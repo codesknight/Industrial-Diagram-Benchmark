@@ -28,6 +28,7 @@ data_index/
   panel_train/val/test.csv panel 级划分
   panel_summary.json      panel 级统计
   panel_report.md         panel 级拆分报告
+  panel_review.html       panel 快速审核表
   train.csv              训练集样本
   val.csv                验证集样本
   test.csv               测试集样本
@@ -37,6 +38,7 @@ scripts/
   clean_dataset_manifest.py   生成非破坏式清洗 manifest
   scan_content_quality.py     第二轮内容质量扫描
   build_panel_manifest.py     生成 panel 级 manifest 和本地裁剪图
+  build_panel_review_html.py  生成 panel HTML 审核表
   check_dataset_integrity.py  检查 manifest 完整性
 
 tools/

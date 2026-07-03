@@ -87,6 +87,12 @@ python scripts/scan_content_quality.py
 python scripts/build_panel_manifest.py
 ```
 
+生成可快速标注并导出 CSV 的 HTML 审核表：
+
+```powershell
+python scripts/build_panel_review_html.py
+```
+
 ## Data Pipeline
 
 ```text

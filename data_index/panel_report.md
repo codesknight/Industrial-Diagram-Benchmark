@@ -8,7 +8,7 @@ This report describes the drawing-level to panel-level expansion.
 - Source multi-panel candidates: 83
 - Panel rows: 2196
 - Multi-panel parent drawings: 47
-- Review panel rows: 46
+- Review panel rows: 225
 
 ## Split Counts
 

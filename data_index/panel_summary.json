@@ -4,7 +4,7 @@
   "source_drawing_rows": 2054,
   "panel_rows": 2196,
   "multi_panel_parent_count": 47,
-  "review_panel_rows": 46,
+  "review_panel_rows": 225,
   "by_split": {
     "train": 1768,
     "val": 209,

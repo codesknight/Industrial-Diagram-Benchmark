@@ -70,6 +70,29 @@ data_index/panel_report.md
 
 - 非多子图样本生成 1 个 full panel
 - 多子图候选按 CAD 图元中心点的大空白间隔拆成多个 panel
+- 优先使用 PNG 连通域识别独立图框，失败时回退到 CAD gap
 - panel 裁剪图写入 `outputs/panels/`
 - `outputs/` 已被 `.gitignore` 忽略，因此裁剪图不会进入 Git 仓库
 - 所有自动拆分 panel 标记 `needs_review=true`
+
+## Review UI
+
+生成 HTML 审核表：
+
+```powershell
+python scripts/build_panel_review_html.py
+```
+
+输出：
+
+```text
+data_index/panel_review.html
+```
+
+功能：
+
+- 浏览待审核 panel 图像
+- 标注 `accept` / `adjust` / `reject`
+- 填写备注
+- 使用浏览器 localStorage 自动保存
+- 导出 `panel_review_labels.csv`

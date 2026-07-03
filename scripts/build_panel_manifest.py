@@ -417,7 +417,7 @@ def make_panel_row(
         "parent_png_height": png_height,
         "panel_entity_count": entity_count,
         "panel_png_path": panel_png_path,
-        "needs_review": split_method in {"cad_gap", "candidate_full_fallback"},
+        "needs_review": split_method in {"image_components", "cad_gap", "candidate_full_fallback"},
         "notes": notes,
     }
 
