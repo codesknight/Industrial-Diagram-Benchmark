@@ -1,11 +1,11 @@
 """Scan dataset manifests for visible/source watermark signals.
 
 The scanner uses deterministic metadata/text signals:
-- filename/path keywords such as wm666.taobao.com
-- TEXT/MTEXT contents in Raw Geometry JSON
+- filename/path keywords such as wm666.taobao.com are source markers only
+- TEXT/MTEXT contents in Raw Geometry JSON are visible watermark candidates
 
-It does not OCR rendered PNGs yet. Results are candidates for filtering or
-manual review, not irreversible deletions.
+It does not OCR rendered PNGs yet. Filtering is based only on visible watermark
+candidates, not filename/source markers.
 """
 
 from __future__ import annotations
@@ -107,11 +107,9 @@ def scan_row(row: Dict[str, str], keywords: List[str]) -> Dict[str, object]:
     text, text_count, error = extract_json_text(json_path)
     json_hits = keyword_hits(text, keywords)
 
-    confidence = "none"
-    if json_hits:
-        confidence = "high"
-    elif meta_hits:
-        confidence = "medium"
+    visible_watermark = bool(json_hits)
+    source_marker = bool(meta_hits)
+    confidence = "visible" if visible_watermark else ("source_marker" if source_marker else "none")
 
     return {
         "drawing_key": row["drawing_key"],
@@ -119,7 +117,9 @@ def scan_row(row: Dict[str, str], keywords: List[str]) -> Dict[str, object]:
         "phase": row["phase"],
         "batch": row["batch"],
         "split": row["split"],
-        "watermark_candidate": bool(meta_hits or json_hits),
+        "watermark_candidate": visible_watermark,
+        "visible_watermark": visible_watermark,
+        "source_marker": source_marker,
         "watermark_confidence": confidence,
         "metadata_hits": ";".join(meta_hits),
         "json_text_hits": ";".join(json_hits),
@@ -147,6 +147,8 @@ def main() -> None:
     fieldnames = list(scanned[0].keys()) if scanned else []
     write_csv(INDEX_DIR / "watermark_scan.csv", scanned, fieldnames)
     write_csv(INDEX_DIR / "watermark_candidates.csv", candidates, fieldnames)
+    source_markers = [row for row in scanned if row["source_marker"]]
+    write_csv(INDEX_DIR / "source_marker_rows.csv", source_markers, fieldnames)
     write_filtered_manifests(rows, scan_by_key)
 
     confidence_counts = Counter(str(row["watermark_confidence"]) for row in scanned)
@@ -160,14 +162,17 @@ def main() -> None:
     summary = {
         "source_manifest": str(args.manifest).replace("\\", "/"),
         "total_rows": len(rows),
-        "watermark_candidate_rows": len(candidates),
+        "visible_watermark_rows": len(candidates),
+        "source_marker_rows": len(source_markers),
         "confidence_counts": dict(confidence_counts),
         "keyword_counts": dict(keyword_counts),
-        "high_confidence_rows": sum(1 for row in scanned if row["watermark_confidence"] == "high"),
-        "medium_confidence_rows": sum(1 for row in scanned if row["watermark_confidence"] == "medium"),
+        "visible_rows": sum(1 for row in scanned if row["visible_watermark"]),
+        "source_marker_only_rows": sum(
+            1 for row in scanned if row["source_marker"] and not row["visible_watermark"]
+        ),
         "recommendation": {
-            "high": "filter from clean training/evaluation or route to separate watermark split",
-            "medium": "review; filename/source marker may not imply visible watermark in image",
+            "visible_watermark": "filter from clean training/evaluation or route to separate watermark split",
+            "source_marker": "do not filter by default; filename/source marker will be normalized later",
         },
     }
     (INDEX_DIR / "watermark_summary.json").write_text(
@@ -177,8 +182,8 @@ def main() -> None:
     write_report(summary, candidates)
 
     print(f"Rows scanned: {len(rows)}")
-    print(f"Watermark candidates: {len(candidates)}")
-    print(f"High confidence: {summary['high_confidence_rows']}")
+    print(f"Visible watermark candidates: {len(candidates)}")
+    print(f"Source marker rows: {summary['source_marker_rows']}")
     print(f"Wrote: {INDEX_DIR.relative_to(ROOT).as_posix()}/watermark_candidates.csv")
 
 
@@ -187,18 +192,19 @@ def write_report(summary: Dict[str, object], candidates: List[Dict[str, object]]
         "# Watermark Scan Report",
         "",
         "This report scans filenames/paths and Raw JSON text entities for watermark/source keywords.",
+        "Filename/path hits are source markers only. Filtering is based on visible text hits.",
         "",
         "## Summary",
         "",
         f"- Total rows scanned: {summary['total_rows']}",
-        f"- Watermark candidate rows: {summary['watermark_candidate_rows']}",
-        f"- High confidence rows: {summary['high_confidence_rows']}",
-        f"- Medium confidence rows: {summary['medium_confidence_rows']}",
+        f"- Visible watermark rows: {summary['visible_watermark_rows']}",
+        f"- Source marker rows: {summary['source_marker_rows']}",
+        f"- Source-marker-only rows: {summary['source_marker_only_rows']}",
         "",
         "## Recommendation",
         "",
-        "- High confidence: filter from clean training/evaluation or place in a separate watermark split.",
-        "- Medium confidence: review before filtering; filename/source marker may not be visibly rendered.",
+        "- Visible watermark: filter from clean training/evaluation or place in a separate watermark split.",
+        "- Source marker only: do not filter by default; filename/source marker will be normalized later.",
         "- Do not delete raw files. Keep filtering manifest-based.",
         "",
         "## Keyword Counts",
@@ -211,7 +217,7 @@ def write_report(summary: Dict[str, object], candidates: List[Dict[str, object]]
     if not candidates:
         lines.append("No candidates found.")
     else:
-        lines.append("| drawing_key | confidence | metadata_hits | json_text_hits |")
+        lines.append("| drawing_key | confidence | source_marker_hits | visible_text_hits |")
         lines.append("|---|---|---|---|")
         for row in candidates[:80]:
             lines.append(
@@ -224,18 +230,20 @@ def write_report(summary: Dict[str, object], candidates: List[Dict[str, object]]
 
 def write_filtered_manifests(rows: List[Dict[str, str]], scan_by_key: Dict[str, Dict[str, object]]) -> None:
     fieldnames = list(rows[0].keys()) if rows else []
-    no_high = [
+    no_visible = [
         row
         for row in rows
-        if scan_by_key[row["drawing_key"]]["watermark_confidence"] != "high"
+        if not scan_by_key[row["drawing_key"]]["visible_watermark"]
     ]
-    no_candidates = [
+    no_source_marker = [
         row
         for row in rows
-        if not scan_by_key[row["drawing_key"]]["watermark_candidate"]
+        if not scan_by_key[row["drawing_key"]]["source_marker"]
     ]
-    write_csv(INDEX_DIR / "round2_clean_no_high_watermark.csv", no_high, fieldnames)
-    write_csv(INDEX_DIR / "round2_clean_no_watermark_candidates.csv", no_candidates, fieldnames)
+    write_csv(INDEX_DIR / "round2_clean_no_visible_watermark.csv", no_visible, fieldnames)
+    # Backward-compatible alias from the earlier naming.
+    write_csv(INDEX_DIR / "round2_clean_no_high_watermark.csv", no_visible, fieldnames)
+    write_csv(INDEX_DIR / "round2_clean_no_source_markers.csv", no_source_marker, fieldnames)
 
 
 if __name__ == "__main__":
