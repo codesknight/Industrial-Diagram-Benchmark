@@ -1,0 +1,30 @@
+{
+  "source_manifest": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/data_index/dataset_manifest.csv",
+  "total_rows": 2099,
+  "candidate_rows_after_asset_checks": 2098,
+  "clean_rows": 2075,
+  "rejected_rows": 24,
+  "duplicate_png_groups": 23,
+  "duplicate_png_rows_rejected": 23,
+  "validate_json": true,
+  "clean_by_split": {
+    "train": 1666,
+    "val": 198,
+    "test": 211
+  },
+  "clean_by_phase": {
+    "P1": 418,
+    "P2": 527,
+    "P3": 1130
+  },
+  "rejected_by_reason": {
+    "missing_assets": 1,
+    "duplicate_png": 23
+  },
+  "rules": [
+    "require complete DWG/DXF/raw JSON/PNG",
+    "validate raw JSON object with entities list",
+    "deduplicate rows sharing the same PNG path",
+    "choose duplicate representative by batch priority then drawing_key"
+  ]
+}

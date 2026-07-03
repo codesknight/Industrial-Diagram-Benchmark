@@ -69,6 +69,12 @@ python scripts/check_dataset_integrity.py
 python scripts/build_dataset_manifest.py --inspect-json
 ```
 
+生成非破坏式清洗后的样本清单：
+
+```powershell
+python scripts/clean_dataset_manifest.py
+```
+
 ## Data Pipeline
 
 ```text

@@ -53,3 +53,20 @@ Raw Geometry JSON
   -> Topology Graph JSON
   -> VQA JSONL
 ```
+
+## Clean Manifest
+
+`data_index/clean_dataset_manifest.csv` 是非破坏式清洗后的样本清单。
+
+当前清洗规则：
+
+- 剔除缺少 DWG/DXF/Raw JSON/PNG 的样本
+- 校验 Raw JSON 必须是对象，且包含 `entities` 列表
+- 对共享同一个 PNG 路径的样本只保留一个代表样本
+- 重复代表样本按 batch 优先级和 `drawing_key` 稳定选择
+
+被剔除的样本写入：
+
+```text
+data_index/rejected_samples.csv
+```

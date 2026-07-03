@@ -14,12 +14,17 @@ data_index/
   dataset_summary.json   数据统计
   missing_assets.md      缺失文件报告
   png_reuse_report.md    PNG 复用报告
+  clean_dataset_manifest.csv  清洗后的样本总表
+  clean_summary.json      清洗统计
+  clean_report.md         清洗报告
+  rejected_samples.csv    剔除样本和原因
   train.csv              训练集样本
   val.csv                验证集样本
   test.csv               测试集样本
 
 scripts/
   build_dataset_manifest.py   生成 manifest、报告和划分
+  clean_dataset_manifest.py   生成非破坏式清洗 manifest
   check_dataset_integrity.py  检查 manifest 完整性
 
 tools/
