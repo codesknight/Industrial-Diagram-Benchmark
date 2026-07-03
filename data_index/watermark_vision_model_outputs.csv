@@ -1,0 +1,85 @@
+﻿drawing_key,png_path,json_text_hits,model,model_visible_watermark,model_evidence,model_confidence,elapsed_sec,error,raw_response
+_P1_staging/110kV开关站+ABB避雷针高度计算,datas/qa_and_png/P1_oda_output/110kV开关站+ABB避雷针高度计算.png,taobao;淘宝,deepseek-ocr:3b,error,,,0.93,"HTTP Error 500: Internal Server Error; {""error"":""unable to load model: C:\\Users\\LiuYanhong\\.ollama\\models\\blobs\\sha256-3a18673ff291a1d8de94d490877127899356d33a18028d5f3945bf245c11b02c""}",
+_P1_staging/110kV开关站+ABB避雷针高度计算,datas/qa_and_png/P1_oda_output/110kV开关站+ABB避雷针高度计算.png,taobao;淘宝,qwen2.5vl:7b,error,,,2.18,"HTTP Error 500: Internal Server Error; {""error"":""memory layout cannot be allocated""}",
+_P1_staging/110kV开关站+ABB避雷针高度计算,datas/qa_and_png/P1_oda_output/110kV开关站+ABB避雷针高度计算.png,taobao;淘宝,qwen2.5vl:3b,true,"The image contains Chinese characters that are not part of the engineering drawing itself, such as '天天工作室录制' which translates to 'Tian Tian Studio Recording'.",medium,3.82,,"{
+  ""visible_watermark"": true,
+  ""evidence"": ""The image contains Chinese characters that are not part of the engineering drawing itself, such as '天天工作室录制' which translates to 'Tian Tian Studio Recording'."",
+  ""confidence"": ""medium""
+}"
+_P1_staging/某医院高低压电气主接线图,datas/qa_and_png/P1_oda_output/某医院高低压电气主接线图.png,taobao;淘宝,deepseek-ocr:3b,error,,,0.73,"HTTP Error 500: Internal Server Error; {""error"":""unable to load model: C:\\Users\\LiuYanhong\\.ollama\\models\\blobs\\sha256-3a18673ff291a1d8de94d490877127899356d33a18028d5f3945bf245c11b02c""}",
+_P1_staging/某医院高低压电气主接线图,datas/qa_and_png/P1_oda_output/某医院高低压电气主接线图.png,taobao;淘宝,qwen2.5vl:7b,error,,,2.91,"HTTP Error 500: Internal Server Error; {""error"":""memory layout cannot be allocated""}",
+_P1_staging/某医院高低压电气主接线图,datas/qa_and_png/P1_oda_output/某医院高低压电气主接线图.png,taobao;淘宝,qwen2.5vl:3b,true,星欣设计图库,medium,3.47,,"{
+  ""visible_watermark"": true,
+  ""evidence"": ""星欣设计图库"",
+  ""confidence"": ""medium""
+}"
+_P2_staging/1B1变电所低压系统,datas/qa_and_png/P2_oda_output/1B1变电所低压系统.png,图库;星欣,deepseek-ocr:3b,error,,,0.7,"HTTP Error 500: Internal Server Error; {""error"":""unable to load model: C:\\Users\\LiuYanhong\\.ollama\\models\\blobs\\sha256-3a18673ff291a1d8de94d490877127899356d33a18028d5f3945bf245c11b02c""}",
+_P2_staging/1B1变电所低压系统,datas/qa_and_png/P2_oda_output/1B1变电所低压系统.png,图库;星欣,qwen2.5vl:7b,error,,,2.99,"HTTP Error 500: Internal Server Error; {""error"":""memory layout cannot be allocated""}",
+_P2_staging/1B1变电所低压系统,datas/qa_and_png/P2_oda_output/1B1变电所低压系统.png,图库;星欣,qwen2.5vl:3b,true,星欣设计图库,high,3.48,,"{
+  ""visible_watermark"": true,
+  ""evidence"": ""星欣设计图库"",
+  ""confidence"": ""high""
+}"
+_P2_staging/1B2变电所低压系统,datas/qa_and_png/P2_oda_output/1B2变电所低压系统.png,图库;星欣,deepseek-ocr:3b,error,,,0.69,"HTTP Error 500: Internal Server Error; {""error"":""unable to load model: C:\\Users\\LiuYanhong\\.ollama\\models\\blobs\\sha256-3a18673ff291a1d8de94d490877127899356d33a18028d5f3945bf245c11b02c""}",
+_P2_staging/1B2变电所低压系统,datas/qa_and_png/P2_oda_output/1B2变电所低压系统.png,图库;星欣,qwen2.5vl:7b,error,,,2.86,"HTTP Error 500: Internal Server Error; {""error"":""memory layout cannot be allocated""}",
+_P2_staging/1B2变电所低压系统,datas/qa_and_png/P2_oda_output/1B2变电所低压系统.png,图库;星欣,qwen2.5vl:3b,true,星欣设计图库,high,3.41,,"{
+  ""visible_watermark"": true,
+  ""evidence"": ""星欣设计图库"",
+  ""confidence"": ""high""
+}"
+_P2_staging/35kv高压配电室电缆沟平面图,datas/qa_and_png/P2_oda_output/35kv高压配电室电缆沟平面图.png,taobao;图库;星欣;淘宝,deepseek-ocr:3b,error,,,0.72,"HTTP Error 500: Internal Server Error; {""error"":""unable to load model: C:\\Users\\LiuYanhong\\.ollama\\models\\blobs\\sha256-3a18673ff291a1d8de94d490877127899356d33a18028d5f3945bf245c11b02c""}",
+_P2_staging/35kv高压配电室电缆沟平面图,datas/qa_and_png/P2_oda_output/35kv高压配电室电缆沟平面图.png,taobao;图库;星欣;淘宝,qwen2.5vl:7b,error,,,3.57,"HTTP Error 500: Internal Server Error; {""error"":""memory layout cannot be allocated""}",
+_P2_staging/35kv高压配电室电缆沟平面图,datas/qa_and_png/P2_oda_output/35kv高压配电室电缆沟平面图.png,taobao;图库;星欣;淘宝,qwen2.5vl:3b,true,星欣设计图库,medium,3.53,,"{
+  ""visible_watermark"": true,
+  ""evidence"": ""星欣设计图库"",
+  ""confidence"": ""medium""
+}"
+_P2_staging/中心变电站,datas/qa_and_png/P2_oda_output/中心变电站.png,taobao;淘宝,deepseek-ocr:3b,error,,,0.71,"HTTP Error 500: Internal Server Error; {""error"":""unable to load model: C:\\Users\\LiuYanhong\\.ollama\\models\\blobs\\sha256-3a18673ff291a1d8de94d490877127899356d33a18028d5f3945bf245c11b02c""}",
+_P2_staging/中心变电站,datas/qa_and_png/P2_oda_output/中心变电站.png,taobao;淘宝,qwen2.5vl:7b,error,,,2.96,"HTTP Error 500: Internal Server Error; {""error"":""memory layout cannot be allocated""}",
+_P2_staging/中心变电站,datas/qa_and_png/P2_oda_output/中心变电站.png,taobao;淘宝,qwen2.5vl:3b,true,星欣设计图库,medium,3.49,,"{
+  ""visible_watermark"": true,
+  ""evidence"": ""星欣设计图库"",
+  ""confidence"": ""medium""
+}"
+_P2_staging/体育场变电所电气平面图,datas/qa_and_png/P2_oda_output/体育场变电所电气平面图.png,taobao;淘宝,deepseek-ocr:3b,error,,,0.7,"HTTP Error 500: Internal Server Error; {""error"":""unable to load model: C:\\Users\\LiuYanhong\\.ollama\\models\\blobs\\sha256-3a18673ff291a1d8de94d490877127899356d33a18028d5f3945bf245c11b02c""}",
+_P2_staging/体育场变电所电气平面图,datas/qa_and_png/P2_oda_output/体育场变电所电气平面图.png,taobao;淘宝,qwen2.5vl:7b,error,,,2.93,"HTTP Error 500: Internal Server Error; {""error"":""memory layout cannot be allocated""}",
+_P2_staging/体育场变电所电气平面图,datas/qa_and_png/P2_oda_output/体育场变电所电气平面图.png,taobao;淘宝,qwen2.5vl:3b,false,"No visible watermark, source mark, website, marketplace mark, or library mark is present in the image.",low,3.56,,"{
+  ""visible_watermark"": false,
+  ""evidence"": ""No visible watermark, source mark, website, marketplace mark, or library mark is present in the image."",
+  ""confidence"": ""low""
+}"
+_P2_staging/变电所平面布置图__473,datas/qa_and_png/P2_oda_output/变电所平面布置图__473.png,taobao;淘宝,deepseek-ocr:3b,error,,,0.65,"HTTP Error 500: Internal Server Error; {""error"":""unable to load model: C:\\Users\\LiuYanhong\\.ollama\\models\\blobs\\sha256-3a18673ff291a1d8de94d490877127899356d33a18028d5f3945bf245c11b02c""}",
+_P2_staging/变电所平面布置图__473,datas/qa_and_png/P2_oda_output/变电所平面布置图__473.png,taobao;淘宝,qwen2.5vl:7b,error,,,3.54,"HTTP Error 500: Internal Server Error; {""error"":""memory layout cannot be allocated""}",
+_P2_staging/变电所平面布置图__473,datas/qa_and_png/P2_oda_output/变电所平面布置图__473.png,taobao;淘宝,qwen2.5vl:3b,true,星欣设计图库,medium,3.45,,"{
+  ""visible_watermark"": true,
+  ""evidence"": ""星欣设计图库"",
+  ""confidence"": ""medium""
+}"
+_P3_staging_batch4/1～3层电照系统及接线图,datas/qa_and_png/P3_oda_output/1～3层电照系统及接线图.png,图库;星欣,deepseek-ocr:3b,error,,,0.71,"HTTP Error 500: Internal Server Error; {""error"":""unable to load model: C:\\Users\\LiuYanhong\\.ollama\\models\\blobs\\sha256-3a18673ff291a1d8de94d490877127899356d33a18028d5f3945bf245c11b02c""}",
+_P3_staging_batch4/1～3层电照系统及接线图,datas/qa_and_png/P3_oda_output/1～3层电照系统及接线图.png,图库;星欣,qwen2.5vl:7b,error,,,3.09,"HTTP Error 500: Internal Server Error; {""error"":""memory layout cannot be allocated""}",
+_P3_staging_batch4/1～3层电照系统及接线图,datas/qa_and_png/P3_oda_output/1～3层电照系统及接线图.png,图库;星欣,qwen2.5vl:3b,false,"No visible watermark, source mark, website, marketplace mark, or library mark is present.",low,3.67,,"{
+  ""visible_watermark"": false,
+  ""evidence"": ""No visible watermark, source mark, website, marketplace mark, or library mark is present."",
+  ""confidence"": ""low""
+}"
+_P3_staging_batch4/中置柜一二次接线图,datas/qa_and_png/P3_oda_output/中置柜一二次接线图.png,图库;星欣,deepseek-ocr:3b,error,,,0.67,"HTTP Error 500: Internal Server Error; {""error"":""unable to load model: C:\\Users\\LiuYanhong\\.ollama\\models\\blobs\\sha256-3a18673ff291a1d8de94d490877127899356d33a18028d5f3945bf245c11b02c""}",
+_P3_staging_batch4/中置柜一二次接线图,datas/qa_and_png/P3_oda_output/中置柜一二次接线图.png,图库;星欣,qwen2.5vl:7b,error,,,3.02,"HTTP Error 500: Internal Server Error; {""error"":""memory layout cannot be allocated""}",
+_P3_staging_batch4/中置柜一二次接线图,datas/qa_and_png/P3_oda_output/中置柜一二次接线图.png,图库;星欣,qwen2.5vl:3b,true,星欣图库专卖店,high,3.58,,"{
+  ""visible_watermark"": true,
+  ""evidence"": ""星欣图库专卖店"",
+  ""confidence"": ""high""
+}"
+_P3_staging_batch4/许继微机保护CAD图,datas/qa_and_png/P3_oda_output/许继微机保护CAD图.png,图库;星欣,deepseek-ocr:3b,error,,,0.67,"HTTP Error 500: Internal Server Error; {""error"":""unable to load model: C:\\Users\\LiuYanhong\\.ollama\\models\\blobs\\sha256-3a18673ff291a1d8de94d490877127899356d33a18028d5f3945bf245c11b02c""}",
+_P3_staging_batch4/许继微机保护CAD图,datas/qa_and_png/P3_oda_output/许继微机保护CAD图.png,图库;星欣,qwen2.5vl:7b,error,,,3.07,"HTTP Error 500: Internal Server Error; {""error"":""memory layout cannot be allocated""}",
+_P3_staging_batch4/许继微机保护CAD图,datas/qa_and_png/P3_oda_output/许继微机保护CAD图.png,图库;星欣,qwen2.5vl:3b,true,星欣设计图库,high,3.45,,"{
+  ""visible_watermark"": true,
+  ""evidence"": ""星欣设计图库"",
+  ""confidence"": ""high""
+}"
+_P3_staging_batch4/铁路局机关10kV配电所电气一次图纸,datas/qa_and_png/P3_oda_output/铁路局机关10kV配电所电气一次图纸.png,图库;星欣,deepseek-ocr:3b,error,,,0.67,"HTTP Error 500: Internal Server Error; {""error"":""unable to load model: C:\\Users\\LiuYanhong\\.ollama\\models\\blobs\\sha256-3a18673ff291a1d8de94d490877127899356d33a18028d5f3945bf245c11b02c""}",
+_P3_staging_batch4/铁路局机关10kV配电所电气一次图纸,datas/qa_and_png/P3_oda_output/铁路局机关10kV配电所电气一次图纸.png,图库;星欣,qwen2.5vl:7b,error,,,3.49,"HTTP Error 500: Internal Server Error; {""error"":""memory layout cannot be allocated""}",
+_P3_staging_batch4/铁路局机关10kV配电所电气一次图纸,datas/qa_and_png/P3_oda_output/铁路局机关10kV配电所电气一次图纸.png,图库;星欣,qwen2.5vl:3b,true,星欣设计图库,high,3.67,,"{
+  ""visible_watermark"": true,
+  ""evidence"": ""星欣设计图库"",
+  ""confidence"": ""high""
+}"

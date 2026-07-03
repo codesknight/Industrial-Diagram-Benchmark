@@ -1,0 +1,26 @@
+{
+  "input_rows": 12,
+  "models": [
+    "deepseek-ocr:3b",
+    "qwen2.5vl:7b",
+    "qwen2.5vl:3b"
+  ],
+  "max_side": 768,
+  "num_ctx": 2048,
+  "consensus_counts": {
+    "likely_visible_watermark": 10,
+    "single_model_not_visible": 2
+  },
+  "model_status_counts": {
+    "deepseek-ocr:3b": {
+      "error": 12
+    },
+    "qwen2.5vl:7b": {
+      "error": 12
+    },
+    "qwen2.5vl:3b": {
+      "false": 2,
+      "true": 10
+    }
+  }
+}

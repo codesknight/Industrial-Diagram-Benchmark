@@ -167,3 +167,26 @@ data_index/round2_clean_no_source_markers.csv
 - 文件名/路径中出现 `wm666.taobao.com` 等来源标记，不作为过滤依据，后续统一重命名处理。
 - Raw JSON 文本图元中出现 `星欣`、`图库`、`淘宝` 等水印关键词，视为可见内容水印候选，建议从 clean 训练/评估集中剔除或单独分组。
 - 本脚本暂未做 PNG OCR，因此无法发现纯栅格水印；后续可接 OCR 扩展。
+
+## Vision Watermark Review
+
+使用本地 Ollama 视觉模型复查可见水印候选：
+
+```powershell
+python scripts/vision_watermark_review.py
+```
+
+如果默认目标模型不可运行，可以显式加入 fallback 模型：
+
+```powershell
+python scripts/vision_watermark_review.py --models deepseek-ocr:3b qwen2.5vl:7b qwen2.5vl:3b --max-side 768 --num-ctx 2048
+```
+
+输出：
+
+```text
+data_index/watermark_vision_model_outputs.csv
+data_index/watermark_vision_consensus.csv
+data_index/watermark_vision_summary.json
+data_index/watermark_vision_report.md
+```

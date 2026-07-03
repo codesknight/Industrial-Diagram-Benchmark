@@ -100,6 +100,12 @@ python scripts/apply_panel_review_labels.py
 python scripts/scan_watermarks.py
 ```
 
+使用本地 Ollama 视觉模型复查水印候选：
+
+```powershell
+python scripts/vision_watermark_review.py --models deepseek-ocr:3b qwen2.5vl:7b qwen2.5vl:3b --max-side 768 --num-ctx 2048
+```
+
 ## Data Pipeline
 
 ```text
