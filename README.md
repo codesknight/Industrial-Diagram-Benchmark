@@ -112,6 +112,12 @@ python scripts/vision_watermark_review.py --models deepseek-ocr:3b qwen2.5vl:7b 
 python scripts/build_final_manifests.py
 ```
 
+构建 Geometry 标准化中间表示：
+
+```powershell
+python scripts/build_normalized_geometry.py
+```
+
 ## Data Pipeline
 
 ```text
