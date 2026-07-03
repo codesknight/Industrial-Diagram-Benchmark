@@ -10,6 +10,14 @@
 - `datas/qa_and_png/`: ODA 渲染得到的 PNG
 - `docs/Industrial_Diagram_Benchmark_Roadmap.md`: 研究路线说明
 
+数据托管在 Hugging Face Dataset：
+
+```text
+https://huggingface.co/datasets/yanhongliu/Industrial-Diagram-Benchmark
+```
+
+GitHub 仓库只管理工程代码、配置、文档和数据索引；大体积原始数据不直接进入 Git。
+
 ## Current Stage
 
 当前阶段重点是把现有数据整理成可复现、可检查、可训练的数据集工程：
@@ -35,6 +43,13 @@ datas/         原始和中间数据
 ```
 
 ## Quick Start
+
+下载 Hugging Face Dataset 到本地 `datas/`：
+
+```powershell
+pip install -r requirements.txt
+python scripts/download_dataset.py
+```
 
 生成数据清单、缺失报告和数据划分：
 

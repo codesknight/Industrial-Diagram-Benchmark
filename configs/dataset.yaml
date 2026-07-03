@@ -3,6 +3,12 @@
 project_name: Industrial Diagram Benchmark
 data_root: datas
 
+hosting:
+  github_repo: https://github.com/codesknight/Industrial-Diagram-Benchmark
+  huggingface_dataset: yanhongliu/Industrial-Diagram-Benchmark
+  huggingface_url: https://huggingface.co/datasets/yanhongliu/Industrial-Diagram-Benchmark
+  license: apache-2.0
+
 inputs:
   dwg_root: datas/dwg_staging
   dxf_root: datas/dxf_staging
