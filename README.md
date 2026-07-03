@@ -93,6 +93,13 @@ python scripts/build_panel_manifest.py
 python scripts/build_panel_review_html.py
 ```
 
+应用人工审核结果，并扫描水印/来源标记：
+
+```powershell
+python scripts/apply_panel_review_labels.py
+python scripts/scan_watermarks.py
+```
+
 ## Data Pipeline
 
 ```text

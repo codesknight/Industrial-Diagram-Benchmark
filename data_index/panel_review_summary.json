@@ -1,0 +1,13 @@
+{
+  "panel_rows": 2196,
+  "label_rows": 225,
+  "matched_label_rows": 225,
+  "status_counts": {
+    "reject": 113,
+    "accept": 110,
+    "unlabeled": 2
+  },
+  "usable_panel_rows": 2081,
+  "rejected_panel_rows": 113,
+  "unlabeled_review_rows": 2
+}

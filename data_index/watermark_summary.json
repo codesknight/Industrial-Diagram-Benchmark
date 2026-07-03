@@ -1,0 +1,23 @@
+{
+  "source_manifest": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/data_index/round2_clean_manifest.csv",
+  "total_rows": 2054,
+  "watermark_candidate_rows": 597,
+  "confidence_counts": {
+    "medium": 585,
+    "none": 1457,
+    "high": 12
+  },
+  "keyword_counts": {
+    "taobao": 591,
+    "wm666": 585,
+    "淘宝": 6,
+    "图库": 7,
+    "星欣": 7
+  },
+  "high_confidence_rows": 12,
+  "medium_confidence_rows": 585,
+  "recommendation": {
+    "high": "filter from clean training/evaluation or route to separate watermark split",
+    "medium": "review; filename/source marker may not imply visible watermark in image"
+  }
+}

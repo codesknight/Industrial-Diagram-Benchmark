@@ -122,3 +122,45 @@ data_index/round2_clean_test.csv
 - `panel_bbox_png`: PNG 像素坐标裁剪框
 - `panel_png_path`: panel 图像路径；多子图拆分样本默认位于 `outputs/panels/`
 - `needs_review`: 自动拆分结果是否需要人工复核
+
+## Review Labels
+
+`data_index/panel_review_labels.csv` 是 HTML 审核表导出的人工标注结果。
+
+应用标注结果：
+
+```powershell
+python scripts/apply_panel_review_labels.py
+```
+
+输出：
+
+```text
+data_index/panel_manifest_reviewed.csv
+data_index/panel_manifest_usable.csv
+data_index/panel_review_summary.json
+```
+
+## Watermark Scan
+
+扫描水印/来源标记：
+
+```powershell
+python scripts/scan_watermarks.py
+```
+
+输出：
+
+```text
+data_index/watermark_scan.csv
+data_index/watermark_candidates.csv
+data_index/watermark_summary.json
+data_index/watermark_report.md
+data_index/round2_clean_no_high_watermark.csv
+data_index/round2_clean_no_watermark_candidates.csv
+```
+
+水印置信度：
+
+- `high`: Raw JSON 文本图元中出现水印关键词，建议从 clean 训练/评估集中剔除或单独分组。
+- `medium`: 文件名/路径中出现来源关键词，可能只是来源标记，建议人工复核后再决定是否剔除。
