@@ -1,0 +1,19 @@
+{
+  "source_manifest": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/data_index/round2_clean_manifest.csv",
+  "source_multi_panel_candidates": 83,
+  "source_drawing_rows": 2054,
+  "panel_rows": 2196,
+  "multi_panel_parent_count": 47,
+  "review_panel_rows": 46,
+  "by_split": {
+    "train": 1768,
+    "val": 209,
+    "test": 219
+  },
+  "by_split_method": {
+    "full": 1971,
+    "candidate_full_fallback": 36,
+    "image_components": 179,
+    "cad_gap": 10
+  }
+}

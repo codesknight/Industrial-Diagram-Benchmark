@@ -105,3 +105,20 @@ data_index/round2_clean_train.csv
 data_index/round2_clean_val.csv
 data_index/round2_clean_test.csv
 ```
+
+## Panel Manifest
+
+`data_index/panel_manifest.csv` 是 panel 级样本入口。
+
+核心字段：
+
+- `panel_id`: panel 主键
+- `parent_drawing_key`: 父 drawing 样本
+- `parent_png_path`: 原始 PNG
+- `panel_index`: panel 序号
+- `panel_count`: 父 drawing 下的 panel 数
+- `split_method`: `full` / `cad_gap` / `candidate_full_fallback`
+- `panel_bbox_cad`: CAD 坐标系裁剪框
+- `panel_bbox_png`: PNG 像素坐标裁剪框
+- `panel_png_path`: panel 图像路径；多子图拆分样本默认位于 `outputs/panels/`
+- `needs_review`: 自动拆分结果是否需要人工复核

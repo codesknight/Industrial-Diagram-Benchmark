@@ -52,3 +52,24 @@ needs_panel_split = true
 ```
 
 它不会裁切 PNG，也不会从第二轮 clean manifest 中删除多子图样本。
+
+## Current Implementation
+
+`scripts/build_panel_manifest.py` 会生成：
+
+```text
+data_index/panel_manifest.csv
+data_index/panel_train.csv
+data_index/panel_val.csv
+data_index/panel_test.csv
+data_index/panel_summary.json
+data_index/panel_report.md
+```
+
+默认行为：
+
+- 非多子图样本生成 1 个 full panel
+- 多子图候选按 CAD 图元中心点的大空白间隔拆成多个 panel
+- panel 裁剪图写入 `outputs/panels/`
+- `outputs/` 已被 `.gitignore` 忽略，因此裁剪图不会进入 Git 仓库
+- 所有自动拆分 panel 标记 `needs_review=true`

@@ -81,6 +81,12 @@ python scripts/clean_dataset_manifest.py
 python scripts/scan_content_quality.py
 ```
 
+生成 panel 级样本清单，并对多子图候选生成本地裁剪图：
+
+```powershell
+python scripts/build_panel_manifest.py
+```
+
 ## Data Pipeline
 
 ```text
