@@ -70,3 +70,38 @@ Raw Geometry JSON
 ```text
 data_index/rejected_samples.csv
 ```
+
+## Content Quality Scan
+
+`data_index/content_quality_stats.csv` 是第二轮内容质量统计表。
+
+它包含：
+
+- Raw JSON 图元数量
+- 文本、线段、多段线、块引用数量
+- CAD 坐标范围
+- PNG 宽高和文件大小
+- 明显坏样本硬剔除原因
+- 需要复核的质量标记
+- 多子图候选标记 `needs_panel_split`
+
+多子图候选写入：
+
+```text
+data_index/multi_panel_candidates.csv
+```
+
+多子图样本不应直接视为坏数据。建议后续生成 panel 级样本：
+
+```text
+parent drawing -> panel_001 / panel_002 / ...
+```
+
+第二轮硬剔除后的 drawing-level 样本写入：
+
+```text
+data_index/round2_clean_manifest.csv
+data_index/round2_clean_train.csv
+data_index/round2_clean_val.csv
+data_index/round2_clean_test.csv
+```

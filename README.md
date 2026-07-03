@@ -75,6 +75,12 @@ python scripts/build_dataset_manifest.py --inspect-json
 python scripts/clean_dataset_manifest.py
 ```
 
+进行第二轮内容质量扫描，并标记多子图候选：
+
+```powershell
+python scripts/scan_content_quality.py
+```
+
 ## Data Pipeline
 
 ```text

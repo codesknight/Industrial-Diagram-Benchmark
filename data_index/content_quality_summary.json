@@ -1,0 +1,44 @@
+{
+  "source_manifest": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/data_index/clean_dataset_manifest.csv",
+  "total_rows": 2075,
+  "round2_keep_rows": 2054,
+  "hard_reject_rows": 21,
+  "review_rows": 178,
+  "multi_panel_candidates": 83,
+  "review_flags": {
+    "multi_panel_candidate": 83,
+    "huge_entity_count": 51,
+    "low_entity_count": 41,
+    "low_line_geometry": 39,
+    "no_text": 48
+  },
+  "hard_reject_reasons": {
+    "empty_entities": 21,
+    "degenerate_cad_bbox": 21
+  },
+  "entity_count": {
+    "min": 0.0,
+    "median": 1213.0,
+    "p95": 11949.599999999999,
+    "p99": 33364.679999999775,
+    "max": 101073.0
+  },
+  "png_width": {
+    "min": 4680.0,
+    "median": 9362.0,
+    "max": 9362.0
+  },
+  "png_height": {
+    "min": 6609.0,
+    "median": 6622.0,
+    "max": 9362.0
+  },
+  "thresholds": {
+    "min_entities": 20,
+    "min_line_like": 5,
+    "huge_entity_threshold": 20000,
+    "extreme_aspect_ratio": 8.0,
+    "panel_gap_ratio": 0.18,
+    "min_panel_entities": 80
+  }
+}

@@ -18,6 +18,12 @@ data_index/
   clean_summary.json      清洗统计
   clean_report.md         清洗报告
   rejected_samples.csv    剔除样本和原因
+  content_quality_stats.csv   第二轮内容质量统计
+  content_quality_summary.json 第二轮内容质量摘要
+  content_quality_report.md   第二轮内容质量报告
+  multi_panel_candidates.csv  多子图候选
+  round2_clean_manifest.csv   第二轮清洗样本总表
+  round2_clean_train/val/test.csv 第二轮清洗划分
   train.csv              训练集样本
   val.csv                验证集样本
   test.csv               测试集样本
@@ -25,6 +31,7 @@ data_index/
 scripts/
   build_dataset_manifest.py   生成 manifest、报告和划分
   clean_dataset_manifest.py   生成非破坏式清洗 manifest
+  scan_content_quality.py     第二轮内容质量扫描
   check_dataset_integrity.py  检查 manifest 完整性
 
 tools/
