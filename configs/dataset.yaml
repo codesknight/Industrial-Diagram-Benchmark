@@ -1,0 +1,37 @@
+# Dataset configuration for Industrial Diagram Benchmark.
+
+project_name: Industrial Diagram Benchmark
+data_root: datas
+
+inputs:
+  dwg_root: datas/dwg_staging
+  dxf_root: datas/dxf_staging
+  raw_json_root: datas/raw_json
+  png_root: datas/qa_and_png
+
+index:
+  output_dir: data_index
+  manifest: data_index/dataset_manifest.csv
+  summary: data_index/dataset_summary.json
+  missing_report: data_index/missing_assets.md
+
+splits:
+  seed: 20260703
+  train: 0.8
+  val: 0.1
+  test: 0.1
+
+stages:
+  p1:
+    source_dir: _P1_staging
+    png_dir: P1_oda_output
+  p2:
+    source_dir: _P2_staging
+    png_dir: P2_oda_output
+  p3:
+    source_dirs:
+      - _P3_staging_batch1
+      - _P3_staging_batch2
+      - _P3_staging_batch3
+      - _P3_staging_batch4
+    png_dir: P3_oda_output

@@ -1,0 +1,16 @@
+.env
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Large raw data can be kept outside version control if needed.
+datas/
+
+# Local Codex workspace metadata.
+.agents/
+.codex/
+
+outputs/*
+!outputs/.gitkeep

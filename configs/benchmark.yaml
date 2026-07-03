@@ -1,0 +1,39 @@
+# Benchmark task scaffold.
+
+tasks:
+  l1_symbol_detection:
+    input: png
+    target: bbox_class
+    metrics: [mAP, precision, recall]
+  l2_text_recognition:
+    input: png
+    target: text_bbox
+    metrics: [CER, WER]
+  l3_port_detection:
+    input: png
+    target: port_bbox
+    metrics: [AP, F1]
+  l4_wire_parsing:
+    input: png
+    target: wire_polyline
+    metrics: [IoU, F1]
+  l5_topology_extraction:
+    input: raw_json
+    target: topology_graph
+    metrics: [graph_f1, edge_f1, node_f1]
+  l6_json_generation:
+    input: png
+    target: semantic_json
+    metrics: [json_edit_distance, schema_valid_rate]
+  l7_diagram_vqa:
+    input: [png, question]
+    target: answer
+    metrics: [accuracy, f1]
+  l8_rule_verification:
+    input: [semantic_json, topology_graph]
+    target: pass_fail
+    metrics: [success_rate]
+  l9_cad_reconstruction:
+    input: semantic_json
+    target: dxf
+    metrics: [cad_consistency, render_similarity]

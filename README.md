@@ -1,0 +1,70 @@
+# Industrial Diagram Benchmark
+
+面向工业接线图理解、结构化解析、拓扑问答与 CAD 重建的数据集工程。
+
+当前项目已有一批工业图纸数据，主要包含：
+
+- `datas/dwg_staging/`: 原始 DWG 图纸
+- `datas/dxf_staging/`: DWG 转换后的 DXF
+- `datas/raw_json/`: DXF 解析得到的 Raw Geometry JSON
+- `datas/qa_and_png/`: ODA 渲染得到的 PNG
+- `docs/Industrial_Diagram_Benchmark_Roadmap.md`: 研究路线说明
+
+## Current Stage
+
+当前阶段重点是把现有数据整理成可复现、可检查、可训练的数据集工程：
+
+1. 统一生成数据清单 `data_index/dataset_manifest.csv`
+2. 检查 DWG/DXF/JSON/PNG 是否一一对应
+3. 输出缺失文件报告 `data_index/missing_assets.md`
+4. 生成 `train/val/test` 划分
+5. 为后续 Geometry JSON、Topology Graph、VQA、Benchmark 评估留出工程入口
+
+## Project Layout
+
+```text
+configs/       数据集和 Benchmark 配置
+scripts/       数据索引、校验、构建脚本
+tools/         DXF/JSON/Graph/CAD 工具模块
+benchmark/     评估脚本入口
+agent/         Tool-Augmented VLM / CAD Agent 入口
+data_index/    自动生成的数据清单、划分和质量报告
+outputs/       实验输出、临时产物和评估结果
+docs/          项目文档
+datas/         原始和中间数据
+```
+
+## Quick Start
+
+生成数据清单、缺失报告和数据划分：
+
+```powershell
+python scripts/build_dataset_manifest.py
+```
+
+检查数据完整性：
+
+```powershell
+python scripts/check_dataset_integrity.py
+```
+
+如需抽取 JSON 图元统计，可额外开启：
+
+```powershell
+python scripts/build_dataset_manifest.py --inspect-json
+```
+
+## Data Pipeline
+
+```text
+DWG
+  -> DXF
+  -> Raw Geometry JSON
+  -> PNG
+  -> Semantic JSON
+  -> Topology Graph
+  -> VQA
+  -> Benchmark
+```
+
+目前仓库中的 `raw_json` 主要是 Raw Geometry JSON，后续会逐步补充语义归一化、拓扑构建和 VQA 生成脚本。

@@ -1,0 +1,34 @@
+{
+  "total_rows": 2099,
+  "physical_file_counts": {
+    "dwg": 2099,
+    "dxf": 2098,
+    "raw_json": 2098,
+    "png": 2075
+  },
+  "complete_all": 2098,
+  "complete_cad_triplet": 2098,
+  "missing_dwg": 0,
+  "missing_dxf": 1,
+  "missing_raw_json": 1,
+  "missing_png": 1,
+  "unique_png_used": 2075,
+  "unused_physical_png": 0,
+  "rows_with_reused_png": 46,
+  "png_reuse_groups": 23,
+  "by_phase": {
+    "P1": 418,
+    "P2": 527,
+    "P3": 1154
+  },
+  "complete_by_phase": {
+    "P1": 418,
+    "P2": 527,
+    "P3": 1153
+  },
+  "by_split_complete_all": {
+    "train": 1684,
+    "val": 201,
+    "test": 213
+  }
+}
