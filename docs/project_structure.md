@@ -34,6 +34,7 @@ data_index/
   panel_manifest_usable.csv 可用 panel 表
   watermark_*.csv/json/md 水印扫描结果和报告
   watermark_vision_*.csv/json/md Ollama 视觉复查结果
+  final_*               最终可用 drawing/panel 清单与报告
   train.csv              训练集样本
   val.csv                验证集样本
   test.csv               测试集样本
@@ -47,6 +48,7 @@ scripts/
   apply_panel_review_labels.py 合并 HTML 导出的人工审核标签
   scan_watermarks.py          扫描水印/来源标记候选
   vision_watermark_review.py  使用 Ollama 视觉模型复查水印候选
+  build_final_manifests.py    生成最终可用 drawing/panel 清单
   check_dataset_integrity.py  检查 manifest 完整性
 
 tools/

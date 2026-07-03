@@ -1,0 +1,31 @@
+{
+  "drawing_source_rows": 2054,
+  "final_drawing_rows": 2042,
+  "rejected_drawing_rows": 12,
+  "panel_source_rows": 2196,
+  "final_panel_rows": 2069,
+  "rejected_panel_rows": 127,
+  "visible_watermark_parent_rows": 12,
+  "final_drawing_by_split": {
+    "train": 1638,
+    "val": 196,
+    "test": 208
+  },
+  "final_panel_by_split": {
+    "train": 1665,
+    "val": 196,
+    "test": 208
+  },
+  "rejected_panel_by_reason": {
+    "panel_review_reject": 115,
+    "parent_visible_watermark": 12
+  },
+  "rules": [
+    "drawing source: round2 clean manifest",
+    "drop drawing rows with visible watermark candidates",
+    "panel source: panel manifest with manual review labels",
+    "drop panels rejected by manual review",
+    "drop panels whose parent drawing has visible watermark candidate",
+    "source marker filenames are not filtered"
+  ]
+}

@@ -190,3 +190,35 @@ data_index/watermark_vision_consensus.csv
 data_index/watermark_vision_summary.json
 data_index/watermark_vision_report.md
 ```
+
+## Final Manifests
+
+最终训练/评估入口：
+
+```powershell
+python scripts/build_final_manifests.py
+```
+
+输出：
+
+```text
+data_index/final_drawing_manifest.csv
+data_index/final_drawing_train.csv
+data_index/final_drawing_val.csv
+data_index/final_drawing_test.csv
+data_index/final_panel_manifest.csv
+data_index/final_panel_train.csv
+data_index/final_panel_val.csv
+data_index/final_panel_test.csv
+data_index/final_manifest_summary.json
+data_index/final_manifest_report.md
+```
+
+规则：
+
+- drawing-level 从 `round2_clean_manifest.csv` 出发
+- 剔除可见内容水印 drawing
+- panel-level 从 `panel_manifest_reviewed.csv` 出发
+- 剔除人工审核 reject 的 panel
+- 剔除父 drawing 带可见内容水印的 panel
+- 文件名来源标记不剔除

@@ -106,6 +106,12 @@ python scripts/scan_watermarks.py
 python scripts/vision_watermark_review.py --models deepseek-ocr:3b qwen2.5vl:7b qwen2.5vl:3b --max-side 768 --num-ctx 2048
 ```
 
+生成最终可用的 drawing/panel 清单：
+
+```powershell
+python scripts/build_final_manifests.py
+```
+
 ## Data Pipeline
 
 ```text
