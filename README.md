@@ -118,6 +118,12 @@ python scripts/build_final_manifests.py
 python scripts/build_normalized_geometry.py
 ```
 
+构建 Topology Graph v0：
+
+```powershell
+python scripts/build_topology_graph.py
+```
+
 ## Data Pipeline
 
 ```text
@@ -125,10 +131,11 @@ DWG
   -> DXF
   -> Raw Geometry JSON
   -> PNG
+  -> Normalized Geometry JSON
+  -> Topology Graph v0
   -> Semantic JSON
-  -> Topology Graph
   -> VQA
   -> Benchmark
 ```
 
-目前仓库中的 `raw_json` 主要是 Raw Geometry JSON，后续会逐步补充语义归一化、拓扑构建和 VQA 生成脚本。
+目前仓库中的 `raw_json` 主要是 Raw Geometry JSON；已补充 Geometry 标准化和 Topology Graph v0，后续会继续推进语义归一化、VQA 生成和 Benchmark 评估脚本。

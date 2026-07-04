@@ -1,0 +1,43 @@
+{
+  "topology_rows": 2042,
+  "by_split": {
+    "train": 1638,
+    "val": 196,
+    "test": 208
+  },
+  "by_phase": {
+    "P1": 411,
+    "P2": 519,
+    "P3": 1112
+  },
+  "by_status": {
+    "ok": 2042
+  },
+  "quality_flag_counts": {
+    "high_isolated_ratio": 32,
+    "single_large_component": 6,
+    "dominant_component": 8,
+    "no_edges": 12
+  },
+  "edge_count_min": 0,
+  "edge_count_avg": 1960.86,
+  "edge_count_max": 70665,
+  "node_count_min": 0,
+  "node_count_avg": 2526.94,
+  "node_count_max": 106465,
+  "net_count_min": 0,
+  "net_count_avg": 857.71,
+  "net_count_max": 42800,
+  "review_rows": 54,
+  "edge_type_counts": {
+    "LINE": 2819376,
+    "LWPOLYLINE": 1184692
+  },
+  "params": {
+    "endpoint_merge_tolerance": 1.0,
+    "min_segment_length": 0.001,
+    "precision": 4,
+    "max_segments": 300000,
+    "intersection_splitting": false
+  }
+}
