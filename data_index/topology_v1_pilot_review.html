@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Industrial Diagram Topology v1 Pilot Review</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7fa;
+      --panel: #ffffff;
+      --ink: #101828;
+      --muted: #667085;
+      --border: #d8dee8;
+      --dark: #111827;
+      --ok: #0f7b45;
+      --warn: #a35b00;
+      --bad: #b42318;
+      --info: #175cd3;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--border);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    input[type="search"], select {
+      height: 34px;
+      min-width: 170px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0 10px;
+      background: #fff;
+      color: var(--ink);
+    }
+    button {
+      height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0 12px;
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 550;
+    }
+    button.primary {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: #fff;
+    }
+    .stats {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    main {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      grid-template-columns: minmax(420px, 1fr) 480px;
+      min-height: 390px;
+      overflow: hidden;
+    }
+    .image-wrap {
+      min-height: 390px;
+      border-right: 1px solid var(--border);
+      background: #fcfcfd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      padding: 10px;
+    }
+    .image-wrap img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border: 1px solid #edf0f5;
+      background: #fff;
+    }
+    .meta {
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+    .title {
+      font-size: 13px;
+      line-height: 1.4;
+      word-break: break-all;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .badge {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 12px;
+      color: var(--muted);
+      background: #fff;
+    }
+    .badge.review { color: var(--warn); border-color: #fedf89; background: #fffbeb; }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .metric {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px;
+      min-width: 0;
+    }
+    .metric strong {
+      display: block;
+      font-size: 16px;
+      line-height: 1.15;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .metric span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+    .compare .metric strong { font-size: 15px; }
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .choice {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 6px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      font-size: 12px;
+      font-weight: 650;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .choice.active[data-value="accept_v1"] { border-color: var(--ok); color: var(--ok); background: #ecfdf3; }
+    .choice.active[data-value="over_connected"] { border-color: var(--bad); color: var(--bad); background: #fff1f0; }
+    .choice.active[data-value="still_fragmented"] { border-color: var(--warn); color: var(--warn); background: #fff7e8; }
+    .choice.active[data-value="needs_terminal_anchor"] { border-color: var(--info); color: var(--info); background: #eff6ff; }
+    .choice.active[data-value="bad_geometry"] { border-color: #7a271a; color: #7a271a; background: #fff1f0; }
+    textarea {
+      width: 100%;
+      min-height: 70px;
+      resize: vertical;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px;
+      font-family: inherit;
+      color: var(--ink);
+    }
+    .kv {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr);
+      gap: 5px 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .kv code, .kv a {
+      color: var(--ink);
+      word-break: break-all;
+      white-space: pre-wrap;
+    }
+    .kv a { text-decoration: none; }
+    .kv a:hover { text-decoration: underline; }
+    @media (max-width: 1120px) {
+      .card { grid-template-columns: 1fr; }
+      .image-wrap { border-right: 0; border-bottom: 1px solid var(--border); }
+      .stats { width: 100%; margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Industrial Diagram Topology v1 Pilot Review</h1>
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="搜索 drawing key" />
+      <select id="labelFilter">
+        <option value="all">全部标注</option>
+        <option value="unlabeled">未标注</option>
+        <option value="accept_v1">accept_v1</option>
+        <option value="over_connected">over_connected</option>
+        <option value="still_fragmented">still_fragmented</option>
+        <option value="needs_terminal_anchor">needs_terminal_anchor</option>
+        <option value="bad_geometry">bad_geometry</option>
+      </select>
+      <select id="phaseFilter">
+        <option value="all">全部 phase</option>
+      </select>
+      <button id="clearFilters">清除筛选</button>
+      <button id="exportCsv" class="primary">导出 CSV</button>
+      <span id="stats" class="stats"></span>
+    </div>
+  </header>
+  <main id="list"></main>
+  <script>
+    const rows = [{"drawing_key": "_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com", "drawing_id": "主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com", "split": "val", "phase": "P1", "batch": "_P1_staging", "png_path": "datas/qa_and_png/P1_oda_output/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/datas/qa_and_png/P1_oda_output/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com.png", "topology_v0_json_path": "outputs/topology_graph/_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com.topology.v0.json", "topology_v0_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph/_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com.topology.v0.json", "topology_v1_json_path": "outputs/topology_graph_v1_pilot/_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com.topology.v1_pilot.json", "topology_v1_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph_v1_pilot/_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com.topology.v1_pilot.json", "status": "ok", "review_label": "needs_intersection_split", "v0_node_count": 728, "v0_edge_count": 392, "v0_net_count": 350, "v0_isolated_edge_ratio": 0.8571, "v0_largest_net_edge_ratio": 0.0102, "v1_node_count": 890, "v1_edge_count": 1388, "v1_net_count": 8, "v1_isolated_edge_ratio": 0.0, "v1_largest_net_edge_ratio": 0.3984, "edge_delta": 996, "net_delta": -342, "isolated_delta": -0.8571, "intersection_count": 834, "split_event_count": 996, "split_short_segments": 0, "effective_endpoint_tolerance": "0.4511"}, {"drawing_key": "_P1_staging/主变及并网线保护屏端子图", "drawing_id": "主变及并网线保护屏端子图", "split": "val", "phase": "P1", "batch": "_P1_staging", "png_path": "datas/qa_and_png/P1_oda_output/主变及并网线保护屏端子图.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/datas/qa_and_png/P1_oda_output/主变及并网线保护屏端子图.png", "topology_v0_json_path": "outputs/topology_graph/_P1_staging/主变及并网线保护屏端子图.topology.v0.json", "topology_v0_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph/_P1_staging/主变及并网线保护屏端子图.topology.v0.json", "topology_v1_json_path": "outputs/topology_graph_v1_pilot/_P1_staging/主变及并网线保护屏端子图.topology.v1_pilot.json", "topology_v1_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph_v1_pilot/_P1_staging/主变及并网线保护屏端子图.topology.v1_pilot.json", "status": "ok", "review_label": "needs_intersection_split", "v0_node_count": 1710, "v0_edge_count": 919, "v0_net_count": 811, "v0_isolated_edge_ratio": 0.8085, "v0_largest_net_edge_ratio": 0.012, "v1_node_count": 3372, "v1_edge_count": 5977, "v1_net_count": 8, "v1_isolated_edge_ratio": 0.0, "v1_largest_net_edge_ratio": 0.221, "edge_delta": 5058, "net_delta": -803, "isolated_delta": -0.8085, "intersection_count": 3400, "split_event_count": 5083, "split_short_segments": 6, "effective_endpoint_tolerance": "0.9258"}, {"drawing_key": "_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com", "drawing_id": "220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com", "split": "train", "phase": "P2", "batch": "_P2_staging", "png_path": "datas/qa_and_png/P2_oda_output/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/datas/qa_and_png/P2_oda_output/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com.png", "topology_v0_json_path": "outputs/topology_graph/_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com.topology.v0.json", "topology_v0_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph/_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com.topology.v0.json", "topology_v1_json_path": "outputs/topology_graph_v1_pilot/_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com.topology.v1_pilot.json", "topology_v1_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph_v1_pilot/_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com.topology.v1_pilot.json", "status": "ok", "review_label": "needs_intersection_split", "v0_node_count": 2756, "v0_edge_count": 1509, "v0_net_count": 1295, "v0_isolated_edge_ratio": 0.8005, "v0_largest_net_edge_ratio": 0.0046, "v1_node_count": 5593, "v1_edge_count": 9745, "v1_net_count": 16, "v1_isolated_edge_ratio": 0.0, "v1_largest_net_edge_ratio": 0.2522, "edge_delta": 8236, "net_delta": -1279, "isolated_delta": -0.8005, "intersection_count": 5479, "split_event_count": 8424, "split_short_segments": 0, "effective_endpoint_tolerance": "0.7591"}, {"drawing_key": "_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com", "drawing_id": "PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com", "split": "train", "phase": "P3", "batch": "_P3_staging_batch3", "png_path": "datas/qa_and_png/P3_oda_output/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/datas/qa_and_png/P3_oda_output/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com.png", "topology_v0_json_path": "outputs/topology_graph/_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com.topology.v0.json", "topology_v0_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph/_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com.topology.v0.json", "topology_v1_json_path": "outputs/topology_graph_v1_pilot/_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com.topology.v1_pilot.json", "topology_v1_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph_v1_pilot/_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com.topology.v1_pilot.json", "status": "ok", "review_label": "needs_intersection_split", "v0_node_count": 1300, "v0_edge_count": 715, "v0_net_count": 616, "v0_isolated_edge_ratio": 0.8378, "v0_largest_net_edge_ratio": 0.0294, "v1_node_count": 2190, "v1_edge_count": 3573, "v1_net_count": 11, "v1_isolated_edge_ratio": 0.0, "v1_largest_net_edge_ratio": 0.2662, "edge_delta": 2858, "net_delta": -605, "isolated_delta": -0.8378, "intersection_count": 1980, "split_event_count": 2882, "split_short_segments": 0, "effective_endpoint_tolerance": "0.5002"}, {"drawing_key": "_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com", "drawing_id": "PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com", "split": "val", "phase": "P3", "batch": "_P3_staging_batch3", "png_path": "datas/qa_and_png/P3_oda_output/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/datas/qa_and_png/P3_oda_output/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com.png", "topology_v0_json_path": "outputs/topology_graph/_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com.topology.v0.json", "topology_v0_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph/_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com.topology.v0.json", "topology_v1_json_path": "outputs/topology_graph_v1_pilot/_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com.topology.v1_pilot.json", "topology_v1_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph_v1_pilot/_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com.topology.v1_pilot.json", "status": "ok", "review_label": "needs_intersection_split", "v0_node_count": 2082, "v0_edge_count": 1124, "v0_net_count": 988, "v0_isolated_edge_ratio": 0.8514, "v0_largest_net_edge_ratio": 0.0196, "v1_node_count": 3460, "v1_edge_count": 5504, "v1_net_count": 17, "v1_isolated_edge_ratio": 0.0, "v1_largest_net_edge_ratio": 0.2971, "edge_delta": 4380, "net_delta": -971, "isolated_delta": -0.8514, "intersection_count": 3018, "split_event_count": 4408, "split_short_segments": 0, "effective_endpoint_tolerance": "0.7335"}, {"drawing_key": "_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com", "drawing_id": "PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com", "split": "train", "phase": "P3", "batch": "_P3_staging_batch3", "png_path": "datas/qa_and_png/P3_oda_output/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/datas/qa_and_png/P3_oda_output/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com.png", "topology_v0_json_path": "outputs/topology_graph/_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com.topology.v0.json", "topology_v0_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph/_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com.topology.v0.json", "topology_v1_json_path": "outputs/topology_graph_v1_pilot/_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com.topology.v1_pilot.json", "topology_v1_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph_v1_pilot/_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com.topology.v1_pilot.json", "status": "ok", "review_label": "needs_intersection_split", "v0_node_count": 2087, "v0_edge_count": 1131, "v0_net_count": 986, "v0_isolated_edge_ratio": 0.8426, "v0_largest_net_edge_ratio": 0.0195, "v1_node_count": 3463, "v1_edge_count": 5505, "v1_net_count": 19, "v1_isolated_edge_ratio": 0.0, "v1_largest_net_edge_ratio": 0.297, "edge_delta": 4374, "net_delta": -967, "isolated_delta": -0.8426, "intersection_count": 3014, "split_event_count": 4402, "split_short_segments": 0, "effective_endpoint_tolerance": "0.733"}, {"drawing_key": "_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com", "drawing_id": "攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com", "split": "train", "phase": "P3", "batch": "_P3_staging_batch3", "png_path": "datas/qa_and_png/P3_oda_output/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/datas/qa_and_png/P3_oda_output/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com.png", "topology_v0_json_path": "outputs/topology_graph/_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com.topology.v0.json", "topology_v0_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph/_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com.topology.v0.json", "topology_v1_json_path": "outputs/topology_graph_v1_pilot/_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com.topology.v1_pilot.json", "topology_v1_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_graph_v1_pilot/_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com.topology.v1_pilot.json", "status": "ok", "review_label": "needs_intersection_split", "v0_node_count": 2366, "v0_edge_count": 1290, "v0_net_count": 1118, "v0_isolated_edge_ratio": 0.8403, "v0_largest_net_edge_ratio": 0.0233, "v1_node_count": 3928, "v1_edge_count": 6198, "v1_net_count": 24, "v1_isolated_edge_ratio": 0.001, "v1_largest_net_edge_ratio": 0.2854, "edge_delta": 4908, "net_delta": -1094, "isolated_delta": -0.8393, "intersection_count": 3362, "split_event_count": 4928, "split_short_segments": 0, "effective_endpoint_tolerance": "0.7937"}];
+    const storageKey = "industrial-diagram-topology-v1-pilot-review-v1";
+    const labelOptions = ["accept_v1", "over_connected", "still_fragmented", "needs_terminal_anchor", "bad_geometry"];
+    let labels = loadLabels();
+
+    function loadLabels() {
+      try { return JSON.parse(localStorage.getItem(storageKey) || "{}"); }
+      catch { return {}; }
+    }
+    function saveLabels() {
+      localStorage.setItem(storageKey, JSON.stringify(labels));
+      renderStats();
+    }
+    function labelFor(id) {
+      return labels[id] || { label: "", comment: "" };
+    }
+    function setLabel(id, label) {
+      labels[id] = { ...labelFor(id), label };
+      saveLabels();
+      render();
+    }
+    function setComment(id, comment) {
+      labels[id] = { ...labelFor(id), comment };
+      saveLabels();
+    }
+    function csvEscape(value) {
+      const s = String(value ?? "");
+      return /[",\n\r]/.test(s) ? '"' + s.replaceAll('"', '""') + '"' : s;
+    }
+    function filteredRows() {
+      const q = document.getElementById("search").value.trim().toLowerCase();
+      const labelFilter = document.getElementById("labelFilter").value;
+      const phaseFilter = document.getElementById("phaseFilter").value;
+      return rows.filter(row => {
+        const saved = labelFor(row.drawing_key);
+        const label = saved.label || "unlabeled";
+        const text = (row.drawing_key + " " + row.drawing_id).toLowerCase();
+        return (!q || text.includes(q))
+          && (labelFilter === "all" || labelFilter === label)
+          && (phaseFilter === "all" || row.phase === phaseFilter);
+      });
+    }
+    function renderFilters() {
+      const phaseSelect = document.getElementById("phaseFilter");
+      const phases = [...new Set(rows.map(row => row.phase).filter(Boolean))].sort();
+      for (const phase of phases) {
+        const option = document.createElement("option");
+        option.value = phase;
+        option.textContent = phase;
+        phaseSelect.appendChild(option);
+      }
+    }
+    function renderStats() {
+      const counts = { unlabeled: 0 };
+      for (const option of labelOptions) counts[option] = 0;
+      for (const row of rows) {
+        const label = labelFor(row.drawing_key).label || "unlabeled";
+        counts[label] = (counts[label] || 0) + 1;
+      }
+      document.getElementById("stats").textContent =
+        `显示 ${filteredRows().length} / ${rows.length} | accept ${counts.accept_v1} | over ${counts.over_connected} | fragmented ${counts.still_fragmented} | terminal ${counts.needs_terminal_anchor} | bad ${counts.bad_geometry} | 未标注 ${counts.unlabeled}`;
+    }
+    function imageHtml(row) {
+      if (!row.image_src) return `<div class="missing-image">missing png path</div>`;
+      return `<img src="${row.image_src}" alt="${row.drawing_key}">`;
+    }
+    function badgeHtml(row) {
+      return [
+        `<span class="badge">${row.phase || "-"}</span>`,
+        `<span class="badge">${row.split || "-"}</span>`,
+        `<span class="badge">${row.status || "-"}</span>`,
+        `<span class="badge review">${row.review_label || "-"}</span>`
+      ].join("");
+    }
+    function render() {
+      const list = document.getElementById("list");
+      list.innerHTML = "";
+      for (const row of filteredRows()) {
+        const saved = labelFor(row.drawing_key);
+        const card = document.createElement("section");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="image-wrap">${imageHtml(row)}</div>
+          <div class="meta">
+            <div class="title"><strong>${row.drawing_key}</strong></div>
+            <div class="badges">${badgeHtml(row)}</div>
+            <div class="compare">
+              <div class="metric"><strong>${row.v0_edge_count} -> ${row.v1_edge_count}</strong><span>edges</span></div>
+              <div class="metric"><strong>${row.v0_net_count} -> ${row.v1_net_count}</strong><span>nets</span></div>
+              <div class="metric"><strong>${row.v0_isolated_edge_ratio} -> ${row.v1_isolated_edge_ratio}</strong><span>isolated ratio</span></div>
+            </div>
+            <div class="metrics">
+              <div class="metric"><strong>${row.edge_delta}</strong><span>edge delta</span></div>
+              <div class="metric"><strong>${row.net_delta}</strong><span>net delta</span></div>
+              <div class="metric"><strong>${row.intersection_count}</strong><span>intersections</span></div>
+              <div class="metric"><strong>${row.split_event_count}</strong><span>split events</span></div>
+              <div class="metric"><strong>${row.v1_node_count}</strong><span>v1 nodes</span></div>
+              <div class="metric"><strong>${row.v1_largest_net_edge_ratio}</strong><span>v1 largest ratio</span></div>
+              <div class="metric"><strong>${row.effective_endpoint_tolerance}</strong><span>tolerance</span></div>
+              <div class="metric"><strong>${row.split_short_segments}</strong><span>short splits</span></div>
+            </div>
+            <div class="choices">
+              ${labelOptions.map(option =>
+                `<div class="choice ${saved.label === option ? "active" : ""}" data-value="${option}">${option}</div>`
+              ).join("")}
+            </div>
+            <textarea placeholder="备注：例如交叉线误连、仍然碎、需要端子锚点、v1可接受..." data-comment>${saved.comment || ""}</textarea>
+            <div class="kv">
+              <span>drawing_id</span><code>${row.drawing_id || ""}</code>
+              <span>batch</span><code>${row.batch || ""}</code>
+              <span>png_path</span><code>${row.png_path || ""}</code>
+              <span>v0_json</span><a href="${row.topology_v0_json_src || "#"}" target="_blank">${row.topology_v0_json_path || ""}</a>
+              <span>v1_json</span><a href="${row.topology_v1_json_src || "#"}" target="_blank">${row.topology_v1_json_path || ""}</a>
+            </div>
+          </div>
+        `;
+        card.querySelectorAll(".choice").forEach(el => {
+          el.addEventListener("click", () => setLabel(row.drawing_key, el.dataset.value));
+        });
+        card.querySelector("[data-comment]").addEventListener("input", event => {
+          setComment(row.drawing_key, event.target.value);
+        });
+        list.appendChild(card);
+      }
+      renderStats();
+    }
+    function exportCsv() {
+      const header = [
+        "drawing_key", "drawing_id", "split", "phase", "batch", "status", "review_label",
+        "v0_edge_count", "v1_edge_count", "edge_delta",
+        "v0_net_count", "v1_net_count", "net_delta",
+        "v0_isolated_edge_ratio", "v1_isolated_edge_ratio", "isolated_delta",
+        "v1_largest_net_edge_ratio", "intersection_count", "split_event_count",
+        "topology_v0_json_path", "topology_v1_json_path", "png_path",
+        "v1_review_label", "comment"
+      ];
+      const lines = [header.join(",")];
+      for (const row of rows) {
+        const saved = labelFor(row.drawing_key);
+        lines.push(header.map(key => {
+          if (key === "v1_review_label") return csvEscape(saved.label || "");
+          if (key === "comment") return csvEscape(saved.comment || "");
+          return csvEscape(row[key]);
+        }).join(","));
+      }
+      const blob = new Blob(["\ufeff" + lines.join("\n")], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "topology_v1_pilot_review_labels.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+    document.getElementById("search").addEventListener("input", render);
+    document.getElementById("labelFilter").addEventListener("change", render);
+    document.getElementById("phaseFilter").addEventListener("change", render);
+    document.getElementById("clearFilters").addEventListener("click", () => {
+      document.getElementById("search").value = "";
+      document.getElementById("labelFilter").value = "all";
+      document.getElementById("phaseFilter").value = "all";
+      render();
+    });
+    document.getElementById("exportCsv").addEventListener("click", exportCsv);
+    renderFilters();
+    render();
+  </script>
+</body>
+</html>

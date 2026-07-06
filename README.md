@@ -148,6 +148,12 @@ python scripts/apply_topology_review_labels.py
 python scripts/build_topology_v1_pilot.py
 ```
 
+生成 Topology Graph v1 pilot HTML 审核表：
+
+```powershell
+python scripts/build_topology_v1_review_html.py
+```
+
 ## Data Pipeline
 
 ```text
