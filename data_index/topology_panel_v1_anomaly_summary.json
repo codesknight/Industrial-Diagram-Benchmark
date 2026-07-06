@@ -1,0 +1,45 @@
+{
+  "panel_rows": 2069,
+  "anomaly_rows": 721,
+  "normal_rows": 1348,
+  "severity_counts": {
+    "critical": 9,
+    "high": 42,
+    "medium": 600,
+    "low": 70
+  },
+  "anomaly_type_counts": {
+    "truncated_max_segments": 2,
+    "error": 7,
+    "no_edges_or_no_nets": 42,
+    "high_fragmentation": 517,
+    "high_isolated_ratio": 83,
+    "dominant_component": 70
+  },
+  "status_counts": {
+    "ok": 2060,
+    "error": 7,
+    "truncated_max_segments": 2
+  },
+  "phase_counts": {
+    "P2": 234,
+    "P3": 336,
+    "P1": 151
+  },
+  "split_counts": {
+    "val": 62,
+    "train": 588,
+    "test": 71
+  },
+  "max_edge_count": 219846,
+  "max_net_count": 17100,
+  "max_intersection_count": 336142,
+  "max_isolated_edge_ratio": 1.0,
+  "source_manifest": "data_index/topology_panel_v1_manifest.csv",
+  "output_manifest": "data_index/topology_panel_v1_anomaly_manifest.csv",
+  "rules": [
+    "status=error and status=truncated_max_segments are critical anomalies",
+    "no_edges/no_nets rows require topology-target review or unsupported-geometry inspection",
+    "high_fragmentation, high_isolated_ratio, and dominant_component are risk samples for the next HTML review"
+  ]
+}
