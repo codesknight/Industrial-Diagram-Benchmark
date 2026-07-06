@@ -1,0 +1,43 @@
+{
+  "panel_rows": 100,
+  "ok_rows": 100,
+  "error_rows": 0,
+  "parent_drawing_count": 94,
+  "by_split": {
+    "train": 86,
+    "val": 7,
+    "test": 7
+  },
+  "by_phase": {
+    "P1": 100
+  },
+  "status_counts": {
+    "ok": 100
+  },
+  "quality_flag_counts": {
+    "high_fragmentation": 32,
+    "none": 66,
+    "no_edges": 1,
+    "no_nets": 1,
+    "dominant_component": 1
+  },
+  "v1_edge_count_min": 0,
+  "v1_edge_count_avg": 4391.98,
+  "v1_edge_count_max": 29506,
+  "v1_net_count_min": 0,
+  "v1_net_count_avg": 318.84,
+  "v1_net_count_max": 2730,
+  "intersection_count_total": 214097,
+  "intersection_count_avg": 2140.97,
+  "no_edge_rows": 1,
+  "output_manifest": "data_index/topology_panel_v1_sample_manifest.csv",
+  "output_dir": "outputs/topology_panel_v1_sample",
+  "params": {
+    "endpoint_merge_tolerance": 1.0,
+    "endpoint_tolerance_ratio": 0.0005,
+    "min_segment_length": 0.001,
+    "intersection_epsilon": 1e-09,
+    "max_segments": 300000,
+    "limit": 100
+  }
+}
