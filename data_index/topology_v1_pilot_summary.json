@@ -1,0 +1,18 @@
+{
+  "pilot_rows": 7,
+  "total_intersections": 21087,
+  "total_split_events": 31123,
+  "improved_isolated_ratio_rows": 7,
+  "reduced_net_count_rows": 7,
+  "v0_edge_total": 7080,
+  "v1_edge_total": 37890,
+  "v0_net_total": 6164,
+  "v1_net_total": 103,
+  "params": {
+    "endpoint_merge_tolerance": 1.0,
+    "endpoint_tolerance_ratio": 0.0005,
+    "min_segment_length": 0.001,
+    "intersection_epsilon": 1e-09,
+    "max_segments": 300000
+  }
+}

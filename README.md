@@ -142,6 +142,12 @@ python scripts/build_topology_ready_manifests.py
 python scripts/apply_topology_review_labels.py
 ```
 
+运行 Topology Graph v1 pilot 交点拆分实验：
+
+```powershell
+python scripts/build_topology_v1_pilot.py
+```
+
 ## Data Pipeline
 
 ```text
