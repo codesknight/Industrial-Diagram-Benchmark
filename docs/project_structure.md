@@ -52,6 +52,7 @@ data_index/
   topology_multipanel_split_labels.csv Topology v1 多子图页面拆分导出结果
   topology_multipanel_manual_panel_* Topology v1 多子图手工 panel 清单、统计和报告
   topology_panel_v1_pilot_* panel-level Topology Graph v1 pilot 索引、统计和报告
+  topology_panel_v1_pilot_review.html panel-level Topology Graph v1 pilot 审核表
   topology_bad_geometry_reviewed.csv 人工标记几何异常清单
   train.csv              训练集样本
   val.csv                验证集样本
@@ -78,6 +79,7 @@ scripts/
   build_topology_multipanel_split_html.py 生成多子图页面 bbox 标注表
   apply_topology_multipanel_split_labels.py 应用多子图 bbox 标注并生成 crop/manifest
   build_topology_panel_v1_pilot.py 运行 panel-level Topology Graph v1 pilot
+  build_topology_panel_v1_review_html.py 生成 panel-level Topology Graph v1 pilot 审核表
   check_dataset_integrity.py  检查 manifest 完整性
 
 tools/

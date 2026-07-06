@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Industrial Diagram Topology Panel v1 Pilot Review</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5f7fa;
+      --panel: #ffffff;
+      --ink: #101828;
+      --muted: #667085;
+      --border: #d8dee8;
+      --dark: #111827;
+      --ok: #0f7b45;
+      --warn: #a35b00;
+      --bad: #b42318;
+      --info: #175cd3;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      padding: 12px 18px;
+      background: rgba(255,255,255,0.96);
+      border-bottom: 1px solid var(--border);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    input[type="search"], select {
+      height: 34px;
+      min-width: 170px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0 10px;
+      background: #fff;
+      color: var(--ink);
+    }
+    button {
+      height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0 12px;
+      background: #fff;
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 550;
+    }
+    button.primary {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: #fff;
+    }
+    .stats {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    main {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      grid-template-columns: minmax(420px, 1fr) 450px;
+      min-height: 360px;
+      overflow: hidden;
+    }
+    .image-wrap {
+      min-height: 360px;
+      border-right: 1px solid var(--border);
+      background: #fcfcfd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      padding: 10px;
+    }
+    .image-wrap img {
+      max-width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+      border: 1px solid #edf0f5;
+      background: #fff;
+    }
+    .meta {
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+    .title {
+      font-size: 13px;
+      line-height: 1.4;
+      word-break: break-all;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .badge {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px 8px;
+      color: var(--muted);
+      font-size: 12px;
+      background: #fff;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .metric {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px;
+      min-width: 0;
+    }
+    .metric strong {
+      display: block;
+      font-size: 16px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 3px;
+    }
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .choice {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 6px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      font-size: 12px;
+      font-weight: 650;
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .choice.active[data-value="accept_v1"] { border-color: var(--ok); color: var(--ok); background: #ecfdf3; }
+    .choice.active[data-value="over_connected"] { border-color: var(--bad); color: var(--bad); background: #fff1f0; }
+    .choice.active[data-value="still_fragmented"] { border-color: var(--warn); color: var(--warn); background: #fff7e8; }
+    .choice.active[data-value="needs_terminal_anchor"] { border-color: var(--info); color: var(--info); background: #eff6ff; }
+    .choice.active[data-value="bad_geometry"] { border-color: #7a271a; color: #7a271a; background: #fff1f0; }
+    textarea {
+      width: 100%;
+      min-height: 70px;
+      resize: vertical;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px;
+      font-family: inherit;
+    }
+    .kv {
+      display: grid;
+      grid-template-columns: 116px minmax(0, 1fr);
+      gap: 5px 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .kv code, .kv a {
+      color: var(--ink);
+      word-break: break-all;
+      white-space: pre-wrap;
+    }
+    .kv a { text-decoration: none; }
+    .kv a:hover { text-decoration: underline; }
+    @media (max-width: 1080px) {
+      .card { grid-template-columns: 1fr; }
+      .image-wrap { border-right: 0; border-bottom: 1px solid var(--border); }
+      .stats { width: 100%; margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Industrial Diagram Topology Panel v1 Pilot Review</h1>
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="搜索 panel / parent" />
+      <select id="labelFilter">
+        <option value="all">全部标注</option>
+        <option value="unlabeled">未标注</option>
+        <option value="accept_v1">accept_v1</option>
+        <option value="over_connected">over_connected</option>
+        <option value="still_fragmented">still_fragmented</option>
+        <option value="needs_terminal_anchor">needs_terminal_anchor</option>
+        <option value="bad_geometry">bad_geometry</option>
+      </select>
+      <select id="phaseFilter">
+        <option value="all">全部 phase</option>
+      </select>
+      <button id="clearFilters">清除筛选</button>
+      <button id="exportCsv" class="primary">导出 CSV</button>
+      <span id="stats" class="stats"></span>
+    </div>
+  </header>
+  <main id="list"></main>
+  <script>
+    const rows = [{"panel_id": "_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com#manual_panel_000", "parent_drawing_key": "_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com", "split": "val", "phase": "P1", "panel_index": "0", "panel_count": "2", "panel_png_path": "outputs/topology_multipanel_panels/P1/P1_staging__主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com#manual_panel_000.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P1/P1_staging__主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com#manual_panel_000.png", "panel_bbox_png": "1190.0,29.0,8251.0,3236.0", "panel_bbox_cad": "77.4053,24.956,536.6982,347.2982", "panel_entity_count": "417", "base_segment_count": "182", "split_segment_count": "639", "intersection_count": "377", "split_event_count": "457", "v1_node_count": "426", "v1_edge_count": "639", "v1_net_count": "3", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.8232", "effective_endpoint_tolerance": "0.2806", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com#manual_panel_000.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com#manual_panel_000.topology.v1_panel_pilot.json"}, {"panel_id": "_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com#manual_panel_001", "parent_drawing_key": "_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com", "split": "val", "phase": "P1", "panel_index": "1", "panel_count": "2", "panel_png_path": "outputs/topology_multipanel_panels/P1/P1_staging__主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com#manual_panel_001.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P1/P1_staging__主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com#manual_panel_001.png", "panel_bbox_png": "1166.0,3353.0,6064.0,6570.0", "panel_bbox_cad": "75.8442,-310.1512,394.4416,13.1961", "panel_entity_count": "426", "base_segment_count": "194", "split_segment_count": "685", "intersection_count": "410", "split_event_count": "491", "v1_node_count": "443", "v1_edge_count": "685", "v1_net_count": "4", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.8073", "effective_endpoint_tolerance": "0.227", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com#manual_panel_001.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com#manual_panel_001.topology.v1_panel_pilot.json"}, {"panel_id": "_P1_staging/主变及并网线保护屏端子图#manual_panel_000", "parent_drawing_key": "_P1_staging/主变及并网线保护屏端子图", "split": "val", "phase": "P1", "panel_index": "0", "panel_count": "2", "panel_png_path": "outputs/topology_multipanel_panels/P1/P1_staging__主变及并网线保护屏端子图#manual_panel_000.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P1/P1_staging__主变及并网线保护屏端子图#manual_panel_000.png", "panel_bbox_png": "83.0,1778.0,4398.0,4849.0", "panel_bbox_cad": "-955.9759,-571.0172,-144.6053,-304.8206", "panel_entity_count": "527", "base_segment_count": "233", "split_segment_count": "1663", "intersection_count": "958", "split_event_count": "1436", "v1_node_count": "921", "v1_edge_count": "1663", "v1_net_count": "4", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.3403", "effective_endpoint_tolerance": "0.427", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P1_staging/主变及并网线保护屏端子图#manual_panel_000.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P1_staging/主变及并网线保护屏端子图#manual_panel_000.topology.v1_panel_pilot.json"}, {"panel_id": "_P1_staging/主变及并网线保护屏端子图#manual_panel_001", "parent_drawing_key": "_P1_staging/主变及并网线保护屏端子图", "split": "val", "phase": "P1", "panel_index": "1", "panel_count": "2", "panel_png_path": "outputs/topology_multipanel_panels/P1/P1_staging__主变及并网线保护屏端子图#manual_panel_001.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P1/P1_staging__主变及并网线保护屏端子图#manual_panel_001.png", "panel_bbox_png": "4951.0,1764.0,9276.0,4864.0", "panel_bbox_cad": "-40.622,-572.3174,772.629,-303.6071", "panel_entity_count": "751", "base_segment_count": "314", "split_segment_count": "2046", "intersection_count": "1124", "split_event_count": "1732", "v1_node_count": "1223", "v1_edge_count": "2046", "v1_net_count": "4", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.3597", "effective_endpoint_tolerance": "0.4282", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P1_staging/主变及并网线保护屏端子图#manual_panel_001.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P1_staging/主变及并网线保护屏端子图#manual_panel_001.topology.v1_panel_pilot.json"}, {"panel_id": "_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com#manual_panel_000", "parent_drawing_key": "_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com", "split": "train", "phase": "P2", "panel_index": "0", "panel_count": "2", "panel_png_path": "outputs/topology_multipanel_panels/P2/P2_staging__220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com#manual_panel_000.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P2/P2_staging__220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com#manual_panel_000.png", "panel_bbox_png": "58.0,739.0,9310.0,3591.0", "panel_bbox_cad": "-16.6234,-35.7382,1319.5886,261.5476", "panel_entity_count": "1306", "base_segment_count": "437", "split_segment_count": "2644", "intersection_count": "1474", "split_event_count": "2240", "v1_node_count": "1552", "v1_edge_count": "2644", "v1_net_count": "2", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.9297", "effective_endpoint_tolerance": "0.6844", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com#manual_panel_000.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com#manual_panel_000.topology.v1_panel_pilot.json"}, {"panel_id": "_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com#manual_panel_001", "parent_drawing_key": "_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com", "split": "train", "phase": "P2", "panel_index": "1", "panel_count": "2", "panel_png_path": "outputs/topology_multipanel_panels/P2/P2_staging__220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com#manual_panel_001.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P2/P2_staging__220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com#manual_panel_001.png", "panel_bbox_png": "49.0,3897.0,5938.0,5889.0", "panel_bbox_cad": "-17.9232,-275.2764,832.5905,-67.635", "panel_entity_count": "2197", "base_segment_count": "655", "split_segment_count": "4038", "intersection_count": "2255", "split_event_count": "3456", "v1_node_count": "2347", "v1_edge_count": "4038", "v1_net_count": "12", "v1_isolated_edge_ratio": "0.0007", "v1_largest_net_edge_ratio": "0.2672", "effective_endpoint_tolerance": "0.4377", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com#manual_panel_001.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com#manual_panel_001.topology.v1_panel_pilot.json"}, {"panel_id": "_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com#manual_panel_000", "parent_drawing_key": "_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com", "split": "train", "phase": "P3", "panel_index": "0", "panel_count": "2", "panel_png_path": "outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com#manual_panel_000.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com#manual_panel_000.png", "panel_bbox_png": "1395.0,19.0,8022.0,3780.0", "panel_bbox_cad": "80.1187,-30.5946,592.5563,361.6052", "panel_entity_count": "818", "base_segment_count": "303", "split_segment_count": "1523", "intersection_count": "841", "split_event_count": "1230", "v1_node_count": "948", "v1_edge_count": "1521", "v1_net_count": "14", "v1_isolated_edge_ratio": "0.0059", "v1_largest_net_edge_ratio": "0.522", "effective_endpoint_tolerance": "0.3227", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com#manual_panel_000.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com#manual_panel_000.topology.v1_panel_pilot.json"}, {"panel_id": "_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com#manual_panel_001", "parent_drawing_key": "_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com", "split": "train", "phase": "P3", "panel_index": "1", "panel_count": "2", "panel_png_path": "outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com#manual_panel_001.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com#manual_panel_001.png", "panel_bbox_png": "1365.0,3887.0,5151.0,6589.0", "panel_bbox_cad": "77.7989,-323.5191,370.5541,-41.7526", "panel_entity_count": "727", "base_segment_count": "265", "split_segment_count": "1367", "intersection_count": "761", "split_event_count": "1112", "v1_node_count": "847", "v1_edge_count": "1365", "v1_net_count": "5", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.4842", "effective_endpoint_tolerance": "0.2032", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com#manual_panel_001.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com#manual_panel_001.topology.v1_panel_pilot.json"}, {"panel_id": "_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_001", "parent_drawing_key": "_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com", "split": "val", "phase": "P3", "panel_index": "1", "panel_count": "4", "panel_png_path": "outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_001.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_001.png", "panel_bbox_png": "141.0,5.0,9281.0,4203.0", "panel_bbox_cad": "-6.3187,-56.0771,1204.6559,440.4121", "panel_entity_count": "1495", "base_segment_count": "554", "split_segment_count": "2746", "intersection_count": "1503", "split_event_count": "2201", "v1_node_count": "1721", "v1_edge_count": "2741", "v1_net_count": "7", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.5965", "effective_endpoint_tolerance": "0.6544", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_001.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_001.topology.v1_panel_pilot.json"}, {"panel_id": "_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_002", "parent_drawing_key": "_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com", "split": "val", "phase": "P3", "panel_index": "2", "panel_count": "4", "panel_png_path": "outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_002.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_002.png", "panel_bbox_png": "190.0,4446.0,3294.0,6579.0", "panel_bbox_cad": "0.1734,-337.0819,411.4278,-84.8162", "panel_entity_count": "670", "base_segment_count": "250", "split_segment_count": "1113", "intersection_count": "588", "split_event_count": "864", "v1_node_count": "730", "v1_edge_count": "1109", "v1_net_count": "6", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.7304", "effective_endpoint_tolerance": "0.2412", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_002.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_002.topology.v1_panel_pilot.json"}, {"panel_id": "_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_003", "parent_drawing_key": "_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com", "split": "val", "phase": "P3", "panel_index": "3", "panel_count": "4", "panel_png_path": "outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_003.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_003.png", "panel_bbox_png": "3464.0,4451.0,6555.0,6618.0", "panel_bbox_cad": "433.9514,-341.6943,843.4834,-85.4075", "panel_entity_count": "759", "base_segment_count": "324", "split_segment_count": "1364", "intersection_count": "728", "split_event_count": "1046", "v1_node_count": "916", "v1_edge_count": "1363", "v1_net_count": "4", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.5356", "effective_endpoint_tolerance": "0.2416", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_003.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com#manual_panel_003.topology.v1_panel_pilot.json"}, {"panel_id": "_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_000", "parent_drawing_key": "_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com", "split": "train", "phase": "P3", "panel_index": "0", "panel_count": "3", "panel_png_path": "outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_000.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_000.png", "panel_bbox_png": "209.0,53.0,9193.0,4247.0", "panel_bbox_cad": "2.6908,-60.2146,1192.9966,434.7485", "panel_entity_count": "1464", "base_segment_count": "556", "split_segment_count": "2745", "intersection_count": "1501", "split_event_count": "2198", "v1_node_count": "1718", "v1_edge_count": "2737", "v1_net_count": "8", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.5974", "effective_endpoint_tolerance": "0.6446", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_000.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_000.topology.v1_panel_pilot.json"}, {"panel_id": "_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_001", "parent_drawing_key": "_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com", "split": "train", "phase": "P3", "panel_index": "1", "panel_count": "3", "panel_png_path": "outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_001.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_001.png", "panel_bbox_png": "190.0,4436.0,3309.0,6565.0", "panel_bbox_cad": "0.1734,-333.7778,413.4152,-82.5198", "panel_entity_count": "651", "base_segment_count": "252", "split_segment_count": "1112", "intersection_count": "586", "split_event_count": "861", "v1_node_count": "730", "v1_edge_count": "1108", "v1_net_count": "7", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.7374", "effective_endpoint_tolerance": "0.2418", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_001.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_001.topology.v1_panel_pilot.json"}, {"panel_id": "_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_002", "parent_drawing_key": "_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com", "split": "train", "phase": "P3", "panel_index": "2", "panel_count": "3", "panel_png_path": "outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_002.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P3/P3_staging_batch3__PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_002.png", "panel_bbox_png": "3683.0,4412.0,6856.0,6545.0", "panel_bbox_cad": "462.9671,-331.4175,883.3634,-79.6874", "panel_entity_count": "757", "base_segment_count": "324", "split_segment_count": "1364", "intersection_count": "728", "split_event_count": "1046", "v1_node_count": "916", "v1_edge_count": "1363", "v1_net_count": "4", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.5356", "effective_endpoint_tolerance": "0.245", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_002.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com#manual_panel_002.topology.v1_panel_pilot.json"}, {"panel_id": "_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_000", "parent_drawing_key": "_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com", "split": "train", "phase": "P3", "panel_index": "0", "panel_count": "3", "panel_png_path": "outputs/topology_multipanel_panels/P3/P3_staging_batch3__攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_000.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P3/P3_staging_batch3__攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_000.png", "panel_bbox_png": "15.0,1244.0,8188.0,3139.0", "panel_bbox_cad": "-23.0634,-34.5157,1251.1946,143.9822", "panel_entity_count": "857", "base_segment_count": "380", "split_segment_count": "1601", "intersection_count": "769", "split_event_count": "1225", "v1_node_count": "1176", "v1_edge_count": "1601", "v1_net_count": "9", "v1_isolated_edge_ratio": "0.0019", "v1_largest_net_edge_ratio": "0.9725", "effective_endpoint_tolerance": "0.6433", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_000.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_000.topology.v1_panel_pilot.json"}, {"panel_id": "_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_001", "parent_drawing_key": "_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com", "split": "train", "phase": "P3", "panel_index": "1", "panel_count": "3", "panel_png_path": "outputs/topology_multipanel_panels/P3/P3_staging_batch3__攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_001.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P3/P3_staging_batch3__攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_001.png", "panel_bbox_png": "97.0,3469.0,2770.0,5394.0", "panel_bbox_cad": "-10.2788,-246.9234,406.4705,-65.5997", "panel_entity_count": "460", "base_segment_count": "172", "split_segment_count": "792", "intersection_count": "427", "split_event_count": "624", "v1_node_count": "508", "v1_edge_count": "792", "v1_net_count": "9", "v1_isolated_edge_ratio": "0.0038", "v1_largest_net_edge_ratio": "0.9394", "effective_endpoint_tolerance": "0.2272", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_001.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_001.topology.v1_panel_pilot.json"}, {"panel_id": "_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_002", "parent_drawing_key": "_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com", "split": "train", "phase": "P3", "panel_index": "2", "panel_count": "3", "panel_png_path": "outputs/topology_multipanel_panels/P3/P3_staging_batch3__攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_002.png", "image_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_multipanel_panels/P3/P3_staging_batch3__攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_002.png", "panel_bbox_png": "2906.0,3426.0,5680.0,5486.0", "panel_bbox_cad": "427.6743,-255.5893,860.1706,-61.5494", "panel_entity_count": "940", "base_segment_count": "356", "split_segment_count": "1662", "intersection_count": "895", "split_event_count": "1308", "v1_node_count": "1085", "v1_edge_count": "1662", "v1_net_count": "6", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.5211", "effective_endpoint_tolerance": "0.237", "topology_v1_panel_json_path": "outputs/topology_panel_v1_pilot/_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_002.topology.v1_panel_pilot.json", "topology_v1_panel_json_src": "D:/LiuYanhong/Projects/BISHE/Industrial Diagram Benchmark/outputs/topology_panel_v1_pilot/_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com#manual_panel_002.topology.v1_panel_pilot.json"}];
+    const storageKey = "industrial-diagram-topology-panel-v1-pilot-review-v1";
+    const labelOptions = ["accept_v1", "over_connected", "still_fragmented", "needs_terminal_anchor", "bad_geometry"];
+    let labels = loadLabels();
+
+    function loadLabels() {
+      try { return JSON.parse(localStorage.getItem(storageKey) || "{}"); }
+      catch { return {}; }
+    }
+    function saveLabels() {
+      localStorage.setItem(storageKey, JSON.stringify(labels));
+      renderStats();
+    }
+    function labelFor(id) {
+      return labels[id] || { label: "", comment: "" };
+    }
+    function setLabel(id, label) {
+      labels[id] = { ...labelFor(id), label };
+      saveLabels();
+      render();
+    }
+    function setComment(id, comment) {
+      labels[id] = { ...labelFor(id), comment };
+      saveLabels();
+    }
+    function csvEscape(value) {
+      const s = String(value ?? "");
+      return /[",\n\r]/.test(s) ? '"' + s.replaceAll('"', '""') + '"' : s;
+    }
+    function filteredRows() {
+      const q = document.getElementById("search").value.trim().toLowerCase();
+      const labelFilter = document.getElementById("labelFilter").value;
+      const phaseFilter = document.getElementById("phaseFilter").value;
+      return rows.filter(row => {
+        const saved = labelFor(row.panel_id);
+        const label = saved.label || "unlabeled";
+        const text = (row.panel_id + " " + row.parent_drawing_key).toLowerCase();
+        return (!q || text.includes(q))
+          && (labelFilter === "all" || labelFilter === label)
+          && (phaseFilter === "all" || row.phase === phaseFilter);
+      });
+    }
+    function renderFilters() {
+      const phaseSelect = document.getElementById("phaseFilter");
+      const phases = [...new Set(rows.map(row => row.phase).filter(Boolean))].sort();
+      for (const phase of phases) {
+        const option = document.createElement("option");
+        option.value = phase;
+        option.textContent = phase;
+        phaseSelect.appendChild(option);
+      }
+    }
+    function renderStats() {
+      const counts = { unlabeled: 0 };
+      for (const option of labelOptions) counts[option] = 0;
+      for (const row of rows) {
+        const label = labelFor(row.panel_id).label || "unlabeled";
+        counts[label] = (counts[label] || 0) + 1;
+      }
+      document.getElementById("stats").textContent =
+        `显示 ${filteredRows().length} / ${rows.length} | accept ${counts.accept_v1} | over ${counts.over_connected} | fragmented ${counts.still_fragmented} | terminal ${counts.needs_terminal_anchor} | bad ${counts.bad_geometry} | 未标注 ${counts.unlabeled}`;
+    }
+    function render() {
+      const list = document.getElementById("list");
+      list.innerHTML = "";
+      for (const row of filteredRows()) {
+        const saved = labelFor(row.panel_id);
+        const card = document.createElement("section");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="image-wrap"><img src="${row.image_src}" alt="${row.panel_id}"></div>
+          <div class="meta">
+            <div class="title"><strong>${row.panel_id}</strong></div>
+            <div class="badges">
+              <span class="badge">${row.phase}</span>
+              <span class="badge">${row.split}</span>
+              <span class="badge">panel ${row.panel_index} / ${row.panel_count}</span>
+            </div>
+            <div class="metrics">
+              <div class="metric"><strong>${row.v1_edge_count}</strong><span>edges</span></div>
+              <div class="metric"><strong>${row.v1_node_count}</strong><span>nodes</span></div>
+              <div class="metric"><strong>${row.v1_net_count}</strong><span>nets</span></div>
+              <div class="metric"><strong>${row.v1_isolated_edge_ratio}</strong><span>isolated</span></div>
+              <div class="metric"><strong>${row.intersection_count}</strong><span>intersections</span></div>
+              <div class="metric"><strong>${row.split_segment_count}</strong><span>split segments</span></div>
+              <div class="metric"><strong>${row.panel_entity_count}</strong><span>entities</span></div>
+              <div class="metric"><strong>${row.v1_largest_net_edge_ratio}</strong><span>largest ratio</span></div>
+            </div>
+            <div class="choices">
+              ${labelOptions.map(option =>
+                `<div class="choice ${saved.label === option ? "active" : ""}" data-value="${option}">${option}</div>`
+              ).join("")}
+            </div>
+            <textarea placeholder="备注：例如 v1合理、交叉误连、仍然碎、需要端子锚点..." data-comment>${saved.comment || ""}</textarea>
+            <div class="kv">
+              <span>parent</span><code>${row.parent_drawing_key}</code>
+              <span>bbox_png</span><code>${row.panel_bbox_png}</code>
+              <span>bbox_cad</span><code>${row.panel_bbox_cad}</code>
+              <span>image</span><code>${row.panel_png_path}</code>
+              <span>v1_json</span><a href="${row.topology_v1_panel_json_src}" target="_blank">${row.topology_v1_panel_json_path}</a>
+            </div>
+          </div>
+        `;
+        card.querySelectorAll(".choice").forEach(el => {
+          el.addEventListener("click", () => setLabel(row.panel_id, el.dataset.value));
+        });
+        card.querySelector("[data-comment]").addEventListener("input", event => {
+          setComment(row.panel_id, event.target.value);
+        });
+        list.appendChild(card);
+      }
+      renderStats();
+    }
+    function exportCsv() {
+      const header = [
+        "panel_id", "parent_drawing_key", "split", "phase", "panel_index", "panel_count",
+        "v1_edge_count", "v1_node_count", "v1_net_count", "v1_isolated_edge_ratio",
+        "v1_largest_net_edge_ratio", "intersection_count", "split_event_count",
+        "panel_png_path", "topology_v1_panel_json_path", "review_label", "comment"
+      ];
+      const lines = [header.join(",")];
+      for (const row of rows) {
+        const saved = labelFor(row.panel_id);
+        lines.push(header.map(key => {
+          if (key === "review_label") return csvEscape(saved.label || "");
+          if (key === "comment") return csvEscape(saved.comment || "");
+          return csvEscape(row[key]);
+        }).join(","));
+      }
+      const blob = new Blob(["\ufeff" + lines.join("\n")], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "topology_panel_v1_pilot_review_labels.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+    document.getElementById("search").addEventListener("input", render);
+    document.getElementById("labelFilter").addEventListener("change", render);
+    document.getElementById("phaseFilter").addEventListener("change", render);
+    document.getElementById("clearFilters").addEventListener("click", () => {
+      document.getElementById("search").value = "";
+      document.getElementById("labelFilter").value = "all";
+      document.getElementById("phaseFilter").value = "all";
+      render();
+    });
+    document.getElementById("exportCsv").addEventListener("click", exportCsv);
+    renderFilters();
+    render();
+  </script>
+</body>
+</html>

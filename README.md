@@ -178,6 +178,12 @@ python scripts/apply_topology_multipanel_split_labels.py
 python scripts/build_topology_panel_v1_pilot.py
 ```
 
+生成 panel-level Topology Graph v1 pilot 审核表：
+
+```powershell
+python scripts/build_topology_panel_v1_review_html.py
+```
+
 ## Data Pipeline
 
 ```text
