@@ -6,8 +6,10 @@ import argparse
 import csv
 import html
 import json
+import os
 from pathlib import Path
 from typing import Dict, Iterable, List
+from urllib.parse import quote
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,14 +27,19 @@ def load_rows(path: Path) -> List[Dict[str, str]]:
 
 
 def rel_asset_path(path: str, html_path: Path) -> str:
+    if not path:
+        return ""
     raw = Path(path)
     if raw.is_absolute():
-        return raw.as_posix()
-    target = ROOT / raw
-    try:
-        return target.relative_to(html_path.parent).as_posix()
-    except ValueError:
-        return target.as_posix()
+        rel = raw.as_posix()
+    else:
+        target = (ROOT / raw).resolve()
+        try:
+            rel = os.path.relpath(target, html_path.parent.resolve())
+        except ValueError:
+            rel = target.as_posix()
+        rel = rel.replace("\\", "/")
+    return quote(rel, safe="/:.")
 
 
 def as_int(value: str) -> int:
