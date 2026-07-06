@@ -1,0 +1,28 @@
+{
+  "pilot_manifest_rows": 17,
+  "label_rows": 17,
+  "reviewed_rows": 17,
+  "unreviewed_rows": 0,
+  "accepted_rows": 17,
+  "not_accepted_rows": 0,
+  "review_label_counts": {
+    "accept_v1": 17
+  },
+  "exclude_reason_counts": {
+    "keep": 17
+  },
+  "accepted_by_phase": {
+    "P1": 4,
+    "P2": 2,
+    "P3": 11
+  },
+  "accepted_by_split": {
+    "val": 7,
+    "train": 10
+  },
+  "rules": [
+    "accept_v1 panels are accepted as panel-level Topology Graph v1 pilot positives",
+    "over_connected, still_fragmented, needs_terminal_anchor, and bad_geometry remain reviewed but not accepted",
+    "unreviewed rows are retained in the reviewed manifest and excluded from accept output"
+  ]
+}
