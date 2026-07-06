@@ -39,6 +39,7 @@ data_index/
   low_geometry_review.csv 低图元样本复核清单
   topology_graph_*      Topology Graph v0 索引、统计和报告
   topology_quality_review.csv Topology Graph 质量复核清单
+  topology_review.html  Topology Graph 快速审核表
   train.csv              训练集样本
   val.csv                验证集样本
   test.csv               测试集样本
@@ -55,6 +56,7 @@ scripts/
   build_final_manifests.py    生成最终可用 drawing/panel 清单
   build_normalized_geometry.py 构建 Normalized Geometry JSON
   build_topology_graph.py      构建 Topology Graph v0
+  build_topology_review_html.py 生成 Topology Graph HTML 审核表
   check_dataset_integrity.py  检查 manifest 完整性
 
 tools/

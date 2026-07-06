@@ -124,6 +124,12 @@ python scripts/build_normalized_geometry.py
 python scripts/build_topology_graph.py
 ```
 
+生成 Topology Graph HTML 审核表：
+
+```powershell
+python scripts/build_topology_review_html.py
+```
+
 ## Data Pipeline
 
 ```text
