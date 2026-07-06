@@ -136,6 +136,12 @@ python scripts/build_topology_review_html.py
 python scripts/build_topology_ready_manifests.py
 ```
 
+应用 Topology 人工审核标签：
+
+```powershell
+python scripts/apply_topology_review_labels.py
+```
+
 ## Data Pipeline
 
 ```text

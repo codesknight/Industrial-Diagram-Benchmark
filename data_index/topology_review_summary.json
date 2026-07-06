@@ -1,0 +1,34 @@
+{
+  "topology_rows": 2042,
+  "label_rows": 52,
+  "reviewed_rows": 52,
+  "unreviewed_rows": 1990,
+  "review_label_counts": {
+    "unreviewed": 1990,
+    "accept_v0": 3,
+    "needs_intersection_split": 7,
+    "bad_geometry": 42
+  },
+  "exclude_reason_counts": {
+    "keep": 2000,
+    "bad_geometry": 31,
+    "not_topology_ready": 11
+  },
+  "reviewed_ready_rows": 2000,
+  "v1_pilot_candidate_rows": 7,
+  "bad_geometry_rows": 42,
+  "reviewed_ready_by_split": {
+    "train": 1607,
+    "val": 191,
+    "test": 202
+  },
+  "v1_candidate_by_label": {
+    "needs_intersection_split": 7
+  },
+  "rules": [
+    "bad_geometry and not_topology_target are excluded from reviewed topology-ready rows",
+    "not_topology_ready rows remain excluded even without a manual label",
+    "needs_intersection_split and needs_terminal_anchor become v1 pilot candidates",
+    "accept_v0 remains eligible for v0 topology benchmark baselines"
+  ]
+}

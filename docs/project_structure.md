@@ -42,6 +42,10 @@ data_index/
   topology_review.html  Topology Graph 快速审核表
   topology_ready_*      Topology-ready 清单、划分和报告
   topology_not_ready_manifest.csv 非拓扑任务样本清单
+  topology_review_labels.csv Topology Graph 人工审核导出结果
+  topology_manifest_reviewed.csv 合并人工审核后的 topology 总表
+  topology_v1_pilot_candidates.csv Topology Graph v1 pilot 候选
+  topology_bad_geometry_reviewed.csv 人工标记几何异常清单
   train.csv              训练集样本
   val.csv                验证集样本
   test.csv               测试集样本
@@ -60,6 +64,7 @@ scripts/
   build_topology_graph.py      构建 Topology Graph v0
   build_topology_review_html.py 生成 Topology Graph HTML 审核表
   build_topology_ready_manifests.py 生成 Topology-ready 清单
+  apply_topology_review_labels.py 合并 Topology 人工审核标签
   check_dataset_integrity.py  检查 manifest 完整性
 
 tools/
