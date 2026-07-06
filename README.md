@@ -160,6 +160,12 @@ python scripts/build_topology_v1_review_html.py
 python scripts/flag_topology_v1_multipanel_pilot.py
 ```
 
+生成 Topology v1 多子图页面拆分标注表：
+
+```powershell
+python scripts/build_topology_multipanel_split_html.py
+```
+
 ## Data Pipeline
 
 ```text
