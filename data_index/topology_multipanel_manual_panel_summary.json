@@ -1,0 +1,24 @@
+{
+  "manual_panel_rows": 18,
+  "usable_panel_rows": 17,
+  "invalid_or_review_rows": 1,
+  "parent_drawing_count": 7,
+  "usable_parent_drawing_count": 7,
+  "panel_rows_by_split": {
+    "val": 8,
+    "train": 10
+  },
+  "usable_rows_by_split": {
+    "val": 7,
+    "train": 10
+  },
+  "invalid_quality_flags": {
+    "too_small": 1,
+    "low_area_ratio": 1
+  },
+  "rules": [
+    "manual bbox rows with status=accept and no quality flags are usable for panel-level topology pilot",
+    "too_small or low_area_ratio rows are retained for review but excluded from usable panel pilot",
+    "this manifest is scoped to topology v1 multi-panel pages and does not replace final_panel_manifest.csv"
+  ]
+}
