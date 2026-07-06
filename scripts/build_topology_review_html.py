@@ -77,6 +77,7 @@ def compact_rows(
                 if row.get("topology_json_path")
                 else "",
                 "status": row.get("status", ""),
+                "topology_ready": row.get("topology_ready", ""),
                 "edge_count": row.get("edge_count", ""),
                 "node_count": row.get("node_count", ""),
                 "net_count": row.get("net_count", ""),
@@ -426,7 +427,8 @@ def render_html(rows: List[Dict[str, str]], title: str) -> str:
       const basics = [
         `<span class="badge">${{row.phase || "-"}}</span>`,
         `<span class="badge">${{row.split || "-"}}</span>`,
-        `<span class="badge">${{row.status || "-"}}</span>`
+        `<span class="badge">${{row.status || "-"}}</span>`,
+        `<span class="badge">${{row.topology_ready === "True" ? "topology_ready" : "not_topology_ready"}}</span>`
       ];
       const flagBadges = flags.length
         ? flags.map(flag => `<span class="badge flag">${{flag}}</span>`)
@@ -484,7 +486,7 @@ def render_html(rows: List[Dict[str, str]], title: str) -> str:
     }}
     function exportCsv() {{
       const header = [
-        "drawing_key", "drawing_id", "split", "phase", "batch", "status",
+        "drawing_key", "drawing_id", "split", "phase", "batch", "status", "topology_ready",
         "edge_count", "node_count", "net_count", "largest_net_edge_ratio",
         "isolated_edge_ratio", "quality_flags", "topology_json_path",
         "png_path", "review_label", "comment"

@@ -100,6 +100,33 @@ def bbox_from_points(points: Sequence[Point]) -> Optional[BBox]:
     return min(xs), min(ys), max(xs), max(ys)
 
 
+def bbox_diagonal(box: object) -> Optional[float]:
+    if not isinstance(box, Sequence) or len(box) < 4:
+        return None
+    try:
+        x0, y0, x1, y1 = [float(value) for value in box[:4]]
+    except (TypeError, ValueError):
+        return None
+    if not all(math.isfinite(value) for value in (x0, y0, x1, y1)):
+        return None
+    return math.hypot(x1 - x0, y1 - y0)
+
+
+def effective_endpoint_tolerance(
+    payload: Dict[str, object],
+    max_tolerance: float,
+    tolerance_ratio: float,
+    min_segment_length: float,
+) -> float:
+    stats = payload.get("stats", {})
+    drawing_bbox = stats.get("drawing_bbox") if isinstance(stats, dict) else None
+    diagonal = bbox_diagonal(drawing_bbox)
+    if not diagonal or diagonal <= 0:
+        return max_tolerance
+    scaled = max(diagonal * tolerance_ratio, min_segment_length * 2)
+    return max(min(scaled, max_tolerance), min_segment_length)
+
+
 def round_bbox(box: Optional[BBox], precision: int) -> str:
     if not box:
         return ""
@@ -163,6 +190,7 @@ def build_graph(
     row: Dict[str, str],
     output_path: Path,
     tolerance: float,
+    tolerance_ratio: float,
     min_segment_length: float,
     precision: int,
     max_segments: int,
@@ -179,9 +207,15 @@ def build_graph(
     layer_counts: Counter[str] = Counter()
     entity_type_counts: Counter[str] = Counter()
     segment_points: List[Point] = []
+    active_tolerance = effective_endpoint_tolerance(
+        payload=payload,
+        max_tolerance=tolerance,
+        tolerance_ratio=tolerance_ratio,
+        min_segment_length=min_segment_length,
+    )
 
     def add_node(point: Point) -> int:
-        key = quantize(point, tolerance)
+        key = quantize(point, active_tolerance)
         node_index = node_lookup.get(key)
         if node_index is None:
             node_index = len(node_sums)
@@ -203,11 +237,11 @@ def build_graph(
 
         start = segment["start"]  # type: ignore[assignment]
         end = segment["end"]  # type: ignore[assignment]
-        source = add_node(start)  # type: ignore[arg-type]
-        target = add_node(end)  # type: ignore[arg-type]
-        if source == target:
+        if quantize(start, active_tolerance) == quantize(end, active_tolerance):  # type: ignore[arg-type]
             skipped_same_node_segments += 1
             continue
+        source = add_node(start)  # type: ignore[arg-type]
+        target = add_node(end)  # type: ignore[arg-type]
 
         edge_id = f"e{len(edges)}"
         degrees[source] += 1
@@ -303,6 +337,7 @@ def build_graph(
         "edge_count": len(edges),
         "candidate_segment_count": total_candidate_segments,
         "net_count": len(nonempty_nets),
+        "topology_ready": bool(edges),
         "largest_net_edges": largest_net_edges,
         "isolated_edge_count": isolated_edge_count,
         "isolated_edge_ratio": isolated_ratio,
@@ -313,6 +348,7 @@ def build_graph(
         "edge_type_counts": dict(entity_type_counts),
         "top_layers": dict(layer_counts.most_common(20)),
         "quality_flags": flags,
+        "effective_endpoint_tolerance": round(active_tolerance, precision),
     }
 
     graph_payload = {
@@ -326,6 +362,8 @@ def build_graph(
         },
         "params": {
             "endpoint_merge_tolerance": tolerance,
+            "endpoint_tolerance_ratio": tolerance_ratio,
+            "effective_endpoint_tolerance": round(active_tolerance, precision),
             "min_segment_length": min_segment_length,
             "precision": precision,
             "max_segments": max_segments,
@@ -355,6 +393,7 @@ def build_graph(
         "edge_count": len(edges),
         "candidate_segment_count": total_candidate_segments,
         "net_count": len(nonempty_nets),
+        "topology_ready": bool(edges),
         "largest_net_edges": largest_net_edges,
         "isolated_edge_count": isolated_edge_count,
         "isolated_edge_ratio": isolated_ratio,
@@ -363,6 +402,7 @@ def build_graph(
         "skipped_same_node_segments": skipped_same_node_segments,
         "graph_bbox": round_bbox(graph_bbox, precision),
         "edge_type_count_json": json.dumps(dict(entity_type_counts), ensure_ascii=False, sort_keys=True),
+        "effective_endpoint_tolerance": round(active_tolerance, precision),
         "quality_flags": ";".join(flags),
     }
 
@@ -379,6 +419,7 @@ def quality_flags(
         flags.append(status)
     if edge_count == 0:
         flags.append("no_edges")
+        flags.append("not_topology_ready")
     if edge_count > 100 and isolated_ratio > 0.8:
         flags.append("high_isolated_ratio")
     if edge_count > 50 and net_count <= 1:
@@ -392,6 +433,7 @@ def process_row(
     row: Dict[str, str],
     output_dir: Path,
     tolerance: float,
+    tolerance_ratio: float,
     min_segment_length: float,
     precision: int,
     max_segments: int,
@@ -406,6 +448,7 @@ def process_row(
         row=row,
         output_path=output_path,
         tolerance=tolerance,
+        tolerance_ratio=tolerance_ratio,
         min_segment_length=min_segment_length,
         precision=precision,
         max_segments=max_segments,
@@ -427,9 +470,12 @@ def write_summary(rows: List[Dict[str, object]], args: argparse.Namespace) -> No
     node_counts = [int(row["node_count"]) for row in rows]
     net_counts = [int(row["net_count"]) for row in rows]
     review_rows = [row for row in rows if str(row["quality_flags"])]
+    topology_ready_rows = [row for row in rows if str(row.get("topology_ready", "")).lower() == "true"]
 
     summary = {
         "topology_rows": len(rows),
+        "topology_ready_rows": len(topology_ready_rows),
+        "not_topology_ready_rows": len(rows) - len(topology_ready_rows),
         "by_split": dict(split_counts),
         "by_phase": dict(phase_counts),
         "by_status": dict(status_counts),
@@ -447,6 +493,7 @@ def write_summary(rows: List[Dict[str, object]], args: argparse.Namespace) -> No
         "edge_type_counts": dict(edge_type_counts.most_common()),
         "params": {
             "endpoint_merge_tolerance": args.endpoint_tolerance,
+            "endpoint_tolerance_ratio": args.endpoint_tolerance_ratio,
             "min_segment_length": args.min_segment_length,
             "precision": args.precision,
             "max_segments": args.max_segments,
@@ -466,6 +513,7 @@ def write_summary(rows: List[Dict[str, object]], args: argparse.Namespace) -> No
         "edge_count",
         "node_count",
         "net_count",
+        "topology_ready",
         "largest_net_edge_ratio",
         "isolated_edge_ratio",
         "quality_flags",
@@ -488,6 +536,8 @@ def write_report(summary: Dict[str, object]) -> None:
         "## Summary",
         "",
         f"- Topology rows: {summary['topology_rows']}",
+        f"- Topology-ready rows: {summary['topology_ready_rows']}",
+        f"- Not topology-ready rows: {summary['not_topology_ready_rows']}",
         f"- Review rows: {summary['review_rows']}",
         f"- Edge count min: {summary['edge_count_min']}",
         f"- Edge count avg: {summary['edge_count_avg']}",
@@ -522,6 +572,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--endpoint-tolerance", type=float, default=1.0)
+    parser.add_argument("--endpoint-tolerance-ratio", type=float, default=0.0005)
     parser.add_argument("--min-segment-length", type=float, default=0.001)
     parser.add_argument("--precision", type=int, default=4)
     parser.add_argument("--max-segments", type=int, default=300000)
@@ -541,6 +592,7 @@ def main() -> None:
             row=row,
             output_dir=output_dir,
             tolerance=args.endpoint_tolerance,
+            tolerance_ratio=args.endpoint_tolerance_ratio,
             min_segment_length=args.min_segment_length,
             precision=args.precision,
             max_segments=args.max_segments,
@@ -559,6 +611,7 @@ def main() -> None:
         "edge_count",
         "candidate_segment_count",
         "net_count",
+        "topology_ready",
         "largest_net_edges",
         "isolated_edge_count",
         "isolated_edge_ratio",
@@ -567,6 +620,7 @@ def main() -> None:
         "skipped_same_node_segments",
         "graph_bbox",
         "edge_type_count_json",
+        "effective_endpoint_tolerance",
         "quality_flags",
     ]
     write_csv(INDEX_DIR / "topology_graph_manifest.csv", manifest_rows, fieldnames)

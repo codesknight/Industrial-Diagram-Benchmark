@@ -39,7 +39,7 @@ Topology v0 extracts wire-like segments from:
 For each drawing, the builder:
 
 1. Converts lines and polyline spans into graph edges.
-2. Clusters endpoints by `endpoint_merge_tolerance`.
+2. Clusters endpoints by an adaptive tolerance capped by `endpoint_merge_tolerance`.
 3. Builds nodes, edges, and connected components.
 4. Writes each connected component as a `net`.
 5. Records quality flags for later review.
@@ -63,6 +63,8 @@ Each local graph JSON uses:
   },
   "params": {
     "endpoint_merge_tolerance": 1.0,
+    "endpoint_tolerance_ratio": 0.0005,
+    "effective_endpoint_tolerance": 1.0,
     "min_segment_length": 0.001,
     "precision": 4,
     "max_segments": 300000,
@@ -113,9 +115,14 @@ bbox
 review. Current flags:
 
 - `no_edges`: no usable `LINE` or `LWPOLYLINE` edges.
+- `not_topology_ready`: graph has zero edges and should not be used as a normal topology sample.
 - `high_isolated_ratio`: many one-edge components.
 - `single_large_component`: only one non-empty component in a graph with many edges.
 - `dominant_component`: one component contains most graph edges.
 - `truncated_max_segments`: graph hit the configured segment cap.
 
 These flags are review signals, not automatic rejection rules.
+
+For topology training and graph benchmark tasks, use `topology_ready = True`.
+Rows with `topology_ready = False` may still be useful for symbol or layout
+tasks, but they should not be treated as valid graph-topology samples.

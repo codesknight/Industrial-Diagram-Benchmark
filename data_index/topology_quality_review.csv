@@ -1,55 +1,53 @@
-﻿drawing_key,split,phase,status,edge_count,node_count,net_count,largest_net_edge_ratio,isolated_edge_ratio,quality_flags,topology_json_path
-_P1_staging/35kv江鑫－主变35kv侧开关柜端子排图,train,P1,ok,241,443,209,0.0207,0.8133,high_isolated_ratio,outputs/topology_graph/_P1_staging/35kv江鑫－主变35kv侧开关柜端子排图.topology.v0.json
-_P1_staging/35kv江鑫－主变35kv侧开关柜端子排图wm666.taobao.com,train,P1,ok,241,443,209,0.0207,0.8133,high_isolated_ratio,outputs/topology_graph/_P1_staging/35kv江鑫－主变35kv侧开关柜端子排图wm666.taobao.com.topology.v0.json
-_P1_staging/XX变电站主接线图,train,P1,ok,292,61,1,1.0,0.0,single_large_component;dominant_component,outputs/topology_graph/_P1_staging/XX变电站主接线图.topology.v0.json
-_P1_staging/XX变电站主接线图1,test,P1,ok,272,58,1,1.0,0.0,single_large_component;dominant_component,outputs/topology_graph/_P1_staging/XX变电站主接线图1.topology.v0.json
-_P1_staging/XX变电站主接线图1wm666.taobao.com,train,P1,ok,272,58,1,1.0,0.0,single_large_component;dominant_component,outputs/topology_graph/_P1_staging/XX变电站主接线图1wm666.taobao.com.topology.v0.json
-_P1_staging/XX变电站主接线图wm666.taobao.com,train,P1,ok,292,61,1,1.0,0.0,single_large_component;dominant_component,outputs/topology_graph/_P1_staging/XX变电站主接线图wm666.taobao.com.topology.v0.json
-_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com,val,P1,ok,392,728,350,0.0102,0.8571,high_isolated_ratio,outputs/topology_graph/_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com.topology.v0.json
-_P1_staging/主变及并网线保护屏端子图,val,P1,ok,919,1715,817,0.012,0.8183,high_isolated_ratio,outputs/topology_graph/_P1_staging/主变及并网线保护屏端子图.topology.v0.json
-_P1_staging/电厂烟气脱硫电气主接线,val,P1,ok,745,1382,655,0.0067,0.8121,high_isolated_ratio,outputs/topology_graph/_P1_staging/电厂烟气脱硫电气主接线.topology.v0.json
-_P1_staging/窑上变电站主接线图,val,P1,ok,53,6,1,1.0,0.0,single_large_component,outputs/topology_graph/_P1_staging/窑上变电站主接线图.topology.v0.json
-_P1_staging/窑上变电站主接线图wm666.taobao.com,train,P1,ok,53,6,1,1.0,0.0,single_large_component,outputs/topology_graph/_P1_staging/窑上变电站主接线图wm666.taobao.com.topology.v0.json
-_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com,train,P2,ok,1509,2756,1295,0.0046,0.8005,high_isolated_ratio,outputs/topology_graph/_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com.topology.v0.json
-_P2_staging/35KV变电所所用变单元端子图,train,P2,ok,398,191,17,0.8844,0.0201,dominant_component,outputs/topology_graph/_P2_staging/35KV变电所所用变单元端子图.topology.v0.json
-_P2_staging/35kv江鑫－6kv馈线开关柜端子排图,train,P2,ok,264,483,231,0.0189,0.8106,high_isolated_ratio,outputs/topology_graph/_P2_staging/35kv江鑫－6kv馈线开关柜端子排图.topology.v0.json
-_P2_staging/35kv江鑫－6kv馈线开关柜端子排图wm666.taobao.com,test,P2,ok,264,483,231,0.0189,0.8106,high_isolated_ratio,outputs/topology_graph/_P2_staging/35kv江鑫－6kv馈线开关柜端子排图wm666.taobao.com.topology.v0.json
-_P2_staging/变电所、配电所 (gb4728_11_1.3-1),train,P2,ok,0,0,0,0.0,0.0,no_edges,outputs/topology_graph/_P2_staging/变电所、配电所 (gb4728_11_1.3-1).topology.v0.json
-_P2_staging/变电所、配电所 (gb4728_11_1.3-2),train,P2,ok,0,0,0,0.0,0.0,no_edges,outputs/topology_graph/_P2_staging/变电所、配电所 (gb4728_11_1.3-2).topology.v0.json
-_P2_staging/变电所（示出改变电压） (gb4728_11_2.9-1),train,P2,ok,0,0,0,0.0,0.0,no_edges,outputs/topology_graph/_P2_staging/变电所（示出改变电压） (gb4728_11_2.9-1).topology.v0.json
-_P2_staging/变电所（示出改变电压） (gb4728_11_2.9-2),test,P2,ok,0,0,0,0.0,0.0,no_edges,outputs/topology_graph/_P2_staging/变电所（示出改变电压） (gb4728_11_2.9-2).topology.v0.json
-_P2_staging/杆上变电站 (gb4728_11_2.11-1),train,P2,ok,0,0,0,0.0,0.0,no_edges,outputs/topology_graph/_P2_staging/杆上变电站 (gb4728_11_2.11-1).topology.v0.json
-_P2_staging/杆上变电站 (gb4728_11_2.11-2),train,P2,ok,0,0,0,0.0,0.0,no_edges,outputs/topology_graph/_P2_staging/杆上变电站 (gb4728_11_2.11-2).topology.v0.json
-_P2_staging/移动变电所 (gb4728-11_2.12-2),val,P2,ok,0,0,0,0.0,0.0,no_edges,outputs/topology_graph/_P2_staging/移动变电所 (gb4728-11_2.12-2).topology.v0.json
-_P2_staging/移动变电所 (gb4728_11_2.12-1),train,P2,ok,0,0,0,0.0,0.0,no_edges,outputs/topology_graph/_P2_staging/移动变电所 (gb4728_11_2.12-1).topology.v0.json
-_P2_staging/运行的移动变电站,test,P2,ok,0,0,0,0.0,0.0,no_edges,outputs/topology_graph/_P2_staging/运行的移动变电站.topology.v0.json
-_P3_staging_batch1/03(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(二)),train,P3,ok,313,562,271,0.0447,0.8019,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/03(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(二)).topology.v0.json
-_P3_staging_batch1/04(RCS-941A背面接线图(二)),train,P3,ok,263,492,236,0.0266,0.8669,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/04(RCS-941A背面接线图(二)).topology.v0.json
-_P3_staging_batch1/04(RCS-9702A背面接线图(二)),train,P3,ok,302,568,275,0.0232,0.8775,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/04(RCS-9702A背面接线图(二)).topology.v0.json
-_P3_staging_batch1/04(RCS-9705A背面接线图(二) ),train,P3,ok,261,496,242,0.0536,0.9195,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/04(RCS-9705A背面接线图(二) ).topology.v0.json
-_P3_staging_batch1/04(RCS-9705A背面接线图(二)),val,P3,ok,245,457,221,0.0571,0.8816,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/04(RCS-9705A背面接线图(二)).topology.v0.json
-_P3_staging_batch1/04(RCS-9794背面接线图),train,P3,ok,206,380,182,0.0194,0.8447,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/04(RCS-9794背面接线图).topology.v0.json
-_P3_staging_batch1/05(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(二)),train,P3,ok,313,562,271,0.0447,0.8019,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/05(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(二)).topology.v0.json
-_P3_staging_batch1/05(RCS-9681B背面接线图(二)),train,P3,ok,153,294,144,0.0458,0.9281,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/05(RCS-9681B背面接线图(二)).topology.v0.json
-_P3_staging_batch1/06(RCS-9702A背面接线图(四)),train,P3,ok,302,568,275,0.0232,0.8775,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/06(RCS-9702A背面接线图(四)).topology.v0.json
-_P3_staging_batch1/06(RCS-9703A背面接线图( 二) ),train,P3,ok,323,614,299,0.0217,0.9102,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/06(RCS-9703A背面接线图( 二) ).topology.v0.json
-_P3_staging_batch1/06(RCS-9705A背面接线图(二)),train,P3,ok,243,458,221,0.0576,0.8971,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/06(RCS-9705A背面接线图(二)).topology.v0.json
-_P3_staging_batch1/07(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(二)),train,P3,ok,313,562,271,0.0447,0.8019,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/07(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(二)).topology.v0.json
-_P3_staging_batch1/11(RCS-9661B背面接线图(四)),val,P3,ok,242,440,210,0.0289,0.8099,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/11(RCS-9661B背面接线图(四)).topology.v0.json
-_P3_staging_batch1/QA-D401-04(10kV线路开关柜端子排图(F2-F10)),train,P3,ok,333,616,290,0.021,0.8048,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/QA-D401-04(10kV线路开关柜端子排图(F2-F10)).topology.v0.json
-_P3_staging_batch1/灭磁及过压保护主回路电气原理图,test,P3,ok,129,71,4,0.9457,0.0155,dominant_component,outputs/topology_graph/_P3_staging_batch1/灭磁及过压保护主回路电气原理图.topology.v0.json
-_P3_staging_batch1/阻容单元电气接线图,train,P3,ok,148,79,5,0.9122,0.0203,dominant_component,outputs/topology_graph/_P3_staging_batch1/阻容单元电气接线图.topology.v0.json
-_P3_staging_batch2/1号炉PLC柜端子外部接线图2,train,P3,ok,107,197,92,0.0748,0.8037,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch2/1号炉PLC柜端子外部接线图2.topology.v0.json
-_P3_staging_batch2/1号炉PLC柜端子外部接线图3,train,P3,ok,105,196,93,0.0762,0.8571,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch2/1号炉PLC柜端子外部接线图3.topology.v0.json
-_P3_staging_batch2/双电源互为备用的APD原理接线图,train,P3,ok,0,1,0,0.0,0.0,no_edges,outputs/topology_graph/_P3_staging_batch2/双电源互为备用的APD原理接线图.topology.v0.json
-_P3_staging_batch2/开关柜底座及基础图,train,P3,ok,0,0,0,0.0,0.0,no_edges,outputs/topology_graph/_P3_staging_batch2/开关柜底座及基础图.topology.v0.json
-_P3_staging_batch2/非电量保护单元端子排图,val,P3,ok,202,122,12,0.8911,0.0347,dominant_component,outputs/topology_graph/_P3_staging_batch2/非电量保护单元端子排图.topology.v0.json
-_P3_staging_batch3/PLP01-54线路保护柜端子排接线示意图(B066-500-2703)wm666.taobao.com,train,P3,ok,682,1235,578,0.0205,0.8138,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch3/PLP01-54线路保护柜端子排接线示意图(B066-500-2703)wm666.taobao.com.topology.v0.json
-_P3_staging_batch3/PLP02-29SP型保护柜端子排接线示意图(B066-500-2608)wm666.taobao.com,train,P3,ok,1428,2574,1211,0.0336,0.8207,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch3/PLP02-29SP型保护柜端子排接线示意图(B066-500-2608)wm666.taobao.com.topology.v0.json
-_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com,train,P3,ok,717,1302,616,0.0293,0.8326,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com.topology.v0.json
-_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com,val,P3,ok,1126,2082,986,0.0195,0.8464,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com.topology.v0.json
-_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com,train,P3,ok,1129,2085,986,0.0195,0.8441,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com.topology.v0.json
-_P3_staging_batch3/攀枝花-西昌220千伏线路PLP02-22型保护端子排线示意图(B066-500-2602)wm666.taobao.com,train,P3,ok,1298,2369,1115,0.0231,0.8313,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch3/攀枝花-西昌220千伏线路PLP02-22型保护端子排线示意图(B066-500-2602)wm666.taobao.com.topology.v0.json
-"_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com",train,P3,ok,1292,2364,1114,0.0232,0.8328,high_isolated_ratio,"outputs/topology_graph/_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com.topology.v0.json"
-_P3_staging_batch4/005内泵房仪表内部接线图2,val,P3,ok,176,327,155,0.0455,0.8409,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch4/005内泵房仪表内部接线图2.topology.v0.json
-_P3_staging_batch4/DXN8B-T接线图,train,P3,ok,0,0,0,0.0,0.0,no_edges,outputs/topology_graph/_P3_staging_batch4/DXN8B-T接线图.topology.v0.json
+﻿drawing_key,split,phase,status,edge_count,node_count,net_count,topology_ready,largest_net_edge_ratio,isolated_edge_ratio,quality_flags,topology_json_path
+_P1_staging/35kv江鑫－主变35kv侧开关柜端子排图,train,P1,ok,241,445,210,True,0.0166,0.8174,high_isolated_ratio,outputs/topology_graph/_P1_staging/35kv江鑫－主变35kv侧开关柜端子排图.topology.v0.json
+_P1_staging/35kv江鑫－主变35kv侧开关柜端子排图wm666.taobao.com,train,P1,ok,241,445,210,True,0.0166,0.8174,high_isolated_ratio,outputs/topology_graph/_P1_staging/35kv江鑫－主变35kv侧开关柜端子排图wm666.taobao.com.topology.v0.json
+_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com,val,P1,ok,392,728,350,True,0.0102,0.8571,high_isolated_ratio,outputs/topology_graph/_P1_staging/主变压器远方测温及有载调压档位显示接线图(B066-500-1209)wm666.taobao.com.topology.v0.json
+_P1_staging/主变及并网线保护屏端子图,val,P1,ok,919,1710,811,True,0.012,0.8085,high_isolated_ratio,outputs/topology_graph/_P1_staging/主变及并网线保护屏端子图.topology.v0.json
+_P1_staging/电厂烟气脱硫电气主接线,val,P1,ok,745,1382,655,True,0.0067,0.8121,high_isolated_ratio,outputs/topology_graph/_P1_staging/电厂烟气脱硫电气主接线.topology.v0.json
+_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com,train,P2,ok,1509,2756,1295,True,0.0046,0.8005,high_isolated_ratio,outputs/topology_graph/_P2_staging/220kV母线保护屏BP-2B端子排(B066-500-0607)wm666.taobao.com.topology.v0.json
+_P2_staging/35KV变电所所用变单元端子图,train,P2,ok,398,191,17,True,0.8844,0.0201,dominant_component,outputs/topology_graph/_P2_staging/35KV变电所所用变单元端子图.topology.v0.json
+_P2_staging/35kv江鑫－6kv馈线开关柜端子排图,train,P2,ok,264,486,233,True,0.0152,0.8182,high_isolated_ratio,outputs/topology_graph/_P2_staging/35kv江鑫－6kv馈线开关柜端子排图.topology.v0.json
+_P2_staging/35kv江鑫－6kv馈线开关柜端子排图wm666.taobao.com,test,P2,ok,264,486,233,True,0.0152,0.8182,high_isolated_ratio,outputs/topology_graph/_P2_staging/35kv江鑫－6kv馈线开关柜端子排图wm666.taobao.com.topology.v0.json
+_P2_staging/变电所、配电所 (gb4728_11_1.3-1),train,P2,ok,0,0,0,False,0.0,0.0,no_edges;not_topology_ready,outputs/topology_graph/_P2_staging/变电所、配电所 (gb4728_11_1.3-1).topology.v0.json
+_P2_staging/变电所、配电所 (gb4728_11_1.3-2),train,P2,ok,0,0,0,False,0.0,0.0,no_edges;not_topology_ready,outputs/topology_graph/_P2_staging/变电所、配电所 (gb4728_11_1.3-2).topology.v0.json
+_P2_staging/变电所（示出改变电压） (gb4728_11_2.9-1),train,P2,ok,0,0,0,False,0.0,0.0,no_edges;not_topology_ready,outputs/topology_graph/_P2_staging/变电所（示出改变电压） (gb4728_11_2.9-1).topology.v0.json
+_P2_staging/变电所（示出改变电压） (gb4728_11_2.9-2),test,P2,ok,0,0,0,False,0.0,0.0,no_edges;not_topology_ready,outputs/topology_graph/_P2_staging/变电所（示出改变电压） (gb4728_11_2.9-2).topology.v0.json
+_P2_staging/杆上变电站 (gb4728_11_2.11-1),train,P2,ok,0,0,0,False,0.0,0.0,no_edges;not_topology_ready,outputs/topology_graph/_P2_staging/杆上变电站 (gb4728_11_2.11-1).topology.v0.json
+_P2_staging/杆上变电站 (gb4728_11_2.11-2),train,P2,ok,0,0,0,False,0.0,0.0,no_edges;not_topology_ready,outputs/topology_graph/_P2_staging/杆上变电站 (gb4728_11_2.11-2).topology.v0.json
+_P2_staging/移动变电所 (gb4728-11_2.12-2),val,P2,ok,0,0,0,False,0.0,0.0,no_edges;not_topology_ready,outputs/topology_graph/_P2_staging/移动变电所 (gb4728-11_2.12-2).topology.v0.json
+_P2_staging/移动变电所 (gb4728_11_2.12-1),train,P2,ok,0,0,0,False,0.0,0.0,no_edges;not_topology_ready,outputs/topology_graph/_P2_staging/移动变电所 (gb4728_11_2.12-1).topology.v0.json
+_P2_staging/运行的移动变电站,test,P2,ok,0,0,0,False,0.0,0.0,no_edges;not_topology_ready,outputs/topology_graph/_P2_staging/运行的移动变电站.topology.v0.json
+_P3_staging_batch1/02(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(一)),test,P3,ok,311,582,277,True,0.0129,0.8232,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/02(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(一)).topology.v0.json
+_P3_staging_batch1/03(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(二)),train,P3,ok,313,562,271,True,0.0447,0.8019,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/03(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(二)).topology.v0.json
+_P3_staging_batch1/04(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(一)),test,P3,ok,311,582,277,True,0.0129,0.8232,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/04(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(一)).topology.v0.json
+_P3_staging_batch1/04(RCS-941A背面接线图(二)),train,P3,ok,263,492,236,True,0.0266,0.8669,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/04(RCS-941A背面接线图(二)).topology.v0.json
+_P3_staging_batch1/04(RCS-9702A背面接线图(二)),train,P3,ok,302,568,275,True,0.0232,0.8775,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/04(RCS-9702A背面接线图(二)).topology.v0.json
+_P3_staging_batch1/04(RCS-9705A背面接线图(二) ),train,P3,ok,261,496,242,True,0.0536,0.9195,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/04(RCS-9705A背面接线图(二) ).topology.v0.json
+_P3_staging_batch1/04(RCS-9705A背面接线图(二)),val,P3,ok,245,457,221,True,0.0571,0.8816,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/04(RCS-9705A背面接线图(二)).topology.v0.json
+_P3_staging_batch1/04(RCS-9794背面接线图),train,P3,ok,206,380,182,True,0.0194,0.8447,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/04(RCS-9794背面接线图).topology.v0.json
+_P3_staging_batch1/05(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(二)),train,P3,ok,313,562,271,True,0.0447,0.8019,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/05(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(二)).topology.v0.json
+_P3_staging_batch1/05(RCS-9681B背面接线图(二)),train,P3,ok,153,294,144,True,0.0458,0.9281,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/05(RCS-9681B背面接线图(二)).topology.v0.json
+_P3_staging_batch1/06(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(一)),train,P3,ok,311,582,277,True,0.0129,0.8232,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/06(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(一)).topology.v0.json
+_P3_staging_batch1/06(RCS-9702A背面接线图(四)),train,P3,ok,302,568,275,True,0.0232,0.8775,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/06(RCS-9702A背面接线图(四)).topology.v0.json
+_P3_staging_batch1/06(RCS-9703A背面接线图( 二) ),train,P3,ok,323,614,299,True,0.0217,0.9102,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/06(RCS-9703A背面接线图( 二) ).topology.v0.json
+_P3_staging_batch1/06(RCS-9705A背面接线图(二)),train,P3,ok,243,458,221,True,0.0576,0.8971,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/06(RCS-9705A背面接线图(二)).topology.v0.json
+_P3_staging_batch1/07(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(二)),train,P3,ok,313,562,271,True,0.0447,0.8019,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/07(PRCK97-YB3电压隔离并列柜RCS-9663D背面接线图(二)).topology.v0.json
+_P3_staging_batch1/11(RCS-9661B背面接线图(四)),val,P3,ok,242,440,210,True,0.0289,0.8099,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/11(RCS-9661B背面接线图(四)).topology.v0.json
+_P3_staging_batch1/QA-D401-04(10kV线路开关柜端子排图(F2-F10)),train,P3,ok,333,616,290,True,0.021,0.8048,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/QA-D401-04(10kV线路开关柜端子排图(F2-F10)).topology.v0.json
+_P3_staging_batch1/灭磁单元电气接线图(II),train,P3,ok,254,473,227,True,0.0157,0.8504,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch1/灭磁单元电气接线图(II).topology.v0.json
+_P3_staging_batch2/1号炉PLC柜端子外部接线图2,train,P3,ok,107,200,94,True,0.0748,0.8318,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch2/1号炉PLC柜端子外部接线图2.topology.v0.json
+_P3_staging_batch2/1号炉PLC柜端子外部接线图3,train,P3,ok,105,202,98,True,0.0476,0.9143,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch2/1号炉PLC柜端子外部接线图3.topology.v0.json
+_P3_staging_batch2/1号炉氧枪柜端子外部接线图2,train,P3,ok,128,240,113,True,0.0312,0.8281,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch2/1号炉氧枪柜端子外部接线图2.topology.v0.json
+_P3_staging_batch2/开关柜底座及基础图,train,P3,ok,0,0,0,False,0.0,0.0,no_edges;not_topology_ready,outputs/topology_graph/_P3_staging_batch2/开关柜底座及基础图.topology.v0.json
+_P3_staging_batch2/非电量保护单元端子排图,val,P3,ok,202,122,12,True,0.8911,0.0347,dominant_component,outputs/topology_graph/_P3_staging_batch2/非电量保护单元端子排图.topology.v0.json
+_P3_staging_batch3/PLP01-54线路保护柜端子排接线示意图(B066-500-2703)wm666.taobao.com,train,P3,ok,683,1236,578,True,0.0205,0.8126,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch3/PLP01-54线路保护柜端子排接线示意图(B066-500-2703)wm666.taobao.com.topology.v0.json
+_P3_staging_batch3/PLP02-29SP型保护柜端子排接线示意图(B066-500-2608)wm666.taobao.com,train,P3,ok,1428,2574,1211,True,0.0336,0.8207,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch3/PLP02-29SP型保护柜端子排接线示意图(B066-500-2608)wm666.taobao.com.topology.v0.json
+_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com,train,P3,ok,715,1300,616,True,0.0294,0.8378,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch3/PLP02-54T线路保护柜端子排接线示意图(B066-500-2704)wm666.taobao.com.topology.v0.json
+_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com,val,P3,ok,1124,2082,988,True,0.0196,0.8514,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch3/PLP21-01中断路器保护柜端子排接线示意图(B066-500-2706)wm666.taobao.com.topology.v0.json
+_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com,train,P3,ok,1131,2087,986,True,0.0195,0.8426,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch3/PLP21-01边断路器保护柜端子排接线示意图(B066-500-2705)wm666.taobao.com.topology.v0.json
+_P3_staging_batch3/攀枝花-西昌220千伏线路PLP02-22型保护端子排线示意图(B066-500-2602)wm666.taobao.com,train,P3,ok,1298,2369,1115,True,0.0231,0.8313,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch3/攀枝花-西昌220千伏线路PLP02-22型保护端子排线示意图(B066-500-2602)wm666.taobao.com.topology.v0.json
+"_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com",train,P3,ok,1290,2366,1118,True,0.0233,0.8403,high_isolated_ratio,"outputs/topology_graph/_P3_staging_batch3/攀枝花-青龙山I,II回,攀枝花-施家坪I,II回PLP02-22型保护柜端子排接线示意图(B066-500-2605)wm666.taobao.com.topology.v0.json"
+_P3_staging_batch4/005内泵房仪表内部接线图2,val,P3,ok,176,328,156,True,0.0455,0.8523,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch4/005内泵房仪表内部接线图2.topology.v0.json
+_P3_staging_batch4/17-连片接线图,test,P3,ok,111,207,97,True,0.0901,0.8378,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch4/17-连片接线图.topology.v0.json
+_P3_staging_batch4/24-连片接线图1,train,P3,ok,111,206,96,True,0.0991,0.8288,high_isolated_ratio,outputs/topology_graph/_P3_staging_batch4/24-连片接线图1.topology.v0.json
+_P3_staging_batch4/DXN8B-T接线图,train,P3,ok,0,0,0,False,0.0,0.0,no_edges;not_topology_ready,outputs/topology_graph/_P3_staging_batch4/DXN8B-T接线图.topology.v0.json
