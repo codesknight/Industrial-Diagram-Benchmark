@@ -22,6 +22,8 @@ outputs/topology_graph_v1_pilot/
 data_index/topology_v1_pilot_manifest.csv
 data_index/topology_v1_pilot_summary.json
 data_index/topology_v1_pilot_report.md
+data_index/topology_v1_pilot_multipanel_findings.csv
+data_index/topology_v1_pilot_multipanel_report.md
 ```
 
 `outputs/topology_graph_v1_pilot/` is local output and is not committed to Git.
@@ -54,7 +56,22 @@ rows with lower isolated ratio: 7
 rows with lower net count: 7
 ```
 
-The result confirms that intersection splitting is valuable for these samples.
-Before full rollout, review whether all visual crossings in the target drawing
-family should be treated as electrical connections. If not, v1 should add a
-connection-marker or layer-aware rule before running full-dataset generation.
+The result confirms that intersection splitting can reduce fragmentation, but
+manual visual review found that all 7 pilot inputs are multi-panel pages while
+the current panel manifest still marks them as `split_method = full`.
+
+Therefore, drawing-level Topology v1 full rollout is blocked. These pages must
+be split into single-diagram panels before v1 results can be used as benchmark
+evidence.
+
+Current finding:
+
+```text
+multi-panel pilot rows: 7
+current panel rows per drawing: 1
+current split method: full
+recommended action: redo panel split before topology v1
+```
+
+Next step: build panel-level topology pilot candidates for these pages, then
+rerun v1 intersection splitting on each single-diagram panel.

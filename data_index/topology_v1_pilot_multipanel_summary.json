@@ -1,0 +1,12 @@
+{
+  "pilot_rows": 7,
+  "multi_panel_page_rows": 7,
+  "current_panel_rows_by_count": {
+    "1": 7
+  },
+  "current_split_methods": {
+    "full": 7
+  },
+  "decision": "do not promote drawing-level topology v1 pilot to full rollout until these pages are split to panel-level samples",
+  "next_action": "build panel-level topology pilot candidates for these multi-panel pages"
+}

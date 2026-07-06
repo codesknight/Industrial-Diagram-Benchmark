@@ -154,6 +154,12 @@ python scripts/build_topology_v1_pilot.py
 python scripts/build_topology_v1_review_html.py
 ```
 
+记录 v1 pilot 多子图发现：
+
+```powershell
+python scripts/flag_topology_v1_multipanel_pilot.py
+```
+
 ## Data Pipeline
 
 ```text

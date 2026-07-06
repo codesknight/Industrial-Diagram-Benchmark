@@ -47,6 +47,7 @@ data_index/
   topology_v1_pilot_candidates.csv Topology Graph v1 pilot 候选
   topology_v1_pilot_* Topology Graph v1 pilot 索引、统计和报告
   topology_v1_pilot_review.html Topology Graph v1 pilot 快速审核表
+  topology_v1_pilot_multipanel_* Topology Graph v1 pilot 多子图发现记录
   topology_bad_geometry_reviewed.csv 人工标记几何异常清单
   train.csv              训练集样本
   val.csv                验证集样本
@@ -69,6 +70,7 @@ scripts/
   apply_topology_review_labels.py 合并 Topology 人工审核标签
   build_topology_v1_pilot.py 运行交点拆分版 Topology Graph v1 pilot
   build_topology_v1_review_html.py 生成 Topology Graph v1 pilot HTML 审核表
+  flag_topology_v1_multipanel_pilot.py 记录 v1 pilot 多子图发现
   check_dataset_integrity.py  检查 manifest 完整性
 
 tools/
