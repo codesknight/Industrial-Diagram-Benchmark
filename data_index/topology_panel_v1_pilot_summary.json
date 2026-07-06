@@ -1,0 +1,24 @@
+{
+  "panel_rows": 17,
+  "parent_drawing_count": 7,
+  "by_split": {
+    "val": 7,
+    "train": 10
+  },
+  "v1_edge_count_min": 639,
+  "v1_edge_count_avg": 1710.41,
+  "v1_edge_count_max": 4038,
+  "v1_net_count_min": 2,
+  "v1_net_count_avg": 6.35,
+  "v1_net_count_max": 14,
+  "intersection_count_total": 15925,
+  "intersection_count_avg": 936.76,
+  "no_edge_rows": 0,
+  "params": {
+    "endpoint_merge_tolerance": 1.0,
+    "endpoint_tolerance_ratio": 0.0005,
+    "min_segment_length": 0.001,
+    "intersection_epsilon": 1e-09,
+    "max_segments": 300000
+  }
+}
