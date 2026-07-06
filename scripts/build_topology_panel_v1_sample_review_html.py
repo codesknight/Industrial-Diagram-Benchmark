@@ -23,6 +23,7 @@ DEFAULT_SUMMARY = INDEX_DIR / "topology_panel_v1_sample_review_summary.json"
 
 LABEL_OPTIONS = [
     "accept_v1",
+    "needs_panel_split",
     "over_connected",
     "still_fragmented",
     "needs_terminal_anchor",
@@ -304,6 +305,7 @@ def render_html(rows: List[Dict[str, object]], title: str) -> str:
       justify-content: center;
     }}
     .choice.active[data-value="accept_v1"] {{ border-color: var(--ok); color: var(--ok); background: #ecfdf3; }}
+    .choice.active[data-value="needs_panel_split"] {{ border-color: #7a5af8; color: #5925dc; background: #f4f3ff; }}
     .choice.active[data-value="over_connected"] {{ border-color: var(--bad); color: var(--bad); background: #fff1f0; }}
     .choice.active[data-value="still_fragmented"] {{ border-color: var(--warn); color: var(--warn); background: #fff7e8; }}
     .choice.active[data-value="needs_terminal_anchor"] {{ border-color: var(--info); color: var(--info); background: #eff6ff; }}
@@ -420,7 +422,7 @@ def render_html(rows: List[Dict[str, object]], title: str) -> str:
         counts[label] = (counts[label] || 0) + 1;
       }}
       document.getElementById("stats").textContent =
-        `显示 ${{filteredRows().length}} / ${{rows.length}} | accept ${{counts.accept_v1}} | over ${{counts.over_connected}} | fragmented ${{counts.still_fragmented}} | terminal ${{counts.needs_terminal_anchor}} | not target ${{counts.not_topology_target}} | bad ${{counts.bad_geometry}} | 未标注 ${{counts.unlabeled}}`;
+        `显示 ${{filteredRows().length}} / ${{rows.length}} | accept ${{counts.accept_v1}} | split ${{counts.needs_panel_split}} | over ${{counts.over_connected}} | fragmented ${{counts.still_fragmented}} | terminal ${{counts.needs_terminal_anchor}} | not target ${{counts.not_topology_target}} | bad ${{counts.bad_geometry}} | 未标注 ${{counts.unlabeled}}`;
     }}
     function render() {{
       const list = document.getElementById("list");
@@ -483,7 +485,7 @@ def render_html(rows: List[Dict[str, object]], title: str) -> str:
     function exportCsv() {{
       const header = [
         "panel_id", "parent_drawing_key", "split", "phase", "severity", "anomaly_type",
-        "status", "quality_flags", "v1_edge_count", "v1_node_count", "v1_net_count",
+        "split_method", "status", "quality_flags", "v1_edge_count", "v1_node_count", "v1_net_count",
         "v1_isolated_edge_ratio", "v1_largest_net_edge_ratio", "intersection_count",
         "panel_png_path", "topology_v1_panel_json_path", "review_label", "comment"
       ];
@@ -565,6 +567,7 @@ def main() -> None:
         "anomaly_type_counts": dict(Counter(str(row.get("anomaly_type", "")) for row in sample_rows)),
         "rules": [
             "All critical and high anomalies are included.",
+            "Use needs_panel_split when one displayed panel still contains multiple independent subfigures.",
             f"Medium anomalies are risk-sorted and capped at {args.medium_limit}.",
             f"Low anomalies are risk-sorted and capped at {args.low_limit}.",
             f"Normal high-intersection spot checks are capped at {args.normal_limit}.",

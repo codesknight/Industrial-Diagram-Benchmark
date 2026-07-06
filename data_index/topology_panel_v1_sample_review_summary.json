@@ -22,6 +22,7 @@
   },
   "rules": [
     "All critical and high anomalies are included.",
+    "Use needs_panel_split when one displayed panel still contains multiple independent subfigures.",
     "Medium anomalies are risk-sorted and capped at 80.",
     "Low anomalies are risk-sorted and capped at 30.",
     "Normal high-intersection spot checks are capped at 10."
