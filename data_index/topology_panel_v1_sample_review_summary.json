@@ -1,0 +1,29 @@
+{
+  "sample_rows": 171,
+  "source_manifest": "data_index/topology_panel_v1_manifest.csv",
+  "source_anomalies": "data_index/topology_panel_v1_anomaly_manifest.csv",
+  "sample_manifest": "data_index/topology_panel_v1_sample_review_manifest.csv",
+  "review_html": "data_index/topology_panel_v1_sample_review.html",
+  "severity_counts": {
+    "critical": 9,
+    "high": 42,
+    "medium": 80,
+    "low": 30,
+    "normal": 10
+  },
+  "anomaly_type_counts": {
+    "error": 7,
+    "truncated_max_segments": 2,
+    "no_edges_or_no_nets": 42,
+    "high_fragmentation": 40,
+    "high_isolated_ratio": 40,
+    "dominant_component": 30,
+    "normal_high_intersection": 10
+  },
+  "rules": [
+    "All critical and high anomalies are included.",
+    "Medium anomalies are risk-sorted and capped at 80.",
+    "Low anomalies are risk-sorted and capped at 30.",
+    "Normal high-intersection spot checks are capped at 10."
+  ]
+}
