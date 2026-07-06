@@ -1,0 +1,38 @@
+{
+  "source_rows": 2042,
+  "topology_ready_rows": 2031,
+  "topology_not_ready_rows": 11,
+  "ready_by_split": {
+    "train": 1630,
+    "val": 195,
+    "test": 206
+  },
+  "not_ready_by_split": {
+    "train": 8,
+    "test": 2,
+    "val": 1
+  },
+  "ready_by_phase": {
+    "P1": 411,
+    "P2": 510,
+    "P3": 1110
+  },
+  "not_ready_by_phase": {
+    "P2": 9,
+    "P3": 2
+  },
+  "not_ready_quality_flags": {
+    "no_edges": 11,
+    "not_topology_ready": 11
+  },
+  "ready_edge_count_min": 1,
+  "ready_edge_count_avg": 2013.51,
+  "ready_edge_count_max": 70665,
+  "ready_node_count_avg": 2601.18,
+  "ready_net_count_avg": 891.59,
+  "rules": [
+    "topology_ready is true only when a graph has at least one edge",
+    "not topology-ready rows are excluded from topology training and graph benchmark tasks",
+    "not topology-ready rows may remain useful for symbol, layout, or classification tasks"
+  ]
+}

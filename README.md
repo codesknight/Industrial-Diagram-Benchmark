@@ -130,6 +130,12 @@ python scripts/build_topology_graph.py
 python scripts/build_topology_review_html.py
 ```
 
+生成 Topology-ready 训练/评估入口清单：
+
+```powershell
+python scripts/build_topology_ready_manifests.py
+```
+
 ## Data Pipeline
 
 ```text
