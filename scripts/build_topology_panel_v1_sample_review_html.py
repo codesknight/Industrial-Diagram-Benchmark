@@ -20,6 +20,7 @@ DEFAULT_ANOMALIES = INDEX_DIR / "topology_panel_v1_anomaly_manifest.csv"
 DEFAULT_OUTPUT = INDEX_DIR / "topology_panel_v1_sample_review.html"
 DEFAULT_SAMPLE_MANIFEST = INDEX_DIR / "topology_panel_v1_sample_review_manifest.csv"
 DEFAULT_SUMMARY = INDEX_DIR / "topology_panel_v1_sample_review_summary.json"
+DEFAULT_MODEL_REVIEW = INDEX_DIR / "topology_panel_v1_model_review.csv"
 
 LABEL_OPTIONS = [
     "accept_v1",
@@ -193,6 +194,21 @@ def compact_rows(rows: Iterable[Dict[str, object]], html_path: Path) -> List[Dic
     return compact
 
 
+def merge_model_review(rows: List[Dict[str, object]], model_rows: List[Dict[str, str]]) -> List[Dict[str, object]]:
+    model_by_panel = {row["panel_id"]: row for row in model_rows if row.get("panel_id")}
+    merged: List[Dict[str, object]] = []
+    for row in rows:
+        model = model_by_panel.get(str(row.get("panel_id", "")), {})
+        out = dict(row)
+        out["model_review_label"] = model.get("model_review_label", "")
+        out["model_confidence"] = model.get("model_confidence", "")
+        out["model_needs_human_review"] = model.get("model_needs_human_review", "")
+        out["model_reason"] = model.get("model_reason", "")
+        out["model_visible_cues"] = model.get("model_visible_cues", "")
+        merged.append(out)
+    return merged
+
+
 def render_html(rows: List[Dict[str, object]], title: str) -> str:
     data_json = json.dumps(rows, ensure_ascii=False)
     labels_json = json.dumps(LABEL_OPTIONS, ensure_ascii=False)
@@ -311,6 +327,31 @@ def render_html(rows: List[Dict[str, object]], title: str) -> str:
     .choice.active[data-value="needs_terminal_anchor"] {{ border-color: var(--info); color: var(--info); background: #eff6ff; }}
     .choice.active[data-value="not_topology_target"] {{ border-color: #475467; color: #475467; background: #f2f4f7; }}
     .choice.active[data-value="bad_geometry"] {{ border-color: #7a271a; color: #7a271a; background: #fff1f0; }}
+    .model-box {{
+      border: 1px solid #c7d7fe;
+      border-radius: 8px;
+      background: #f5f8ff;
+      padding: 8px;
+      display: grid;
+      gap: 6px;
+      font-size: 12px;
+    }}
+    .model-head {{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }}
+    .model-label {{
+      font-weight: 700;
+      color: #175cd3;
+    }}
+    .model-apply {{
+      height: 28px;
+      padding: 0 9px;
+      font-size: 12px;
+      margin-left: auto;
+    }}
     textarea {{
       width: 100%;
       min-height: 72px;
@@ -338,6 +379,7 @@ def render_html(rows: List[Dict[str, object]], title: str) -> str:
       <input id="search" type="search" placeholder="搜索 panel / parent" />
       <select id="severityFilter"><option value="all">全部 severity</option></select>
       <select id="typeFilter"><option value="all">全部 anomaly</option></select>
+      <select id="modelFilter"><option value="all">全部模型建议</option></select>
       <select id="labelFilter">
         <option value="all">全部标注</option>
         <option value="unlabeled">未标注</option>
@@ -380,6 +422,7 @@ def render_html(rows: List[Dict[str, object]], title: str) -> str:
       const q = document.getElementById("search").value.trim().toLowerCase();
       const severity = document.getElementById("severityFilter").value;
       const type = document.getElementById("typeFilter").value;
+      const modelFilter = document.getElementById("modelFilter").value;
       const labelFilter = document.getElementById("labelFilter").value;
       return rows.filter(row => {{
         const saved = labelFor(row.panel_id);
@@ -388,12 +431,14 @@ def render_html(rows: List[Dict[str, object]], title: str) -> str:
         return (!q || text.includes(q))
           && (severity === "all" || row.severity === severity)
           && (type === "all" || row.anomaly_type === type)
+          && (modelFilter === "all" || row.model_review_label === modelFilter)
           && (labelFilter === "all" || labelFilter === label);
       }});
     }}
     function renderFilters() {{
       const severitySelect = document.getElementById("severityFilter");
       const typeSelect = document.getElementById("typeFilter");
+      const modelSelect = document.getElementById("modelFilter");
       const labelSelect = document.getElementById("labelFilter");
       for (const value of [...new Set(rows.map(row => row.severity).filter(Boolean))]) {{
         const option = document.createElement("option");
@@ -406,6 +451,12 @@ def render_html(rows: List[Dict[str, object]], title: str) -> str:
         option.value = value;
         option.textContent = value;
         typeSelect.appendChild(option);
+      }}
+      for (const value of [...new Set(rows.map(row => row.model_review_label).filter(Boolean))].sort()) {{
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        modelSelect.appendChild(option);
       }}
       for (const value of labelOptions) {{
         const option = document.createElement("option");
@@ -460,6 +511,16 @@ def render_html(rows: List[Dict[str, object]], title: str) -> str:
                 `<div class="choice ${{saved.label === option ? "active" : ""}}" data-value="${{option}}">${{option}}</div>`
               ).join("")}}
             </div>
+            <div class="model-box">
+              <div class="model-head">
+                <span>模型建议</span>
+                <span class="model-label">${{row.model_review_label || "none"}}</span>
+                <span>confidence ${{row.model_confidence || ""}}</span>
+                <button class="model-apply" data-apply-model>采用建议</button>
+              </div>
+              <code>${{row.model_reason || ""}}</code>
+              <code>${{row.model_visible_cues || ""}}</code>
+            </div>
             <textarea placeholder="备注：说明过连、碎裂、端子锚点需求、非拓扑目标或几何异常..." data-comment>${{saved.comment || ""}}</textarea>
             <div class="kv">
               <span>suggested</span><code>${{row.suggested_action || ""}}</code>
@@ -475,6 +536,16 @@ def render_html(rows: List[Dict[str, object]], title: str) -> str:
         card.querySelectorAll(".choice").forEach(el => {{
           el.addEventListener("click", () => setLabel(row.panel_id, el.dataset.value));
         }});
+        card.querySelector("[data-apply-model]").addEventListener("click", () => {{
+          if (!row.model_review_label) return;
+          labels[row.panel_id] = {{
+            ...labelFor(row.panel_id),
+            label: row.model_review_label,
+            comment: labelFor(row.panel_id).comment || `model: ${{row.model_reason || ""}}`
+          }};
+          saveLabels();
+          render();
+        }});
         card.querySelector("[data-comment]").addEventListener("input", event => {{
           setComment(row.panel_id, event.target.value);
         }});
@@ -487,7 +558,8 @@ def render_html(rows: List[Dict[str, object]], title: str) -> str:
         "panel_id", "parent_drawing_key", "split", "phase", "severity", "anomaly_type",
         "split_method", "status", "quality_flags", "v1_edge_count", "v1_node_count", "v1_net_count",
         "v1_isolated_edge_ratio", "v1_largest_net_edge_ratio", "intersection_count",
-        "panel_png_path", "topology_v1_panel_json_path", "review_label", "comment"
+        "panel_png_path", "topology_v1_panel_json_path", "model_review_label", "model_confidence",
+        "model_needs_human_review", "model_reason", "review_label", "comment"
       ];
       const lines = [header.join(",")];
       for (const row of rows) {{
@@ -509,11 +581,13 @@ def render_html(rows: List[Dict[str, object]], title: str) -> str:
     document.getElementById("search").addEventListener("input", render);
     document.getElementById("severityFilter").addEventListener("change", render);
     document.getElementById("typeFilter").addEventListener("change", render);
+    document.getElementById("modelFilter").addEventListener("change", render);
     document.getElementById("labelFilter").addEventListener("change", render);
     document.getElementById("clearFilters").addEventListener("click", () => {{
       document.getElementById("search").value = "";
       document.getElementById("severityFilter").value = "all";
       document.getElementById("typeFilter").value = "all";
+      document.getElementById("modelFilter").value = "all";
       document.getElementById("labelFilter").value = "all";
       render();
     }});
@@ -530,6 +604,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
     parser.add_argument("--anomalies", type=Path, default=DEFAULT_ANOMALIES)
+    parser.add_argument("--model-review", type=Path, default=DEFAULT_MODEL_REVIEW)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--sample-manifest", type=Path, default=DEFAULT_SAMPLE_MANIFEST)
     parser.add_argument("--summary", type=Path, default=DEFAULT_SUMMARY)
@@ -552,6 +627,8 @@ def main() -> None:
         low_limit=args.low_limit,
         normal_limit=args.normal_limit,
     )
+    model_rows = load_csv(args.model_review) if args.model_review.exists() else []
+    sample_rows = merge_model_review(sample_rows, model_rows)
     fieldnames = list(sample_rows[0].keys()) if sample_rows else []
     write_csv(args.sample_manifest, sample_rows, fieldnames)
     compact = compact_rows(sample_rows, args.output)
@@ -561,10 +638,12 @@ def main() -> None:
         "sample_rows": len(sample_rows),
         "source_manifest": args.manifest.resolve().relative_to(ROOT).as_posix(),
         "source_anomalies": args.anomalies.resolve().relative_to(ROOT).as_posix(),
+        "source_model_review": args.model_review.resolve().relative_to(ROOT).as_posix() if args.model_review.exists() else "",
         "sample_manifest": args.sample_manifest.resolve().relative_to(ROOT).as_posix(),
         "review_html": args.output.relative_to(ROOT).as_posix(),
         "severity_counts": dict(Counter(str(row.get("severity", "")) for row in sample_rows)),
         "anomaly_type_counts": dict(Counter(str(row.get("anomaly_type", "")) for row in sample_rows)),
+        "model_review_label_counts": dict(Counter(str(row.get("model_review_label", "")) or "missing" for row in sample_rows)),
         "rules": [
             "All critical and high anomalies are included.",
             "Use needs_panel_split when one displayed panel still contains multiple independent subfigures.",

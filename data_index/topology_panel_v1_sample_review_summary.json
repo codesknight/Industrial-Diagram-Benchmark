@@ -2,6 +2,7 @@
   "sample_rows": 171,
   "source_manifest": "data_index/topology_panel_v1_manifest.csv",
   "source_anomalies": "data_index/topology_panel_v1_anomaly_manifest.csv",
+  "source_model_review": "data_index/topology_panel_v1_model_review.csv",
   "sample_manifest": "data_index/topology_panel_v1_sample_review_manifest.csv",
   "review_html": "data_index/topology_panel_v1_sample_review.html",
   "severity_counts": {
@@ -19,6 +20,15 @@
     "high_isolated_ratio": 40,
     "dominant_component": 30,
     "normal_high_intersection": 10
+  },
+  "model_review_label_counts": {
+    "needs_panel_split": 76,
+    "still_fragmented": 22,
+    "not_topology_target": 36,
+    "bad_geometry": 8,
+    "accept_v1": 18,
+    "over_connected": 9,
+    "needs_terminal_anchor": 2
   },
   "rules": [
     "All critical and high anomalies are included.",
