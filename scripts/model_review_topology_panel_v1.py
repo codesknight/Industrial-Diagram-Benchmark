@@ -20,6 +20,7 @@ from typing import Dict, Iterable, List, Optional
 
 from dotenv import load_dotenv
 from openai import OpenAI
+from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,6 +28,7 @@ INDEX_DIR = ROOT / "data_index"
 DEFAULT_INPUT = INDEX_DIR / "topology_panel_v1_sample_review_manifest.csv"
 DEFAULT_OUTPUT = INDEX_DIR / "topology_panel_v1_model_review.csv"
 DEFAULT_SUMMARY = INDEX_DIR / "topology_panel_v1_model_review_summary.json"
+DEFAULT_IMAGE_CACHE = ROOT / "outputs" / "model_review_images"
 
 LABELS = {
     "accept_v1",
@@ -108,6 +110,29 @@ def image_data_url(path: Path) -> str:
     return f"data:{mime};base64,{data}"
 
 
+def prepare_image_for_model(path: Path, args: argparse.Namespace) -> Path:
+    with Image.open(path) as image:
+        width, height = image.size
+        pixels = width * height
+        scale = min(
+            1.0,
+            args.max_image_side / max(width, height),
+            (args.max_image_pixels / pixels) ** 0.5 if pixels > 0 else 1.0,
+        )
+        if scale >= 1.0:
+            return path
+        new_size = (max(1, int(width * scale)), max(1, int(height * scale)))
+        cache_root = args.image_cache.resolve()
+        rel_name = path.relative_to(ROOT).as_posix().replace("/", "__").replace("\\", "__")
+        out_path = cache_root / f"{rel_name}.model.png"
+        if out_path.exists():
+            return out_path
+        cache_root.mkdir(parents=True, exist_ok=True)
+        resized = image.convert("RGB").resize(new_size, Image.Resampling.LANCZOS)
+        resized.save(out_path, format="PNG", optimize=True)
+        return out_path
+
+
 def resolve_image_path(row: Dict[str, str]) -> Path:
     raw = Path(row.get("panel_png_path", ""))
     return raw if raw.is_absolute() else ROOT / raw
@@ -180,6 +205,7 @@ def normalize_response(payload: Dict[str, object]) -> Dict[str, object]:
 
 
 def call_vision_model(client: OpenAI, row: Dict[str, str], image_path: Path, args: argparse.Namespace) -> Dict[str, object]:
+    model_image_path = prepare_image_for_model(image_path, args)
     response = client.chat.completions.create(
         model=args.model,
         temperature=args.temperature,
@@ -190,7 +216,7 @@ def call_vision_model(client: OpenAI, row: Dict[str, str], image_path: Path, arg
                 "role": "user",
                 "content": [
                     {"type": "text", "text": user_prompt(row)},
-                    {"type": "image_url", "image_url": {"url": image_data_url(image_path)}},
+                    {"type": "image_url", "image_url": {"url": image_data_url(model_image_path)}},
                 ],
             },
         ],
@@ -346,6 +372,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--retry-sleep", type=float, default=2.0)
     parser.add_argument("--sleep", type=float, default=0.0)
     parser.add_argument("--progress-every", type=int, default=10)
+    parser.add_argument("--image-cache", type=Path, default=DEFAULT_IMAGE_CACHE)
+    parser.add_argument("--max-image-side", type=int, default=4096)
+    parser.add_argument("--max-image-pixels", type=int, default=32_000_000)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()

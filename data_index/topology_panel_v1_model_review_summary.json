@@ -1,0 +1,32 @@
+{
+  "model_review_rows": 171,
+  "input_manifest": "data_index/topology_panel_v1_sample_review_manifest.csv",
+  "output_csv": "data_index/topology_panel_v1_model_review.csv",
+  "dry_run": false,
+  "model": "doubao-seed-2-0-pro-260215",
+  "label_counts": {
+    "needs_panel_split": 76,
+    "still_fragmented": 22,
+    "not_topology_target": 36,
+    "bad_geometry": 8,
+    "accept_v1": 18,
+    "over_connected": 9,
+    "needs_terminal_anchor": 2
+  },
+  "human_review_counts": {
+    "True": 163,
+    "False": 8
+  },
+  "severity_counts": {
+    "critical": 9,
+    "high": 42,
+    "medium": 80,
+    "low": 30,
+    "normal": 10
+  },
+  "rules": [
+    "Model labels are pre-annotations only; final labels require human confirmation.",
+    "needs_panel_split means a displayed panel still contains multiple independent subfigures.",
+    "Rows with confidence below 0.85 are forced into human review."
+  ]
+}
