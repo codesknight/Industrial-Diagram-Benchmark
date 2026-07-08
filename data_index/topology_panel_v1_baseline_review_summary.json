@@ -1,0 +1,23 @@
+{
+  "source_manifest": "data_index/topology_panel_v1_release_manifest.csv",
+  "review_html": "data_index/topology_panel_v1_baseline_review.html",
+  "review_manifest": "data_index/topology_panel_v1_baseline_review_manifest.csv",
+  "row_count": 14,
+  "split_counts": {
+    "test": 2,
+    "train": 11,
+    "val": 1
+  },
+  "phase_counts": {
+    "P1": 4,
+    "P3": 9,
+    "P2": 1
+  },
+  "min_nodes": 204,
+  "max_nodes": 731,
+  "min_edges": 337,
+  "max_edges": 1165,
+  "min_nets": 1,
+  "max_nets": 3,
+  "mean_isolated_edge_ratio": 0.0004
+}

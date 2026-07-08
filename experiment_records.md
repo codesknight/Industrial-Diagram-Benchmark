@@ -19,3 +19,14 @@
   - `data_index/topology_panel_v1_release_improvement_manifest.csv`
   - `data_index/topology_panel_v1_release_summary.json`
   - `data_index/topology_panel_v1_release_report.md`
+
+## 2026-07-08 Topology Panel v1 Clean Baseline Review HTML
+
+- Built a compact HTML visual review sheet for the 14-row clean baseline release.
+- Source manifest: `data_index/topology_panel_v1_release_manifest.csv`.
+- Review HTML: `data_index/topology_panel_v1_baseline_review.html`.
+- Review manifest: `data_index/topology_panel_v1_baseline_review_manifest.csv`.
+- Summary: `data_index/topology_panel_v1_baseline_review_summary.json`.
+- The page shows the panel PNG, a lightweight topology SVG preview generated from the v1 graph JSON, key graph metrics, model review notes, and a CSV export for final baseline confirmation labels.
+- Baseline review split counts: train 11, val 1, test 2.
+- Baseline review phase counts: P1 4, P2 1, P3 9.
