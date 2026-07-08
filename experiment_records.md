@@ -45,3 +45,13 @@
   - `data_index/topology_panel_v1_baseline_reviewed.csv`
   - `data_index/topology_panel_v1_final_baseline_summary.json`
   - `data_index/topology_panel_v1_final_baseline_report.md`
+
+## 2026-07-08 Topology Graph v1 Evaluation Protocol
+
+- Added the first formal evaluation protocol for panel-level Topology Graph v1.
+- Protocol document: `docs/topology_graph_eval_protocol_v1.md`.
+- Formal score manifest: `data_index/topology_panel_v1_final_baseline_manifest.csv`.
+- Baseline size fixed for this release: 14 rows.
+- The protocol excludes multi-subfigure badcases, bad geometry, not-topology targets, unreviewed rows, and v1.1 improvement targets from the formal v1 score.
+- Primary metrics defined: graph valid rate, node count error, edge count error, net count error, isolated edge ratio, largest net edge ratio, and human accept rate.
+- The document also records v1 non-goals and the recommended v1.1 improvement order.
