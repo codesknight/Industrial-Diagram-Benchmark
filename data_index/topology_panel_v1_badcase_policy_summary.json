@@ -1,0 +1,49 @@
+{
+  "sample_rows": 171,
+  "baseline_accept_rows": 14,
+  "badcase_rows": 125,
+  "multi_subfigure_badcase_rows": 43,
+  "improvement_target_rows": 31,
+  "unreviewed_rows": 1,
+  "review_label_counts": {
+    "needs_panel_split": 43,
+    "bad_geometry": 63,
+    "still_fragmented": 19,
+    "not_topology_target": 19,
+    "needs_terminal_anchor": 3,
+    "unreviewed": 1,
+    "over_connected": 9,
+    "accept_v1": 14
+  },
+  "policy_decision_counts": {
+    "badcase": 125,
+    "improvement_target": 31,
+    "unreviewed": 1,
+    "baseline_accept": 14
+  },
+  "policy_exclude_reason_counts": {
+    "multi_subfigure_badcase": 43,
+    "bad_geometry": 63,
+    "still_fragmented": 19,
+    "not_topology_target": 19,
+    "needs_terminal_anchor": 3,
+    "unreviewed": 1,
+    "over_connected": 9,
+    "keep": 14
+  },
+  "multi_subfigure_by_split_method": {
+    "full": 37,
+    "image_components": 6
+  },
+  "multi_subfigure_by_phase": {
+    "P2": 27,
+    "P3": 15,
+    "P1": 1
+  },
+  "rules": [
+    "needs_panel_split is treated as multi_subfigure_badcase and excluded from topology baseline",
+    "bad_geometry and not_topology_target are excluded from topology baseline",
+    "accept_v1 remains eligible for the clean panel-level v1 baseline",
+    "over_connected, still_fragmented, and needs_terminal_anchor are retained as algorithm improvement targets"
+  ]
+}

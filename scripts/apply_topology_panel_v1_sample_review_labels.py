@@ -196,7 +196,7 @@ def build_summary(
         "needs_panel_split_by_phase": dict(Counter(str(row.get("phase", "")) for row in needs_panel_split)),
         "rules": [
             "accept_v1 rows remain eligible for panel-level Topology Graph v1 baseline",
-            "needs_panel_split rows must go to panel split v2 before topology use",
+            "needs_panel_split rows are multi-subfigure badcases under the current policy and are excluded from topology baseline",
             "bad_geometry and not_topology_target rows are excluded from topology baseline",
             "over_connected, still_fragmented, and needs_terminal_anchor remain v1 improvement targets",
         ],

@@ -39,6 +39,6 @@ This report summarizes manual labels exported from `topology_panel_v1_sample_rev
 ## Rules
 
 - accept_v1 rows remain eligible for panel-level Topology Graph v1 baseline
-- needs_panel_split rows must go to panel split v2 before topology use
+- needs_panel_split rows are multi-subfigure badcases under the current policy and are excluded from topology baseline
 - bad_geometry and not_topology_target rows are excluded from topology baseline
 - over_connected, still_fragmented, and needs_terminal_anchor remain v1 improvement targets
