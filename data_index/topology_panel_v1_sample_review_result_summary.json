@@ -1,0 +1,50 @@
+{
+  "sample_manifest_rows": 171,
+  "label_rows": 171,
+  "reviewed_rows": 170,
+  "unreviewed_rows": 1,
+  "accepted_rows": 14,
+  "needs_panel_split_rows": 43,
+  "not_topology_target_rows": 19,
+  "bad_geometry_rows": 63,
+  "other_not_accept_rows": 31,
+  "review_label_counts": {
+    "needs_panel_split": 43,
+    "bad_geometry": 63,
+    "still_fragmented": 19,
+    "not_topology_target": 19,
+    "needs_terminal_anchor": 3,
+    "unreviewed": 1,
+    "over_connected": 9,
+    "accept_v1": 14
+  },
+  "model_label_counts": {
+    "needs_panel_split": 76,
+    "still_fragmented": 22,
+    "not_topology_target": 36,
+    "bad_geometry": 8,
+    "accept_v1": 18,
+    "over_connected": 9,
+    "needs_terminal_anchor": 2
+  },
+  "model_agreement_counts": {
+    "agree": 107,
+    "disagree": 63,
+    "unreviewed": 1
+  },
+  "needs_panel_split_by_split_method": {
+    "full": 37,
+    "image_components": 6
+  },
+  "needs_panel_split_by_phase": {
+    "P2": 27,
+    "P3": 15,
+    "P1": 1
+  },
+  "rules": [
+    "accept_v1 rows remain eligible for panel-level Topology Graph v1 baseline",
+    "needs_panel_split rows must go to panel split v2 before topology use",
+    "bad_geometry and not_topology_target rows are excluded from topology baseline",
+    "over_connected, still_fragmented, and needs_terminal_anchor remain v1 improvement targets"
+  ]
+}
