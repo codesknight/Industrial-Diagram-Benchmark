@@ -1,0 +1,15 @@
+{
+  "review_rows": 43,
+  "source_input": "data_index/topology_panel_v1_needs_panel_split.csv",
+  "review_html": "data_index/topology_panel_split_v2_review.html",
+  "by_split_method": {
+    "full": 37,
+    "image_components": 6
+  },
+  "by_phase": {
+    "P2": 27,
+    "P3": 15,
+    "P1": 1
+  },
+  "export_filename": "topology_panel_split_v2_labels.csv"
+}
