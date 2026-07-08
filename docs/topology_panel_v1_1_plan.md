@@ -156,6 +156,52 @@ Only `true_fragmentation` should receive algorithmic endpoint/short-segment
 repair. Other classes should be routed to filtering, relabeling, or symbol
 anchor work.
 
+## Abandoned Policy
+
+After reviewing the first still-fragmented experiment and diagnostic buckets,
+the current decision is to abandon all 19 `still_fragmented` rows for v1.1
+repair. They are kept only for badcase and error analysis.
+
+Apply the policy with:
+
+```powershell
+python scripts/apply_topology_panel_v1_1_abandoned_policy.py
+```
+
+Outputs:
+
+```text
+data_index/topology_panel_v1_1_abandoned_manifest.csv
+data_index/topology_panel_v1_1_active_improvement_manifest.csv
+data_index/topology_panel_v1_1_active_terminal_anchor_manifest.csv
+data_index/topology_panel_v1_1_active_over_connected_manifest.csv
+data_index/topology_panel_v1_1_abandoned_policy_summary.json
+data_index/topology_panel_v1_1_abandoned_policy_report.md
+```
+
+Current policy result:
+
+```text
+input improvement rows: 31
+abandoned rows: 19
+active improvement rows: 12
+active terminal-anchor rows: 3
+active over-connected rows: 9
+```
+
+Abandoned diagnostic label counts:
+
+```text
+no_line_geometry: 1
+non_topology_target: 4
+needs_panel_split_badcase: 7
+true_fragmentation: 5
+terminal_anchor_needed: 2
+```
+
+The abandoned rows must not be used as v1.1 repair candidates unless a future
+manual override creates a new candidate manifest.
+
 ## Promotion Rule
 
 No v1.1 output should enter the benchmark baseline automatically.

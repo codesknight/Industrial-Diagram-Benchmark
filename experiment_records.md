@@ -115,3 +115,17 @@
   - `true_fragmentation`: 5
   - `terminal_anchor_needed`: 2
 - HTML supports manual override and exports `topology_panel_v1_1_still_fragmented_diagnostic_labels.csv`.
+
+## 2026-07-08 Topology Panel v1.1 Abandoned Policy
+
+- Applied the decision to abandon all 19 v1.1 `still_fragmented` diagnostic rows.
+- Script: `scripts/apply_topology_panel_v1_1_abandoned_policy.py`.
+- Abandoned manifest: `data_index/topology_panel_v1_1_abandoned_manifest.csv`.
+- Active improvement manifest: `data_index/topology_panel_v1_1_active_improvement_manifest.csv`.
+- Summary: `data_index/topology_panel_v1_1_abandoned_policy_summary.json`.
+- Report: `data_index/topology_panel_v1_1_abandoned_policy_report.md`.
+- Input improvement rows: 31.
+- Abandoned rows: 19.
+- Active improvement rows: 12.
+- Active next routes: terminal anchor 3, over-connected repair 9.
+- Formal Topology Panel v1 baseline remains unchanged.

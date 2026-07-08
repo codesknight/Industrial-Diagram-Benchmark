@@ -1,0 +1,43 @@
+{
+  "policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08",
+  "source_improvement_manifest": "data_index/topology_panel_v1_release_improvement_manifest.csv",
+  "source_diagnostic_csv": "data_index/topology_panel_v1_1_still_fragmented_diagnostic.csv",
+  "input_improvement_rows": 31,
+  "diagnostic_rows": 19,
+  "abandoned_rows": 19,
+  "active_improvement_rows": 12,
+  "decision_counts": {
+    "abandoned": 19,
+    "active_improvement": 12
+  },
+  "original_reason_counts": {
+    "still_fragmented": 19,
+    "needs_terminal_anchor": 3,
+    "over_connected": 9
+  },
+  "abandoned_diagnostic_label_counts": {
+    "no_line_geometry": 1,
+    "non_topology_target": 4,
+    "needs_panel_split_badcase": 7,
+    "terminal_anchor_needed": 2,
+    "true_fragmentation": 5
+  },
+  "active_next_route_counts": {
+    "terminal_anchor_module": 3,
+    "over_connected_repair": 9
+  },
+  "rules": [
+    "All still_fragmented rows diagnosed in v1.1 are abandoned and kept for badcase/error analysis only.",
+    "Abandoned rows must not be used as v1.1 repair candidates unless a future manual override is created.",
+    "needs_terminal_anchor and over_connected rows remain active improvement targets.",
+    "The formal Topology Panel v1 baseline remains unchanged."
+  ],
+  "outputs": {
+    "active_improvement_manifest": "data_index/topology_panel_v1_1_active_improvement_manifest.csv",
+    "abandoned_manifest": "data_index/topology_panel_v1_1_abandoned_manifest.csv",
+    "active_terminal_anchor_manifest": "data_index/topology_panel_v1_1_active_terminal_anchor_manifest.csv",
+    "active_over_connected_manifest": "data_index/topology_panel_v1_1_active_over_connected_manifest.csv",
+    "summary": "data_index/topology_panel_v1_1_abandoned_policy_summary.json",
+    "report": "data_index/topology_panel_v1_1_abandoned_policy_report.md"
+  }
+}
