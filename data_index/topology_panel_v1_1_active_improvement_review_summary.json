@@ -1,0 +1,39 @@
+{
+  "source_manifest": "data_index/topology_panel_v1_1_active_improvement_manifest.csv",
+  "review_html": "data_index/topology_panel_v1_1_active_improvement_review.html",
+  "review_manifest": "data_index/topology_panel_v1_1_active_improvement_review_manifest.csv",
+  "row_count": 12,
+  "next_route_counts": {
+    "over_connected_repair": 9,
+    "terminal_anchor_module": 3
+  },
+  "original_reason_counts": {
+    "over_connected": 9,
+    "needs_terminal_anchor": 3
+  },
+  "model_label_counts": {
+    "over_connected": 9,
+    "needs_terminal_anchor": 2,
+    "needs_panel_split": 1
+  },
+  "phase_counts": {
+    "P1": 3,
+    "P3": 8,
+    "P2": 1
+  },
+  "split_counts": {
+    "train": 10,
+    "test": 1,
+    "val": 1
+  },
+  "suggested_review_label_counts": {
+    "keep_over_connected": 9,
+    "keep_terminal_anchor": 3
+  },
+  "labels": [
+    "keep_terminal_anchor",
+    "keep_over_connected",
+    "abandon_badcase",
+    "defer_complex"
+  ]
+}

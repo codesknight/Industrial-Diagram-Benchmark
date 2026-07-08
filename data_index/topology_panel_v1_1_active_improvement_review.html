@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Topology Panel v1.1 Active Improvement Review</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --ink: #101828;
+      --muted: #667085;
+      --border: #d7dde7;
+      --dark: #111827;
+      --ok: #0f7b45;
+      --warn: #a35b00;
+      --bad: #b42318;
+      --info: #175cd3;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 12px 16px;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--border);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      font-weight: 680;
+      letter-spacing: 0;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    input[type="search"], select {
+      height: 34px;
+      min-width: 160px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0 10px;
+      background: #fff;
+      color: var(--ink);
+    }
+    button {
+      height: 34px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0 12px;
+      background: #fff;
+      cursor: pointer;
+      font-weight: 560;
+    }
+    button.primary {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: #fff;
+    }
+    .stats {
+      margin-left: auto;
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    main {
+      padding: 14px;
+      display: grid;
+      gap: 14px;
+    }
+    .card {
+      display: grid;
+      grid-template-columns: minmax(420px, 1fr) 470px;
+      min-height: 360px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .image-pane {
+      min-height: 360px;
+      border-right: 1px solid var(--border);
+      background: #fbfcfe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+      padding: 10px;
+    }
+    .image-pane img {
+      max-width: 100%;
+      max-height: 82vh;
+      object-fit: contain;
+    }
+    .meta {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+    .title {
+      font-size: 15px;
+      font-weight: 680;
+      overflow-wrap: anywhere;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .badge {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 12px;
+      background: #fff;
+    }
+    .terminal { color: var(--ok); border-color: #b7e4c7; background: #f1fbf5; }
+    .over { color: var(--warn); border-color: #ffdca8; background: #fff8eb; }
+    .bad { color: var(--bad); border-color: #fecdca; background: #fff3f2; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 6px;
+    }
+    .metric {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 8px;
+      min-width: 0;
+    }
+    .metric b {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 560;
+    }
+    .metric span {
+      display: block;
+      margin-top: 2px;
+      font-size: 14px;
+      font-weight: 670;
+      overflow-wrap: anywhere;
+    }
+    textarea {
+      width: 100%;
+      min-height: 72px;
+      resize: vertical;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px;
+      font: inherit;
+      font-size: 13px;
+    }
+    a { color: var(--info); text-decoration: none; overflow-wrap: anywhere; }
+    @media (max-width: 980px) {
+      .card { grid-template-columns: 1fr; }
+      .image-pane { border-right: 0; border-bottom: 1px solid var(--border); }
+      .stats { width: 100%; margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Topology Panel v1.1 Active Improvement Review</h1>
+    <div class="toolbar">
+      <input id="query" type="search" placeholder="panel / route / reason" />
+      <select id="routeFilter">
+        <option value="">all routes</option>
+        <option value="terminal_anchor_module">terminal_anchor_module</option>
+        <option value="over_connected_repair">over_connected_repair</option>
+      </select>
+      <select id="reviewFilter"><option value="">all review labels</option></select>
+      <button id="clearBtn">Clear</button>
+      <button id="exportBtn" class="primary">Export CSV</button>
+      <span id="stats" class="stats"></span>
+    </div>
+  </header>
+  <main id="cards"></main>
+  <script>
+    const rows = [{"panel_id": "_P1_staging/某电厂GIS室接地布置图#panel_000", "parent_drawing_key": "_P1_staging/某电厂GIS室接地布置图", "split": "train", "phase": "P1", "batch": "_P1_staging", "panel_index": "0", "panel_count": "1", "split_method": "full", "panel_png_path": "datas/qa_and_png/P1_oda_output/某电厂GIS室接地布置图.png", "panel_bbox_cad": "43099.1058,22761.7209,64053.6313,81235.6089", "parent_normalized_json_path": "outputs/normalized_geometry/_P1_staging/某电厂GIS室接地布置图.normalized.json", "parent_topology_v0_json_path": "outputs/topology_graph/_P1_staging/某电厂GIS室接地布置图.topology.v0.json", "topology_v1_panel_json_path": "outputs/topology_panel_v1/_P1_staging/某电厂GIS室接地布置图#panel_000.topology.v1.json", "status": "ok", "error": "", "panel_entity_count": "11013", "base_segment_count": "9692", "split_segment_count": "40032", "intersection_count": "31835", "split_event_count": "51661", "split_short_segments": "73", "v1_node_count": "4678", "v1_edge_count": "15994", "v1_net_count": "142", "v1_isolated_edge_ratio": "0.0011", "v1_largest_net_edge_ratio": "0.8954", "effective_endpoint_tolerance": "1.0", "quality_flags": "", "severity": "normal", "anomaly_type": "normal_high_intersection", "suggested_action": "Spot-check accepted-looking high-intersection samples.", "model_review_label": "over_connected", "model_confidence": "0.92", "model_needs_human_review": "True", "model_reason": "Extremely high intersection count and abnormally large single net edge ratio indicate the topology is incorrectly connecting unrelated visual line crossings as valid connections.", "model_visible_cues": "Intersection count (31835) is vastly higher than base segment count (9692); Largest net edge ratio of 0.8954 shows nearly 90% of edges are grouped into one net incorrectly; Anomaly type flagged as normal_high_intersection", "topology_panel_v1_review_label": "over_connected", "topology_panel_v1_review_comment": "model: Extremely high intersection count and abnormally large single net edge ratio indicate the topology is incorrectly connecting unrelated visual line crossings as valid connections.", "topology_panel_v1_reviewed": "True", "topology_panel_v1_accepted": "False", "topology_panel_v1_exclude_reason": "over_connected", "topology_panel_v1_policy_decision": "improvement_target", "topology_panel_v1_policy_exclude_reason": "over_connected", "topology_panel_v1_release_id": "topology_panel_v1_2026-07-08", "topology_panel_v1_release_partition": "improvement_target", "topology_panel_v1_release_use": "topology_algorithm_improvement", "topology_panel_v1_release_exclude_reason": "over_connected", "topology_panel_v1_release_is_baseline": "False", "topology_panel_v1_release_is_badcase": "False", "topology_panel_v1_release_is_improvement_target": "True", "topology_panel_v1_release_is_reviewed": "True", "panel_png_exists": "True", "topology_v1_panel_json_exists": "True", "topology_panel_v1_1_policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08", "topology_panel_v1_1_original_improvement_reason": "over_connected", "topology_panel_v1_1_diagnostic_label": "", "topology_panel_v1_1_diagnostic_reason": "", "topology_panel_v1_1_panel_line_like_entity_count": "", "topology_panel_v1_1_panel_total_entity_count": "", "topology_panel_v1_1_still_empty": "", "topology_panel_v1_1_candidate_improved": "", "topology_panel_v1_1_abandoned": "False", "topology_panel_v1_1_decision": "active_improvement", "topology_panel_v1_1_decision_reason": "reserved for crossing-line disambiguation work", "topology_panel_v1_1_next_route": "over_connected_repair", "image_src": "../datas/qa_and_png/P1_oda_output/%E6%9F%90%E7%94%B5%E5%8E%82GIS%E5%AE%A4%E6%8E%A5%E5%9C%B0%E5%B8%83%E7%BD%AE%E5%9B%BE.png", "topology_json_src": "../outputs/topology_panel_v1/_P1_staging/%E6%9F%90%E7%94%B5%E5%8E%82GIS%E5%AE%A4%E6%8E%A5%E5%9C%B0%E5%B8%83%E7%BD%AE%E5%9B%BE%23panel_000.topology.v1.json", "suggested_review_label": "keep_over_connected"}, {"panel_id": "_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_000", "parent_drawing_key": "_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com", "split": "train", "phase": "P1", "batch": "_P1_staging", "panel_index": "0", "panel_count": "3", "split_method": "image_components", "panel_png_path": "outputs/panels/P1/P1_staging__主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com__panel_000.png", "panel_bbox_cad": "-0.0,-42.36,608.9648,159.4622", "parent_normalized_json_path": "outputs/normalized_geometry/_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com.normalized.json", "parent_topology_v0_json_path": "outputs/topology_graph/_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com.topology.v0.json", "topology_v1_panel_json_path": "outputs/topology_panel_v1/_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_000.topology.v1.json", "status": "ok", "error": "", "panel_entity_count": "347", "base_segment_count": "128", "split_segment_count": "592", "intersection_count": "291", "split_event_count": "472", "split_short_segments": "0", "v1_node_count": "399", "v1_edge_count": "590", "v1_net_count": "1", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "1.0", "effective_endpoint_tolerance": "0.3208", "quality_flags": "dominant_component", "severity": "low", "anomaly_type": "dominant_component", "suggested_action": "Spot-check whether the graph is over-connected.", "model_review_label": "over_connected", "model_confidence": "0.9", "model_needs_human_review": "True", "model_reason": "Topology graph incorrectly merged all distinct wiring circuits into a single net, likely by connecting non-electrical visual crossings between wiring and background grid lines.", "model_visible_cues": "Multiple separate discrete wiring circuits are visible in the diagram; v1_net_count is 1 despite multiple independent circuits present; v1_largest_net_edge_ratio is 1.0 indicating all edges are incorrectly grouped as one connected net; High intersection count (291) likely from background grid lines crossing wiring paths", "topology_panel_v1_review_label": "over_connected", "topology_panel_v1_review_comment": "model: Topology graph incorrectly merged all distinct wiring circuits into a single net, likely by connecting non-electrical visual crossings between wiring and background grid lines.", "topology_panel_v1_reviewed": "True", "topology_panel_v1_accepted": "False", "topology_panel_v1_exclude_reason": "over_connected", "topology_panel_v1_policy_decision": "improvement_target", "topology_panel_v1_policy_exclude_reason": "over_connected", "topology_panel_v1_release_id": "topology_panel_v1_2026-07-08", "topology_panel_v1_release_partition": "improvement_target", "topology_panel_v1_release_use": "topology_algorithm_improvement", "topology_panel_v1_release_exclude_reason": "over_connected", "topology_panel_v1_release_is_baseline": "False", "topology_panel_v1_release_is_badcase": "False", "topology_panel_v1_release_is_improvement_target": "True", "topology_panel_v1_release_is_reviewed": "True", "panel_png_exists": "True", "topology_v1_panel_json_exists": "True", "topology_panel_v1_1_policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08", "topology_panel_v1_1_original_improvement_reason": "over_connected", "topology_panel_v1_1_diagnostic_label": "", "topology_panel_v1_1_diagnostic_reason": "", "topology_panel_v1_1_panel_line_like_entity_count": "", "topology_panel_v1_1_panel_total_entity_count": "", "topology_panel_v1_1_still_empty": "", "topology_panel_v1_1_candidate_improved": "", "topology_panel_v1_1_abandoned": "False", "topology_panel_v1_1_decision": "active_improvement", "topology_panel_v1_1_decision_reason": "reserved for crossing-line disambiguation work", "topology_panel_v1_1_next_route": "over_connected_repair", "image_src": "../outputs/panels/P1/P1_staging__%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com__panel_000.png", "topology_json_src": "../outputs/topology_panel_v1/_P1_staging/%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com%23panel_000.topology.v1.json", "suggested_review_label": "keep_over_connected"}, {"panel_id": "_P3_staging_batch1/500KVA有载调压箱变系统图#panel_000", "parent_drawing_key": "_P3_staging_batch1/500KVA有载调压箱变系统图", "split": "test", "phase": "P3", "batch": "_P3_staging_batch1", "panel_index": "0", "panel_count": "1", "split_method": "full", "panel_png_path": "datas/qa_and_png/P3_oda_output/500KVA有载调压箱变系统图.png", "panel_bbox_cad": "1550.0,-5.0,2939.3734,415.0", "parent_normalized_json_path": "outputs/normalized_geometry/_P3_staging_batch1/500KVA有载调压箱变系统图.normalized.json", "parent_topology_v0_json_path": "outputs/topology_graph/_P3_staging_batch1/500KVA有载调压箱变系统图.topology.v0.json", "topology_v1_panel_json_path": "outputs/topology_panel_v1/_P3_staging_batch1/500KVA有载调压箱变系统图#panel_000.topology.v1.json", "status": "ok", "error": "", "panel_entity_count": "794", "base_segment_count": "530", "split_segment_count": "42955", "intersection_count": "21811", "split_event_count": "42821", "split_short_segments": "0", "v1_node_count": "21097", "v1_edge_count": "42471", "v1_net_count": "14", "v1_isolated_edge_ratio": "0.0002", "v1_largest_net_edge_ratio": "0.996", "effective_endpoint_tolerance": "0.7257", "quality_flags": "dominant_component", "severity": "low", "anomaly_type": "dominant_component", "suggested_action": "Spot-check whether the graph is over-connected.", "model_review_label": "over_connected", "model_confidence": "0.9", "model_needs_human_review": "True", "model_reason": "Abnormally high node, edge and intersection counts with nearly all edges grouped into one net indicate the topology incorrectly connected visual crossings and unrelated regions.", "model_visible_cues": "v1_node_count is 21097, v1_edge_count is 42471, intersection_count is 21811, all far exceed expected values for this single system diagram; v1_largest_net_edge_ratio is 0.996 meaning over 99% of edges are assigned to a single net", "topology_panel_v1_review_label": "over_connected", "topology_panel_v1_review_comment": "model: Abnormally high node, edge and intersection counts with nearly all edges grouped into one net indicate the topology incorrectly connected visual crossings and unrelated regions.", "topology_panel_v1_reviewed": "True", "topology_panel_v1_accepted": "False", "topology_panel_v1_exclude_reason": "over_connected", "topology_panel_v1_policy_decision": "improvement_target", "topology_panel_v1_policy_exclude_reason": "over_connected", "topology_panel_v1_release_id": "topology_panel_v1_2026-07-08", "topology_panel_v1_release_partition": "improvement_target", "topology_panel_v1_release_use": "topology_algorithm_improvement", "topology_panel_v1_release_exclude_reason": "over_connected", "topology_panel_v1_release_is_baseline": "False", "topology_panel_v1_release_is_badcase": "False", "topology_panel_v1_release_is_improvement_target": "True", "topology_panel_v1_release_is_reviewed": "True", "panel_png_exists": "True", "topology_v1_panel_json_exists": "True", "topology_panel_v1_1_policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08", "topology_panel_v1_1_original_improvement_reason": "over_connected", "topology_panel_v1_1_diagnostic_label": "", "topology_panel_v1_1_diagnostic_reason": "", "topology_panel_v1_1_panel_line_like_entity_count": "", "topology_panel_v1_1_panel_total_entity_count": "", "topology_panel_v1_1_still_empty": "", "topology_panel_v1_1_candidate_improved": "", "topology_panel_v1_1_abandoned": "False", "topology_panel_v1_1_decision": "active_improvement", "topology_panel_v1_1_decision_reason": "reserved for crossing-line disambiguation work", "topology_panel_v1_1_next_route": "over_connected_repair", "image_src": "../datas/qa_and_png/P3_oda_output/500KVA%E6%9C%89%E8%BD%BD%E8%B0%83%E5%8E%8B%E7%AE%B1%E5%8F%98%E7%B3%BB%E7%BB%9F%E5%9B%BE.png", "topology_json_src": "../outputs/topology_panel_v1/_P3_staging_batch1/500KVA%E6%9C%89%E8%BD%BD%E8%B0%83%E5%8E%8B%E7%AE%B1%E5%8F%98%E7%B3%BB%E7%BB%9F%E5%9B%BE%23panel_000.topology.v1.json", "suggested_review_label": "keep_over_connected"}, {"panel_id": "_P3_staging_batch3/WGB-114N 馈线保护原理图(手车)#panel_000", "parent_drawing_key": "_P3_staging_batch3/WGB-114N 馈线保护原理图(手车)", "split": "train", "phase": "P3", "batch": "_P3_staging_batch3", "panel_index": "0", "panel_count": "1", "split_method": "full", "panel_png_path": "datas/qa_and_png/P3_oda_output/WGB-114N 馈线保护原理图(手车).png", "panel_bbox_cad": "0.6113,3.5965,1326.9946,300.5965", "parent_normalized_json_path": "outputs/normalized_geometry/_P3_staging_batch3/WGB-114N 馈线保护原理图(手车).normalized.json", "parent_topology_v0_json_path": "outputs/topology_graph/_P3_staging_batch3/WGB-114N 馈线保护原理图(手车).topology.v0.json", "topology_v1_panel_json_path": "outputs/topology_panel_v1/_P3_staging_batch3/WGB-114N 馈线保护原理图(手车)#panel_000.topology.v1.json", "status": "ok", "error": "", "panel_entity_count": "4536", "base_segment_count": "3837", "split_segment_count": "35553", "intersection_count": "22386", "split_event_count": "44431", "split_short_segments": "2613", "v1_node_count": "2123", "v1_edge_count": "4627", "v1_net_count": "235", "v1_isolated_edge_ratio": "0.0255", "v1_largest_net_edge_ratio": "0.2725", "effective_endpoint_tolerance": "0.6796", "quality_flags": "", "severity": "normal", "anomaly_type": "normal_high_intersection", "suggested_action": "Spot-check accepted-looking high-intersection samples.", "model_review_label": "over_connected", "model_confidence": "0.9", "model_needs_human_review": "True", "model_reason": "Abnormally high intersection count indicates the topology graph likely incorrectly connects visually crossing unrelated line segments.", "model_visible_cues": "Reported intersection count reaches 22386, far exceeding expected valid connection count for the diagram; Anomaly type is explicitly flagged as normal_high_intersection", "topology_panel_v1_review_label": "over_connected", "topology_panel_v1_review_comment": "model: Abnormally high intersection count indicates the topology graph likely incorrectly connects visually crossing unrelated line segments.", "topology_panel_v1_reviewed": "True", "topology_panel_v1_accepted": "False", "topology_panel_v1_exclude_reason": "over_connected", "topology_panel_v1_policy_decision": "improvement_target", "topology_panel_v1_policy_exclude_reason": "over_connected", "topology_panel_v1_release_id": "topology_panel_v1_2026-07-08", "topology_panel_v1_release_partition": "improvement_target", "topology_panel_v1_release_use": "topology_algorithm_improvement", "topology_panel_v1_release_exclude_reason": "over_connected", "topology_panel_v1_release_is_baseline": "False", "topology_panel_v1_release_is_badcase": "False", "topology_panel_v1_release_is_improvement_target": "True", "topology_panel_v1_release_is_reviewed": "True", "panel_png_exists": "True", "topology_v1_panel_json_exists": "True", "topology_panel_v1_1_policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08", "topology_panel_v1_1_original_improvement_reason": "over_connected", "topology_panel_v1_1_diagnostic_label": "", "topology_panel_v1_1_diagnostic_reason": "", "topology_panel_v1_1_panel_line_like_entity_count": "", "topology_panel_v1_1_panel_total_entity_count": "", "topology_panel_v1_1_still_empty": "", "topology_panel_v1_1_candidate_improved": "", "topology_panel_v1_1_abandoned": "False", "topology_panel_v1_1_decision": "active_improvement", "topology_panel_v1_1_decision_reason": "reserved for crossing-line disambiguation work", "topology_panel_v1_1_next_route": "over_connected_repair", "image_src": "../datas/qa_and_png/P3_oda_output/WGB-114N%20%E9%A6%88%E7%BA%BF%E4%BF%9D%E6%8A%A4%E5%8E%9F%E7%90%86%E5%9B%BE%28%E6%89%8B%E8%BD%A6%29.png", "topology_json_src": "../outputs/topology_panel_v1/_P3_staging_batch3/WGB-114N%20%E9%A6%88%E7%BA%BF%E4%BF%9D%E6%8A%A4%E5%8E%9F%E7%90%86%E5%9B%BE%28%E6%89%8B%E8%BD%A6%29%23panel_000.topology.v1.json", "suggested_review_label": "keep_over_connected"}, {"panel_id": "_P3_staging_batch3/WGB-114N 馈线保护原理图(手车)__286#panel_000", "parent_drawing_key": "_P3_staging_batch3/WGB-114N 馈线保护原理图(手车)__286", "split": "train", "phase": "P3", "batch": "_P3_staging_batch3", "panel_index": "0", "panel_count": "1", "split_method": "full", "panel_png_path": "datas/qa_and_png/P3_oda_output/WGB-114N 馈线保护原理图(手车)__286.png", "panel_bbox_cad": "0.6113,3.5965,1326.9946,300.5965", "parent_normalized_json_path": "outputs/normalized_geometry/_P3_staging_batch3/WGB-114N 馈线保护原理图(手车)__286.normalized.json", "parent_topology_v0_json_path": "outputs/topology_graph/_P3_staging_batch3/WGB-114N 馈线保护原理图(手车)__286.topology.v0.json", "topology_v1_panel_json_path": "outputs/topology_panel_v1/_P3_staging_batch3/WGB-114N 馈线保护原理图(手车)__286#panel_000.topology.v1.json", "status": "ok", "error": "", "panel_entity_count": "4536", "base_segment_count": "3837", "split_segment_count": "35553", "intersection_count": "22386", "split_event_count": "44431", "split_short_segments": "2613", "v1_node_count": "2123", "v1_edge_count": "4627", "v1_net_count": "235", "v1_isolated_edge_ratio": "0.0255", "v1_largest_net_edge_ratio": "0.2725", "effective_endpoint_tolerance": "0.6796", "quality_flags": "", "severity": "normal", "anomaly_type": "normal_high_intersection", "suggested_action": "Spot-check accepted-looking high-intersection samples.", "model_review_label": "over_connected", "model_confidence": "0.85", "model_needs_human_review": "True", "model_reason": "Extremely high intersection count relative to total edge count indicates visual line crossings are likely incorrectly connected in the generated topology graph.", "model_visible_cues": "intersection_count = 22386, far exceeding v1_edge_count = 4627; anomaly_type flagged as normal_high_intersection", "topology_panel_v1_review_label": "over_connected", "topology_panel_v1_review_comment": "model: Extremely high intersection count relative to total edge count indicates visual line crossings are likely incorrectly connected in the generated topology graph.", "topology_panel_v1_reviewed": "True", "topology_panel_v1_accepted": "False", "topology_panel_v1_exclude_reason": "over_connected", "topology_panel_v1_policy_decision": "improvement_target", "topology_panel_v1_policy_exclude_reason": "over_connected", "topology_panel_v1_release_id": "topology_panel_v1_2026-07-08", "topology_panel_v1_release_partition": "improvement_target", "topology_panel_v1_release_use": "topology_algorithm_improvement", "topology_panel_v1_release_exclude_reason": "over_connected", "topology_panel_v1_release_is_baseline": "False", "topology_panel_v1_release_is_badcase": "False", "topology_panel_v1_release_is_improvement_target": "True", "topology_panel_v1_release_is_reviewed": "True", "panel_png_exists": "True", "topology_v1_panel_json_exists": "True", "topology_panel_v1_1_policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08", "topology_panel_v1_1_original_improvement_reason": "over_connected", "topology_panel_v1_1_diagnostic_label": "", "topology_panel_v1_1_diagnostic_reason": "", "topology_panel_v1_1_panel_line_like_entity_count": "", "topology_panel_v1_1_panel_total_entity_count": "", "topology_panel_v1_1_still_empty": "", "topology_panel_v1_1_candidate_improved": "", "topology_panel_v1_1_abandoned": "False", "topology_panel_v1_1_decision": "active_improvement", "topology_panel_v1_1_decision_reason": "reserved for crossing-line disambiguation work", "topology_panel_v1_1_next_route": "over_connected_repair", "image_src": "../datas/qa_and_png/P3_oda_output/WGB-114N%20%E9%A6%88%E7%BA%BF%E4%BF%9D%E6%8A%A4%E5%8E%9F%E7%90%86%E5%9B%BE%28%E6%89%8B%E8%BD%A6%29__286.png", "topology_json_src": "../outputs/topology_panel_v1/_P3_staging_batch3/WGB-114N%20%E9%A6%88%E7%BA%BF%E4%BF%9D%E6%8A%A4%E5%8E%9F%E7%90%86%E5%9B%BE%28%E6%89%8B%E8%BD%A6%29__286%23panel_000.topology.v1.json", "suggested_review_label": "keep_over_connected"}, {"panel_id": "_P3_staging_batch4/WGB-124N 高压柜综合保护原理图(手车)#panel_000", "parent_drawing_key": "_P3_staging_batch4/WGB-124N 高压柜综合保护原理图(手车)", "split": "val", "phase": "P3", "batch": "_P3_staging_batch4", "panel_index": "0", "panel_count": "1", "split_method": "full", "panel_png_path": "datas/qa_and_png/P3_oda_output/WGB-124N 高压柜综合保护原理图(手车).png", "panel_bbox_cad": "0.6113,3.5965,1326.9946,300.5965", "parent_normalized_json_path": "outputs/normalized_geometry/_P3_staging_batch4/WGB-124N 高压柜综合保护原理图(手车).normalized.json", "parent_topology_v0_json_path": "outputs/topology_graph/_P3_staging_batch4/WGB-124N 高压柜综合保护原理图(手车).topology.v0.json", "topology_v1_panel_json_path": "outputs/topology_panel_v1/_P3_staging_batch4/WGB-124N 高压柜综合保护原理图(手车)#panel_000.topology.v1.json", "status": "ok", "error": "", "panel_entity_count": "4536", "base_segment_count": "3834", "split_segment_count": "35549", "intersection_count": "22385", "split_event_count": "44430", "split_short_segments": "2613", "v1_node_count": "2083", "v1_edge_count": "4613", "v1_net_count": "236", "v1_isolated_edge_ratio": "0.0249", "v1_largest_net_edge_ratio": "0.2734", "effective_endpoint_tolerance": "0.6796", "quality_flags": "", "severity": "normal", "anomaly_type": "normal_high_intersection", "suggested_action": "Spot-check accepted-looking high-intersection samples.", "model_review_label": "over_connected", "model_confidence": "0.85", "model_needs_human_review": "True", "model_reason": "Abnormally high intersection count indicates visual line crossings are likely incorrectly connected in the generated topology graph.", "model_visible_cues": "Intersection count of 22385 is extremely high for this schematic size; Anomaly type is marked as normal_high_intersection", "topology_panel_v1_review_label": "over_connected", "topology_panel_v1_review_comment": "model: Abnormally high intersection count indicates visual line crossings are likely incorrectly connected in the generated topology graph.", "topology_panel_v1_reviewed": "True", "topology_panel_v1_accepted": "False", "topology_panel_v1_exclude_reason": "over_connected", "topology_panel_v1_policy_decision": "improvement_target", "topology_panel_v1_policy_exclude_reason": "over_connected", "topology_panel_v1_release_id": "topology_panel_v1_2026-07-08", "topology_panel_v1_release_partition": "improvement_target", "topology_panel_v1_release_use": "topology_algorithm_improvement", "topology_panel_v1_release_exclude_reason": "over_connected", "topology_panel_v1_release_is_baseline": "False", "topology_panel_v1_release_is_badcase": "False", "topology_panel_v1_release_is_improvement_target": "True", "topology_panel_v1_release_is_reviewed": "True", "panel_png_exists": "True", "topology_v1_panel_json_exists": "True", "topology_panel_v1_1_policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08", "topology_panel_v1_1_original_improvement_reason": "over_connected", "topology_panel_v1_1_diagnostic_label": "", "topology_panel_v1_1_diagnostic_reason": "", "topology_panel_v1_1_panel_line_like_entity_count": "", "topology_panel_v1_1_panel_total_entity_count": "", "topology_panel_v1_1_still_empty": "", "topology_panel_v1_1_candidate_improved": "", "topology_panel_v1_1_abandoned": "False", "topology_panel_v1_1_decision": "active_improvement", "topology_panel_v1_1_decision_reason": "reserved for crossing-line disambiguation work", "topology_panel_v1_1_next_route": "over_connected_repair", "image_src": "../datas/qa_and_png/P3_oda_output/WGB-124N%20%E9%AB%98%E5%8E%8B%E6%9F%9C%E7%BB%BC%E5%90%88%E4%BF%9D%E6%8A%A4%E5%8E%9F%E7%90%86%E5%9B%BE%28%E6%89%8B%E8%BD%A6%29.png", "topology_json_src": "../outputs/topology_panel_v1/_P3_staging_batch4/WGB-124N%20%E9%AB%98%E5%8E%8B%E6%9F%9C%E7%BB%BC%E5%90%88%E4%BF%9D%E6%8A%A4%E5%8E%9F%E7%90%86%E5%9B%BE%28%E6%89%8B%E8%BD%A6%29%23panel_000.topology.v1.json", "suggested_review_label": "keep_over_connected"}, {"panel_id": "_P3_staging_batch3/WGB-113N 馈线保护原理图(手车)#panel_000", "parent_drawing_key": "_P3_staging_batch3/WGB-113N 馈线保护原理图(手车)", "split": "train", "phase": "P3", "batch": "_P3_staging_batch3", "panel_index": "0", "panel_count": "1", "split_method": "full", "panel_png_path": "datas/qa_and_png/P3_oda_output/WGB-113N 馈线保护原理图(手车).png", "panel_bbox_cad": "-30.3175,-145.7021,1296.0658,151.2979", "parent_normalized_json_path": "outputs/normalized_geometry/_P3_staging_batch3/WGB-113N 馈线保护原理图(手车).normalized.json", "parent_topology_v0_json_path": "outputs/topology_graph/_P3_staging_batch3/WGB-113N 馈线保护原理图(手车).topology.v0.json", "topology_v1_panel_json_path": "outputs/topology_panel_v1/_P3_staging_batch3/WGB-113N 馈线保护原理图(手车)#panel_000.topology.v1.json", "status": "ok", "error": "", "panel_entity_count": "4531", "base_segment_count": "3827", "split_segment_count": "35662", "intersection_count": "22424", "split_event_count": "44507", "split_short_segments": "2612", "v1_node_count": "2076", "v1_edge_count": "4581", "v1_net_count": "241", "v1_isolated_edge_ratio": "0.0264", "v1_largest_net_edge_ratio": "0.2991", "effective_endpoint_tolerance": "0.6796", "quality_flags": "", "severity": "normal", "anomaly_type": "normal_high_intersection", "suggested_action": "Spot-check accepted-looking high-intersection samples.", "model_review_label": "over_connected", "model_confidence": "0.9", "model_needs_human_review": "True", "model_reason": "Extremely high intersection count indicates the topology graph is incorrectly connecting visual line crossings that are not actual electrical connections.", "model_visible_cues": "Intersection count of 22424 is anomalously high for this schematic size; Schematic contains many non-connected crossing lines typical of protection schematics", "topology_panel_v1_review_label": "over_connected", "topology_panel_v1_review_comment": "model: Extremely high intersection count indicates the topology graph is incorrectly connecting visual line crossings that are not actual electrical connections.", "topology_panel_v1_reviewed": "True", "topology_panel_v1_accepted": "False", "topology_panel_v1_exclude_reason": "over_connected", "topology_panel_v1_policy_decision": "improvement_target", "topology_panel_v1_policy_exclude_reason": "over_connected", "topology_panel_v1_release_id": "topology_panel_v1_2026-07-08", "topology_panel_v1_release_partition": "improvement_target", "topology_panel_v1_release_use": "topology_algorithm_improvement", "topology_panel_v1_release_exclude_reason": "over_connected", "topology_panel_v1_release_is_baseline": "False", "topology_panel_v1_release_is_badcase": "False", "topology_panel_v1_release_is_improvement_target": "True", "topology_panel_v1_release_is_reviewed": "True", "panel_png_exists": "True", "topology_v1_panel_json_exists": "True", "topology_panel_v1_1_policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08", "topology_panel_v1_1_original_improvement_reason": "over_connected", "topology_panel_v1_1_diagnostic_label": "", "topology_panel_v1_1_diagnostic_reason": "", "topology_panel_v1_1_panel_line_like_entity_count": "", "topology_panel_v1_1_panel_total_entity_count": "", "topology_panel_v1_1_still_empty": "", "topology_panel_v1_1_candidate_improved": "", "topology_panel_v1_1_abandoned": "False", "topology_panel_v1_1_decision": "active_improvement", "topology_panel_v1_1_decision_reason": "reserved for crossing-line disambiguation work", "topology_panel_v1_1_next_route": "over_connected_repair", "image_src": "../datas/qa_and_png/P3_oda_output/WGB-113N%20%E9%A6%88%E7%BA%BF%E4%BF%9D%E6%8A%A4%E5%8E%9F%E7%90%86%E5%9B%BE%28%E6%89%8B%E8%BD%A6%29.png", "topology_json_src": "../outputs/topology_panel_v1/_P3_staging_batch3/WGB-113N%20%E9%A6%88%E7%BA%BF%E4%BF%9D%E6%8A%A4%E5%8E%9F%E7%90%86%E5%9B%BE%28%E6%89%8B%E8%BD%A6%29%23panel_000.topology.v1.json", "suggested_review_label": "keep_over_connected"}, {"panel_id": "_P3_staging_batch4/WGB-123N 高压柜综合保护原理图(手车)#panel_000", "parent_drawing_key": "_P3_staging_batch4/WGB-123N 高压柜综合保护原理图(手车)", "split": "train", "phase": "P3", "batch": "_P3_staging_batch4", "panel_index": "0", "panel_count": "1", "split_method": "full", "panel_png_path": "datas/qa_and_png/P3_oda_output/WGB-123N 高压柜综合保护原理图(手车).png", "panel_bbox_cad": "0.6113,3.5965,1326.9946,300.5965", "parent_normalized_json_path": "outputs/normalized_geometry/_P3_staging_batch4/WGB-123N 高压柜综合保护原理图(手车).normalized.json", "parent_topology_v0_json_path": "outputs/topology_graph/_P3_staging_batch4/WGB-123N 高压柜综合保护原理图(手车).topology.v0.json", "topology_v1_panel_json_path": "outputs/topology_panel_v1/_P3_staging_batch4/WGB-123N 高压柜综合保护原理图(手车)#panel_000.topology.v1.json", "status": "ok", "error": "", "panel_entity_count": "4576", "base_segment_count": "3863", "split_segment_count": "35635", "intersection_count": "22385", "split_event_count": "44424", "split_short_segments": "2606", "v1_node_count": "2114", "v1_edge_count": "4576", "v1_net_count": "241", "v1_isolated_edge_ratio": "0.0273", "v1_largest_net_edge_ratio": "0.2653", "effective_endpoint_tolerance": "0.6796", "quality_flags": "", "severity": "normal", "anomaly_type": "normal_high_intersection", "suggested_action": "Spot-check accepted-looking high-intersection samples.", "model_review_label": "over_connected", "model_confidence": "0.85", "model_needs_human_review": "True", "model_reason": "Extremely high intersection count indicates most visual line crossings are likely incorrectly connected, resulting in an over-connected topology graph.", "model_visible_cues": "Intersection count is abnormally high at 22385; High density of line crossings across the schematic diagram", "topology_panel_v1_review_label": "over_connected", "topology_panel_v1_review_comment": "model: Extremely high intersection count indicates most visual line crossings are likely incorrectly connected, resulting in an over-connected topology graph.", "topology_panel_v1_reviewed": "True", "topology_panel_v1_accepted": "False", "topology_panel_v1_exclude_reason": "over_connected", "topology_panel_v1_policy_decision": "improvement_target", "topology_panel_v1_policy_exclude_reason": "over_connected", "topology_panel_v1_release_id": "topology_panel_v1_2026-07-08", "topology_panel_v1_release_partition": "improvement_target", "topology_panel_v1_release_use": "topology_algorithm_improvement", "topology_panel_v1_release_exclude_reason": "over_connected", "topology_panel_v1_release_is_baseline": "False", "topology_panel_v1_release_is_badcase": "False", "topology_panel_v1_release_is_improvement_target": "True", "topology_panel_v1_release_is_reviewed": "True", "panel_png_exists": "True", "topology_v1_panel_json_exists": "True", "topology_panel_v1_1_policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08", "topology_panel_v1_1_original_improvement_reason": "over_connected", "topology_panel_v1_1_diagnostic_label": "", "topology_panel_v1_1_diagnostic_reason": "", "topology_panel_v1_1_panel_line_like_entity_count": "", "topology_panel_v1_1_panel_total_entity_count": "", "topology_panel_v1_1_still_empty": "", "topology_panel_v1_1_candidate_improved": "", "topology_panel_v1_1_abandoned": "False", "topology_panel_v1_1_decision": "active_improvement", "topology_panel_v1_1_decision_reason": "reserved for crossing-line disambiguation work", "topology_panel_v1_1_next_route": "over_connected_repair", "image_src": "../datas/qa_and_png/P3_oda_output/WGB-123N%20%E9%AB%98%E5%8E%8B%E6%9F%9C%E7%BB%BC%E5%90%88%E4%BF%9D%E6%8A%A4%E5%8E%9F%E7%90%86%E5%9B%BE%28%E6%89%8B%E8%BD%A6%29.png", "topology_json_src": "../outputs/topology_panel_v1/_P3_staging_batch4/WGB-123N%20%E9%AB%98%E5%8E%8B%E6%9F%9C%E7%BB%BC%E5%90%88%E4%BF%9D%E6%8A%A4%E5%8E%9F%E7%90%86%E5%9B%BE%28%E6%89%8B%E8%BD%A6%29%23panel_000.topology.v1.json", "suggested_review_label": "keep_over_connected"}, {"panel_id": "_P3_staging_batch1/06(背面通讯接线图)#panel_000", "parent_drawing_key": "_P3_staging_batch1/06(背面通讯接线图)", "split": "train", "phase": "P3", "batch": "_P3_staging_batch1", "panel_index": "0", "panel_count": "1", "split_method": "full", "panel_png_path": "datas/qa_and_png/P3_oda_output/06(背面通讯接线图).png", "panel_bbox_cad": "35.8945,7.7001,416.5994,274.0976", "parent_normalized_json_path": "outputs/normalized_geometry/_P3_staging_batch1/06(背面通讯接线图).normalized.json", "parent_topology_v0_json_path": "outputs/topology_graph/_P3_staging_batch1/06(背面通讯接线图).topology.v0.json", "topology_v1_panel_json_path": "outputs/topology_panel_v1/_P3_staging_batch1/06(背面通讯接线图)#panel_000.topology.v1.json", "status": "ok", "error": "", "panel_entity_count": "450", "base_segment_count": "262", "split_segment_count": "990", "intersection_count": "474", "split_event_count": "728", "split_short_segments": "0", "v1_node_count": "630", "v1_edge_count": "990", "v1_net_count": "1", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "1.0", "effective_endpoint_tolerance": "0.2323", "quality_flags": "dominant_component", "severity": "low", "anomaly_type": "dominant_component", "suggested_action": "Spot-check whether the graph is over-connected.", "model_review_label": "over_connected", "model_confidence": "0.85", "model_needs_human_review": "True", "model_reason": "Extracted topology incorrectly merges all wiring into a single net, likely caused by misclassifying visual line crossings as valid electrical connections.", "model_visible_cues": "v1_net_count is 1 with 100% of edges assigned to the single largest net; 474 line intersections are present in the diagram, most are not valid connections; Multiple distinct signal wire pairs exist that should be separate topology nets", "topology_panel_v1_review_label": "over_connected", "topology_panel_v1_review_comment": "model: Extracted topology incorrectly merges all wiring into a single net, likely caused by misclassifying visual line crossings as valid electrical connections.", "topology_panel_v1_reviewed": "True", "topology_panel_v1_accepted": "False", "topology_panel_v1_exclude_reason": "over_connected", "topology_panel_v1_policy_decision": "improvement_target", "topology_panel_v1_policy_exclude_reason": "over_connected", "topology_panel_v1_release_id": "topology_panel_v1_2026-07-08", "topology_panel_v1_release_partition": "improvement_target", "topology_panel_v1_release_use": "topology_algorithm_improvement", "topology_panel_v1_release_exclude_reason": "over_connected", "topology_panel_v1_release_is_baseline": "False", "topology_panel_v1_release_is_badcase": "False", "topology_panel_v1_release_is_improvement_target": "True", "topology_panel_v1_release_is_reviewed": "True", "panel_png_exists": "True", "topology_v1_panel_json_exists": "True", "topology_panel_v1_1_policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08", "topology_panel_v1_1_original_improvement_reason": "over_connected", "topology_panel_v1_1_diagnostic_label": "", "topology_panel_v1_1_diagnostic_reason": "", "topology_panel_v1_1_panel_line_like_entity_count": "", "topology_panel_v1_1_panel_total_entity_count": "", "topology_panel_v1_1_still_empty": "", "topology_panel_v1_1_candidate_improved": "", "topology_panel_v1_1_abandoned": "False", "topology_panel_v1_1_decision": "active_improvement", "topology_panel_v1_1_decision_reason": "reserved for crossing-line disambiguation work", "topology_panel_v1_1_next_route": "over_connected_repair", "image_src": "../datas/qa_and_png/P3_oda_output/06%28%E8%83%8C%E9%9D%A2%E9%80%9A%E8%AE%AF%E6%8E%A5%E7%BA%BF%E5%9B%BE%29.png", "topology_json_src": "../outputs/topology_panel_v1/_P3_staging_batch1/06%28%E8%83%8C%E9%9D%A2%E9%80%9A%E8%AE%AF%E6%8E%A5%E7%BA%BF%E5%9B%BE%29%23panel_000.topology.v1.json", "suggested_review_label": "keep_over_connected"}, {"panel_id": "_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_001", "parent_drawing_key": "_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com", "split": "train", "phase": "P1", "batch": "_P1_staging", "panel_index": "1", "panel_count": "3", "split_method": "image_components", "panel_png_path": "outputs/panels/P1/P1_staging__主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com__panel_001.png", "panel_bbox_cad": "32.2783,23.4066,600.5044,121.0199", "parent_normalized_json_path": "outputs/normalized_geometry/_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com.normalized.json", "parent_topology_v0_json_path": "outputs/topology_graph/_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com.topology.v0.json", "topology_v1_panel_json_path": "outputs/topology_panel_v1/_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_001.topology.v1.json", "status": "ok", "error": "", "panel_entity_count": "98", "base_segment_count": "26", "split_segment_count": "42", "intersection_count": "16", "split_event_count": "16", "split_short_segments": "0", "v1_node_count": "35", "v1_edge_count": "42", "v1_net_count": "1", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "1.0", "effective_endpoint_tolerance": "0.2883", "quality_flags": "dominant_component", "severity": "low", "anomaly_type": "dominant_component", "suggested_action": "Spot-check whether the graph is over-connected.", "model_review_label": "needs_terminal_anchor", "model_confidence": "0.9", "model_needs_human_review": "True", "model_reason": "The topology line graph is structurally plausible but requires terminal/symbol anchors for semantic correctness.", "model_visible_cues": "Single coherent terminal block wiring diagram with no independent sub-panels; Wiring lines are present but not yet anchored to the marked terminal identifiers and target device labels", "topology_panel_v1_review_label": "needs_terminal_anchor", "topology_panel_v1_review_comment": "model: The topology line graph is structurally plausible but requires terminal/symbol anchors for semantic correctness.", "topology_panel_v1_reviewed": "True", "topology_panel_v1_accepted": "False", "topology_panel_v1_exclude_reason": "needs_terminal_anchor", "topology_panel_v1_policy_decision": "improvement_target", "topology_panel_v1_policy_exclude_reason": "needs_terminal_anchor", "topology_panel_v1_release_id": "topology_panel_v1_2026-07-08", "topology_panel_v1_release_partition": "improvement_target", "topology_panel_v1_release_use": "topology_algorithm_improvement", "topology_panel_v1_release_exclude_reason": "needs_terminal_anchor", "topology_panel_v1_release_is_baseline": "False", "topology_panel_v1_release_is_badcase": "False", "topology_panel_v1_release_is_improvement_target": "True", "topology_panel_v1_release_is_reviewed": "True", "panel_png_exists": "True", "topology_v1_panel_json_exists": "True", "topology_panel_v1_1_policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08", "topology_panel_v1_1_original_improvement_reason": "needs_terminal_anchor", "topology_panel_v1_1_diagnostic_label": "", "topology_panel_v1_1_diagnostic_reason": "", "topology_panel_v1_1_panel_line_like_entity_count": "", "topology_panel_v1_1_panel_total_entity_count": "", "topology_panel_v1_1_still_empty": "", "topology_panel_v1_1_candidate_improved": "", "topology_panel_v1_1_abandoned": "False", "topology_panel_v1_1_decision": "active_improvement", "topology_panel_v1_1_decision_reason": "reserved for terminal or symbol anchor work", "topology_panel_v1_1_next_route": "terminal_anchor_module", "image_src": "../outputs/panels/P1/P1_staging__%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com__panel_001.png", "topology_json_src": "../outputs/topology_panel_v1/_P1_staging/%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com%23panel_001.topology.v1.json", "suggested_review_label": "keep_terminal_anchor"}, {"panel_id": "_P2_staging/电站、变电所电气及设备13#panel_001", "parent_drawing_key": "_P2_staging/电站、变电所电气及设备13", "split": "train", "phase": "P2", "batch": "_P2_staging", "panel_index": "1", "panel_count": "8", "split_method": "image_components", "panel_png_path": "outputs/panels/P2/P2_staging__电站、变电所电气及设备13__panel_001.png", "panel_bbox_cad": "45371.9834,-5926.2953,301570.2959,88042.3516", "parent_normalized_json_path": "outputs/normalized_geometry/_P2_staging/电站、变电所电气及设备13.normalized.json", "parent_topology_v0_json_path": "outputs/topology_graph/_P2_staging/电站、变电所电气及设备13.topology.v0.json", "topology_v1_panel_json_path": "outputs/topology_panel_v1/_P2_staging/电站、变电所电气及设备13#panel_001.topology.v1.json", "status": "ok", "error": "", "panel_entity_count": "1", "base_segment_count": "0", "split_segment_count": "0", "intersection_count": "0", "split_event_count": "0", "split_short_segments": "0", "v1_node_count": "0", "v1_edge_count": "0", "v1_net_count": "0", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "0.0", "effective_endpoint_tolerance": "1.0", "quality_flags": "no_edges;no_nets", "severity": "high", "anomaly_type": "no_edges_or_no_nets", "suggested_action": "Check whether this panel is not a topology target or uses unsupported geometry types.", "model_review_label": "needs_panel_split", "model_confidence": "0.9", "model_needs_human_review": "True", "model_reason": "The image contains multiple independent separated sub-diagrams and a title block that must be split prior to topology graph assessment.", "model_visible_cues": "Multiple distinct labeled subfigures (site plan, M view, A--A, B--B, D--D, E--E, C--C sections) are present; Title block is a separate independent region at the bottom right corner; No shared topology connections exist between the visually separated sub-diagrams", "topology_panel_v1_review_label": "needs_terminal_anchor", "topology_panel_v1_review_comment": "model: The image contains multiple independent separated sub-diagrams and a title block that must be split prior to topology graph assessment.", "topology_panel_v1_reviewed": "True", "topology_panel_v1_accepted": "False", "topology_panel_v1_exclude_reason": "needs_terminal_anchor", "topology_panel_v1_policy_decision": "improvement_target", "topology_panel_v1_policy_exclude_reason": "needs_terminal_anchor", "topology_panel_v1_release_id": "topology_panel_v1_2026-07-08", "topology_panel_v1_release_partition": "improvement_target", "topology_panel_v1_release_use": "topology_algorithm_improvement", "topology_panel_v1_release_exclude_reason": "needs_terminal_anchor", "topology_panel_v1_release_is_baseline": "False", "topology_panel_v1_release_is_badcase": "False", "topology_panel_v1_release_is_improvement_target": "True", "topology_panel_v1_release_is_reviewed": "True", "panel_png_exists": "True", "topology_v1_panel_json_exists": "True", "topology_panel_v1_1_policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08", "topology_panel_v1_1_original_improvement_reason": "needs_terminal_anchor", "topology_panel_v1_1_diagnostic_label": "", "topology_panel_v1_1_diagnostic_reason": "", "topology_panel_v1_1_panel_line_like_entity_count": "", "topology_panel_v1_1_panel_total_entity_count": "", "topology_panel_v1_1_still_empty": "", "topology_panel_v1_1_candidate_improved": "", "topology_panel_v1_1_abandoned": "False", "topology_panel_v1_1_decision": "active_improvement", "topology_panel_v1_1_decision_reason": "reserved for terminal or symbol anchor work", "topology_panel_v1_1_next_route": "terminal_anchor_module", "image_src": "../outputs/panels/P2/P2_staging__%E7%94%B5%E7%AB%99%E3%80%81%E5%8F%98%E7%94%B5%E6%89%80%E7%94%B5%E6%B0%94%E5%8F%8A%E8%AE%BE%E5%A4%8713__panel_001.png", "topology_json_src": "../outputs/topology_panel_v1/_P2_staging/%E7%94%B5%E7%AB%99%E3%80%81%E5%8F%98%E7%94%B5%E6%89%80%E7%94%B5%E6%B0%94%E5%8F%8A%E8%AE%BE%E5%A4%8713%23panel_001.topology.v1.json", "suggested_review_label": "keep_terminal_anchor"}, {"panel_id": "_P3_staging_batch4/发电机保护屏端子图#panel_004", "parent_drawing_key": "_P3_staging_batch4/发电机保护屏端子图", "split": "train", "phase": "P3", "batch": "_P3_staging_batch4", "panel_index": "4", "panel_count": "7", "split_method": "image_components", "panel_png_path": "outputs/panels/P3/P3_staging_batch4__发电机保护屏端子图__panel_004.png", "panel_bbox_cad": "-124.9811,-544.9556,12.5728,-401.7589", "parent_normalized_json_path": "outputs/normalized_geometry/_P3_staging_batch4/发电机保护屏端子图.normalized.json", "parent_topology_v0_json_path": "outputs/topology_graph/_P3_staging_batch4/发电机保护屏端子图.topology.v0.json", "topology_v1_panel_json_path": "outputs/topology_panel_v1/_P3_staging_batch4/发电机保护屏端子图#panel_004.topology.v1.json", "status": "ok", "error": "", "panel_entity_count": "135", "base_segment_count": "58", "split_segment_count": "329", "intersection_count": "173", "split_event_count": "271", "split_short_segments": "0", "v1_node_count": "214", "v1_edge_count": "329", "v1_net_count": "1", "v1_isolated_edge_ratio": "0.0", "v1_largest_net_edge_ratio": "1.0", "effective_endpoint_tolerance": "0.0993", "quality_flags": "dominant_component", "severity": "low", "anomaly_type": "dominant_component", "suggested_action": "Spot-check whether the graph is over-connected.", "model_review_label": "needs_terminal_anchor", "model_confidence": "0.9", "model_needs_human_review": "True", "model_reason": "The generator terminal wiring diagram is a valid topology target but requires explicit terminal/symbol anchors for semantic correctness of the graph.", "model_visible_cues": "Single coherent generator protection terminal diagram panel; Contains numbered terminal entries, signal labels, and connection lines to external equipment panels; No fragmented or multiple independent subdiagrams present", "topology_panel_v1_review_label": "needs_terminal_anchor", "topology_panel_v1_review_comment": "model: The generator terminal wiring diagram is a valid topology target but requires explicit terminal/symbol anchors for semantic correctness of the graph.", "topology_panel_v1_reviewed": "True", "topology_panel_v1_accepted": "False", "topology_panel_v1_exclude_reason": "needs_terminal_anchor", "topology_panel_v1_policy_decision": "improvement_target", "topology_panel_v1_policy_exclude_reason": "needs_terminal_anchor", "topology_panel_v1_release_id": "topology_panel_v1_2026-07-08", "topology_panel_v1_release_partition": "improvement_target", "topology_panel_v1_release_use": "topology_algorithm_improvement", "topology_panel_v1_release_exclude_reason": "needs_terminal_anchor", "topology_panel_v1_release_is_baseline": "False", "topology_panel_v1_release_is_badcase": "False", "topology_panel_v1_release_is_improvement_target": "True", "topology_panel_v1_release_is_reviewed": "True", "panel_png_exists": "True", "topology_v1_panel_json_exists": "True", "topology_panel_v1_1_policy_id": "topology_panel_v1_1_abandoned_policy_2026-07-08", "topology_panel_v1_1_original_improvement_reason": "needs_terminal_anchor", "topology_panel_v1_1_diagnostic_label": "", "topology_panel_v1_1_diagnostic_reason": "", "topology_panel_v1_1_panel_line_like_entity_count": "", "topology_panel_v1_1_panel_total_entity_count": "", "topology_panel_v1_1_still_empty": "", "topology_panel_v1_1_candidate_improved": "", "topology_panel_v1_1_abandoned": "False", "topology_panel_v1_1_decision": "active_improvement", "topology_panel_v1_1_decision_reason": "reserved for terminal or symbol anchor work", "topology_panel_v1_1_next_route": "terminal_anchor_module", "image_src": "../outputs/panels/P3/P3_staging_batch4__%E5%8F%91%E7%94%B5%E6%9C%BA%E4%BF%9D%E6%8A%A4%E5%B1%8F%E7%AB%AF%E5%AD%90%E5%9B%BE__panel_004.png", "topology_json_src": "../outputs/topology_panel_v1/_P3_staging_batch4/%E5%8F%91%E7%94%B5%E6%9C%BA%E4%BF%9D%E6%8A%A4%E5%B1%8F%E7%AB%AF%E5%AD%90%E5%9B%BE%23panel_004.topology.v1.json", "suggested_review_label": "keep_terminal_anchor"}];
+    const labels = ["keep_terminal_anchor", "keep_over_connected", "abandon_badcase", "defer_complex"];
+    const summary = {"source_manifest": "data_index/topology_panel_v1_1_active_improvement_manifest.csv", "review_html": "data_index/topology_panel_v1_1_active_improvement_review.html", "review_manifest": "data_index/topology_panel_v1_1_active_improvement_review_manifest.csv", "row_count": 12, "next_route_counts": {"over_connected_repair": 9, "terminal_anchor_module": 3}, "original_reason_counts": {"over_connected": 9, "needs_terminal_anchor": 3}, "model_label_counts": {"over_connected": 9, "needs_terminal_anchor": 2, "needs_panel_split": 1}, "phase_counts": {"P1": 3, "P3": 8, "P2": 1}, "split_counts": {"train": 10, "test": 1, "val": 1}, "suggested_review_label_counts": {"keep_over_connected": 9, "keep_terminal_anchor": 3}, "labels": ["keep_terminal_anchor", "keep_over_connected", "abandon_badcase", "defer_complex"]};
+    const stateKey = "topology_panel_v1_1_active_improvement_review_labels";
+    const saved = JSON.parse(localStorage.getItem(stateKey) || "{}");
+    const cards = document.getElementById("cards");
+    const query = document.getElementById("query");
+    const routeFilter = document.getElementById("routeFilter");
+    const reviewFilter = document.getElementById("reviewFilter");
+    const stats = document.getElementById("stats");
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, ch => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+      }[ch]));
+    }
+    function current(id, row) {
+      return saved[id] || { review_label: row.suggested_review_label, comment: "" };
+    }
+    function save(id, patch) {
+      const row = rows.find(item => item.panel_id === id);
+      saved[id] = { ...current(id, row), ...patch };
+      localStorage.setItem(stateKey, JSON.stringify(saved));
+      render();
+    }
+    function metric(label, value) {
+      return `<div class="metric"><b>${escapeHtml(label)}</b><span>${escapeHtml(value)}</span></div>`;
+    }
+    function routeClass(route) {
+      if (route === "terminal_anchor_module") return "terminal";
+      if (route === "over_connected_repair") return "over";
+      return "bad";
+    }
+    function card(row) {
+      const review = current(row.panel_id, row);
+      const jsonLink = row.topology_json_src ? `<a href="${row.topology_json_src}" target="_blank">topology json</a>` : "";
+      return `<article class="card">
+        <section class="image-pane">
+          <img src="${row.image_src}" alt="${escapeHtml(row.panel_id)}" loading="lazy" />
+        </section>
+        <section class="meta">
+          <div>
+            <div class="title">${escapeHtml(row.panel_id)}</div>
+            <div class="sub">${escapeHtml(row.parent_drawing_key)}</div>
+          </div>
+          <div class="badges">
+            <span class="badge ${routeClass(row.topology_panel_v1_1_next_route)}">${escapeHtml(row.topology_panel_v1_1_next_route)}</span>
+            <span class="badge">${escapeHtml(row.model_review_label)}</span>
+            <span class="badge">${escapeHtml(row.phase)}</span>
+            <span class="badge">${escapeHtml(row.split_method)}</span>
+          </div>
+          <div class="grid">
+            ${metric("nodes", row.v1_node_count)}
+            ${metric("edges", row.v1_edge_count)}
+            ${metric("nets", row.v1_net_count)}
+            ${metric("intersections", row.intersection_count)}
+            ${metric("isolated ratio", row.v1_isolated_edge_ratio)}
+            ${metric("largest net", row.v1_largest_net_edge_ratio)}
+            ${metric("entity count", row.panel_entity_count)}
+            ${metric("quality", row.quality_flags || "none")}
+          </div>
+          <div class="sub"><b>policy:</b> ${escapeHtml(row.topology_panel_v1_1_decision_reason)}</div>
+          <div class="sub"><b>model:</b> ${escapeHtml(row.model_reason)}</div>
+          <div class="sub">${jsonLink}</div>
+          <select onchange="save('${escapeHtml(row.panel_id)}', { review_label: this.value })">
+            ${labels.map(label => `<option value="${label}" ${review.review_label === label ? "selected" : ""}>${label}</option>`).join("")}
+          </select>
+          <textarea placeholder="comment" oninput="save('${escapeHtml(row.panel_id)}', { comment: this.value })">${escapeHtml(review.comment || "")}</textarea>
+        </section>
+      </article>`;
+    }
+    function populateFilters() {
+      for (const label of labels) {
+        reviewFilter.insertAdjacentHTML("beforeend", `<option value="${label}">${label}</option>`);
+      }
+    }
+    function filteredRows() {
+      const q = query.value.trim().toLowerCase();
+      return rows.filter(row => {
+        const review = current(row.panel_id, row);
+        if (routeFilter.value && row.topology_panel_v1_1_next_route !== routeFilter.value) return false;
+        if (reviewFilter.value && review.review_label !== reviewFilter.value) return false;
+        if (!q) return true;
+        return [row.panel_id, row.parent_drawing_key, row.topology_panel_v1_1_next_route, row.model_review_label, row.model_reason, row.quality_flags]
+          .some(value => String(value || "").toLowerCase().includes(q));
+      });
+    }
+    function render() {
+      const visible = filteredRows();
+      cards.innerHTML = visible.map(card).join("");
+      const counts = rows.reduce((acc, row) => {
+        const label = current(row.panel_id, row).review_label;
+        acc[label] = (acc[label] || 0) + 1;
+        return acc;
+      }, {});
+      stats.textContent = `${visible.length} / ${rows.length} visible | ` + labels.map(label => `${label} ${counts[label] || 0}`).join(" | ");
+    }
+    function csvEscape(value) {
+      const text = String(value ?? "");
+      return /[",\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+    }
+    function exportCsv() {
+      const header = ["panel_id", "review_label", "comment", "suggested_review_label", "next_route"];
+      const lines = [header.join(",")];
+      for (const row of rows) {
+        const review = current(row.panel_id, row);
+        lines.push([row.panel_id, review.review_label, review.comment || "", row.suggested_review_label, row.topology_panel_v1_1_next_route].map(csvEscape).join(","));
+      }
+      const blob = new Blob(["\ufeff" + lines.join("\n") + "\n"], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "topology_panel_v1_1_active_improvement_review_labels.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+    populateFilters();
+    for (const input of [query, routeFilter, reviewFilter]) {
+      input.addEventListener("input", render);
+      input.addEventListener("change", render);
+    }
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      query.value = "";
+      routeFilter.value = "";
+      reviewFilter.value = "";
+      render();
+    });
+    document.getElementById("exportBtn").addEventListener("click", exportCsv);
+    render();
+  </script>
+</body>
+</html>

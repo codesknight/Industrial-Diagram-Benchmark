@@ -129,3 +129,15 @@
 - Active improvement rows: 12.
 - Active next routes: terminal anchor 3, over-connected repair 9.
 - Formal Topology Panel v1 baseline remains unchanged.
+
+## 2026-07-08 Topology Panel v1.1 Active Improvement Review
+
+- Built the active improvement HTML review entrypoint for the 12 remaining v1.1 candidates.
+- Script: `scripts/build_topology_panel_v1_1_active_improvement_review_html.py`.
+- Review HTML: `data_index/topology_panel_v1_1_active_improvement_review.html`.
+- Review manifest: `data_index/topology_panel_v1_1_active_improvement_review_manifest.csv`.
+- Summary: `data_index/topology_panel_v1_1_active_improvement_review_summary.json`.
+- Rows: 12.
+- Routes: terminal anchor 3, over-connected repair 9.
+- Suggested labels: `keep_terminal_anchor` 3, `keep_over_connected` 9.
+- HTML exports `topology_panel_v1_1_active_improvement_review_labels.csv`.
