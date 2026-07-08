@@ -1,0 +1,63 @@
+{
+  "benchmark_id": "topology_panel_v1_benchmark_2026-07-08",
+  "source_manifest": "data_index/topology_panel_v1_final_baseline_manifest.csv",
+  "output_jsonl": "data_index/topology_panel_v1_benchmark_manifest.jsonl",
+  "protocol": "docs/topology_graph_eval_protocol_v1.md",
+  "record_count": 14,
+  "split_counts": {
+    "test": 2,
+    "train": 11,
+    "val": 1
+  },
+  "phase_counts": {
+    "P1": 4,
+    "P3": 9,
+    "P2": 1
+  },
+  "asset_checks": {
+    "missing_image_count": 0,
+    "missing_graph_count": 0,
+    "missing_image_panel_ids": [],
+    "missing_graph_panel_ids": []
+  },
+  "graph_stats": {
+    "node_count": {
+      "min": 204.0,
+      "max": 731.0,
+      "mean": 518.5
+    },
+    "edge_count": {
+      "min": 337.0,
+      "max": 1165.0,
+      "mean": 841.6429
+    },
+    "net_count": {
+      "min": 1.0,
+      "max": 3.0,
+      "mean": 1.2857
+    },
+    "intersection_count": {
+      "min": 184.0,
+      "max": 628.0,
+      "mean": 440.2857
+    },
+    "isolated_edge_ratio": {
+      "min": 0.0,
+      "max": 0.0032,
+      "mean": 0.0004
+    },
+    "largest_net_edge_ratio": {
+      "min": 0.9964,
+      "max": 1.0,
+      "mean": 0.9993
+    }
+  },
+  "quality_label_counts": {
+    "confirmed_baseline": 14
+  },
+  "outputs": {
+    "jsonl": "data_index/topology_panel_v1_benchmark_manifest.jsonl",
+    "summary": "data_index/topology_panel_v1_benchmark_summary.json",
+    "report": "data_index/topology_panel_v1_benchmark_report.md"
+  }
+}

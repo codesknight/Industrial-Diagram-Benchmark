@@ -55,3 +55,17 @@
 - The protocol excludes multi-subfigure badcases, bad geometry, not-topology targets, unreviewed rows, and v1.1 improvement targets from the formal v1 score.
 - Primary metrics defined: graph valid rate, node count error, edge count error, net count error, isolated edge ratio, largest net edge ratio, and human accept rate.
 - The document also records v1 non-goals and the recommended v1.1 improvement order.
+
+## 2026-07-08 Topology Panel v1 Benchmark JSONL Package
+
+- Built the first machine-readable JSONL package for the final Topology Panel v1 baseline.
+- Source manifest: `data_index/topology_panel_v1_final_baseline_manifest.csv`.
+- Output JSONL: `data_index/topology_panel_v1_benchmark_manifest.jsonl`.
+- Summary: `data_index/topology_panel_v1_benchmark_summary.json`.
+- Report: `data_index/topology_panel_v1_benchmark_report.md`.
+- Benchmark id: `topology_panel_v1_benchmark_2026-07-08`.
+- Records: 14.
+- Missing images: 0.
+- Missing topology graphs: 0.
+- Split counts: train 11, val 1, test 2.
+- Phase counts: P1 4, P2 1, P3 9.
