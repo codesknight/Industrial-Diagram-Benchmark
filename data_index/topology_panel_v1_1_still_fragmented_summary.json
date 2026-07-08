@@ -1,0 +1,80 @@
+{
+  "experiment_id": "topology_panel_v1_1_still_fragmented_2026-07-08",
+  "source_manifest": "data_index/topology_panel_v1_release_improvement_manifest.csv",
+  "input_rows": 19,
+  "variant_count": 4,
+  "experiment_rows": 76,
+  "best_candidate_rows": 19,
+  "input_quality_flag_counts": {
+    "no_edges;no_nets": 11,
+    "high_fragmentation": 2,
+    "high_isolated_ratio": 6
+  },
+  "input_model_label_counts": {
+    "still_fragmented": 14,
+    "not_topology_target": 4,
+    "needs_panel_split": 1
+  },
+  "by_variant": {
+    "baseline_0005_cap1": {
+      "rows": 19,
+      "status_counts": {
+        "ok": 19
+      },
+      "candidate_improved_rows": 0,
+      "still_empty_rows": 11,
+      "overmerge_warning_rows": 0,
+      "new_edge_count_avg": 3212.4211,
+      "new_isolated_edge_ratio_avg": 0.276384
+    },
+    "merge_0010_cap2": {
+      "rows": 19,
+      "status_counts": {
+        "ok": 19
+      },
+      "candidate_improved_rows": 0,
+      "still_empty_rows": 11,
+      "overmerge_warning_rows": 0,
+      "new_edge_count_avg": 3190.2105,
+      "new_isolated_edge_ratio_avg": 0.276389
+    },
+    "merge_0020_cap5": {
+      "rows": 19,
+      "status_counts": {
+        "ok": 19
+      },
+      "candidate_improved_rows": 0,
+      "still_empty_rows": 11,
+      "overmerge_warning_rows": 0,
+      "new_edge_count_avg": 2993.9474,
+      "new_isolated_edge_ratio_avg": 0.276363
+    },
+    "merge_0050_cap10": {
+      "rows": 19,
+      "status_counts": {
+        "ok": 19
+      },
+      "candidate_improved_rows": 0,
+      "still_empty_rows": 11,
+      "overmerge_warning_rows": 0,
+      "new_edge_count_avg": 2673.1053,
+      "new_isolated_edge_ratio_avg": 0.297479
+    }
+  },
+  "best_candidate_improved_rows": 0,
+  "best_still_empty_rows": 11,
+  "best_overmerge_warning_rows": 0,
+  "rules": [
+    "This is an improvement experiment only; no row is promoted into the v1 baseline automatically.",
+    "No-edge rows that remain empty likely need geometry-type support, crop review, or target relabeling rather than endpoint tuning.",
+    "Rows marked overmerge_warning require visual review before any future v1.1 promotion."
+  ],
+  "outputs": {
+    "input": "data_index/topology_panel_v1_1_still_fragmented_input.csv",
+    "experiment_manifest": "data_index/topology_panel_v1_1_still_fragmented_experiment_manifest.csv",
+    "best_candidates": "data_index/topology_panel_v1_1_still_fragmented_best_candidates.csv",
+    "summary": "data_index/topology_panel_v1_1_still_fragmented_summary.json",
+    "report": "data_index/topology_panel_v1_1_still_fragmented_report.md",
+    "local_graph_dir": "outputs/topology_panel_v1_1_still_fragmented"
+  }
+}

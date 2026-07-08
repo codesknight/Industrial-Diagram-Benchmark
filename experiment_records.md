@@ -82,3 +82,21 @@
 - Reference graph valid rate: 1.0.
 - Prediction graph valid rate in default mode: 1.0.
 - Node, edge, and net count MAE/MRE are all 0.0 in default mode.
+
+## 2026-07-08 Topology Panel v1.1 Still-Fragmented Experiment
+
+- Added v1.1 planning document: `docs/topology_panel_v1_1_plan.md`.
+- Added first still-fragmented experiment script: `scripts/run_topology_panel_v1_1_still_fragmented_experiment.py`.
+- Input rows: 19 from `data_index/topology_panel_v1_release_improvement_manifest.csv`.
+- Variants tested: `baseline_0005_cap1`, `merge_0010_cap2`, `merge_0020_cap5`, `merge_0050_cap10`.
+- Experiment rows: 76.
+- Best improved rows: 0.
+- Best still-empty rows: 11.
+- Best overmerge-warning rows: 0.
+- Main interpretation: endpoint tolerance tuning alone does not repair this bucket; next v1.1 step should diagnose no-line geometry, crop/bbox issues, non-topology targets, panel-split remnants, true fragmentation, and terminal-anchor cases.
+- Main outputs:
+  - `data_index/topology_panel_v1_1_still_fragmented_input.csv`
+  - `data_index/topology_panel_v1_1_still_fragmented_experiment_manifest.csv`
+  - `data_index/topology_panel_v1_1_still_fragmented_best_candidates.csv`
+  - `data_index/topology_panel_v1_1_still_fragmented_summary.json`
+  - `data_index/topology_panel_v1_1_still_fragmented_report.md`
