@@ -1,0 +1,101 @@
+{
+  "release_id": "topology_panel_v1_2026-07-08",
+  "source_manifest": "data_index/topology_panel_v1_sample_policy_reviewed.csv",
+  "reviewed_sample_rows": 171,
+  "release_baseline_rows": 14,
+  "excluded_badcase_rows": 125,
+  "improvement_target_rows": 31,
+  "unreviewed_rows": 1,
+  "partition_counts": {
+    "excluded_badcase": 125,
+    "improvement_target": 31,
+    "unreviewed": 1,
+    "clean_baseline": 14
+  },
+  "review_label_counts": {
+    "needs_panel_split": 43,
+    "bad_geometry": 63,
+    "still_fragmented": 19,
+    "not_topology_target": 19,
+    "needs_terminal_anchor": 3,
+    "empty": 1,
+    "over_connected": 9,
+    "accept_v1": 14
+  },
+  "exclude_reason_counts": {
+    "multi_subfigure_badcase": 43,
+    "bad_geometry": 63,
+    "still_fragmented": 19,
+    "not_topology_target": 19,
+    "needs_terminal_anchor": 3,
+    "unreviewed": 1,
+    "over_connected": 9,
+    "empty": 14
+  },
+  "baseline_split_counts": {
+    "test": 2,
+    "train": 11,
+    "val": 1
+  },
+  "baseline_phase_counts": {
+    "P1": 4,
+    "P3": 9,
+    "P2": 1
+  },
+  "badcase_reason_counts": {
+    "multi_subfigure_badcase": 43,
+    "bad_geometry": 63,
+    "not_topology_target": 19
+  },
+  "improvement_reason_counts": {
+    "still_fragmented": 19,
+    "needs_terminal_anchor": 3,
+    "over_connected": 9
+  },
+  "asset_checks": {
+    "missing_panel_png_rows": 0,
+    "missing_topology_v1_json_rows": 7,
+    "baseline_missing_panel_png_rows": 0,
+    "baseline_missing_topology_v1_json_rows": 0
+  },
+  "baseline_graph_stats": {
+    "v1_node_count": {
+      "min": 204,
+      "max": 731,
+      "mean": 518.5
+    },
+    "v1_edge_count": {
+      "min": 337,
+      "max": 1165,
+      "mean": 841.6429
+    },
+    "v1_net_count": {
+      "min": 1,
+      "max": 3,
+      "mean": 1.2857
+    },
+    "intersection_count": {
+      "min": 184,
+      "max": 628,
+      "mean": 440.2857
+    }
+  },
+  "rules": [
+    "Only clean_baseline rows are eligible for the formal Topology Panel v1 baseline.",
+    "Rows labeled needs_panel_split are multi-subfigure badcases and are excluded from the baseline.",
+    "Rows labeled bad_geometry or not_topology_target are excluded from the baseline.",
+    "Rows labeled over_connected, still_fragmented, or needs_terminal_anchor are retained as improvement targets."
+  ],
+  "outputs": {
+    "release_manifest": "data_index/topology_panel_v1_release_manifest.csv",
+    "release_train_manifest": "data_index/topology_panel_v1_release_train.csv",
+    "release_val_manifest": "data_index/topology_panel_v1_release_val.csv",
+    "release_test_manifest": "data_index/topology_panel_v1_release_test.csv",
+    "all_reviewed_manifest": "data_index/topology_panel_v1_release_all_reviewed_manifest.csv",
+    "excluded_manifest": "data_index/topology_panel_v1_release_excluded_manifest.csv",
+    "improvement_manifest": "data_index/topology_panel_v1_release_improvement_manifest.csv",
+    "unreviewed_manifest": "data_index/topology_panel_v1_release_unreviewed_manifest.csv",
+    "summary": "data_index/topology_panel_v1_release_summary.json",
+    "report": "data_index/topology_panel_v1_release_report.md"
+  }
+}
