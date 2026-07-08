@@ -69,3 +69,16 @@
 - Missing topology graphs: 0.
 - Split counts: train 11, val 1, test 2.
 - Phase counts: P1 4, P2 1, P3 9.
+
+## 2026-07-08 Topology Panel v1 Evaluation Script
+
+- Added the first benchmark evaluation script for Topology Panel v1.
+- Script: `benchmark/topology/evaluate_topology_graph_v1.py`.
+- Input manifest: `data_index/topology_panel_v1_benchmark_manifest.jsonl`.
+- Output summary: `data_index/topology_panel_v1_eval_summary.json`.
+- Output report: `data_index/topology_panel_v1_eval_report.md`.
+- Default mode: `reference_as_prediction`, used to validate the evaluation pipeline and reference graph structure.
+- Evaluated rows: 14.
+- Reference graph valid rate: 1.0.
+- Prediction graph valid rate in default mode: 1.0.
+- Node, edge, and net count MAE/MRE are all 0.0 in default mode.
