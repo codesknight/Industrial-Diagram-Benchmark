@@ -1,0 +1,30 @@
+{
+  "source_manifest": "data_index/topology_panel_v1_baseline_review_manifest.csv",
+  "labels_csv": "data_index/topology_panel_v1_baseline_review_labels.csv",
+  "used_default_confirmed": true,
+  "reviewed_rows": 14,
+  "final_baseline_rows": 14,
+  "needs_recheck_rows": 0,
+  "removed_rows": 0,
+  "label_counts": {
+    "confirmed_baseline": 14
+  },
+  "split_counts": {
+    "test": 2,
+    "train": 11,
+    "val": 1
+  },
+  "phase_counts": {
+    "P1": 4,
+    "P3": 9,
+    "P2": 1
+  },
+  "outputs": {
+    "reviewed": "data_index/topology_panel_v1_baseline_reviewed.csv",
+    "final_baseline": "data_index/topology_panel_v1_final_baseline_manifest.csv",
+    "needs_recheck": "data_index/topology_panel_v1_baseline_needs_recheck.csv",
+    "removed": "data_index/topology_panel_v1_baseline_removed.csv",
+    "summary": "data_index/topology_panel_v1_final_baseline_summary.json",
+    "report": "data_index/topology_panel_v1_final_baseline_report.md"
+  }
+}

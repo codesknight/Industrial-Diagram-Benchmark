@@ -30,3 +30,18 @@
 - The page shows the panel PNG, a lightweight topology SVG preview generated from the v1 graph JSON, key graph metrics, model review notes, and a CSV export for final baseline confirmation labels.
 - Baseline review split counts: train 11, val 1, test 2.
 - Baseline review phase counts: P1 4, P2 1, P3 9.
+
+## 2026-07-08 Topology Panel v1 Final Baseline
+
+- Applied final clean-baseline review confirmation after manual visual check.
+- No exported `topology_panel_v1_baseline_review_labels.csv` was found in `data_index`, so the run used the user's confirmation that all reviewed baseline samples were valid.
+- Final baseline rows: 14.
+- Needs recheck rows: 0.
+- Removed rows: 0.
+- Final baseline split counts: train 11, val 1, test 2.
+- Final baseline phase counts: P1 4, P2 1, P3 9.
+- Main outputs:
+  - `data_index/topology_panel_v1_final_baseline_manifest.csv`
+  - `data_index/topology_panel_v1_baseline_reviewed.csv`
+  - `data_index/topology_panel_v1_final_baseline_summary.json`
+  - `data_index/topology_panel_v1_final_baseline_report.md`
