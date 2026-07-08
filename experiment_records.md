@@ -100,3 +100,18 @@
   - `data_index/topology_panel_v1_1_still_fragmented_best_candidates.csv`
   - `data_index/topology_panel_v1_1_still_fragmented_summary.json`
   - `data_index/topology_panel_v1_1_still_fragmented_report.md`
+
+## 2026-07-08 Topology Panel v1.1 Still-Fragmented Diagnostic Review
+
+- Added diagnostic HTML/CSV for the 19 `still_fragmented` v1.1 rows.
+- Script: `scripts/build_topology_panel_v1_1_still_fragmented_diagnostic_html.py`.
+- Diagnostic CSV: `data_index/topology_panel_v1_1_still_fragmented_diagnostic.csv`.
+- Diagnostic HTML: `data_index/topology_panel_v1_1_still_fragmented_diagnostic.html`.
+- Diagnostic summary: `data_index/topology_panel_v1_1_still_fragmented_diagnostic_summary.json`.
+- Suggested diagnostic label counts:
+  - `no_line_geometry`: 1
+  - `non_topology_target`: 4
+  - `needs_panel_split_badcase`: 7
+  - `true_fragmentation`: 5
+  - `terminal_anchor_needed`: 2
+- HTML supports manual override and exports `topology_panel_v1_1_still_fragmented_diagnostic_labels.csv`.

@@ -1,0 +1,34 @@
+{
+  "source_input": "data_index/topology_panel_v1_1_still_fragmented_input.csv",
+  "source_best_candidates": "data_index/topology_panel_v1_1_still_fragmented_best_candidates.csv",
+  "diagnostic_csv": "data_index/topology_panel_v1_1_still_fragmented_diagnostic.csv",
+  "diagnostic_html": "data_index/topology_panel_v1_1_still_fragmented_diagnostic.html",
+  "row_count": 19,
+  "suggested_label_counts": {
+    "no_line_geometry": 1,
+    "non_topology_target": 4,
+    "needs_panel_split_badcase": 7,
+    "terminal_anchor_needed": 2,
+    "true_fragmentation": 5
+  },
+  "model_label_counts": {
+    "still_fragmented": 14,
+    "not_topology_target": 4,
+    "needs_panel_split": 1
+  },
+  "quality_flag_counts": {
+    "no_edges;no_nets": 11,
+    "high_fragmentation": 2,
+    "high_isolated_ratio": 6
+  },
+  "still_empty_rows": 11,
+  "line_like_zero_rows": 11,
+  "labels": [
+    "no_line_geometry",
+    "crop_or_bbox_issue",
+    "non_topology_target",
+    "needs_panel_split_badcase",
+    "true_fragmentation",
+    "terminal_anchor_needed"
+  ]
+}
