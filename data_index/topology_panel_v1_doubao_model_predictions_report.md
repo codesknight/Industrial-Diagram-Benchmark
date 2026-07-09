@@ -1,0 +1,32 @@
+# Topology Panel v1 Model Prediction Adapter Report
+
+Adapter id: `topology_panel_v1_doubao_adapter_2026-07-09`
+
+## Summary
+
+- Provider: doubao
+- Model: doubao-seed-2-0-pro-260215
+- Dry run: False
+- Prediction rows: 1
+- Output predictions: `data_index/topology_panel_v1_doubao_model_predictions.jsonl`
+
+## Adapter Modes
+
+- synthetic_from_counts: 1
+
+## Adapter Errors
+
+- none: 1
+
+## Evaluator Command
+
+```powershell
+python benchmark/topology/evaluate_topology_graph_v1.py `
+  --predictions data_index/topology_panel_v1_doubao_model_predictions.jsonl `
+  --summary data_index/topology_panel_v1_doubao_model_predictions_eval_summary.json `
+  --report data_index/topology_panel_v1_doubao_model_predictions_eval_report.md `
+  --details-csv data_index/topology_panel_v1_doubao_model_predictions_eval_details.csv `
+  --errors-csv data_index/topology_panel_v1_doubao_model_predictions_eval_errors.csv
+```
+
+Count-only predictions are converted to synthetic graph objects so evaluator count metrics can run.

@@ -325,3 +325,27 @@
   - default reference-as-prediction still has 14 details rows and 0 error rows.
   - oracle-minus remains prediction-valid with 14 error rows caused by count differences, not schema errors.
   - unfilled prediction template yields 14 invalid predictions with explicit source/schema/status/node/edge/net error categories.
+
+## 2026-07-09 Topology Panel v1 Model Prediction Adapter
+
+- Added model prediction adapter: `scripts/run_topology_panel_v1_model_prediction_adapter.py`.
+- Added dependencies to `requirements.txt`: `openai`, `Pillow`, `python-dotenv`.
+- The adapter supports OpenAI-compatible `doubao` and `deepseek` providers.
+- The adapter reads `DOUBAO_API_KEY`, `DOUBAO_VISION_MODEL`, `DEEPSEEK_API_KEY`, and `DEEPSEEK_VISION_MODEL` from `.env` without printing secrets.
+- The adapter asks a vision model for topology counts or an optional full topology graph.
+- If the model returns counts only, the adapter creates a schema-valid synthetic topology graph with stats set to the model counts.
+- Doubao smoke test:
+  - command: `python scripts/run_topology_panel_v1_model_prediction_adapter.py --provider doubao --limit 1 --keep-raw-response`
+  - predictions: `data_index/topology_panel_v1_doubao_model_predictions.jsonl`
+  - adapter mode: `synthetic_from_counts`
+  - adapter errors: none 1
+  - evaluator prediction rows: 1
+  - evaluator prediction valid rate: 0.071429
+- DeepSeek smoke test:
+  - command: `python scripts/run_topology_panel_v1_model_prediction_adapter.py --provider deepseek --limit 1 --keep-raw-response`
+  - predictions: `data_index/topology_panel_v1_deepseek_model_predictions.jsonl`
+  - adapter mode: `synthetic_from_counts`
+  - adapter errors: model_error 1
+  - model error indicates the configured DeepSeek endpoint expected text-only messages and rejected `image_url` input.
+  - evaluator prediction valid rate: 0.0
+- Interpretation: Doubao is currently usable as the first real vision prediction path; DeepSeek requires a vision-capable endpoint or different request format before it can be used for image-based topology prediction.
