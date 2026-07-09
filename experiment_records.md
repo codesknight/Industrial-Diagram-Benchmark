@@ -297,3 +297,13 @@
 - Rows with net error: 5.
 - Count error summary: node MAE 7.5, edge MAE 57.857143, net MAE 0.571429.
 - Interpretation: the evaluator can detect topology count errors even when predicted graph schemas remain valid.
+
+## 2026-07-09 Oracle-Minus Sanity Baseline Documentation
+
+- Updated evaluation protocol: `docs/topology_graph_eval_protocol_v1.md`.
+- Updated release note: `docs/topology_panel_v1_release_note.md`.
+- Documented two official sanity baselines:
+  - `reference_as_prediction`: package/evaluator consistency check.
+  - `oracle_minus`: evaluator sensitivity check with valid but intentionally perturbed prediction graphs.
+- Clarified that oracle-minus is not a model-performance baseline.
+- Added oracle-minus commands, expected metrics, and output files to the protocol and release note.

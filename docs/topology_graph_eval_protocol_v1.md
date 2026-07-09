@@ -300,7 +300,102 @@ Recommended output files:
 ```text
 data_index/topology_panel_v1_eval_summary.json
 data_index/topology_panel_v1_eval_report.md
+data_index/topology_panel_v1_eval_details.csv
+data_index/topology_panel_v1_eval_errors.csv
 ```
+
+## Official Sanity Baselines
+
+The v1 protocol includes two official sanity baselines. These are intended to
+validate the benchmark package and evaluator behavior before reporting real
+model results.
+
+### Reference-as-Prediction
+
+Command:
+
+```powershell
+python benchmark/topology/evaluate_topology_graph_v1.py
+```
+
+This mode uses the reference graph as the prediction. It should produce zero
+count error and confirms that the benchmark JSONL, reference graph paths, and
+evaluation code are internally consistent.
+
+Expected result for the current release:
+
+```text
+evaluated_rows: 14
+prediction_mode: reference_as_prediction
+reference graph valid rate: 1.0
+prediction graph valid rate: 1.0
+node_count MAE/MRE: 0.0 / 0.0
+edge_count MAE/MRE: 0.0 / 0.0
+net_count MAE/MRE: 0.0 / 0.0
+error rows: 0
+```
+
+Primary outputs:
+
+```text
+data_index/topology_panel_v1_eval_summary.json
+data_index/topology_panel_v1_eval_report.md
+data_index/topology_panel_v1_eval_details.csv
+data_index/topology_panel_v1_eval_errors.csv
+```
+
+### Oracle-Minus
+
+Command:
+
+```powershell
+python scripts/build_topology_panel_v1_oracle_minus_baseline.py
+python benchmark/topology/evaluate_topology_graph_v1.py `
+  --predictions data_index/topology_panel_v1_oracle_minus_predictions.jsonl `
+  --summary data_index/topology_panel_v1_oracle_minus_eval_summary.json `
+  --report data_index/topology_panel_v1_oracle_minus_eval_report.md `
+  --details-csv data_index/topology_panel_v1_oracle_minus_eval_details.csv `
+  --errors-csv data_index/topology_panel_v1_oracle_minus_eval_errors.csv
+```
+
+The oracle-minus baseline starts from the reference graph and applies
+deterministic destructive perturbations: it drops a small fraction of edges,
+drops a small fraction of nodes, filters affected edges, and removes nets for
+some samples. The resulting prediction graphs remain schema-valid, but their
+topology counts are intentionally wrong.
+
+This baseline is **not** a model-performance baseline. It is an evaluator
+sensitivity check: it verifies that the evaluator can detect topology errors
+even when predicted graph JSON remains valid.
+
+Expected result for the current release:
+
+```text
+evaluated_rows: 14
+prediction_mode: external_prediction
+reference graph valid rate: 1.0
+prediction graph valid rate: 1.0
+error rows: 14
+node_count MAE/MRE: 7.5 / 0.014551
+edge_count MAE/MRE: 57.857143 / 0.068867
+net_count MAE/MRE: 0.571429 / 0.333333
+```
+
+Primary outputs:
+
+```text
+data_index/topology_panel_v1_oracle_minus_predictions.jsonl
+data_index/topology_panel_v1_oracle_minus_summary.json
+data_index/topology_panel_v1_oracle_minus_report.md
+data_index/topology_panel_v1_oracle_minus_eval_summary.json
+data_index/topology_panel_v1_oracle_minus_eval_report.md
+data_index/topology_panel_v1_oracle_minus_eval_details.csv
+data_index/topology_panel_v1_oracle_minus_eval_errors.csv
+```
+
+The oracle-minus prediction JSONL is self-contained: each row includes an
+inline `prediction` graph. The optional `prediction_json_path` field is retained
+for local debugging.
 
 ## Non-Goals for v1
 

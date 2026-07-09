@@ -185,6 +185,76 @@ python benchmark/topology/evaluate_topology_graph_v1.py `
 
 预测文件应按 `panel_id` 与 benchmark JSONL 对齐。
 
+## 官方 sanity baseline
+
+本版本包含两个官方 sanity baseline，用于验证 benchmark package 和 evaluator，而不是作为真实模型能力结论。
+
+### Reference-as-Prediction
+
+默认命令：
+
+```powershell
+python benchmark/topology/evaluate_topology_graph_v1.py
+```
+
+该模式把 reference graph 当作 prediction，用于确认 benchmark JSONL、reference graph 路径和 evaluator 逻辑一致。
+
+当前结果：
+
+```text
+evaluated_rows: 14
+prediction_mode: reference_as_prediction
+reference graph valid rate: 1.0
+prediction graph valid rate: 1.0
+node_count MAE/MRE: 0.0 / 0.0
+edge_count MAE/MRE: 0.0 / 0.0
+net_count MAE/MRE: 0.0 / 0.0
+error rows: 0
+```
+
+### Oracle-Minus
+
+生成并评测 oracle-minus baseline：
+
+```powershell
+python scripts/build_topology_panel_v1_oracle_minus_baseline.py
+python benchmark/topology/evaluate_topology_graph_v1.py `
+  --predictions data_index/topology_panel_v1_oracle_minus_predictions.jsonl `
+  --summary data_index/topology_panel_v1_oracle_minus_eval_summary.json `
+  --report data_index/topology_panel_v1_oracle_minus_eval_report.md `
+  --details-csv data_index/topology_panel_v1_oracle_minus_eval_details.csv `
+  --errors-csv data_index/topology_panel_v1_oracle_minus_eval_errors.csv
+```
+
+oracle-minus 从 reference graph 出发，确定性地删除一部分 edges、nodes 和部分 nets。它输出的 prediction graph 仍然是 schema-valid，但拓扑计数被故意破坏。因此它用于验证 evaluator 对真实拓扑错误是否敏感。
+
+当前结果：
+
+```text
+evaluated_rows: 14
+prediction_mode: external_prediction
+reference graph valid rate: 1.0
+prediction graph valid rate: 1.0
+error rows: 14
+node_count MAE/MRE: 7.5 / 0.014551
+edge_count MAE/MRE: 57.857143 / 0.068867
+net_count MAE/MRE: 0.571429 / 0.333333
+```
+
+相关文件：
+
+```text
+data_index/topology_panel_v1_oracle_minus_predictions.jsonl
+data_index/topology_panel_v1_oracle_minus_summary.json
+data_index/topology_panel_v1_oracle_minus_report.md
+data_index/topology_panel_v1_oracle_minus_eval_summary.json
+data_index/topology_panel_v1_oracle_minus_eval_report.md
+data_index/topology_panel_v1_oracle_minus_eval_details.csv
+data_index/topology_panel_v1_oracle_minus_eval_errors.csv
+```
+
+注意：oracle-minus 是 evaluator sensitivity check，不应作为模型性能 baseline 报告。
+
 ## Hugging Face 发布包
 
 本次发布已经上传到 Hugging Face Dataset：
@@ -254,7 +324,7 @@ benchmark jsonl: data_index/topology_panel_v1_benchmark_manifest.jsonl
 - v1.1 candidates 尚未通过修复后复核，不能进入正式 v1 baseline。
 - 多子图样本已经作为 badcase 排除，不再进行 panel split v2。
 - 当前评测重点是拓扑图结构质量，尚未覆盖完整语义理解、VQA 或 CAD 重建指标。
-- 模型预测 JSONL 的更严格 schema 校验和 per-sample error CSV 仍待后续补强。
+- 模型预测 JSONL 的更严格 schema 校验仍待后续补强；当前已经支持 per-sample details CSV 和 error CSV。
 
 ## 下一步建议
 
@@ -262,7 +332,7 @@ benchmark jsonl: data_index/topology_panel_v1_benchmark_manifest.jsonl
 
 1. 生成 `data_index/topology_panel_v1_prediction_template.jsonl`，固定模型预测输入格式。
 2. 扩展 `benchmark/topology/evaluate_topology_graph_v1.py`，输出 per-sample details CSV 和 error CSV。
-3. 构建 dummy baseline 或 oracle-minus baseline，验证指标对拓扑错误的敏感性。
+3. 增强模型预测 JSONL 的 schema 校验和错误类型归因。
 4. 启动 v1.1 `terminal_anchor_module` 小规模修复实验。
 5. 等 v1.1 修复样本通过重新复核后，再考虑形成 `Topology Panel v1.1` 或 `Topology Panel v2`。
 
@@ -277,6 +347,8 @@ Hugging Face dataset card updated
 HF release package generated
 HF release package uploaded
 remote key files verified
+oracle-minus sanity baseline generated
+per-sample eval CSVs generated
 ```
 
 当前 release note 可作为 README、Hugging Face dataset card、论文实验说明和项目交接材料的统一参考。
