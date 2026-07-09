@@ -1,0 +1,38 @@
+{
+  "source_manifest": "data_index/topology_panel_v1_1_active_improvement_review_manifest.csv",
+  "source_labels": "data_index/topology_panel_v1_1_active_improvement_review_labels.csv",
+  "manifest_rows": 12,
+  "label_rows": 12,
+  "kept_rows": 12,
+  "keep_terminal_anchor_rows": 3,
+  "keep_over_connected_rows": 9,
+  "abandoned_rows": 0,
+  "deferred_rows": 0,
+  "label_counts": {
+    "keep_over_connected": 9,
+    "keep_terminal_anchor": 3
+  },
+  "decision_counts": {
+    "keep_improvement": 12
+  },
+  "next_route_counts": {
+    "over_connected_repair": 9,
+    "terminal_anchor_module": 3
+  },
+  "rules": [
+    "Rows labeled keep_terminal_anchor remain candidates for terminal/symbol anchor work.",
+    "Rows labeled keep_over_connected remain candidates for crossing-line disambiguation work.",
+    "Rows labeled abandon_badcase or defer_complex are excluded from immediate v1.1 repair.",
+    "No active improvement row is promoted into the formal v1 baseline by this step."
+  ],
+  "outputs": {
+    "reviewed": "data_index/topology_panel_v1_1_active_improvement_reviewed.csv",
+    "keep_improvement": "data_index/topology_panel_v1_1_keep_improvement_manifest.csv",
+    "keep_terminal_anchor": "data_index/topology_panel_v1_1_keep_terminal_anchor_manifest.csv",
+    "keep_over_connected": "data_index/topology_panel_v1_1_keep_over_connected_manifest.csv",
+    "abandoned": "data_index/topology_panel_v1_1_active_review_abandoned.csv",
+    "deferred": "data_index/topology_panel_v1_1_active_review_deferred.csv",
+    "summary": "data_index/topology_panel_v1_1_active_improvement_review_result_summary.json",
+    "report": "data_index/topology_panel_v1_1_active_improvement_review_result_report.md"
+  }
+}

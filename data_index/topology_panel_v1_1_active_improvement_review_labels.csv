@@ -1,0 +1,13 @@
+﻿panel_id,review_label,comment,suggested_review_label,next_route
+_P1_staging/某电厂GIS室接地布置图#panel_000,keep_over_connected,,keep_over_connected,over_connected_repair
+_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_000,keep_over_connected,,keep_over_connected,over_connected_repair
+_P3_staging_batch1/500KVA有载调压箱变系统图#panel_000,keep_over_connected,,keep_over_connected,over_connected_repair
+_P3_staging_batch3/WGB-114N 馈线保护原理图(手车)#panel_000,keep_over_connected,,keep_over_connected,over_connected_repair
+_P3_staging_batch3/WGB-114N 馈线保护原理图(手车)__286#panel_000,keep_over_connected,,keep_over_connected,over_connected_repair
+_P3_staging_batch4/WGB-124N 高压柜综合保护原理图(手车)#panel_000,keep_over_connected,,keep_over_connected,over_connected_repair
+_P3_staging_batch3/WGB-113N 馈线保护原理图(手车)#panel_000,keep_over_connected,,keep_over_connected,over_connected_repair
+_P3_staging_batch4/WGB-123N 高压柜综合保护原理图(手车)#panel_000,keep_over_connected,,keep_over_connected,over_connected_repair
+_P3_staging_batch1/06(背面通讯接线图)#panel_000,keep_over_connected,,keep_over_connected,over_connected_repair
+_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_001,keep_terminal_anchor,,keep_terminal_anchor,terminal_anchor_module
+_P2_staging/电站、变电所电气及设备13#panel_001,keep_terminal_anchor,,keep_terminal_anchor,terminal_anchor_module
+_P3_staging_batch4/发电机保护屏端子图#panel_004,keep_terminal_anchor,,keep_terminal_anchor,terminal_anchor_module

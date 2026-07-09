@@ -141,3 +141,22 @@
 - Routes: terminal anchor 3, over-connected repair 9.
 - Suggested labels: `keep_terminal_anchor` 3, `keep_over_connected` 9.
 - HTML exports `topology_panel_v1_1_active_improvement_review_labels.csv`.
+
+## 2026-07-09 Topology Panel v1.1 Active Improvement Labels Applied
+
+- Applied labels exported from `data_index/topology_panel_v1_1_active_improvement_review.html`.
+- Labels CSV: `data_index/topology_panel_v1_1_active_improvement_review_labels.csv`.
+- Script: `scripts/apply_topology_panel_v1_1_active_improvement_review_labels.py`.
+- Reviewed rows: 12.
+- Kept rows: 12.
+- Keep terminal-anchor rows: 3.
+- Keep over-connected rows: 9.
+- Abandoned rows: 0.
+- Deferred rows: 0.
+- Main outputs:
+  - `data_index/topology_panel_v1_1_active_improvement_reviewed.csv`
+  - `data_index/topology_panel_v1_1_keep_improvement_manifest.csv`
+  - `data_index/topology_panel_v1_1_keep_terminal_anchor_manifest.csv`
+  - `data_index/topology_panel_v1_1_keep_over_connected_manifest.csv`
+  - `data_index/topology_panel_v1_1_active_improvement_review_result_summary.json`
+  - `data_index/topology_panel_v1_1_active_improvement_review_result_report.md`

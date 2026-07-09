@@ -202,6 +202,45 @@ terminal_anchor_needed: 2
 The abandoned rows must not be used as v1.1 repair candidates unless a future
 manual override creates a new candidate manifest.
 
+## Active Improvement Review
+
+The remaining 12 active improvement rows were reviewed through:
+
+```text
+data_index/topology_panel_v1_1_active_improvement_review.html
+```
+
+Apply exported labels with:
+
+```powershell
+python scripts/apply_topology_panel_v1_1_active_improvement_review_labels.py
+```
+
+Current review result:
+
+```text
+manifest rows: 12
+kept rows: 12
+keep terminal-anchor rows: 3
+keep over-connected rows: 9
+abandoned rows: 0
+deferred rows: 0
+```
+
+Next active manifests:
+
+```text
+data_index/topology_panel_v1_1_keep_terminal_anchor_manifest.csv
+data_index/topology_panel_v1_1_keep_over_connected_manifest.csv
+```
+
+Recommended order:
+
+1. Explore the 3 terminal-anchor rows first if v1.1 expansion is still desired.
+2. Keep the 9 over-connected rows for later crossing-line disambiguation work.
+3. Do not promote either group into the benchmark baseline without another
+   candidate-generation and manual-review cycle.
+
 ## Promotion Rule
 
 No v1.1 output should enter the benchmark baseline automatically.
