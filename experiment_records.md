@@ -176,3 +176,13 @@
 - v1.1 active kept improvement rows: 12.
 - v1.1 active routes: terminal anchor 3, over-connected repair 9.
 - Main recommendation: finish README/HuggingFace release documentation before continuing topology algorithm repair.
+
+## 2026-07-09 README Topology Panel v1 Update
+
+- Rewrote `README.md` as the main public entrypoint for the current project state.
+- Clarified the official `Topology Panel v1` boundary: 14 clean baseline rows only.
+- Added quick benchmark usage for `benchmark/topology/evaluate_topology_graph_v1.py`.
+- Added benchmark JSONL, protocol, summary, report, and output paths.
+- Added data version boundaries for clean baseline, excluded badcases, improvement targets, and unreviewed rows.
+- Clarified that v1.1 kept improvement candidates remain outside the formal v1 baseline.
+- Preserved the broader data processing command sequence after the release-facing project summary.

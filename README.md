@@ -1,201 +1,284 @@
 # Industrial Diagram Benchmark
 
-面向工业接线图理解、结构化解析、拓扑问答与 CAD 重建的数据集工程。
+Industrial Diagram Benchmark 是一个面向工业图纸理解、结构化解析、拓扑图抽取、VQA 与 CAD 重建的 benchmark 工程。
 
-当前项目已有一批工业图纸数据，主要包含：
-
-- `datas/dwg_staging/`: 原始 DWG 图纸
-- `datas/dxf_staging/`: DWG 转换后的 DXF
-- `datas/raw_json/`: DXF 解析得到的 Raw Geometry JSON
-- `datas/qa_and_png/`: ODA 渲染得到的 PNG
-- `docs/Industrial_Diagram_Benchmark_Roadmap.md`: 研究路线说明
-
-数据托管在 Hugging Face Dataset：
+当前仓库主要管理工程代码、数据索引、评测协议、实验报告和发布文档；大体积原始数据托管在 Hugging Face Dataset：
 
 ```text
 https://huggingface.co/datasets/yanhongliu/Industrial-Diagram-Benchmark
 ```
 
-GitHub 仓库只管理工程代码、配置、文档和数据索引；大体积原始数据不直接进入 Git。
+当前最稳定、可直接使用的发布单元是 **Topology Panel v1 clean baseline**。它是一个小规模但经过人工复核的 panel 级拓扑图评测基准。
 
-## Current Stage
+## 当前发布状态
 
-当前阶段重点是把现有数据整理成可复现、可检查、可训练的数据集工程：
-
-1. 统一生成数据清单 `data_index/dataset_manifest.csv`
-2. 检查 DWG/DXF/JSON/PNG 是否一一对应
-3. 输出缺失文件报告 `data_index/missing_assets.md`
-4. 生成 `train/val/test` 划分
-5. 为后续 Geometry JSON、Topology Graph、VQA、Benchmark 评估留出工程入口
-
-## Project Layout
+Topology Panel v1 的正式 baseline：
 
 ```text
-configs/       数据集和 Benchmark 配置
-scripts/       数据索引、校验、构建脚本
-tools/         DXF/JSON/Graph/CAD 工具模块
-benchmark/     评估脚本入口
-agent/         Tool-Augmented VLM / CAD Agent 入口
-data_index/    自动生成的数据清单、划分和质量报告
-outputs/       实验输出、临时产物和评估结果
-docs/          项目文档
-datas/         原始和中间数据
+data_index/topology_panel_v1_final_baseline_manifest.csv
 ```
 
-## Quick Start
+规模：
 
-下载 Hugging Face Dataset 到本地 `datas/`：
+```text
+total: 14
+train: 11
+val: 1
+test: 2
+```
+
+阶段分布：
+
+```text
+P1: 4
+P2: 1
+P3: 9
+```
+
+当前版本边界：
+
+- `Topology Panel v1`：只表示 14 条已经人工确认的 clean baseline。
+- `Topology Panel v1 excluded badcase`：125 条已排除样本，包括多子图、几何异常和非拓扑目标。
+- `Topology Panel v1.1 candidates`：12 条仍待算法修复的候选样本，不进入 v1 正式评测。
+- `still_fragmented` 19 条已经作为 abandoned 固化，不再作为当前 v1.1 修复目标。
+
+更完整的中文状态说明见：
+
+```text
+docs/topology_panel_v1_release_status.md
+```
+
+## 快速使用 Benchmark
+
+安装依赖：
 
 ```powershell
 pip install -r requirements.txt
-python scripts/download_dataset.py
 ```
 
-生成数据清单、缺失报告和数据划分：
+使用默认 reference-as-prediction 模式检查 benchmark 包和评测脚本：
 
 ```powershell
-python scripts/build_dataset_manifest.py
+python benchmark/topology/evaluate_topology_graph_v1.py
 ```
 
-检查数据完整性：
+默认读取：
+
+```text
+data_index/topology_panel_v1_benchmark_manifest.jsonl
+```
+
+默认输出：
+
+```text
+data_index/topology_panel_v1_eval_summary.json
+data_index/topology_panel_v1_eval_report.md
+```
+
+如需指定 manifest 或模型预测结果：
 
 ```powershell
-python scripts/check_dataset_integrity.py
+python benchmark/topology/evaluate_topology_graph_v1.py `
+  --manifest data_index/topology_panel_v1_benchmark_manifest.jsonl `
+  --predictions path/to/predictions.jsonl `
+  --summary outputs/topology_eval_summary.json `
+  --report outputs/topology_eval_report.md
 ```
 
-如需抽取 JSON 图元统计，可额外开启：
+预测文件应按 `panel_id` 与 benchmark JSONL 对齐。评测协议见：
 
-```powershell
-python scripts/build_dataset_manifest.py --inspect-json
+```text
+docs/topology_graph_eval_protocol_v1.md
 ```
 
-生成非破坏式清洗后的样本清单：
+## Benchmark 数据包
 
-```powershell
-python scripts/clean_dataset_manifest.py
+正式 benchmark JSONL：
+
+```text
+data_index/topology_panel_v1_benchmark_manifest.jsonl
 ```
 
-进行第二轮内容质量扫描，并标记多子图候选：
+来源 manifest：
 
-```powershell
-python scripts/scan_content_quality.py
+```text
+data_index/topology_panel_v1_final_baseline_manifest.csv
 ```
 
-生成 panel 级样本清单，并对多子图候选生成本地裁剪图：
+数据包报告：
 
-```powershell
-python scripts/build_panel_manifest.py
+```text
+data_index/topology_panel_v1_benchmark_report.md
+data_index/topology_panel_v1_benchmark_summary.json
 ```
 
-生成可快速标注并导出 CSV 的 HTML 审核表：
+资产检查：
 
-```powershell
-python scripts/build_panel_review_html.py
+```text
+missing images: 0
+missing topology graphs: 0
 ```
 
-应用人工审核结果，并扫描图片内容水印/来源标记：
+图统计概览：
 
-```powershell
-python scripts/apply_panel_review_labels.py
-python scripts/scan_watermarks.py
+```text
+node_count mean: 518.5
+edge_count mean: 841.6429
+net_count mean: 1.2857
+intersection_count mean: 440.2857
+isolated_edge_ratio mean: 0.0004
+largest_net_edge_ratio mean: 0.9993
 ```
 
-使用本地 Ollama 视觉模型复查水印候选：
+## 数据版本边界
 
-```powershell
-python scripts/vision_watermark_review.py --models deepseek-ocr:3b qwen2.5vl:7b qwen2.5vl:3b --max-side 768 --num-ctx 2048
+当前数据索引分为四类：
+
+```text
+clean_baseline: 14
+excluded_badcase: 125
+improvement_target: 31
+unreviewed: 1
 ```
 
-生成最终可用的 drawing/panel 清单：
+发布 manifest：
 
-```powershell
-python scripts/build_final_manifests.py
+```text
+data_index/topology_panel_v1_release_manifest.csv
+data_index/topology_panel_v1_release_train.csv
+data_index/topology_panel_v1_release_val.csv
+data_index/topology_panel_v1_release_test.csv
+data_index/topology_panel_v1_release_excluded_manifest.csv
+data_index/topology_panel_v1_release_improvement_manifest.csv
+data_index/topology_panel_v1_release_summary.json
+data_index/topology_panel_v1_release_report.md
 ```
 
-构建 Geometry 标准化中间表示：
+排除数据不参与正式 v1 评测：
 
-```powershell
-python scripts/build_normalized_geometry.py
+```text
+multi_subfigure_badcase: 43
+bad_geometry: 63
+not_topology_target: 19
 ```
 
-构建 Topology Graph v0：
+v1.1 当前保留候选：
 
-```powershell
-python scripts/build_topology_graph.py
+```text
+data_index/topology_panel_v1_1_keep_improvement_manifest.csv
+data_index/topology_panel_v1_1_keep_terminal_anchor_manifest.csv
+data_index/topology_panel_v1_1_keep_over_connected_manifest.csv
 ```
 
-生成 Topology Graph HTML 审核表：
+v1.1 当前保留候选数量：
 
-```powershell
-python scripts/build_topology_review_html.py
+```text
+total: 12
+terminal_anchor_module: 3
+over_connected_repair: 9
 ```
 
-生成 Topology-ready 训练/评估入口清单：
+这些候选只用于后续算法实验。除非重新生成、重新审核并形成新版本，否则不应混入 `Topology Panel v1` 的正式结果。
 
-```powershell
-python scripts/build_topology_ready_manifests.py
+## 项目入口
+
+常用入口：
+
+```text
+README.md                                      项目首页和快速入口
+docs/topology_panel_v1_release_status.md      Topology Panel v1 中文发布状态
+docs/topology_graph_eval_protocol_v1.md       Topology Graph v1 评测协议
+docs/topology_panel_v1_1_plan.md              v1.1 改进计划
+docs/project_structure.md                     更详细的目录说明
+experiment_records.md                         实验过程记录
 ```
 
-应用 Topology 人工审核标签：
+核心目录：
 
-```powershell
-python scripts/apply_topology_review_labels.py
+```text
+configs/       数据集和 benchmark 配置
+scripts/       数据索引、清洗、审核表、manifest 构建脚本
+tools/         DXF/JSON/Graph/CAD 工具模块
+benchmark/     评测脚本入口
+agent/         Tool-Augmented VLM / CAD Agent 入口
+data_index/    自动生成的数据清单、划分、质量报告和 benchmark 包
+outputs/       实验输出、临时产物和评测结果
+docs/          项目文档
+datas/         原始和中间数据，通常不直接进入 Git
 ```
 
-运行 Topology Graph v1 pilot 交点拆分实验：
+## 数据处理流程
 
-```powershell
-python scripts/build_topology_v1_pilot.py
-```
-
-生成 Topology Graph v1 pilot HTML 审核表：
-
-```powershell
-python scripts/build_topology_v1_review_html.py
-```
-
-记录 v1 pilot 多子图发现：
-
-```powershell
-python scripts/flag_topology_v1_multipanel_pilot.py
-```
-
-生成 Topology v1 多子图页面拆分标注表：
-
-```powershell
-python scripts/build_topology_multipanel_split_html.py
-```
-
-应用 Topology v1 多子图页面拆分标注结果：
-
-```powershell
-python scripts/apply_topology_multipanel_split_labels.py
-```
-
-运行 panel-level Topology Graph v1 pilot：
-
-```powershell
-python scripts/build_topology_panel_v1_pilot.py
-```
-
-生成 panel-level Topology Graph v1 pilot 审核表：
-
-```powershell
-python scripts/build_topology_panel_v1_review_html.py
-```
-
-## Data Pipeline
+整体数据管线：
 
 ```text
 DWG
   -> DXF
   -> Raw Geometry JSON
   -> PNG
+  -> Panel Manifest
   -> Normalized Geometry JSON
-  -> Topology Graph v0
-  -> Semantic JSON
-  -> VQA
-  -> Benchmark
+  -> Topology Graph
+  -> Human Review
+  -> Benchmark JSONL
+  -> Evaluation
 ```
 
-目前仓库中的 `raw_json` 主要是 Raw Geometry JSON；已补充 Geometry 标准化和 Topology Graph v0，后续会继续推进语义归一化、VQA 生成和 Benchmark 评估脚本。
+基础数据索引：
+
+```powershell
+python scripts/download_dataset.py
+python scripts/build_dataset_manifest.py
+python scripts/check_dataset_integrity.py
+```
+
+清洗与 panel 级样本：
+
+```powershell
+python scripts/clean_dataset_manifest.py
+python scripts/scan_content_quality.py
+python scripts/build_panel_manifest.py
+python scripts/build_panel_review_html.py
+python scripts/apply_panel_review_labels.py
+python scripts/scan_watermarks.py
+python scripts/build_final_manifests.py
+```
+
+Geometry 与 Topology：
+
+```powershell
+python scripts/build_normalized_geometry.py
+python scripts/build_topology_graph.py
+python scripts/build_topology_review_html.py
+python scripts/build_topology_ready_manifests.py
+python scripts/apply_topology_review_labels.py
+```
+
+Topology Panel v1：
+
+```powershell
+python scripts/build_topology_panel_v1_pilot.py
+python scripts/build_topology_panel_v1_review_html.py
+python scripts/build_topology_panel_v1_release.py
+python scripts/build_topology_panel_v1_benchmark_package.py
+python benchmark/topology/evaluate_topology_graph_v1.py
+```
+
+v1.1 诊断和候选管理：
+
+```powershell
+python scripts/run_topology_panel_v1_1_still_fragmented_experiment.py
+python scripts/build_topology_panel_v1_1_still_fragmented_diagnostic_html.py
+python scripts/apply_topology_panel_v1_1_abandoned_policy.py
+python scripts/build_topology_panel_v1_1_active_improvement_review_html.py
+python scripts/apply_topology_panel_v1_1_active_improvement_review_labels.py
+```
+
+## 当前建议
+
+短期优先级：
+
+1. 固化 README、HuggingFace dataset card 和发布文件清单。
+2. 保持 `Topology Panel v1` 与 `Topology Panel v1.1 candidates` 的边界清晰。
+3. 使用 14 条 clean baseline 先形成可复现评测闭环。
+4. 后续再针对 3 条 terminal-anchor 和 9 条 over-connected 候选做 v1.1 算法实验。
