@@ -186,3 +186,16 @@
 - Added data version boundaries for clean baseline, excluded badcases, improvement targets, and unreviewed rows.
 - Clarified that v1.1 kept improvement candidates remain outside the formal v1 baseline.
 - Preserved the broader data processing command sequence after the release-facing project summary.
+
+## 2026-07-09 Hugging Face Dataset Card and Release File List
+
+- Updated Hugging Face dataset card draft: `docs/huggingface_dataset_card.md`.
+- Added release upload checklist: `data_index/HF_RELEASE_FILES.md`.
+- Synchronized the public version boundary from `README.md`:
+  - `Topology Panel v1`: 14 clean baseline rows only.
+  - `excluded_badcase`: 125 rows.
+  - original `improvement_target`: 31 rows.
+  - v1.1 kept candidates: 12 rows.
+  - abandoned `still_fragmented`: 19 rows.
+- Added recommended HF release files for benchmark JSONL, final baseline manifest, summaries/reports, protocol docs, and optional boundary manifests.
+- Clarified that review HTML files are optional review artifacts and are not model evaluation inputs.
