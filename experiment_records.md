@@ -307,3 +307,21 @@
   - `oracle_minus`: evaluator sensitivity check with valid but intentionally perturbed prediction graphs.
 - Clarified that oracle-minus is not a model-performance baseline.
 - Added oracle-minus commands, expected metrics, and output files to the protocol and release note.
+
+## 2026-07-09 Topology Panel v1 Prediction Schema Diagnostics
+
+- Enhanced evaluator schema diagnostics in `benchmark/topology/evaluate_topology_graph_v1.py`.
+- Added prediction source diagnostics for inline `prediction`, inline `graph`, `prediction_json_path`, and missing prediction graph cases.
+- Added stricter graph schema checks:
+  - `schema_missing`, `schema_not_string`, `schema_unexpected_*`
+  - `status_missing`, `status_not_string`, `status_*`
+  - node id, point, and degree diagnostics
+  - edge id, source/target, points, length, and missing reference diagnostics
+  - net id, bbox, and count diagnostics
+- Added `prediction_error_category_counts` and `prediction_invalid_reason_counts` to evaluation summaries.
+- Added per-row CSV columns for `prediction_source`, `load_errors`, `prediction_source_errors`, `schema_errors`, `status_errors`, `nodes_errors`, `edges_errors`, `nets_errors`, and `other_errors`.
+- Updated prediction valid-rate denominator so missing prediction rows count against the full evaluated row count.
+- Validation:
+  - default reference-as-prediction still has 14 details rows and 0 error rows.
+  - oracle-minus remains prediction-valid with 14 error rows caused by count differences, not schema errors.
+  - unfilled prediction template yields 14 invalid predictions with explicit source/schema/status/node/edge/net error categories.

@@ -39,6 +39,8 @@ This report evaluates the Topology Panel v1 benchmark package according to `docs
 
 - Reference invalid rows: 0
 - Prediction invalid rows: 0
+- Missing prediction rows: 0
+- Extra prediction panel ids: 0
 
 ## Outputs
 

@@ -4,6 +4,13 @@
   "prediction_mode": "reference_as_prediction",
   "evaluated_rows": 14,
   "prediction_rows": 0,
+  "prediction_input": {
+    "source": null,
+    "row_count": 0,
+    "usable_rows": 0,
+    "duplicate_panel_ids": [],
+    "missing_panel_id_rows": 0
+  },
   "split_counts": {
     "test": 2,
     "train": 11,
@@ -46,6 +53,10 @@
   },
   "invalid_reference_rows": [],
   "invalid_prediction_rows": [],
+  "missing_prediction_rows": [],
+  "extra_prediction_panel_ids": [],
+  "prediction_invalid_reason_counts": {},
+  "prediction_error_category_counts": {},
   "rows": [
     {
       "panel_id": "_P1_staging/QA-D301-10(110kV南雄线开关机构箱端子排图(3AP1-FG))#panel_000",
@@ -56,6 +67,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 731,
         "edge_count": 1165,
@@ -92,6 +114,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 730,
         "edge_count": 1162,
@@ -128,6 +161,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 731,
         "edge_count": 1165,
@@ -164,6 +208,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 561,
         "edge_count": 953,
@@ -200,6 +255,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 684,
         "edge_count": 1108,
@@ -236,6 +302,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 594,
         "edge_count": 940,
@@ -272,6 +349,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 520,
         "edge_count": 878,
@@ -308,6 +396,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 506,
         "edge_count": 795,
@@ -344,6 +443,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 485,
         "edge_count": 762,
@@ -380,6 +490,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 421,
         "edge_count": 701,
@@ -416,6 +537,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 392,
         "edge_count": 657,
@@ -452,6 +584,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 385,
         "edge_count": 619,
@@ -488,6 +631,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 204,
         "edge_count": 337,
@@ -524,6 +678,17 @@
       "reference_invalid_reasons": [],
       "prediction_valid": true,
       "prediction_invalid_reasons": [],
+      "prediction_source": "reference",
+      "prediction_error_categories": {
+        "load": 0,
+        "prediction_source": 0,
+        "schema": 0,
+        "status": 0,
+        "nodes": 0,
+        "edges": 0,
+        "nets": 0,
+        "other": 0
+      },
       "reference_counts": {
         "node_count": 315,
         "edge_count": 541,
