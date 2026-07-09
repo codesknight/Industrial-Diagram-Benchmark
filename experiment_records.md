@@ -237,3 +237,12 @@
   - `data_index/hf_release_package_summary.json`
   - `docs/topology_graph_eval_protocol_v1.md`
 - Remote dataset file count after upload check: 27.
+
+## 2026-07-09 Topology Panel v1 Release Note
+
+- Added formal release note: `docs/topology_panel_v1_release_note.md`.
+- The release note summarizes the v1 clean baseline, data version boundary, benchmark files, evaluation command, Hugging Face upload status, known limitations, and next-step recommendations.
+- Official release name: `Topology Panel v1 clean baseline`.
+- Official baseline rows: 14.
+- Hugging Face dataset: `yanhongliu/Industrial-Diagram-Benchmark`.
+- The note records that 26 files were uploaded and key remote files were verified.
