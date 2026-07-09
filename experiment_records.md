@@ -349,3 +349,25 @@
   - model error indicates the configured DeepSeek endpoint expected text-only messages and rejected `image_url` input.
   - evaluator prediction valid rate: 0.0
 - Interpretation: Doubao is currently usable as the first real vision prediction path; DeepSeek requires a vision-capable endpoint or different request format before it can be used for image-based topology prediction.
+
+## 2026-07-09 Doubao Full Topology Panel v1 Baseline Evaluation
+
+- Ran Doubao on the full 14-row Topology Panel v1 baseline.
+- Model: `doubao-seed-2-0-pro-260215`.
+- Command used image downscaling controls: `--max-image-side 512 --max-image-pixels 250000 --timeout 45 --retries 1`.
+- Prediction rows: 14 / 14.
+- Adapter mode counts: `synthetic_from_counts` 14.
+- Adapter error counts: `none` 14.
+- Evaluator prediction graph valid rate: 0.357143.
+- Count error summary: node MAE 500.857143, edge MAE 828.357143, net MAE 3.571429.
+- Prediction invalid rows: 9, caused by status diagnostics (`status_uncertain` 5, `status_unreadable` 4).
+- Interpretation: Doubao end-to-end model access is now working, but this first run is a count-only synthetic graph baseline rather than a full topology reconstruction baseline.
+- Main outputs:
+  - `docs/topology_panel_v1_doubao_eval_report.md`
+  - `data_index/topology_panel_v1_doubao_model_predictions.jsonl`
+  - `data_index/topology_panel_v1_doubao_model_predictions_summary.json`
+  - `data_index/topology_panel_v1_doubao_model_predictions_report.md`
+  - `data_index/topology_panel_v1_doubao_model_predictions_eval_summary.json`
+  - `data_index/topology_panel_v1_doubao_model_predictions_eval_report.md`
+  - `data_index/topology_panel_v1_doubao_model_predictions_eval_details.csv`
+  - `data_index/topology_panel_v1_doubao_model_predictions_eval_errors.csv`

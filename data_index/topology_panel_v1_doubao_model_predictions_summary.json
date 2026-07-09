@@ -5,12 +5,12 @@
   "dry_run": false,
   "benchmark": "data_index/topology_panel_v1_benchmark_manifest.jsonl",
   "output_predictions": "data_index/topology_panel_v1_doubao_model_predictions.jsonl",
-  "prediction_rows": 1,
+  "prediction_rows": 14,
   "adapter_mode_counts": {
-    "synthetic_from_counts": 1
+    "synthetic_from_counts": 14
   },
   "adapter_error_counts": {
-    "none": 1
+    "none": 14
   },
   "rules": [
     "Model predictions are converted into evaluator-ready topology graph JSONL.",

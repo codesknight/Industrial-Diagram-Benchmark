@@ -138,7 +138,8 @@ def prepare_image_for_model(path: Path, args: argparse.Namespace) -> Path:
         new_size = (max(1, int(width * scale)), max(1, int(height * scale)))
         cache_root = args.image_cache.resolve()
         rel_name = path.relative_to(ROOT).as_posix().replace("/", "__").replace("\\", "__")
-        out_path = cache_root / f"{rel_name}.prediction.png"
+        size_tag = f"s{args.max_image_side}_p{args.max_image_pixels}"
+        out_path = cache_root / f"{rel_name}.{size_tag}.prediction.png"
         if out_path.exists():
             return out_path
         cache_root.mkdir(parents=True, exist_ok=True)
@@ -180,7 +181,7 @@ def make_client(args: argparse.Namespace) -> OpenAI:
         raise SystemExit(f"Missing API key for {args.provider}. Checked: {', '.join(api_key_names)}")
     if not args.model:
         raise SystemExit(f"Missing model for {args.provider}. Pass --model or set the provider model env var.")
-    return OpenAI(api_key=api_key, base_url=base_url)
+    return OpenAI(api_key=api_key, base_url=base_url, timeout=args.timeout)
 
 
 def extract_json(text: str) -> Dict[str, object]:
@@ -466,7 +467,7 @@ def write_report(rows: List[Dict[str, object]], args: argparse.Namespace) -> Non
     lines.extend(
         [
             "python benchmark/topology/evaluate_topology_graph_v1.py `",
-            f"  --predictions {args.output.relative_to(ROOT).as_posix()} `",
+            f"  --predictions {rel(args.output)} `",
             f"  --summary data_index/{stem}_eval_summary.json `",
             f"  --report data_index/{stem}_eval_report.md `",
             f"  --details-csv data_index/{stem}_eval_details.csv `",
@@ -494,6 +495,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--max-tokens", type=int, default=900)
+    parser.add_argument("--timeout", type=float, default=60.0)
     parser.add_argument("--retries", type=int, default=2)
     parser.add_argument("--retry-sleep", type=float, default=2.0)
     parser.add_argument("--sleep", type=float, default=0.0)

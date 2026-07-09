@@ -3,11 +3,11 @@
   "manifest": "data_index/topology_panel_v1_benchmark_manifest.jsonl",
   "prediction_mode": "external_prediction",
   "evaluated_rows": 14,
-  "prediction_rows": 1,
+  "prediction_rows": 14,
   "prediction_input": {
     "source": "data_index/topology_panel_v1_doubao_model_predictions.jsonl",
-    "row_count": 1,
-    "usable_rows": 1,
+    "row_count": 14,
+    "usable_rows": 14,
     "duplicate_panel_ids": [],
     "missing_panel_id_rows": 0
   },
@@ -23,20 +23,20 @@
   },
   "graph_valid_rate": {
     "reference": 1.0,
-    "prediction": 0.071429
+    "prediction": 0.357143
   },
   "count_errors": {
     "node_count": {
-      "mae": 505.642857,
-      "mre": 0.982412
+      "mae": 500.857143,
+      "mre": 0.952608
     },
     "edge_count": {
-      "mae": 839.5,
-      "mre": 0.998161
+      "mae": 828.357143,
+      "mre": 0.977183
     },
     "net_count": {
-      "mae": 3.285714,
-      "mre": 3.0
+      "mae": 3.571429,
+      "mre": 3.214286
     }
   },
   "diagnostics": {
@@ -53,41 +53,24 @@
   },
   "invalid_reference_rows": [],
   "invalid_prediction_rows": [
+    "_P1_staging/QA-D301-10(110kV南雄线开关机构箱端子排图(3AP1-FG))#panel_000",
     "_P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000",
     "_P1_staging/QA-D302-10(110kV澜河线开关机构箱端子排图(3AP1-FG))#panel_000",
     "_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_002",
-    "_P3_staging_batch1/QA-D401-06(10kV开关柜柜顶小母线布置图)#panel_000",
     "_P3_staging_batch1/09(通信回路背面接线图)#panel_000",
     "_P3_staging_batch3/#2备用分支在微机保护柜上的端子排(B066-500-0911)wm666.taobao.com#panel_000",
-    "_P3_staging_batch1/07(通信回路背面接线图 )#panel_000",
-    "_P3_staging_batch1/07(通信回路背面接线图)#panel_000",
-    "_P3_staging_batch3/1FWK柜左侧端子排电缆接线图(B066-500-2409)wm666.taobao.com#panel_000",
-    "_P3_staging_batch3/2FWK柜左侧端子排电缆接线图(B066-500-2411)wm666.taobao.com#panel_000",
     "_P3_staging_batch4/发电机保护屏端子图#panel_003",
     "_P3_staging_batch1/QA-D601-03(10kV#1(#2)站变柜端子排图)#panel_000",
     "_P2_staging/35kV并联电抗器在监控柜上的端子排(B066-500-1904)wm666.taobao.com#panel_000"
   ],
-  "missing_prediction_rows": [
-    "_P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000",
-    "_P1_staging/QA-D302-10(110kV澜河线开关机构箱端子排图(3AP1-FG))#panel_000",
-    "_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_002",
-    "_P3_staging_batch1/QA-D401-06(10kV开关柜柜顶小母线布置图)#panel_000",
-    "_P3_staging_batch1/09(通信回路背面接线图)#panel_000",
-    "_P3_staging_batch3/#2备用分支在微机保护柜上的端子排(B066-500-0911)wm666.taobao.com#panel_000",
-    "_P3_staging_batch1/07(通信回路背面接线图 )#panel_000",
-    "_P3_staging_batch1/07(通信回路背面接线图)#panel_000",
-    "_P3_staging_batch3/1FWK柜左侧端子排电缆接线图(B066-500-2409)wm666.taobao.com#panel_000",
-    "_P3_staging_batch3/2FWK柜左侧端子排电缆接线图(B066-500-2411)wm666.taobao.com#panel_000",
-    "_P3_staging_batch4/发电机保护屏端子图#panel_003",
-    "_P3_staging_batch1/QA-D601-03(10kV#1(#2)站变柜端子排图)#panel_000",
-    "_P2_staging/35kV并联电抗器在监控柜上的端子排(B066-500-1904)wm666.taobao.com#panel_000"
-  ],
+  "missing_prediction_rows": [],
   "extra_prediction_panel_ids": [],
   "prediction_invalid_reason_counts": {
-    "prediction_row_missing": 13
+    "status_uncertain": 5,
+    "status_unreadable": 4
   },
   "prediction_error_category_counts": {
-    "prediction_source": 13
+    "status": 9
   },
   "rows": [
     {
@@ -97,14 +80,16 @@
       "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
-      "prediction_valid": true,
-      "prediction_invalid_reasons": [],
+      "prediction_valid": false,
+      "prediction_invalid_reasons": [
+        "status_uncertain"
+      ],
       "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
         "prediction_source": 0,
         "schema": 0,
-        "status": 0,
+        "status": 1,
         "nodes": 0,
         "edges": 0,
         "nets": 0,
@@ -116,22 +101,22 @@
         "net_count": 1
       },
       "prediction_counts": {
-        "node_count": 180,
-        "edge_count": 30,
-        "net_count": 30
+        "node_count": 0,
+        "edge_count": 0,
+        "net_count": 0
       },
       "errors": {
         "node_count": {
-          "abs": 551.0,
-          "rel": 0.753762
+          "abs": 731.0,
+          "rel": 1.0
         },
         "edge_count": {
-          "abs": 1135.0,
-          "rel": 0.974249
+          "abs": 1165.0,
+          "rel": 1.0
         },
         "net_count": {
-          "abs": 29.0,
-          "rel": 29.0
+          "abs": 1.0,
+          "rel": 1.0
         }
       },
       "isolated_edge_ratio": 0.0,
@@ -141,19 +126,19 @@
       "panel_id": "_P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000",
       "split": "test",
       "phase": "P1",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
       "prediction_valid": false,
       "prediction_invalid_reasons": [
-        "prediction_row_missing"
+        "status_unreadable"
       ],
-      "prediction_source": "reference",
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
-        "status": 0,
+        "status": 1,
         "nodes": 0,
         "edges": 0,
         "nets": 0,
@@ -190,19 +175,19 @@
       "panel_id": "_P1_staging/QA-D302-10(110kV澜河线开关机构箱端子排图(3AP1-FG))#panel_000",
       "split": "train",
       "phase": "P1",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
       "prediction_valid": false,
       "prediction_invalid_reasons": [
-        "prediction_row_missing"
+        "status_uncertain"
       ],
-      "prediction_source": "reference",
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
-        "status": 0,
+        "status": 1,
         "nodes": 0,
         "edges": 0,
         "nets": 0,
@@ -239,19 +224,19 @@
       "panel_id": "_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_002",
       "split": "train",
       "phase": "P1",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
       "prediction_valid": false,
       "prediction_invalid_reasons": [
-        "prediction_row_missing"
+        "status_uncertain"
       ],
-      "prediction_source": "reference",
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
-        "status": 0,
+        "status": 1,
         "nodes": 0,
         "edges": 0,
         "nets": 0,
@@ -263,22 +248,22 @@
         "net_count": 1
       },
       "prediction_counts": {
-        "node_count": 0,
-        "edge_count": 0,
-        "net_count": 0
+        "node_count": 55,
+        "edge_count": 32,
+        "net_count": 7
       },
       "errors": {
         "node_count": {
-          "abs": 561.0,
-          "rel": 1.0
+          "abs": 506.0,
+          "rel": 0.901961
         },
         "edge_count": {
-          "abs": 953.0,
-          "rel": 1.0
+          "abs": 921.0,
+          "rel": 0.966422
         },
         "net_count": {
-          "abs": 1.0,
-          "rel": 1.0
+          "abs": 6.0,
+          "rel": 6.0
         }
       },
       "isolated_edge_ratio": 0.0,
@@ -288,17 +273,15 @@
       "panel_id": "_P3_staging_batch1/QA-D401-06(10kV开关柜柜顶小母线布置图)#panel_000",
       "split": "train",
       "phase": "P3",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
-      "prediction_valid": false,
-      "prediction_invalid_reasons": [
-        "prediction_row_missing"
-      ],
-      "prediction_source": "reference",
+      "prediction_valid": true,
+      "prediction_invalid_reasons": [],
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
         "status": 0,
         "nodes": 0,
@@ -312,22 +295,22 @@
         "net_count": 2
       },
       "prediction_counts": {
-        "node_count": 0,
-        "edge_count": 0,
-        "net_count": 0
+        "node_count": 20,
+        "edge_count": 17,
+        "net_count": 8
       },
       "errors": {
         "node_count": {
-          "abs": 684.0,
-          "rel": 1.0
+          "abs": 664.0,
+          "rel": 0.97076
         },
         "edge_count": {
-          "abs": 1108.0,
-          "rel": 1.0
+          "abs": 1091.0,
+          "rel": 0.984657
         },
         "net_count": {
-          "abs": 2.0,
-          "rel": 1.0
+          "abs": 6.0,
+          "rel": 3.0
         }
       },
       "isolated_edge_ratio": 0.0,
@@ -337,19 +320,19 @@
       "panel_id": "_P3_staging_batch1/09(通信回路背面接线图)#panel_000",
       "split": "train",
       "phase": "P3",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
       "prediction_valid": false,
       "prediction_invalid_reasons": [
-        "prediction_row_missing"
+        "status_unreadable"
       ],
-      "prediction_source": "reference",
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
-        "status": 0,
+        "status": 1,
         "nodes": 0,
         "edges": 0,
         "nets": 0,
@@ -386,19 +369,19 @@
       "panel_id": "_P3_staging_batch3/#2备用分支在微机保护柜上的端子排(B066-500-0911)wm666.taobao.com#panel_000",
       "split": "train",
       "phase": "P3",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
       "prediction_valid": false,
       "prediction_invalid_reasons": [
-        "prediction_row_missing"
+        "status_uncertain"
       ],
-      "prediction_source": "reference",
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
-        "status": 0,
+        "status": 1,
         "nodes": 0,
         "edges": 0,
         "nets": 0,
@@ -435,17 +418,15 @@
       "panel_id": "_P3_staging_batch1/07(通信回路背面接线图 )#panel_000",
       "split": "train",
       "phase": "P3",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
-      "prediction_valid": false,
-      "prediction_invalid_reasons": [
-        "prediction_row_missing"
-      ],
-      "prediction_source": "reference",
+      "prediction_valid": true,
+      "prediction_invalid_reasons": [],
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
         "status": 0,
         "nodes": 0,
@@ -459,22 +440,22 @@
         "net_count": 1
       },
       "prediction_counts": {
-        "node_count": 0,
-        "edge_count": 0,
-        "net_count": 0
+        "node_count": 32,
+        "edge_count": 24,
+        "net_count": 12
       },
       "errors": {
         "node_count": {
-          "abs": 506.0,
-          "rel": 1.0
+          "abs": 474.0,
+          "rel": 0.936759
         },
         "edge_count": {
-          "abs": 795.0,
-          "rel": 1.0
+          "abs": 771.0,
+          "rel": 0.969811
         },
         "net_count": {
-          "abs": 1.0,
-          "rel": 1.0
+          "abs": 11.0,
+          "rel": 11.0
         }
       },
       "isolated_edge_ratio": 0.0,
@@ -484,17 +465,15 @@
       "panel_id": "_P3_staging_batch1/07(通信回路背面接线图)#panel_000",
       "split": "train",
       "phase": "P3",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
-      "prediction_valid": false,
-      "prediction_invalid_reasons": [
-        "prediction_row_missing"
-      ],
-      "prediction_source": "reference",
+      "prediction_valid": true,
+      "prediction_invalid_reasons": [],
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
         "status": 0,
         "nodes": 0,
@@ -508,22 +487,22 @@
         "net_count": 1
       },
       "prediction_counts": {
-        "node_count": 0,
-        "edge_count": 0,
-        "net_count": 0
+        "node_count": 24,
+        "edge_count": 12,
+        "net_count": 12
       },
       "errors": {
         "node_count": {
-          "abs": 485.0,
-          "rel": 1.0
+          "abs": 461.0,
+          "rel": 0.950515
         },
         "edge_count": {
-          "abs": 762.0,
-          "rel": 1.0
+          "abs": 750.0,
+          "rel": 0.984252
         },
         "net_count": {
-          "abs": 1.0,
-          "rel": 1.0
+          "abs": 11.0,
+          "rel": 11.0
         }
       },
       "isolated_edge_ratio": 0.0,
@@ -533,17 +512,15 @@
       "panel_id": "_P3_staging_batch3/1FWK柜左侧端子排电缆接线图(B066-500-2409)wm666.taobao.com#panel_000",
       "split": "train",
       "phase": "P3",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
-      "prediction_valid": false,
-      "prediction_invalid_reasons": [
-        "prediction_row_missing"
-      ],
-      "prediction_source": "reference",
+      "prediction_valid": true,
+      "prediction_invalid_reasons": [],
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
         "status": 0,
         "nodes": 0,
@@ -557,22 +534,22 @@
         "net_count": 1
       },
       "prediction_counts": {
-        "node_count": 0,
-        "edge_count": 0,
-        "net_count": 0
+        "node_count": 50,
+        "edge_count": 45,
+        "net_count": 5
       },
       "errors": {
         "node_count": {
-          "abs": 421.0,
-          "rel": 1.0
+          "abs": 371.0,
+          "rel": 0.881235
         },
         "edge_count": {
-          "abs": 701.0,
-          "rel": 1.0
+          "abs": 656.0,
+          "rel": 0.935806
         },
         "net_count": {
-          "abs": 1.0,
-          "rel": 1.0
+          "abs": 4.0,
+          "rel": 4.0
         }
       },
       "isolated_edge_ratio": 0.0,
@@ -582,17 +559,15 @@
       "panel_id": "_P3_staging_batch3/2FWK柜左侧端子排电缆接线图(B066-500-2411)wm666.taobao.com#panel_000",
       "split": "train",
       "phase": "P3",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
-      "prediction_valid": false,
-      "prediction_invalid_reasons": [
-        "prediction_row_missing"
-      ],
-      "prediction_source": "reference",
+      "prediction_valid": true,
+      "prediction_invalid_reasons": [],
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
         "status": 0,
         "nodes": 0,
@@ -606,22 +581,22 @@
         "net_count": 1
       },
       "prediction_counts": {
-        "node_count": 0,
-        "edge_count": 0,
-        "net_count": 0
+        "node_count": 8,
+        "edge_count": 4,
+        "net_count": 4
       },
       "errors": {
         "node_count": {
-          "abs": 392.0,
-          "rel": 1.0
+          "abs": 384.0,
+          "rel": 0.979592
         },
         "edge_count": {
-          "abs": 657.0,
-          "rel": 1.0
+          "abs": 653.0,
+          "rel": 0.993912
         },
         "net_count": {
-          "abs": 1.0,
-          "rel": 1.0
+          "abs": 3.0,
+          "rel": 3.0
         }
       },
       "isolated_edge_ratio": 0.0,
@@ -631,19 +606,19 @@
       "panel_id": "_P3_staging_batch4/发电机保护屏端子图#panel_003",
       "split": "train",
       "phase": "P3",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
       "prediction_valid": false,
       "prediction_invalid_reasons": [
-        "prediction_row_missing"
+        "status_unreadable"
       ],
-      "prediction_source": "reference",
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
-        "status": 0,
+        "status": 1,
         "nodes": 0,
         "edges": 0,
         "nets": 0,
@@ -680,19 +655,19 @@
       "panel_id": "_P3_staging_batch1/QA-D601-03(10kV#1(#2)站变柜端子排图)#panel_000",
       "split": "train",
       "phase": "P3",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
       "prediction_valid": false,
       "prediction_invalid_reasons": [
-        "prediction_row_missing"
+        "status_uncertain"
       ],
-      "prediction_source": "reference",
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
-        "status": 0,
+        "status": 1,
         "nodes": 0,
         "edges": 0,
         "nets": 0,
@@ -704,22 +679,22 @@
         "net_count": 2
       },
       "prediction_counts": {
-        "node_count": 0,
-        "edge_count": 0,
-        "net_count": 0
+        "node_count": 58,
+        "edge_count": 52,
+        "net_count": 2
       },
       "errors": {
         "node_count": {
-          "abs": 204.0,
-          "rel": 1.0
+          "abs": 146.0,
+          "rel": 0.715686
         },
         "edge_count": {
-          "abs": 337.0,
-          "rel": 1.0
+          "abs": 285.0,
+          "rel": 0.845697
         },
         "net_count": {
-          "abs": 2.0,
-          "rel": 1.0
+          "abs": 0.0,
+          "rel": 0.0
         }
       },
       "isolated_edge_ratio": 0.003,
@@ -729,19 +704,19 @@
       "panel_id": "_P2_staging/35kV并联电抗器在监控柜上的端子排(B066-500-1904)wm666.taobao.com#panel_000",
       "split": "val",
       "phase": "P2",
-      "mode": "missing_prediction",
+      "mode": "external_prediction",
       "reference_valid": true,
       "reference_invalid_reasons": [],
       "prediction_valid": false,
       "prediction_invalid_reasons": [
-        "prediction_row_missing"
+        "status_unreadable"
       ],
-      "prediction_source": "reference",
+      "prediction_source": "prediction",
       "prediction_error_categories": {
         "load": 0,
-        "prediction_source": 1,
+        "prediction_source": 0,
         "schema": 0,
-        "status": 0,
+        "status": 1,
         "nodes": 0,
         "edges": 0,
         "nets": 0,

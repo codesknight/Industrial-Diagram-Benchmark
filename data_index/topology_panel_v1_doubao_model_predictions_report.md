@@ -7,16 +7,16 @@ Adapter id: `topology_panel_v1_doubao_adapter_2026-07-09`
 - Provider: doubao
 - Model: doubao-seed-2-0-pro-260215
 - Dry run: False
-- Prediction rows: 1
+- Prediction rows: 14
 - Output predictions: `data_index/topology_panel_v1_doubao_model_predictions.jsonl`
 
 ## Adapter Modes
 
-- synthetic_from_counts: 1
+- synthetic_from_counts: 14
 
 ## Adapter Errors
 
-- none: 1
+- none: 14
 
 ## Evaluator Command
 
