@@ -1,0 +1,15 @@
+﻿panel_id,split,phase,mode,reference_valid,prediction_valid,reference_invalid_reasons,prediction_invalid_reasons,reference_node_count,reference_edge_count,reference_net_count,prediction_node_count,prediction_edge_count,prediction_net_count,node_count_abs_error,node_count_rel_error,edge_count_abs_error,edge_count_rel_error,net_count_abs_error,net_count_rel_error,isolated_edge_ratio,largest_net_edge_ratio
+_P1_staging/QA-D301-10(110kV南雄线开关机构箱端子排图(3AP1-FG))#panel_000,test,P1,external_prediction,True,True,,,731,1165,1,721,1086,0,10.0,0.01368,79.0,0.067811,1.0,1.0,0.0,1.0
+_P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000,test,P1,external_prediction,True,True,,,730,1162,1,719,1086,1,11.0,0.015068,76.0,0.065404,0.0,0.0,0.0,1.0
+_P1_staging/QA-D302-10(110kV澜河线开关机构箱端子排图(3AP1-FG))#panel_000,train,P1,external_prediction,True,True,,,731,1165,1,721,1084,1,10.0,0.01368,81.0,0.069528,0.0,0.0,0.0,1.0
+_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_002,train,P1,external_prediction,True,True,,,561,953,1,554,884,1,7.0,0.012478,69.0,0.072403,0.0,0.0,0.0,1.0
+_P3_staging_batch1/QA-D401-06(10kV开关柜柜顶小母线布置图)#panel_000,train,P3,external_prediction,True,True,,,684,1108,2,669,1032,0,15.0,0.02193,76.0,0.068592,2.0,1.0,0.0,0.9964
+_P3_staging_batch1/09(通信回路背面接线图)#panel_000,train,P3,external_prediction,True,True,,,594,940,1,585,879,1,9.0,0.015152,61.0,0.064894,0.0,0.0,0.0,1.0
+_P3_staging_batch3/#2备用分支在微机保护柜上的端子排(B066-500-0911)wm666.taobao.com#panel_000,train,P3,external_prediction,True,True,,,520,878,1,513,817,1,7.0,0.013462,61.0,0.069476,0.0,0.0,0.0,1.0
+_P3_staging_batch1/07(通信回路背面接线图 )#panel_000,train,P3,external_prediction,True,True,,,506,795,1,501,741,1,5.0,0.009881,54.0,0.067925,0.0,0.0,0.0,1.0
+_P3_staging_batch1/07(通信回路背面接线图)#panel_000,train,P3,external_prediction,True,True,,,485,762,1,480,705,0,5.0,0.010309,57.0,0.074803,1.0,1.0,0.0,1.0
+_P3_staging_batch3/1FWK柜左侧端子排电缆接线图(B066-500-2409)wm666.taobao.com#panel_000,train,P3,external_prediction,True,True,,,421,701,1,415,652,1,6.0,0.014252,49.0,0.0699,0.0,0.0,0.0,1.0
+_P3_staging_batch3/2FWK柜左侧端子排电缆接线图(B066-500-2411)wm666.taobao.com#panel_000,train,P3,external_prediction,True,True,,,392,657,1,387,614,1,5.0,0.012755,43.0,0.065449,0.0,0.0,0.0,1.0
+_P3_staging_batch4/发电机保护屏端子图#panel_003,train,P3,external_prediction,True,True,,,385,619,3,379,576,1,6.0,0.015584,43.0,0.069467,2.0,0.666667,0.0032,0.9968
+_P3_staging_batch1/QA-D601-03(10kV#1(#2)站变柜端子排图)#panel_000,train,P3,external_prediction,True,True,,,204,337,2,200,314,0,4.0,0.019608,23.0,0.068249,2.0,1.0,0.003,0.997
+_P2_staging/35kV并联电抗器在监控柜上的端子排(B066-500-1904)wm666.taobao.com#panel_000,val,P2,external_prediction,True,True,,,315,541,1,310,503,1,5.0,0.015873,38.0,0.07024,0.0,0.0,0.0,1.0

@@ -275,3 +275,25 @@
   - error rows: 14
   - prediction graph valid rate: 0.0
 - Fixed evaluator output path handling for relative custom output paths such as `outputs/template_eval_summary.json`.
+
+## 2026-07-09 Topology Panel v1 Oracle-Minus Baseline
+
+- Added oracle-minus baseline script: `scripts/build_topology_panel_v1_oracle_minus_baseline.py`.
+- Generated predictions: `data_index/topology_panel_v1_oracle_minus_predictions.jsonl`.
+- Generated oracle-minus prediction graphs under `outputs/topology_panel_v1_oracle_minus/`.
+- The prediction JSONL is self-contained with inline `prediction` graphs and also keeps `prediction_json_path` for local debugging.
+- Generated baseline summary/report:
+  - `data_index/topology_panel_v1_oracle_minus_summary.json`
+  - `data_index/topology_panel_v1_oracle_minus_report.md`
+- Ran evaluator on oracle-minus predictions and generated:
+  - `data_index/topology_panel_v1_oracle_minus_eval_summary.json`
+  - `data_index/topology_panel_v1_oracle_minus_eval_report.md`
+  - `data_index/topology_panel_v1_oracle_minus_eval_details.csv`
+  - `data_index/topology_panel_v1_oracle_minus_eval_errors.csv`
+- Oracle-minus prediction rows: 14.
+- Prediction graph valid rate: 1.0.
+- Rows with node error: 14.
+- Rows with edge error: 14.
+- Rows with net error: 5.
+- Count error summary: node MAE 7.5, edge MAE 57.857143, net MAE 0.571429.
+- Interpretation: the evaluator can detect topology count errors even when predicted graph schemas remain valid.

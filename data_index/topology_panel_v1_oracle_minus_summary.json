@@ -1,0 +1,16 @@
+{
+  "baseline_id": "topology_panel_v1_oracle_minus_2026-07-09",
+  "prediction_rows": 14,
+  "rows_with_node_error": 14,
+  "rows_with_edge_error": 14,
+  "rows_with_net_error": 5,
+  "mean_abs_node_error": 7.5,
+  "mean_abs_edge_error": 57.857143,
+  "mean_abs_net_error": 0.571429,
+  "outputs": {
+    "predictions": "data_index/topology_panel_v1_oracle_minus_predictions.jsonl",
+    "summary": "data_index/topology_panel_v1_oracle_minus_summary.json",
+    "report": "data_index/topology_panel_v1_oracle_minus_report.md",
+    "prediction_graph_dir": "outputs/topology_panel_v1_oracle_minus"
+  }
+}
