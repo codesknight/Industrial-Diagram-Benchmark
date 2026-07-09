@@ -160,3 +160,19 @@
   - `data_index/topology_panel_v1_1_keep_over_connected_manifest.csv`
   - `data_index/topology_panel_v1_1_active_improvement_review_result_summary.json`
   - `data_index/topology_panel_v1_1_active_improvement_review_result_report.md`
+
+## 2026-07-09 Topology Panel v1 Release Status Document
+
+- Added Chinese release status document: `docs/topology_panel_v1_release_status.md`.
+- Purpose: freeze the current project state before README/HuggingFace release documentation work.
+- Formal v1 baseline remains `data_index/topology_panel_v1_final_baseline_manifest.csv`.
+- Formal v1 baseline rows: 14.
+- Split counts: train 11, val 1, test 2.
+- Benchmark JSONL: `data_index/topology_panel_v1_benchmark_manifest.jsonl`.
+- Evaluation protocol: `docs/topology_graph_eval_protocol_v1.md`.
+- Evaluation script: `benchmark/topology/evaluate_topology_graph_v1.py`.
+- v1 excluded badcase rows: 125.
+- v1.1 abandoned `still_fragmented` rows: 19.
+- v1.1 active kept improvement rows: 12.
+- v1.1 active routes: terminal anchor 3, over-connected repair 9.
+- Main recommendation: finish README/HuggingFace release documentation before continuing topology algorithm repair.
