@@ -182,6 +182,7 @@ datas/
 ```powershell
 git status --short
 python benchmark/topology/evaluate_topology_graph_v1.py
+python scripts/prepare_hf_release_package.py
 ```
 
 评测 sanity check 应保持：
@@ -206,4 +207,32 @@ This release includes 14 manually reviewed panel-level topology samples,
 the benchmark JSONL manifest, evaluation protocol, sanity-check evaluation
 outputs, and boundary manifests for excluded badcases and v1.1 candidates.
 The formal Topology Panel v1 score should only use the 14 clean baseline rows.
+```
+
+## 自动打包脚本
+
+可以使用下面命令自动生成本地上传包：
+
+```powershell
+python scripts/prepare_hf_release_package.py
+```
+
+默认输出：
+
+```text
+outputs/hf_release_topology_panel_v1/
+```
+
+默认不包含大型 HTML 审核表。如需一起复制审核 HTML：
+
+```powershell
+python scripts/prepare_hf_release_package.py --include-review-html
+```
+
+输出包内会自动生成：
+
+```text
+data_index/hf_release_package_manifest.csv
+data_index/hf_release_package_summary.json
+data_index/hf_release_package_report.md
 ```

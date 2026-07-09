@@ -199,3 +199,16 @@
   - abandoned `still_fragmented`: 19 rows.
 - Added recommended HF release files for benchmark JSONL, final baseline manifest, summaries/reports, protocol docs, and optional boundary manifests.
 - Clarified that review HTML files are optional review artifacts and are not model evaluation inputs.
+
+## 2026-07-09 Hugging Face Release Package Script
+
+- Added release packaging script: `scripts/prepare_hf_release_package.py`.
+- Default output directory: `outputs/hf_release_topology_panel_v1/`.
+- The script copies the dataset card to package-root `README.md`.
+- The script copies required benchmark files, protocol docs, recommended release manifests, and optional boundary manifests.
+- Review HTML artifacts are excluded by default and can be included with `--include-review-html`.
+- The script writes package metadata inside the output package:
+  - `data_index/hf_release_package_manifest.csv`
+  - `data_index/hf_release_package_summary.json`
+  - `data_index/hf_release_package_report.md`
+- Updated `data_index/HF_RELEASE_FILES.md` with the packaging command.
