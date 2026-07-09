@@ -1,0 +1,29 @@
+{
+  "template_id": "topology_panel_v1_prediction_template_2026-07-09",
+  "source_benchmark": "data_index/topology_panel_v1_benchmark_manifest.jsonl",
+  "output_jsonl": "data_index/topology_panel_v1_prediction_template.jsonl",
+  "record_count": 14,
+  "source_record_count": 14,
+  "expected_prediction_schema": "industrial_diagram.topology_graph.v1_panel",
+  "split_counts": {
+    "test": 2,
+    "train": 11,
+    "val": 1
+  },
+  "phase_counts": {
+    "P1": 4,
+    "P3": 9,
+    "P2": 1
+  },
+  "accepted_prediction_modes": [
+    "inline `prediction` topology graph object",
+    "`prediction_json_path` repository-relative topology graph JSON path",
+    "inline `graph` topology graph object, accepted by evaluator for compatibility"
+  ],
+  "required_alignment_key": "panel_id",
+  "outputs": {
+    "jsonl": "data_index/topology_panel_v1_prediction_template.jsonl",
+    "summary": "data_index/topology_panel_v1_prediction_template_summary.json",
+    "report": "data_index/topology_panel_v1_prediction_template_report.md"
+  }
+}

@@ -246,3 +246,13 @@
 - Official baseline rows: 14.
 - Hugging Face dataset: `yanhongliu/Industrial-Diagram-Benchmark`.
 - The note records that 26 files were uploaded and key remote files were verified.
+
+## 2026-07-09 Topology Panel v1 Prediction Template
+
+- Added template builder script: `scripts/build_topology_panel_v1_prediction_template.py`.
+- Generated prediction template JSONL: `data_index/topology_panel_v1_prediction_template.jsonl`.
+- Generated template summary: `data_index/topology_panel_v1_prediction_template_summary.json`.
+- Generated template report: `data_index/topology_panel_v1_prediction_template_report.md`.
+- Template rows: 14, aligned with `data_index/topology_panel_v1_benchmark_manifest.jsonl`.
+- The template fixes `panel_id`, split, phase, image path, reference summary, model metadata fields, and prediction placeholders.
+- Accepted prediction modes: inline `prediction`, `prediction_json_path`, or inline `graph` for evaluator compatibility.
