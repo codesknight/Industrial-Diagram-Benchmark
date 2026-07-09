@@ -256,3 +256,22 @@
 - Template rows: 14, aligned with `data_index/topology_panel_v1_benchmark_manifest.jsonl`.
 - The template fixes `panel_id`, split, phase, image path, reference summary, model metadata fields, and prediction placeholders.
 - Accepted prediction modes: inline `prediction`, `prediction_json_path`, or inline `graph` for evaluator compatibility.
+
+## 2026-07-09 Topology Panel v1 Per-Sample Evaluation CSVs
+
+- Extended evaluator: `benchmark/topology/evaluate_topology_graph_v1.py`.
+- Added default per-sample details CSV: `data_index/topology_panel_v1_eval_details.csv`.
+- Added default error-only CSV: `data_index/topology_panel_v1_eval_errors.csv`.
+- Added CLI options:
+  - `--details-csv`
+  - `--errors-csv`
+- Default reference-as-prediction validation:
+  - evaluated rows: 14
+  - details rows: 14
+  - error rows: 0
+- External prediction smoke test with the unfilled prediction template:
+  - prediction mode: external_prediction
+  - details rows: 14
+  - error rows: 14
+  - prediction graph valid rate: 0.0
+- Fixed evaluator output path handling for relative custom output paths such as `outputs/template_eval_summary.json`.

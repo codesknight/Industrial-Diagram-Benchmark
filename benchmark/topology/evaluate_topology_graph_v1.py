@@ -8,6 +8,7 @@ counts against the reference package.
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 from collections import Counter
 from pathlib import Path
@@ -20,6 +21,8 @@ INDEX_DIR = ROOT / "data_index"
 DEFAULT_MANIFEST = INDEX_DIR / "topology_panel_v1_benchmark_manifest.jsonl"
 DEFAULT_SUMMARY = INDEX_DIR / "topology_panel_v1_eval_summary.json"
 DEFAULT_REPORT = INDEX_DIR / "topology_panel_v1_eval_report.md"
+DEFAULT_DETAILS = INDEX_DIR / "topology_panel_v1_eval_details.csv"
+DEFAULT_ERRORS = INDEX_DIR / "topology_panel_v1_eval_errors.csv"
 
 
 def load_jsonl(path: Path) -> List[Dict[str, object]]:
@@ -198,6 +201,20 @@ def numeric_stats(values: Iterable[float]) -> Dict[str, float]:
     return {"min": min(values), "max": max(values), "mean": mean(values)}
 
 
+def join_reasons(reasons: object) -> str:
+    if isinstance(reasons, list):
+        return ";".join(str(reason) for reason in reasons)
+    return str(reasons or "")
+
+
+def display_path(path: Path) -> str:
+    resolved = path.resolve()
+    try:
+        return resolved.relative_to(ROOT).as_posix()
+    except ValueError:
+        return resolved.as_posix()
+
+
 def evaluate(records: List[Dict[str, object]], predictions: Dict[str, Dict[str, object]]) -> Dict[str, object]:
     rows: List[Dict[str, object]] = []
     reference_valid = 0
@@ -288,13 +305,102 @@ def evaluate(records: List[Dict[str, object]], predictions: Dict[str, Dict[str, 
         "outputs": {
             "summary": DEFAULT_SUMMARY.relative_to(ROOT).as_posix(),
             "report": DEFAULT_REPORT.relative_to(ROOT).as_posix(),
+            "details_csv": DEFAULT_DETAILS.relative_to(ROOT).as_posix(),
+            "errors_csv": DEFAULT_ERRORS.relative_to(ROOT).as_posix(),
         },
     }
     return summary
 
 
 def write_summary(summary: Dict[str, object], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def flatten_eval_row(row: Dict[str, object]) -> Dict[str, object]:
+    ref_counts = row.get("reference_counts", {})
+    if not isinstance(ref_counts, dict):
+        ref_counts = {}
+    pred_counts = row.get("prediction_counts", {})
+    if not isinstance(pred_counts, dict):
+        pred_counts = {}
+    errors = row.get("errors", {})
+    if not isinstance(errors, dict):
+        errors = {}
+
+    out: Dict[str, object] = {
+        "panel_id": row.get("panel_id", ""),
+        "split": row.get("split", ""),
+        "phase": row.get("phase", ""),
+        "mode": row.get("mode", ""),
+        "reference_valid": row.get("reference_valid", False),
+        "prediction_valid": row.get("prediction_valid", False),
+        "reference_invalid_reasons": join_reasons(row.get("reference_invalid_reasons", [])),
+        "prediction_invalid_reasons": join_reasons(row.get("prediction_invalid_reasons", [])),
+        "reference_node_count": ref_counts.get("node_count", 0),
+        "reference_edge_count": ref_counts.get("edge_count", 0),
+        "reference_net_count": ref_counts.get("net_count", 0),
+        "prediction_node_count": pred_counts.get("node_count", 0),
+        "prediction_edge_count": pred_counts.get("edge_count", 0),
+        "prediction_net_count": pred_counts.get("net_count", 0),
+        "isolated_edge_ratio": row.get("isolated_edge_ratio", 0),
+        "largest_net_edge_ratio": row.get("largest_net_edge_ratio", 0),
+    }
+    for name in ["node_count", "edge_count", "net_count"]:
+        metric = errors.get(name, {})
+        if not isinstance(metric, dict):
+            metric = {}
+        out[f"{name}_abs_error"] = metric.get("abs", 0.0)
+        out[f"{name}_rel_error"] = metric.get("rel", 0.0)
+    return out
+
+
+def is_error_row(row: Dict[str, object]) -> bool:
+    if not row.get("reference_valid", False):
+        return True
+    if not row.get("prediction_valid", False):
+        return True
+    errors = row.get("errors", {})
+    if not isinstance(errors, dict):
+        return True
+    for name in ["node_count", "edge_count", "net_count"]:
+        metric = errors.get(name, {})
+        if isinstance(metric, dict) and as_float(metric.get("abs", 0)) > 0:
+            return True
+    return False
+
+
+def write_eval_csv(rows: List[Dict[str, object]], path: Path) -> None:
+    fieldnames = [
+        "panel_id",
+        "split",
+        "phase",
+        "mode",
+        "reference_valid",
+        "prediction_valid",
+        "reference_invalid_reasons",
+        "prediction_invalid_reasons",
+        "reference_node_count",
+        "reference_edge_count",
+        "reference_net_count",
+        "prediction_node_count",
+        "prediction_edge_count",
+        "prediction_net_count",
+        "node_count_abs_error",
+        "node_count_rel_error",
+        "edge_count_abs_error",
+        "edge_count_rel_error",
+        "net_count_abs_error",
+        "net_count_rel_error",
+        "isolated_edge_ratio",
+        "largest_net_edge_ratio",
+    ]
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(flatten_eval_row(row))
 
 
 def write_report(summary: Dict[str, object], path: Path) -> None:
@@ -348,6 +454,7 @@ def write_report(summary: Dict[str, object], path: Path) -> None:
     for name, output_path in summary["outputs"].items():
         lines.append(f"- {name}: `{output_path}`")
 
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -357,6 +464,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--predictions", type=Path, default=None)
     parser.add_argument("--summary", type=Path, default=DEFAULT_SUMMARY)
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
+    parser.add_argument("--details-csv", type=Path, default=DEFAULT_DETAILS)
+    parser.add_argument("--errors-csv", type=Path, default=DEFAULT_ERRORS)
     return parser.parse_args()
 
 
@@ -365,15 +474,23 @@ def main() -> None:
     records = load_jsonl(args.manifest)
     predictions = load_predictions(args.predictions)
     summary = evaluate(records, predictions)
+    summary["outputs"]["summary"] = display_path(args.summary)
+    summary["outputs"]["report"] = display_path(args.report)
+    summary["outputs"]["details_csv"] = display_path(args.details_csv)
+    summary["outputs"]["errors_csv"] = display_path(args.errors_csv)
     write_summary(summary, args.summary)
     write_report(summary, args.report)
+    write_eval_csv(summary["rows"], args.details_csv)
+    write_eval_csv([row for row in summary["rows"] if is_error_row(row)], args.errors_csv)
 
     print(f"Evaluated rows: {summary['evaluated_rows']}")
     print(f"Prediction mode: {summary['prediction_mode']}")
     print(f"Reference graph valid rate: {summary['graph_valid_rate']['reference']}")
     print(f"Prediction graph valid rate: {summary['graph_valid_rate']['prediction']}")
-    print(f"Wrote: {args.summary.relative_to(ROOT).as_posix()}")
-    print(f"Wrote: {args.report.relative_to(ROOT).as_posix()}")
+    print(f"Wrote: {display_path(args.summary)}")
+    print(f"Wrote: {display_path(args.report)}")
+    print(f"Wrote: {display_path(args.details_csv)}")
+    print(f"Wrote: {display_path(args.errors_csv)}")
 
 
 if __name__ == "__main__":

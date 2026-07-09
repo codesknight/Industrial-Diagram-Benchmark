@@ -44,3 +44,5 @@ This report evaluates the Topology Panel v1 benchmark package according to `docs
 
 - summary: `data_index/topology_panel_v1_eval_summary.json`
 - report: `data_index/topology_panel_v1_eval_report.md`
+- details_csv: `data_index/topology_panel_v1_eval_details.csv`
+- errors_csv: `data_index/topology_panel_v1_eval_errors.csv`
