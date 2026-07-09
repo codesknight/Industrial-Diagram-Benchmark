@@ -236,3 +236,34 @@ data_index/hf_release_package_manifest.csv
 data_index/hf_release_package_summary.json
 data_index/hf_release_package_report.md
 ```
+
+生成本地包后，可以上传到 Hugging Face Dataset：
+
+```powershell
+python scripts/upload_hf_release_package.py
+```
+
+上传脚本默认使用：
+
+```text
+repo_id: yanhongliu/Industrial-Diagram-Benchmark
+package_dir: outputs/hf_release_topology_panel_v1/
+```
+
+上传前可先预览文件列表：
+
+```powershell
+python scripts/upload_hf_release_package.py --dry-run
+```
+
+上传需要 Hugging Face 登录状态，任选一种：
+
+```powershell
+hf auth login
+```
+
+或在 `.env` 中设置：
+
+```text
+HF_TOKEN=...
+```

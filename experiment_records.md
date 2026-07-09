@@ -212,3 +212,13 @@
   - `data_index/hf_release_package_summary.json`
   - `data_index/hf_release_package_report.md`
 - Updated `data_index/HF_RELEASE_FILES.md` with the packaging command.
+
+## 2026-07-09 Hugging Face Upload Attempt and Helper Script
+
+- Prepared local package in `outputs/hf_release_topology_panel_v1/`.
+- Package check: 23 copied files, 0 missing files.
+- Direct upload was blocked because no Hugging Face token or cached login was found on this machine.
+- Added upload helper script: `scripts/upload_hf_release_package.py`.
+- The script uploads `outputs/hf_release_topology_panel_v1/` to `yanhongliu/Industrial-Diagram-Benchmark`.
+- The script supports `.env` token keys such as `HF_TOKEN` and supports cached `hf auth login`.
+- Added upload instructions and dry-run command to `data_index/HF_RELEASE_FILES.md`.
