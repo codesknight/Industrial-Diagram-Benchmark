@@ -222,3 +222,18 @@
 - The script uploads `outputs/hf_release_topology_panel_v1/` to `yanhongliu/Industrial-Diagram-Benchmark`.
 - The script supports `.env` token keys such as `HF_TOKEN` and supports cached `hf auth login`.
 - Added upload instructions and dry-run command to `data_index/HF_RELEASE_FILES.md`.
+
+## 2026-07-09 Hugging Face Topology Panel v1 Upload Completed
+
+- Detected `HF_TOKEN` in `.env` without printing the token value.
+- Regenerated local release package with `python scripts/prepare_hf_release_package.py`.
+- Upload dry-run confirmed 26 files in `outputs/hf_release_topology_panel_v1/`.
+- Uploaded the package with `python scripts/upload_hf_release_package.py`.
+- Target dataset: `yanhongliu/Industrial-Diagram-Benchmark`.
+- Upload result: 26 files uploaded.
+- Remote verification confirmed these key files:
+  - `README.md`
+  - `data_index/topology_panel_v1_benchmark_manifest.jsonl`
+  - `data_index/hf_release_package_summary.json`
+  - `docs/topology_graph_eval_protocol_v1.md`
+- Remote dataset file count after upload check: 27.
