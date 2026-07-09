@@ -29,7 +29,7 @@ DEFAULT_IMAGE_CACHE = ROOT / "outputs" / "topology_panel_v1_model_prediction_ima
 EXPECTED_SCHEMA = "industrial_diagram.topology_graph.v1_panel"
 
 
-SYSTEM_PROMPT = """You are predicting a topology graph summary from an industrial diagram panel image.
+SYSTEM_PROMPT_V1 = """You are predicting a topology graph summary from an industrial diagram panel image.
 Return only strict JSON. Do not include markdown.
 
 The evaluator accepts a topology graph schema with nodes, edges, and nets. For
@@ -42,13 +42,77 @@ set status to "not_topology_target" or "unreadable" and use zero counts.
 """
 
 
-def user_prompt(record: Dict[str, object]) -> str:
+SYSTEM_PROMPT_V2 = """You are a careful industrial diagram topology counting assistant.
+Return only strict JSON. Do not include markdown, prose, comments, or code fences.
+
+Your task is count-level topology prediction, not visual description. You should
+estimate the topology counts visible in the panel even when the drawing is dense.
+Use status "ok" whenever the panel contains a readable industrial connection,
+terminal, wiring, or control diagram and you can make a reasonable estimate.
+
+Use status "unreadable" only when the image is blank, corrupted, or the linework
+is impossible to inspect. Use status "not_topology_target" only when the image is
+clearly not a diagram. Use status "uncertain" only when the image is a diagram
+but the topology target is genuinely ambiguous.
+
+Do not return zero counts for a readable diagram. If status is "ok", all of
+node_count, edge_count, and net_count must be positive integers.
+"""
+
+
+def system_prompt(prompt_version: str) -> str:
+    if prompt_version == "v2":
+        return SYSTEM_PROMPT_V2
+    return SYSTEM_PROMPT_V1
+
+
+def adapter_id(args: argparse.Namespace) -> str:
+    suffix = "" if args.prompt_version == "v1" else f"_{args.prompt_version}"
+    return f"topology_panel_v1_{args.provider}_adapter{suffix}_2026-07-09"
+
+
+def user_prompt(record: Dict[str, object], prompt_version: str) -> str:
     reference = record.get("reference", {})
     if not isinstance(reference, dict):
         reference = {}
     summary = reference.get("topology_summary", {})
     if not isinstance(summary, dict):
         summary = {}
+    if prompt_version == "v2":
+        return f"""Predict topology graph count-level structure for this panel image.
+
+panel_id: {record.get("panel_id", "")}
+split: {record.get("split", "")}
+phase: {record.get("phase", "")}
+task: {record.get("task", "")}
+
+Counting definitions:
+- node_count: count junctions, terminal endpoints, wire endpoints, and line split points needed to represent connectivity
+- edge_count: count wire-like connected line segments after splitting at junctions/endpoints
+- net_count: count connected components / electrical networks
+
+Important counting rules:
+- For dense readable diagrams, estimate counts from the visible linework instead of returning zero.
+- Prefer a realistic order-of-magnitude estimate over an unreadable/uncertain status.
+- If there are many repeated terminal rows or wire runs, count them as topology elements.
+- If the exact number is hard, use the best integer estimate and lower confidence.
+- Keep status "ok" for readable industrial diagrams even if confidence is not high.
+
+Return JSON with this exact shape and no extra fields:
+{{
+  "status": "ok",
+  "node_count": 1,
+  "edge_count": 1,
+  "net_count": 1,
+  "confidence": 0.0,
+  "reason": "short concrete reason",
+  "topology_graph": null
+}}
+
+Allowed status values: "ok", "not_topology_target", "unreadable", "uncertain".
+For status "ok", node_count, edge_count, and net_count must be positive integers.
+"""
+
     return f"""Predict topology graph structure for this panel image.
 
 panel_id: {record.get("panel_id", "")}
@@ -320,11 +384,11 @@ def call_model(client: OpenAI, record: Dict[str, object], image_path: Path, args
         temperature=args.temperature,
         max_tokens=args.max_tokens,
         messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": system_prompt(args.prompt_version)},
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": user_prompt(record)},
+                    {"type": "text", "text": user_prompt(record, args.prompt_version)},
                     {"type": "image_url", "image_url": {"url": image_data_url(model_image_path)}},
                 ],
             },
@@ -388,7 +452,7 @@ def run_predictions(args: argparse.Namespace) -> List[Dict[str, object]]:
         graph, meta = normalize_model_payload(payload)
         prediction_rows.append(
             {
-                "adapter_id": f"topology_panel_v1_{args.provider}_adapter_2026-07-09",
+                "adapter_id": adapter_id(args),
                 "benchmark_id": record.get("benchmark_id", ""),
                 "task": record.get("task", "panel_topology_graph_v1"),
                 "panel_id": panel_id,
@@ -421,9 +485,12 @@ def write_summary(rows: List[Dict[str, object]], args: argparse.Namespace) -> No
     mode_counts = Counter(str(row.get("model", {}).get("adapter_mode", "")) for row in rows)
     error_counts = Counter(str(row.get("metadata", {}).get("adapter_error", "")) or "none" for row in rows)
     summary = {
-        "adapter_id": f"topology_panel_v1_{args.provider}_adapter_2026-07-09",
+        "adapter_id": adapter_id(args),
         "provider": args.provider,
         "model": args.model or ("dry_run" if args.dry_run else ""),
+        "prompt_version": args.prompt_version,
+        "image_max_side": args.max_image_side,
+        "image_max_pixels": args.max_image_pixels,
         "dry_run": args.dry_run,
         "benchmark": rel(args.benchmark),
         "output_predictions": rel(args.output),
@@ -450,6 +517,9 @@ def write_report(rows: List[Dict[str, object]], args: argparse.Namespace) -> Non
         "",
         f"- Provider: {summary['provider']}",
         f"- Model: {summary['model']}",
+        f"- Prompt version: {summary.get('prompt_version', 'v1')}",
+        f"- Image max side: {summary.get('image_max_side', '')}",
+        f"- Image max pixels: {summary.get('image_max_pixels', '')}",
         f"- Dry run: {summary['dry_run']}",
         f"- Prediction rows: {summary['prediction_rows']}",
         f"- Output predictions: `{summary['output_predictions']}`",
@@ -485,6 +555,7 @@ def write_report(rows: List[Dict[str, object]], args: argparse.Namespace) -> Non
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--provider", choices=["doubao", "deepseek"], default="doubao")
+    parser.add_argument("--prompt-version", choices=["v1", "v2"], default="v1")
     parser.add_argument("--benchmark", type=Path, default=DEFAULT_BENCHMARK)
     parser.add_argument("--output", type=Path, default=None)
     parser.add_argument("--summary", type=Path, default=None)
@@ -507,7 +578,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
-    default_prefix = INDEX_DIR / f"topology_panel_v1_{args.provider}_model_predictions"
+    prompt_suffix = "" if args.prompt_version == "v1" else f"_{args.prompt_version}"
+    default_prefix = INDEX_DIR / f"topology_panel_v1_{args.provider}{prompt_suffix}_model_predictions"
     if args.dry_run:
         default_prefix = INDEX_DIR / f"topology_panel_v1_{args.provider}_model_predictions_dry_run"
     args.output = args.output or default_prefix.with_suffix(".jsonl")

@@ -371,3 +371,29 @@
   - `data_index/topology_panel_v1_doubao_model_predictions_eval_report.md`
   - `data_index/topology_panel_v1_doubao_model_predictions_eval_details.csv`
   - `data_index/topology_panel_v1_doubao_model_predictions_eval_errors.csv`
+
+## 2026-07-09 Doubao Prompt v2 Full Baseline Comparison
+
+- Added prompt version support to `scripts/run_topology_panel_v1_model_prediction_adapter.py`.
+- Prompt v2 narrows the task to count-level topology prediction and discourages unnecessary `unreadable` / `uncertain` status for readable industrial diagrams.
+- Ran Doubao prompt v2 on all 14 Topology Panel v1 baseline rows.
+- Command used: `--provider doubao --prompt-version v2 --max-image-side 512 --max-image-pixels 250000 --timeout 45 --retries 1`.
+- Prediction rows: 14 / 14.
+- Adapter mode counts: `synthetic_from_counts` 14.
+- Adapter error counts: `none` 14.
+- v2 prediction graph valid rate: 1.0, improved from v1 0.357143.
+- v2 invalid prediction rows: 0, improved from v1 9.
+- Count error comparison:
+  - node MAE: v1 500.857143, v2 409.285714.
+  - edge MAE: v1 828.357143, v2 737.357143.
+  - net MAE: v1 3.571429, v2 16.357143.
+- Interpretation: prompt v2 improves readability/status behavior and node/edge count estimates, but overestimates `net_count`; prompt v3 should focus on stricter network/component definitions.
+- Main outputs:
+  - `docs/topology_panel_v1_doubao_prompt_v2_comparison_report.md`
+  - `data_index/topology_panel_v1_doubao_v2_model_predictions.jsonl`
+  - `data_index/topology_panel_v1_doubao_v2_model_predictions_summary.json`
+  - `data_index/topology_panel_v1_doubao_v2_model_predictions_report.md`
+  - `data_index/topology_panel_v1_doubao_v2_model_predictions_eval_summary.json`
+  - `data_index/topology_panel_v1_doubao_v2_model_predictions_eval_report.md`
+  - `data_index/topology_panel_v1_doubao_v2_model_predictions_eval_details.csv`
+  - `data_index/topology_panel_v1_doubao_v2_model_predictions_eval_errors.csv`
