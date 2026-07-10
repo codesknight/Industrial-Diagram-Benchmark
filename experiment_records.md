@@ -649,3 +649,15 @@
   - edge MAE: 687.857143
   - net MAE: 0.857143
 - The summary keeps the formal v1 boundary unchanged: 14 clean baseline rows only.
+
+## 2026-07-10 Topology Panel v1 Figures
+
+- Generated presentation-ready figures for Topology Panel v1.
+- Figure outputs are mirrored to `docs/figures/` and `outputs/figures/`.
+- Figures:
+  - `docs/figures/topology_panel_v1_mae_bar_chart.png`
+  - `docs/figures/topology_panel_v1_per_sample_delta_heatmap.png`
+  - `docs/figures/topology_panel_v1_data_cleaning_flow.png`
+- Added figure index:
+  - `docs/topology_panel_v1_figures.md`
+- Design note: figure labels use English to avoid cross-platform Chinese font rendering issues.
