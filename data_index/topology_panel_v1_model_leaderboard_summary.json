@@ -1,7 +1,7 @@
 {
   "leaderboard_id": "topology_panel_v1_model_leaderboard_2026-07-10",
-  "row_count": 7,
-  "comparable_row_count": 4,
+  "row_count": 8,
+  "comparable_row_count": 5,
   "output_csv": "data_index/topology_panel_v1_model_leaderboard.csv",
   "output_md": "docs/topology_panel_v1_model_leaderboard.md",
   "experiments": [
@@ -11,12 +11,13 @@
     "doubao_prompt_v2",
     "doubao_prompt_v3",
     "doubao_prompt_v3_image_1024",
+    "doubao_prompt_v3_tile2x2",
     "deepseek_smoke"
   ],
   "best_comparable": {
-    "prediction_valid_rate": "doubao_prompt_v2, doubao_prompt_v3, doubao_prompt_v3_image_1024",
-    "node_mae": "doubao_prompt_v3",
-    "edge_mae": "doubao_prompt_v3",
-    "net_mae": "doubao_prompt_v3"
+    "prediction_valid_rate": "doubao_prompt_v2, doubao_prompt_v3, doubao_prompt_v3_image_1024, doubao_prompt_v3_tile2x2",
+    "node_mae": "doubao_prompt_v3_tile2x2",
+    "edge_mae": "doubao_prompt_v3_tile2x2",
+    "net_mae": "doubao_prompt_v3_tile2x2"
   }
 }

@@ -14,16 +14,17 @@
 | doubao_prompt_v2 | yes | doubao | v2 | 1 | 0 | 409.285714 | 737.357143 | 16.357143 | Improves valid/status behavior and node/edge counts; overestimates net_count. |
 | doubao_prompt_v3 | yes | doubao | v3 | 1 | 0 | 394.642857 | 715.642857 | 0.857143 | Keeps valid/status gains and fixes net_count overestimation with stricter connected-component rules. |
 | doubao_prompt_v3_image_1024 | yes | doubao | v3 | 1 | 0 | 399.571429 | 724.285714 | 0.928571 | Same prompt as v3 with larger whole-image input; did not improve count MAE over 512. |
+| doubao_prompt_v3_tile2x2 | yes | doubao | v3 | 1 | 0 | 378.285714 | 713.5 | 0.714286 | Splits each panel into 2x2 tiles; improves node/edge/net MAE over whole-image v3. |
 | deepseek_smoke | no | deepseek | v1 | 0 | 14 | 518.5 | 841.642857 | 1.285714 | Smoke run only; configured endpoint rejected image input, so it is not comparable. |
 
 ## 当前可比较模型结论
 
-- 最高 prediction valid rate：`doubao_prompt_v2, doubao_prompt_v3, doubao_prompt_v3_image_1024` = 1
-- 最低 node_count MAE：`doubao_prompt_v3` = 394.642857
-- 最低 edge_count MAE：`doubao_prompt_v3` = 715.642857
-- 最低 net_count MAE：`doubao_prompt_v3` = 0.857143
+- 最高 prediction valid rate：`doubao_prompt_v2, doubao_prompt_v3, doubao_prompt_v3_image_1024, doubao_prompt_v3_tile2x2` = 1
+- 最低 node_count MAE：`doubao_prompt_v3_tile2x2` = 378.285714
+- 最低 edge_count MAE：`doubao_prompt_v3_tile2x2` = 713.5
+- 最低 net_count MAE：`doubao_prompt_v3_tile2x2` = 0.714286
 
-Doubao prompt v3 的 512 输入仍是当前最好的 count-level baseline。1024 整图输入没有降低 node/edge/net MAE，说明下一步应转向局部裁剪/分块输入，而不是继续放大整图。
+Doubao prompt v3 tile2x2 是当前最好的 count-level baseline。分块输入降低了 node/edge/net MAE；1024 整图输入没有收益，说明降低信息密度比单纯放大整图更有效。
 
 ## 文件入口
 
@@ -33,6 +34,7 @@ Doubao prompt v3 的 512 输入仍是当前最好的 count-level baseline。1024
 - Doubao prompt v2 report：`docs/topology_panel_v1_doubao_prompt_v2_comparison_report.md`
 - Doubao prompt v3 report：`docs/topology_panel_v1_doubao_prompt_v3_comparison_report.md`
 - Doubao image input v2 report：`docs/topology_panel_v1_doubao_image_input_v2_report.md`
+- Doubao tile2x2 input report：`docs/topology_panel_v1_doubao_tile2x2_input_report.md`
 - Evaluation protocol：`docs/topology_graph_eval_protocol_v1.md`
 
 ## 更新规则

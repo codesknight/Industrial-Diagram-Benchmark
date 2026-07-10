@@ -468,3 +468,30 @@
   - `data_index/topology_panel_v1_doubao_v3_1024_model_predictions_eval_details.csv`
   - `data_index/topology_panel_v1_doubao_v3_1024_model_predictions_eval_errors.csv`
   - updated `data_index/topology_panel_v1_model_leaderboard.csv`
+
+## 2026-07-10 Doubao Tile2x2 Image Input Experiment
+
+- Added tile benchmark builder: `scripts/build_topology_panel_v1_tile_benchmark.py`.
+- Added tile prediction aggregator: `scripts/aggregate_topology_panel_v1_tile_predictions.py`.
+- Generated 2x2 tile benchmark from the 14-row Topology Panel v1 baseline.
+- Tile records: 56.
+- Ran Doubao prompt v3 on all 56 tile images.
+- Tile adapter mode counts: `synthetic_from_counts` 56.
+- Tile adapter error counts: `none` 56.
+- Aggregated tile predictions back to 14 panel-level predictions.
+- Aggregation rule: node=sum, edge=sum, net=mean_clamped3.
+- Panel-level prediction graph valid rate: 1.0.
+- Count error comparison:
+  - node MAE: v3@512 394.642857, v3@1024 399.571429, tile2x2 378.285714.
+  - edge MAE: v3@512 715.642857, v3@1024 724.285714, tile2x2 713.5.
+  - net MAE: v3@512 0.857143, v3@1024 0.928571, tile2x2 0.714286.
+- Interpretation: tile2x2 input improves node/edge/net MAE over whole-image v3@512 and v3@1024. The next image-input experiment should test overlap tiles or tile review to reduce edge-boundary truncation.
+- Main outputs:
+  - `docs/topology_panel_v1_doubao_tile2x2_input_report.md`
+  - `data_index/topology_panel_v1_tile2x2_benchmark_manifest.jsonl`
+  - `data_index/topology_panel_v1_tile2x2_benchmark_manifest.csv`
+  - `data_index/topology_panel_v1_doubao_v3_tile2x2_tile_predictions.jsonl`
+  - `data_index/topology_panel_v1_doubao_v3_tile2x2_clamped_panel_predictions.jsonl`
+  - `data_index/topology_panel_v1_doubao_v3_tile2x2_clamped_panel_predictions_eval_summary.json`
+  - `data_index/topology_panel_v1_doubao_v3_tile2x2_clamped_panel_predictions_eval_details.csv`
+  - updated `data_index/topology_panel_v1_model_leaderboard.csv`

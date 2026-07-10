@@ -1,0 +1,27 @@
+{
+  "adapter_id": "topology_panel_v1_doubao_adapter_v3_tile2x2_2026-07-10",
+  "provider": "doubao",
+  "model": "doubao-seed-2-0-pro-260215",
+  "prompt_version": "v3",
+  "input_version": "tile2x2_512px_250k",
+  "tile_predictions": "data_index/topology_panel_v1_doubao_v3_tile2x2_tile_predictions.jsonl",
+  "output_predictions": "data_index/topology_panel_v1_doubao_v3_tile2x2_clamped_panel_predictions.jsonl",
+  "prediction_rows": 14,
+  "adapter_mode_counts": {
+    "tile2x2_sum_counts": 14
+  },
+  "adapter_error_counts": {
+    "none": 14
+  },
+  "tile_count_min": 4,
+  "tile_count_max": 4,
+  "aggregation": {
+    "node_count": "sum",
+    "edge_count": "sum",
+    "net_count": "mean_clamped3"
+  },
+  "rules": [
+    "Tile-level model predictions are aggregated back to panel-level predictions.",
+    "This is a count-level image-input experiment, not a full geometry reconstruction."
+  ]
+}
