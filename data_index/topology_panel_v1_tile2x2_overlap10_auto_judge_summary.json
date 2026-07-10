@@ -1,0 +1,26 @@
+{
+  "policy_id": "topology_panel_v1_tile2x2_overlap10_auto_judge_2026-07-10",
+  "source_review_manifest": "data_index/topology_panel_v1_tile2x2_overlap10_review_manifest.csv",
+  "output_manifest": "data_index/topology_panel_v1_tile2x2_overlap10_auto_judge_manifest.csv",
+  "output_report": "docs/topology_panel_v1_tile2x2_overlap10_auto_judge_report.md",
+  "panel_count": 14,
+  "decision_counts": {
+    "prefer_overlap10": 10,
+    "overlap10_risk_monitor": 2,
+    "prefer_overlap10_with_monitoring": 1,
+    "needs_tile_review_before_scaling": 1
+  },
+  "next_action_counts": {
+    "use_overlap10_for_next_benchmark": 8,
+    "monitor_aggregation_rule": 4,
+    "no_extra_tile_complexity": 1,
+    "inspect_boundary_duplicates": 1
+  },
+  "global_decision": "trust_auto_judge_and_use_tile2x2_overlap10_as_next image-input baseline",
+  "rationale": [
+    "10 of 14 panels have overlap_edge_benefit.",
+    "10 of 14 panels are better_than_whole_image.",
+    "Only 1 panel has possible_duplicate_edges.",
+    "Overlap10 has best node/edge MAE among current Doubao count-level experiments."
+  ]
+}

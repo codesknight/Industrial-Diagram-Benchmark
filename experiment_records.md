@@ -539,3 +539,26 @@
   - `data_index/topology_panel_v1_tile2x2_overlap10_review.html`
   - `data_index/topology_panel_v1_tile2x2_overlap10_review_manifest.csv`
   - `data_index/topology_panel_v1_tile2x2_overlap10_review_summary.json`
+
+## 2026-07-10 Tile2x2 Overlap10 Auto Judge Policy
+
+- Applied the user's decision to trust the model/auto Judge instead of waiting for manual per-panel review.
+- Added auto-judge policy script: `scripts/apply_topology_panel_v1_tile_overlap_auto_judge.py`.
+- Source review manifest: `data_index/topology_panel_v1_tile2x2_overlap10_review_manifest.csv`.
+- Auto-judge rows: 14.
+- Global decision: use `tile2x2 + overlap10` as the next default image-input baseline.
+- Decision counts:
+  - `prefer_overlap10`: 10.
+  - `overlap10_risk_monitor`: 2.
+  - `prefer_overlap10_with_monitoring`: 1.
+  - `needs_tile_review_before_scaling`: 1.
+- Next action counts:
+  - `use_overlap10_for_next_benchmark`: 8.
+  - `monitor_aggregation_rule`: 4.
+  - `no_extra_tile_complexity`: 1.
+  - `inspect_boundary_duplicates`: 1.
+- Policy: possible duplicate-edge rows do not block the overlap10 strategy, but remain in a boundary duplicate risk monitor.
+- Main outputs:
+  - `data_index/topology_panel_v1_tile2x2_overlap10_auto_judge_manifest.csv`
+  - `data_index/topology_panel_v1_tile2x2_overlap10_auto_judge_summary.json`
+  - `docs/topology_panel_v1_tile2x2_overlap10_auto_judge_report.md`
