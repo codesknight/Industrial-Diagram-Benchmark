@@ -1,0 +1,13 @@
+{
+  "tile_set_id": "tile2x2_overlap10_v1",
+  "source_benchmark": "data_index/topology_panel_v1_benchmark_manifest.jsonl",
+  "tile_records": 56,
+  "source_panels": 14,
+  "rows": 2,
+  "cols": 2,
+  "overlap": 0.1,
+  "output_jsonl": "data_index/topology_panel_v1_tile2x2_overlap10_benchmark_manifest.jsonl",
+  "output_csv": "data_index/topology_panel_v1_tile2x2_overlap10_benchmark_manifest.csv",
+  "tile_root": "outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1",
+  "aggregation_note": "Tile predictions are not evaluated directly; aggregate back to panel-level predictions first."
+}

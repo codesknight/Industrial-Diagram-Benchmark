@@ -124,6 +124,21 @@ EXPERIMENTS = [
         "notes": "Splits each panel into 2x2 tiles; improves node/edge/net MAE over whole-image v3.",
     },
     {
+        "experiment_id": "doubao_prompt_v3_tile2x2_overlap10",
+        "display_name": "Doubao prompt v3 tile2x2 overlap10",
+        "category": "model",
+        "comparable": "yes",
+        "provider": "doubao",
+        "model": "",
+        "prompt_version": "v3",
+        "input_version": "tile2x2_overlap10_512px_250k",
+        "prediction_type": "tile2x2_overlap10_sum_counts_clamped_net",
+        "adapter_summary": INDEX_DIR / "topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions_summary.json",
+        "eval_summary": INDEX_DIR / "topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions_eval_summary.json",
+        "report": DOCS_DIR / "topology_panel_v1_doubao_tile2x2_overlap10_input_report.md",
+        "notes": "Adds 10% overlap to 2x2 tiles; best node/edge MAE so far, net matches whole-image v3.",
+    },
+    {
         "experiment_id": "deepseek_smoke",
         "display_name": "DeepSeek smoke",
         "category": "smoke",
@@ -305,7 +320,7 @@ def write_markdown(rows: List[Dict[str, object]]) -> None:
                 f"- 最低 edge_count MAE：`{best_ids(comparable_rows, 'edge_mae', 'min')}` = {fmt(best_edge['edge_mae'])}",
                 f"- 最低 net_count MAE：`{best_ids(comparable_rows, 'net_mae', 'min')}` = {fmt(best_net['net_mae'])}",
                 "",
-                "Doubao prompt v3 tile2x2 是当前最好的 count-level baseline。分块输入降低了 node/edge/net MAE；1024 整图输入没有收益，说明降低信息密度比单纯放大整图更有效。",
+                "Doubao prompt v3 tile2x2 overlap10 是当前最好的 node/edge count-level baseline。10% overlap 进一步降低了 edge MAE，说明边界截断确实是分块输入的误差来源之一。",
             ]
         )
     lines.extend(
@@ -320,6 +335,7 @@ def write_markdown(rows: List[Dict[str, object]]) -> None:
             "- Doubao prompt v3 report：`docs/topology_panel_v1_doubao_prompt_v3_comparison_report.md`",
             "- Doubao image input v2 report：`docs/topology_panel_v1_doubao_image_input_v2_report.md`",
             "- Doubao tile2x2 input report：`docs/topology_panel_v1_doubao_tile2x2_input_report.md`",
+            "- Doubao tile2x2 overlap10 input report：`docs/topology_panel_v1_doubao_tile2x2_overlap10_input_report.md`",
             "- Evaluation protocol：`docs/topology_graph_eval_protocol_v1.md`",
             "",
             "## 更新规则",

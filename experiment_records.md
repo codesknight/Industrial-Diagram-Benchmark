@@ -495,3 +495,28 @@
   - `data_index/topology_panel_v1_doubao_v3_tile2x2_clamped_panel_predictions_eval_summary.json`
   - `data_index/topology_panel_v1_doubao_v3_tile2x2_clamped_panel_predictions_eval_details.csv`
   - updated `data_index/topology_panel_v1_model_leaderboard.csv`
+
+## 2026-07-10 Doubao Tile2x2 Overlap10 Image Input Experiment
+
+- Generated a 2x2 tile benchmark with 10% overlap.
+- Tile records: 56.
+- Ran Doubao prompt v3 on all 56 overlap tile images.
+- Tile adapter mode counts: `synthetic_from_counts` 56.
+- Tile adapter error counts: `none` 56.
+- Aggregated overlap tile predictions back to 14 panel-level predictions.
+- Aggregation rule: node=sum, edge=sum, net=mean_clamped3.
+- Panel-level prediction graph valid rate: 1.0.
+- Count error comparison:
+  - node MAE: v3@512 394.642857, tile2x2 378.285714, tile2x2 overlap10 362.642857.
+  - edge MAE: v3@512 715.642857, tile2x2 713.5, tile2x2 overlap10 687.857143.
+  - net MAE: v3@512 0.857143, tile2x2 0.714286, tile2x2 overlap10 0.857143.
+- Interpretation: 10% overlap improves edge_count compared with no-overlap tile2x2, supporting the hypothesis that tile boundary truncation was hurting edge estimates. It also improves node_count, while net_count returns to the whole-image v3 level.
+- Main outputs:
+  - `docs/topology_panel_v1_doubao_tile2x2_overlap10_input_report.md`
+  - `data_index/topology_panel_v1_tile2x2_overlap10_benchmark_manifest.jsonl`
+  - `data_index/topology_panel_v1_tile2x2_overlap10_benchmark_manifest.csv`
+  - `data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_tile_predictions.jsonl`
+  - `data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions.jsonl`
+  - `data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions_eval_summary.json`
+  - `data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions_eval_details.csv`
+  - updated `data_index/topology_panel_v1_model_leaderboard.csv`
