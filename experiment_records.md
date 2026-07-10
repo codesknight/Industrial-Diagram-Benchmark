@@ -661,3 +661,18 @@
 - Added figure index:
   - `docs/topology_panel_v1_figures.md`
 - Design note: figure labels use English to avoid cross-platform Chinese font rendering issues.
+
+## 2026-07-10 Defense Summary Topology Panel v1 Integration
+
+- Integrated project final summary, experiment table, and figures into the external defense summary.
+- External file:
+  - `D:/LiuYanhong/Projects/BISHE/data/答辩汇报总结.md`
+- Inserted section marker:
+  - `<!-- TOPOLOGY_PANEL_V1_DEFENSE_START -->`
+- Included:
+  - data boundary and cleaning flow explanation.
+  - Topology Panel v1 benchmark definition.
+  - Doubao model experiment table.
+  - current best baseline metrics.
+  - MAE bar chart, per-sample delta heatmap, and data cleaning flow chart.
+  - ready-to-speak defense script.
