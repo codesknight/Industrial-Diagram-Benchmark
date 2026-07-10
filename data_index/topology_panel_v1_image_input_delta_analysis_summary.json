@@ -1,0 +1,43 @@
+{
+  "analysis_id": "topology_panel_v1_image_input_delta_analysis_2026-07-10",
+  "row_count": 14,
+  "output_csv": "data_index/topology_panel_v1_image_input_delta_analysis.csv",
+  "output_md": "docs/topology_panel_v1_image_input_delta_analysis.md",
+  "mean_abs_error": {
+    "whole_v3_512": {
+      "node": 394.642857,
+      "edge": 715.642857,
+      "net": 0.857143
+    },
+    "whole_v3_1024": {
+      "node": 399.571429,
+      "edge": 724.285714,
+      "net": 0.928571
+    },
+    "tile2x2": {
+      "node": 378.285714,
+      "edge": 713.5,
+      "net": 0.714286
+    },
+    "tile2x2_overlap10": {
+      "node": 362.642857,
+      "edge": 687.857143,
+      "net": 0.857143
+    }
+  },
+  "gain_counts_vs_512": {
+    "node": 10,
+    "edge": 10,
+    "net": 2
+  },
+  "regression_counts_vs_512": {
+    "node": 4,
+    "edge": 4,
+    "net": 2
+  },
+  "pattern_counts": {
+    "node_edge_gain": 9,
+    "node_edge_net_gain": 1,
+    "no_count_gain": 4
+  }
+}

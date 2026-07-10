@@ -562,3 +562,33 @@
   - `data_index/topology_panel_v1_tile2x2_overlap10_auto_judge_manifest.csv`
   - `data_index/topology_panel_v1_tile2x2_overlap10_auto_judge_summary.json`
   - `docs/topology_panel_v1_tile2x2_overlap10_auto_judge_report.md`
+
+## 2026-07-10 Model Experiment Summary and Per-Sample Delta Analysis
+
+- Generated final method summary document for Topology Panel v1 model experiments.
+- Generated per-sample image-input delta analysis across:
+  - whole-image Doubao prompt v3 at 512.
+  - whole-image Doubao prompt v3 at 1024.
+  - Doubao prompt v3 tile2x2.
+  - Doubao prompt v3 tile2x2 overlap10.
+- Delta analysis rows: 14.
+- Mean absolute errors:
+  - whole_v3_512: node 394.642857, edge 715.642857, net 0.857143.
+  - whole_v3_1024: node 399.571429, edge 724.285714, net 0.928571.
+  - tile2x2: node 378.285714, edge 713.5, net 0.714286.
+  - tile2x2_overlap10: node 362.642857, edge 687.857143, net 0.857143.
+- Gain counts versus whole_v3_512:
+  - node improved on 10 / 14 panels.
+  - edge improved on 10 / 14 panels.
+  - net improved on 2 / 14 panels.
+- Pattern counts:
+  - `node_edge_gain`: 9.
+  - `node_edge_net_gain`: 1.
+  - `no_count_gain`: 4.
+- Interpretation: tile2x2 overlap10 is supported by per-sample evidence, not just aggregate averages; duplicate-risk samples remain monitored but do not block the default baseline policy.
+- Main outputs:
+  - `docs/topology_panel_v1_model_experiment_summary.md`
+  - `scripts/build_topology_panel_v1_image_input_delta_analysis.py`
+  - `data_index/topology_panel_v1_image_input_delta_analysis.csv`
+  - `data_index/topology_panel_v1_image_input_delta_analysis_summary.json`
+  - `docs/topology_panel_v1_image_input_delta_analysis.md`
