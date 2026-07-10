@@ -267,3 +267,35 @@ hf auth login
 ```text
 HF_TOKEN=...
 ```
+
+## 2026-07-10 Addendum: Current Best Model Baseline
+
+The Hugging Face release package should also include the frozen current best real-model count-level baseline:
+
+```text
+method: doubao_prompt_v3_tile2x2_overlap10
+model: Doubao
+prompt: v3
+image_input: tile2x2 + 10% overlap
+aggregation: node=sum; edge=sum; net=mean_clamped3
+rows: 14
+prediction_graph_valid_rate: 1.0
+node_count_mae: 362.642857
+edge_count_mae: 687.857143
+net_count_mae: 0.857143
+```
+
+These files are model baseline artifacts, not ground-truth benchmark rows:
+
+```text
+data_index/topology_panel_v1_best_model_predictions.jsonl
+data_index/topology_panel_v1_best_model_eval_summary.json
+data_index/topology_panel_v1_best_model_eval_report.md
+data_index/topology_panel_v1_best_model_eval_details.csv
+data_index/topology_panel_v1_best_model_eval_errors.csv
+data_index/topology_panel_v1_best_model_manifest.csv
+data_index/topology_panel_v1_best_model_summary.json
+data_index/topology_panel_v1_best_model_adapter_summary.json
+data_index/topology_panel_v1_best_model_adapter_report.md
+docs/topology_panel_v1_best_model_baseline.md
+```

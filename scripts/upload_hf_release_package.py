@@ -11,7 +11,7 @@ from typing import Iterable, Optional
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PACKAGE_DIR = ROOT / "outputs" / "hf_release_topology_panel_v1"
 DEFAULT_REPO_ID = "yanhongliu/Industrial-Diagram-Benchmark"
-DEFAULT_COMMIT_MESSAGE = "Add Topology Panel v1 clean baseline benchmark package"
+DEFAULT_COMMIT_MESSAGE = "Update Topology Panel v1 package with best model baseline"
 
 
 def parse_args() -> argparse.Namespace:

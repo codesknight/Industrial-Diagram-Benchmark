@@ -15,7 +15,7 @@ from typing import Iterable, List
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT_DIR = ROOT / "outputs" / "hf_release_topology_panel_v1"
 
-PACKAGE_ID = "hf_release_topology_panel_v1_2026-07-09"
+PACKAGE_ID = "hf_release_topology_panel_v1_2026-07-10"
 
 
 @dataclass(frozen=True)
@@ -200,6 +200,80 @@ BOUNDARY_FILES = [
 ]
 
 
+BEST_MODEL_BASELINE_FILES = [
+    ReleaseFile(
+        "data_index/topology_panel_v1_best_model_predictions.jsonl",
+        "data_index/topology_panel_v1_best_model_predictions.jsonl",
+        "model_baseline",
+        False,
+        "Current best real-model count-level baseline predictions",
+    ),
+    ReleaseFile(
+        "data_index/topology_panel_v1_best_model_eval_summary.json",
+        "data_index/topology_panel_v1_best_model_eval_summary.json",
+        "model_baseline",
+        False,
+        "Current best model evaluation summary",
+    ),
+    ReleaseFile(
+        "data_index/topology_panel_v1_best_model_eval_report.md",
+        "data_index/topology_panel_v1_best_model_eval_report.md",
+        "model_baseline",
+        False,
+        "Current best model evaluation report",
+    ),
+    ReleaseFile(
+        "data_index/topology_panel_v1_best_model_eval_details.csv",
+        "data_index/topology_panel_v1_best_model_eval_details.csv",
+        "model_baseline",
+        False,
+        "Per-sample evaluation details for the current best model baseline",
+    ),
+    ReleaseFile(
+        "data_index/topology_panel_v1_best_model_eval_errors.csv",
+        "data_index/topology_panel_v1_best_model_eval_errors.csv",
+        "model_baseline",
+        False,
+        "Per-sample evaluation errors for the current best model baseline",
+    ),
+    ReleaseFile(
+        "data_index/topology_panel_v1_best_model_manifest.csv",
+        "data_index/topology_panel_v1_best_model_manifest.csv",
+        "model_baseline",
+        False,
+        "Current best model baseline manifest",
+    ),
+    ReleaseFile(
+        "data_index/topology_panel_v1_best_model_summary.json",
+        "data_index/topology_panel_v1_best_model_summary.json",
+        "model_baseline",
+        False,
+        "Current best model baseline summary",
+    ),
+    ReleaseFile(
+        "data_index/topology_panel_v1_best_model_adapter_summary.json",
+        "data_index/topology_panel_v1_best_model_adapter_summary.json",
+        "model_baseline",
+        False,
+        "Adapter run summary for the current best model baseline",
+    ),
+    ReleaseFile(
+        "data_index/topology_panel_v1_best_model_adapter_report.md",
+        "data_index/topology_panel_v1_best_model_adapter_report.md",
+        "model_baseline",
+        False,
+        "Adapter run report for the current best model baseline",
+    ),
+    ReleaseFile(
+        "docs/topology_panel_v1_best_model_baseline.md",
+        "docs/topology_panel_v1_best_model_baseline.md",
+        "model_baseline",
+        False,
+        "Current best model baseline documentation",
+    ),
+]
+
+
 REVIEW_HTML_FILES = [
     ReleaseFile(
         "data_index/topology_panel_v1_baseline_review.html",
@@ -242,7 +316,7 @@ def rel(path: Path) -> str:
 
 
 def selected_files(include_review_html: bool) -> List[ReleaseFile]:
-    files = [*CORE_FILES, *RECOMMENDED_FILES, *BOUNDARY_FILES]
+    files = [*CORE_FILES, *RECOMMENDED_FILES, *BOUNDARY_FILES, *BEST_MODEL_BASELINE_FILES]
     if include_review_html:
         files.extend(REVIEW_HTML_FILES)
     return files
@@ -317,6 +391,7 @@ def build_summary(output_dir: Path, rows: List[dict], include_review_html: bool)
         "rules": [
             "Package README.md is copied from docs/huggingface_dataset_card.md.",
             "Topology Panel v1 means the 14 clean baseline rows only.",
+            "The best model baseline is included as a reproducible count-level reference result, not as ground truth.",
             "v1.1 candidates are included only as boundary files, not formal v1 scoring rows.",
             "Review HTML artifacts are excluded by default and require --include-review-html.",
         ],

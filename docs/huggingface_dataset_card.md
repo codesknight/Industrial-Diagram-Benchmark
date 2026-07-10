@@ -65,6 +65,44 @@ Evaluation script in the companion repository:
 benchmark/topology/evaluate_topology_graph_v1.py
 ```
 
+## Current Best Model Baseline
+
+The current best real-model count-level baseline is frozen as:
+
+```text
+doubao_prompt_v3_tile2x2_overlap10
+```
+
+This baseline is a reproducible model result for the 14-row `Topology Panel v1 clean baseline`.
+It is **not** ground truth and it is **not** a full topology graph reconstruction result. It should be used as a count-level reference result for model comparison.
+
+Configuration:
+
+```text
+model: Doubao
+prompt: v3
+image_input: tile2x2 + 10% overlap
+aggregation: node=sum; edge=sum; net=mean_clamped3
+rows: 14
+prediction_graph_valid_rate: 1.0
+node_count_mae: 362.642857
+edge_count_mae: 687.857143
+net_count_mae: 0.857143
+```
+
+Best baseline files:
+
+```text
+data_index/topology_panel_v1_best_model_predictions.jsonl
+data_index/topology_panel_v1_best_model_eval_summary.json
+data_index/topology_panel_v1_best_model_eval_report.md
+data_index/topology_panel_v1_best_model_eval_details.csv
+data_index/topology_panel_v1_best_model_eval_errors.csv
+data_index/topology_panel_v1_best_model_manifest.csv
+data_index/topology_panel_v1_best_model_summary.json
+docs/topology_panel_v1_best_model_baseline.md
+```
+
 ## Version Boundary
 
 `Topology Panel v1` means **only** the 14 clean baseline samples.
@@ -168,6 +206,19 @@ data_index/topology_panel_v1_release_excluded_manifest.csv
 data_index/topology_panel_v1_release_improvement_manifest.csv
 data_index/topology_panel_v1_1_abandoned_manifest.csv
 data_index/topology_panel_v1_1_keep_improvement_manifest.csv
+```
+
+Optional model baseline files:
+
+```text
+data_index/topology_panel_v1_best_model_predictions.jsonl
+data_index/topology_panel_v1_best_model_eval_summary.json
+data_index/topology_panel_v1_best_model_eval_report.md
+data_index/topology_panel_v1_best_model_eval_details.csv
+data_index/topology_panel_v1_best_model_eval_errors.csv
+data_index/topology_panel_v1_best_model_manifest.csv
+data_index/topology_panel_v1_best_model_summary.json
+docs/topology_panel_v1_best_model_baseline.md
 ```
 
 ## Data Scope

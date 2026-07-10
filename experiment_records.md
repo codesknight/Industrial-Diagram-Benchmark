@@ -614,3 +614,23 @@
   - `data_index/topology_panel_v1_best_model_manifest.csv`
   - `data_index/topology_panel_v1_best_model_summary.json`
   - `docs/topology_panel_v1_best_model_baseline.md`
+
+## 2026-07-10 Hugging Face Release Package Sync for Best Baseline
+
+- Synced the frozen current best model baseline into the Hugging Face release package and dataset card.
+- Updated dataset card section: `Current Best Model Baseline`.
+- Updated release file checklist with the 2026-07-10 best baseline addendum.
+- Updated `scripts/prepare_hf_release_package.py`:
+  - package id: `hf_release_topology_panel_v1_2026-07-10`.
+  - added `model_baseline` release category.
+  - included 10 best baseline files.
+- Rebuilt local package:
+  - output directory: `outputs/hf_release_topology_panel_v1/`.
+  - copied files: 33 source files plus 3 generated package metadata files.
+  - missing files: 0.
+  - package file count uploaded: 36.
+- Uploaded package to Hugging Face Dataset:
+  - repo: `yanhongliu/Industrial-Diagram-Benchmark`.
+- Important boundary:
+  - best model baseline files are reproducible model-result artifacts.
+  - they are not ground truth and do not change the 14-row Topology Panel v1 clean baseline boundary.
