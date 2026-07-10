@@ -1,0 +1,20 @@
+{
+  "leaderboard_id": "topology_panel_v1_model_leaderboard_2026-07-10",
+  "row_count": 5,
+  "comparable_row_count": 2,
+  "output_csv": "data_index/topology_panel_v1_model_leaderboard.csv",
+  "output_md": "docs/topology_panel_v1_model_leaderboard.md",
+  "experiments": [
+    "reference_as_prediction",
+    "oracle_minus",
+    "doubao_v1",
+    "doubao_prompt_v2",
+    "deepseek_smoke"
+  ],
+  "best_comparable": {
+    "prediction_valid_rate": "doubao_prompt_v2",
+    "node_mae": "doubao_prompt_v2",
+    "edge_mae": "doubao_prompt_v2",
+    "net_mae": "doubao_v1"
+  }
+}

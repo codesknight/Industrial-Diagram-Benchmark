@@ -397,3 +397,21 @@
   - `data_index/topology_panel_v1_doubao_v2_model_predictions_eval_report.md`
   - `data_index/topology_panel_v1_doubao_v2_model_predictions_eval_details.csv`
   - `data_index/topology_panel_v1_doubao_v2_model_predictions_eval_errors.csv`
+
+## 2026-07-10 Topology Panel v1 Model Leaderboard
+
+- Added a reproducible leaderboard builder: `scripts/build_topology_panel_v1_model_leaderboard.py`.
+- Generated the first model experiment leaderboard for Topology Panel v1.
+- Leaderboard rows: 5.
+- Comparable model rows: 2 (`doubao_v1`, `doubao_prompt_v2`).
+- Sanity/smoke rows: `reference_as_prediction`, `oracle_minus`, `deepseek_smoke`.
+- Current comparable bests:
+  - prediction valid rate: `doubao_prompt_v2` = 1.0.
+  - node MAE: `doubao_prompt_v2` = 409.285714.
+  - edge MAE: `doubao_prompt_v2` = 737.357143.
+  - net MAE: `doubao_v1` = 3.571429.
+- Interpretation: Doubao prompt v2 is better for valid/status behavior and node/edge count estimates, while Doubao v1 is still better for net_count. The next prompt iteration should focus on stricter connected-component / network-count definitions.
+- Main outputs:
+  - `data_index/topology_panel_v1_model_leaderboard.csv`
+  - `data_index/topology_panel_v1_model_leaderboard_summary.json`
+  - `docs/topology_panel_v1_model_leaderboard.md`
