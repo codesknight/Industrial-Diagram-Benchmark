@@ -282,3 +282,36 @@ python scripts/apply_topology_panel_v1_1_active_improvement_review_labels.py
 2. 保持 `Topology Panel v1` 与 `Topology Panel v1.1 candidates` 的边界清晰。
 3. 使用 14 条 clean baseline 先形成可复现评测闭环。
 4. 后续再针对 3 条 terminal-anchor 和 9 条 over-connected 候选做 v1.1 算法实验。
+
+## Current Best Model Baseline
+
+As of 2026-07-10, the current best real-model count-level baseline for Topology Panel v1 is:
+
+- Method: `doubao_prompt_v3_tile2x2_overlap10`
+- Model/input: Doubao, prompt v3, `tile2x2 + 10% overlap`
+- Aggregation: `node=sum; edge=sum; net=mean_clamped3`
+- Scope: count-level synthetic graph baseline, not full topology graph reconstruction
+- Rows: 14
+- Prediction graph valid rate: 1.0
+- MAE: node `362.642857`, edge `687.857143`, net `0.857143`
+
+Stable entry files:
+
+```text
+data_index/topology_panel_v1_best_model_predictions.jsonl
+data_index/topology_panel_v1_best_model_eval_summary.json
+data_index/topology_panel_v1_best_model_eval_details.csv
+data_index/topology_panel_v1_best_model_eval_errors.csv
+data_index/topology_panel_v1_best_model_manifest.csv
+data_index/topology_panel_v1_best_model_summary.json
+docs/topology_panel_v1_best_model_baseline.md
+```
+
+Related experiment analysis:
+
+```text
+docs/topology_panel_v1_model_experiment_summary.md
+docs/topology_panel_v1_image_input_delta_analysis.md
+docs/topology_panel_v1_tile2x2_overlap10_auto_judge_report.md
+data_index/topology_panel_v1_model_leaderboard.csv
+```

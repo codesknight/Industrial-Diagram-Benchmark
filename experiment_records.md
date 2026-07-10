@@ -592,3 +592,25 @@
   - `data_index/topology_panel_v1_image_input_delta_analysis.csv`
   - `data_index/topology_panel_v1_image_input_delta_analysis_summary.json`
   - `docs/topology_panel_v1_image_input_delta_analysis.md`
+
+## 2026-07-10 Frozen Current Best Model Baseline
+
+- Frozen current best real-model count-level baseline for Topology Panel v1.
+- Method: `doubao_prompt_v3_tile2x2_overlap10`.
+- Input: Doubao prompt v3 with tile2x2 + 10% overlap.
+- Aggregation: node=sum; edge=sum; net=mean_clamped3.
+- Scope: count-level synthetic graph baseline, not full topology graph reconstruction.
+- Rows: 14.
+- Prediction graph valid rate: 1.0.
+- MAE:
+  - node_count: 362.642857.
+  - edge_count: 687.857143.
+  - net_count: 0.857143.
+- Main outputs:
+  - `data_index/topology_panel_v1_best_model_predictions.jsonl`
+  - `data_index/topology_panel_v1_best_model_eval_summary.json`
+  - `data_index/topology_panel_v1_best_model_eval_details.csv`
+  - `data_index/topology_panel_v1_best_model_eval_errors.csv`
+  - `data_index/topology_panel_v1_best_model_manifest.csv`
+  - `data_index/topology_panel_v1_best_model_summary.json`
+  - `docs/topology_panel_v1_best_model_baseline.md`

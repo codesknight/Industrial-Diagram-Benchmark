@@ -271,3 +271,29 @@ panel samples -> human review -> clean baseline -> benchmark JSONL -> eval proto
 ```
 
 这意味着 Topology Panel v1 可以先作为一个小规模但规则清晰的基准发布。后续重点应从继续扩大自动修复，转为先把发布材料、复现实验入口和数据边界写清楚，再逐步扩充 v1.1/v2。
+
+## 当前最佳模型基线 / Current Best Model Baseline
+
+截至 2026-07-10，Topology Panel v1 当前最佳真实模型 count-level baseline 已固化为：
+
+- 方法：`doubao_prompt_v3_tile2x2_overlap10`
+- 模型与输入：Doubao，prompt v3，`tile2x2 + 10% overlap`
+- 聚合规则：`node=sum; edge=sum; net=mean_clamped3`
+- 适用范围：count-level synthetic graph baseline，不代表完整 topology graph reconstruction
+- 样本数：14
+- prediction graph valid rate：1.0
+- MAE：node `362.642857`，edge `687.857143`，net `0.857143`
+
+正式入口文件：
+
+```text
+data_index/topology_panel_v1_best_model_predictions.jsonl
+data_index/topology_panel_v1_best_model_eval_summary.json
+data_index/topology_panel_v1_best_model_eval_details.csv
+data_index/topology_panel_v1_best_model_eval_errors.csv
+data_index/topology_panel_v1_best_model_manifest.csv
+data_index/topology_panel_v1_best_model_summary.json
+docs/topology_panel_v1_best_model_baseline.md
+```
+
+这个 best baseline 只用于模型实验结果的统一引用；数据集边界仍然以 14 条 `Topology Panel v1 clean baseline` 为准。

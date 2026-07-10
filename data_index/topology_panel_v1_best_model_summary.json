@@ -1,0 +1,64 @@
+{
+  "best_id": "topology_panel_v1_best_model_baseline_2026-07-10",
+  "method_id": "doubao_prompt_v3_tile2x2_overlap10",
+  "status": "current_best_count_level_model_baseline",
+  "important_scope_note": "This is a count-level synthetic-graph baseline, not full topology graph reconstruction.",
+  "source_files": {
+    "predictions": "data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions.jsonl",
+    "eval_summary": "data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions_eval_summary.json",
+    "eval_report": "data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions_eval_report.md",
+    "eval_details": "data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions_eval_details.csv",
+    "eval_errors": "data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions_eval_errors.csv",
+    "adapter_summary": "data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions_summary.json",
+    "adapter_report": "data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions_report.md"
+  },
+  "target_files": {
+    "predictions": "data_index/topology_panel_v1_best_model_predictions.jsonl",
+    "eval_summary": "data_index/topology_panel_v1_best_model_eval_summary.json",
+    "eval_report": "data_index/topology_panel_v1_best_model_eval_report.md",
+    "eval_details": "data_index/topology_panel_v1_best_model_eval_details.csv",
+    "eval_errors": "data_index/topology_panel_v1_best_model_eval_errors.csv",
+    "adapter_summary": "data_index/topology_panel_v1_best_model_adapter_summary.json",
+    "adapter_report": "data_index/topology_panel_v1_best_model_adapter_report.md",
+    "manifest": "data_index/topology_panel_v1_best_model_manifest.csv",
+    "summary": "data_index/topology_panel_v1_best_model_summary.json",
+    "report": "docs/topology_panel_v1_best_model_baseline.md"
+  },
+  "prediction_rows": 14,
+  "prediction_valid_rate": 1.0,
+  "count_errors": {
+    "node_count": {
+      "mae": 362.642857,
+      "mre": 0.691472
+    },
+    "edge_count": {
+      "mae": 687.857143,
+      "mre": 0.815865
+    },
+    "net_count": {
+      "mae": 0.857143,
+      "mre": 0.738095
+    }
+  },
+  "manifest": [
+    {
+      "best_id": "topology_panel_v1_best_model_baseline_2026-07-10",
+      "method_id": "doubao_prompt_v3_tile2x2_overlap10",
+      "provider": "doubao",
+      "model": "doubao-seed-2-0-pro-260215",
+      "prompt_version": "v3",
+      "input_version": "tile2x2_512px_250k",
+      "aggregation": "node=sum;edge=sum;net=mean_clamped3",
+      "prediction_rows": 14,
+      "prediction_valid_rate": 1.0,
+      "node_mae": 362.642857,
+      "edge_mae": 687.857143,
+      "net_mae": 0.857143,
+      "predictions": "data_index/topology_panel_v1_best_model_predictions.jsonl",
+      "eval_summary": "data_index/topology_panel_v1_best_model_eval_summary.json",
+      "eval_details": "data_index/topology_panel_v1_best_model_eval_details.csv",
+      "eval_errors": "data_index/topology_panel_v1_best_model_eval_errors.csv",
+      "report": "docs/topology_panel_v1_best_model_baseline.md"
+    }
+  ]
+}
