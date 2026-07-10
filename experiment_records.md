@@ -634,3 +634,18 @@
 - Important boundary:
   - best model baseline files are reproducible model-result artifacts.
   - they are not ground truth and do not change the 14-row Topology Panel v1 clean baseline boundary.
+
+## 2026-07-10 Project Final Summary and Experiment Table
+
+- Generated project-level final summary for the current Industrial Diagram Benchmark stage.
+- Generated Topology Panel v1 experiment result table in CSV and Markdown.
+- Main outputs:
+  - `docs/project_final_summary.md`
+  - `data_index/topology_panel_v1_experiment_table.csv`
+  - `docs/topology_panel_v1_experiment_table.md`
+- Current best model baseline remains:
+  - `doubao_prompt_v3_tile2x2_overlap10`
+  - node MAE: 362.642857
+  - edge MAE: 687.857143
+  - net MAE: 0.857143
+- The summary keeps the formal v1 boundary unchanged: 14 clean baseline rows only.
