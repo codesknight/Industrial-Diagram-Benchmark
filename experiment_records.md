@@ -520,3 +520,22 @@
   - `data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions_eval_summary.json`
   - `data_index/topology_panel_v1_doubao_v3_tile2x2_overlap10_panel_predictions_eval_details.csv`
   - updated `data_index/topology_panel_v1_model_leaderboard.csv`
+
+## 2026-07-10 Tile2x2 / Overlap10 Review HTML
+
+- Added a tile overlap review HTML builder: `scripts/build_topology_panel_v1_tile_overlap_review_html.py`.
+- Generated review HTML for comparing whole-image v3@512, tile2x2, and tile2x2 overlap10 predictions.
+- Review panels: 14.
+- The review page shows the original panel, 2x2 tile images, 2x2 overlap10 tile images, tile-level node/edge/net predictions, panel-level errors, and automatic delta tags.
+- Auto tag counts:
+  - `overlap_edge_benefit`: 10.
+  - `overlap_node_benefit`: 8.
+  - `better_than_whole_image`: 10.
+  - `possible_duplicate_edges`: 1.
+  - `possible_duplicate_nodes`: 4.
+  - `possible_duplicate_nets`: 2.
+- The page supports browser-local review labels and CSV export for manual decisions about overlap benefit, duplicate counting, boundary cut issues, 3x3, or adaptive crop.
+- Main outputs:
+  - `data_index/topology_panel_v1_tile2x2_overlap10_review.html`
+  - `data_index/topology_panel_v1_tile2x2_overlap10_review_manifest.csv`
+  - `data_index/topology_panel_v1_tile2x2_overlap10_review_summary.json`

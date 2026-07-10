@@ -1,0 +1,15 @@
+{
+  "review_id": "topology_panel_v1_tile2x2_overlap10_review_2026-07-10",
+  "panel_count": 14,
+  "output_html": "data_index/topology_panel_v1_tile2x2_overlap10_review.html",
+  "output_manifest": "data_index/topology_panel_v1_tile2x2_overlap10_review_manifest.csv",
+  "tag_counts": {
+    "better_than_whole_image": 10,
+    "overlap_edge_benefit": 10,
+    "overlap_node_benefit": 8,
+    "possible_duplicate_edges": 1,
+    "possible_duplicate_nets": 2,
+    "possible_duplicate_nodes": 4
+  },
+  "sort_order": "most negative edge_delta_overlap_minus_tile first"
+}

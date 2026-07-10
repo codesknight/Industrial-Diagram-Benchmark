@@ -1,0 +1,1817 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>Topology Panel v1 Tile2x2 Overlap Review</title>
+  <style>
+    body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; background: #f5f5f2; color: #202124; }
+    header { position: sticky; top: 0; z-index: 10; background: #202124; color: #fff; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    h1 { font-size: 18px; margin: 0; }
+    button { border: 1px solid #888; background: #fff; color: #111; padding: 7px 10px; cursor: pointer; }
+    main { padding: 18px; }
+    .panel-card { background: #fff; border: 1px solid #d8d8d8; margin-bottom: 18px; padding: 14px; }
+    .panel-header { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
+    h2 { font-size: 15px; margin: 0 0 4px; word-break: break-all; }
+    .subtle { color: #666; font-size: 12px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; }
+    .tag { font-size: 12px; border: 1px solid #bbb; padding: 3px 6px; background: #f0f0f0; }
+    .overlap_edge_benefit, .overlap_node_benefit, .better_than_whole_image { background: #e6f4ea; border-color: #7dbb86; }
+    .possible_duplicate_edges, .possible_duplicate_nodes, .possible_duplicate_nets { background: #fdecea; border-color: #e2847d; }
+    .delta-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 12px 0; font-size: 13px; }
+    .delta-strip div, .metric-block, .ref { background: #f7f7f7; border: 1px solid #e1e1e1; padding: 8px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 12px; font-size: 12px; }
+    .metric-title, .section-title { font-weight: 700; margin-bottom: 5px; }
+    .visual-grid { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 12px; align-items: start; }
+    img { max-width: 100%; display: block; background: #fafafa; border: 1px solid #ddd; }
+    .original img { max-height: 620px; object-fit: contain; width: 100%; }
+    .tile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .tile-card { border: 1px solid #ddd; background: #fafafa; padding: 6px; }
+    .tile-head { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+    .tile-bbox { font-size: 10px; color: #666; margin-top: 4px; word-break: break-all; }
+    .review-controls { display: flex; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #e2e2e2; }
+    .review-controls label { font-size: 12px; display: flex; gap: 6px; align-items: center; }
+    .review-controls input { min-width: 420px; padding: 6px; }
+    @media (max-width: 1300px) {
+      .visual-grid { grid-template-columns: 1fr; }
+      .metrics, .delta-strip { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Topology Panel v1 Tile2x2 / Overlap10 Review · 14 panels</h1>
+    <div>
+      <button onclick="exportCsv()">Export Review CSV</button>
+      <button onclick="clearLabels()">Clear Labels</button>
+    </div>
+  </header>
+  <main>
+    
+            <section class="panel-card" id="row-1">
+              <div class="panel-header">
+                <div>
+                  <h2>1. _P3_staging_batch1/QA-D401-06(10kV开关柜柜顶小母线布置图)#panel_000</h2>
+                  <div class="subtle">P3 · train</div>
+                </div>
+                <div class="tags"><span class="tag overlap_edge_benefit">overlap_edge_benefit</span><span class="tag overlap_node_benefit">overlap_node_benefit</span><span class="tag better_than_whole_image">better_than_whole_image</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>-80.0</b></div>
+                <div>overlap - tile node err: <b>-39.0</b></div>
+                <div>overlap - tile net err: <b>+0.0</b></div>
+                <div>overlap - whole edge err: <b>-151.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>684</b> / <b>1108</b> / <b>2</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>65</b> / <b>58</b> / <b>1</b></div>
+        <div>abs err n/e/net: <b>619.0</b> / <b>1050.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>122</b> / <b>129</b> / <b>3</b></div>
+        <div>abs err n/e/net: <b>562.0</b> / <b>979.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>161</b> / <b>209</b> / <b>3</b></div>
+        <div>abs err n/e/net: <b>523.0</b> / <b>899.0</b> / <b>1.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../datas/qa_and_png/P3_oda_output/QA-D401-06%2810kV%E5%BC%80%E5%85%B3%E6%9F%9C%E6%9F%9C%E9%A1%B6%E5%B0%8F%E6%AF%8D%E7%BA%BF%E5%B8%83%E7%BD%AE%E5%9B%BE%29.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 42/36/3</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_QA-D401-06%2810kV%E5%BC%80%E5%85%B3%E6%9F%9C%E6%9F%9C%E9%A1%B6%E5%B0%8F%E6%AF%8D%E7%BA%BF%E5%B8%83%E7%BD%AE%E5%9B%BE%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4681, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 45/60/18</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_QA-D401-06%2810kV%E5%BC%80%E5%85%B3%E6%9F%9C%E6%9F%9C%E9%A1%B6%E5%B0%8F%E6%AF%8D%E7%BA%BF%E5%B8%83%E7%BD%AE%E5%9B%BE%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 0, 9362, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 35/33/3</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_QA-D401-06%2810kV%E5%BC%80%E5%85%B3%E6%9F%9C%E6%9F%9C%E9%A1%B6%E5%B0%8F%E6%AF%8D%E7%BA%BF%E5%B8%83%E7%BD%AE%E5%9B%BE%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3311, 4681, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_QA-D401-06%2810kV%E5%BC%80%E5%85%B3%E6%9F%9C%E6%9F%9C%E9%A1%B6%E5%B0%8F%E6%AF%8D%E7%BA%BF%E5%B8%83%E7%BD%AE%E5%9B%BE%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 3311, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 62/105/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_QA-D401-06%2810kV%E5%BC%80%E5%85%B3%E6%9F%9C%E6%9F%9C%E9%A1%B6%E5%B0%8F%E6%AF%8D%E7%BA%BF%E5%B8%83%E7%BD%AE%E5%9B%BE%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4915, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 55/70/3</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_QA-D401-06%2810kV%E5%BC%80%E5%85%B3%E6%9F%9C%E6%9F%9C%E9%A1%B6%E5%B0%8F%E6%AF%8D%E7%BA%BF%E5%B8%83%E7%BD%AE%E5%9B%BE%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 0, 9362, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 32/25/7</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_QA-D401-06%2810kV%E5%BC%80%E5%85%B3%E6%9F%9C%E6%9F%9C%E9%A1%B6%E5%B0%8F%E6%AF%8D%E7%BA%BF%E5%B8%83%E7%BD%AE%E5%9B%BE%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3145, 4915, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 12/9/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_QA-D401-06%2810kV%E5%BC%80%E5%85%B3%E6%9F%9C%E6%9F%9C%E9%A1%B6%E5%B0%8F%E6%AF%8D%E7%BA%BF%E5%B8%83%E7%BD%AE%E5%9B%BE%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 3145, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-2">
+              <div class="panel-header">
+                <div>
+                  <h2>2. _P3_staging_batch3/#2备用分支在微机保护柜上的端子排(B066-500-0911)wm666.taobao.com#panel_000</h2>
+                  <div class="subtle">P3 · train</div>
+                </div>
+                <div class="tags"><span class="tag overlap_edge_benefit">overlap_edge_benefit</span><span class="tag overlap_node_benefit">overlap_node_benefit</span><span class="tag better_than_whole_image">better_than_whole_image</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>-53.0</b></div>
+                <div>overlap - tile node err: <b>-47.0</b></div>
+                <div>overlap - tile net err: <b>+0.0</b></div>
+                <div>overlap - whole edge err: <b>-1.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>520</b> / <b>878</b> / <b>1</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>120</b> / <b>145</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>400.0</b> / <b>733.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>105</b> / <b>93</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>415.0</b> / <b>785.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>152</b> / <b>146</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>368.0</b> / <b>732.0</b> / <b>1.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../datas/qa_and_png/P3_oda_output/%232%E5%A4%87%E7%94%A8%E5%88%86%E6%94%AF%E5%9C%A8%E5%BE%AE%E6%9C%BA%E4%BF%9D%E6%8A%A4%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-0911%29wm666.taobao.com.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 28/24/3</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch3___2%E5%A4%87%E7%94%A8%E5%88%86%E6%94%AF%E5%9C%A8%E5%BE%AE%E6%9C%BA%E4%BF%9D%E6%8A%A4%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-0911%29wm666.taobao.com__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4681, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 16/14/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch3___2%E5%A4%87%E7%94%A8%E5%88%86%E6%94%AF%E5%9C%A8%E5%BE%AE%E6%9C%BA%E4%BF%9D%E6%8A%A4%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-0911%29wm666.taobao.com__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 0, 9362, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 36/32/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch3___2%E5%A4%87%E7%94%A8%E5%88%86%E6%94%AF%E5%9C%A8%E5%BE%AE%E6%9C%BA%E4%BF%9D%E6%8A%A4%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-0911%29wm666.taobao.com__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3311, 4681, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 25/23/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch3___2%E5%A4%87%E7%94%A8%E5%88%86%E6%94%AF%E5%9C%A8%E5%BE%AE%E6%9C%BA%E4%BF%9D%E6%8A%A4%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-0911%29wm666.taobao.com__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 3311, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 14/10/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch3___2%E5%A4%87%E7%94%A8%E5%88%86%E6%94%AF%E5%9C%A8%E5%BE%AE%E6%9C%BA%E4%BF%9D%E6%8A%A4%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-0911%29wm666.taobao.com__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4915, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 28/33/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch3___2%E5%A4%87%E7%94%A8%E5%88%86%E6%94%AF%E5%9C%A8%E5%BE%AE%E6%9C%BA%E4%BF%9D%E6%8A%A4%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-0911%29wm666.taobao.com__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 0, 9362, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 60/55/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch3___2%E5%A4%87%E7%94%A8%E5%88%86%E6%94%AF%E5%9C%A8%E5%BE%AE%E6%9C%BA%E4%BF%9D%E6%8A%A4%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-0911%29wm666.taobao.com__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3145, 4915, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 50/48/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch3___2%E5%A4%87%E7%94%A8%E5%88%86%E6%94%AF%E5%9C%A8%E5%BE%AE%E6%9C%BA%E4%BF%9D%E6%8A%A4%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-0911%29wm666.taobao.com__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 3145, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-3">
+              <div class="panel-header">
+                <div>
+                  <h2>3. _P1_staging/QA-D301-10(110kV南雄线开关机构箱端子排图(3AP1-FG))#panel_000</h2>
+                  <div class="subtle">P1 · test</div>
+                </div>
+                <div class="tags"><span class="tag overlap_edge_benefit">overlap_edge_benefit</span><span class="tag overlap_node_benefit">overlap_node_benefit</span><span class="tag better_than_whole_image">better_than_whole_image</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>-53.0</b></div>
+                <div>overlap - tile node err: <b>-44.0</b></div>
+                <div>overlap - tile net err: <b>+0.0</b></div>
+                <div>overlap - whole edge err: <b>-38.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>731</b> / <b>1165</b> / <b>1</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>185</b> / <b>210</b> / <b>3</b></div>
+        <div>abs err n/e/net: <b>546.0</b> / <b>955.0</b> / <b>2.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>206</b> / <b>195</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>525.0</b> / <b>970.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>250</b> / <b>248</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>481.0</b> / <b>917.0</b> / <b>1.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../datas/qa_and_png/P1_oda_output/QA-D301-10%28110kV%E5%8D%97%E9%9B%84%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 42/47/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_QA-D301-10%28110kV%E5%8D%97%E9%9B%84%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4681, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 70/65/3</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_QA-D301-10%28110kV%E5%8D%97%E9%9B%84%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 0, 9362, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 62/55/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_QA-D301-10%28110kV%E5%8D%97%E9%9B%84%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3311, 4681, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 32/28/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_QA-D301-10%28110kV%E5%8D%97%E9%9B%84%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 3311, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 70/60/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_QA-D301-10%28110kV%E5%8D%97%E9%9B%84%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4915, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 70/78/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_QA-D301-10%28110kV%E5%8D%97%E9%9B%84%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 0, 9362, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 70/65/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_QA-D301-10%28110kV%E5%8D%97%E9%9B%84%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3145, 4915, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 40/45/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_QA-D301-10%28110kV%E5%8D%97%E9%9B%84%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 3145, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-4">
+              <div class="panel-header">
+                <div>
+                  <h2>4. _P1_staging/QA-D302-10(110kV澜河线开关机构箱端子排图(3AP1-FG))#panel_000</h2>
+                  <div class="subtle">P1 · train</div>
+                </div>
+                <div class="tags"><span class="tag overlap_edge_benefit">overlap_edge_benefit</span><span class="tag overlap_node_benefit">overlap_node_benefit</span><span class="tag better_than_whole_image">better_than_whole_image</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>-41.0</b></div>
+                <div>overlap - tile node err: <b>-17.0</b></div>
+                <div>overlap - tile net err: <b>+0.0</b></div>
+                <div>overlap - whole edge err: <b>-63.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>731</b> / <b>1165</b> / <b>1</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>220</b> / <b>200</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>511.0</b> / <b>965.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>230</b> / <b>222</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>501.0</b> / <b>943.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>247</b> / <b>263</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>484.0</b> / <b>902.0</b> / <b>1.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../datas/qa_and_png/P1_oda_output/QA-D302-10%28110kV%E6%BE%9C%E6%B2%B3%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 78/72/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_QA-D302-10%28110kV%E6%BE%9C%E6%B2%B3%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4681, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 52/48/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_QA-D302-10%28110kV%E6%BE%9C%E6%B2%B3%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 0, 9362, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 65/72/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_QA-D302-10%28110kV%E6%BE%9C%E6%B2%B3%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3311, 4681, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 35/30/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_QA-D302-10%28110kV%E6%BE%9C%E6%B2%B3%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 3311, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 55/60/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_QA-D302-10%28110kV%E6%BE%9C%E6%B2%B3%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4915, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 72/81/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_QA-D302-10%28110kV%E6%BE%9C%E6%B2%B3%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 0, 9362, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 75/70/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_QA-D302-10%28110kV%E6%BE%9C%E6%B2%B3%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3145, 4915, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 45/52/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_QA-D302-10%28110kV%E6%BE%9C%E6%B2%B3%E7%BA%BF%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 3145, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-5">
+              <div class="panel-header">
+                <div>
+                  <h2>5. _P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000</h2>
+                  <div class="subtle">P1 · test</div>
+                </div>
+                <div class="tags"><span class="tag overlap_edge_benefit">overlap_edge_benefit</span><span class="tag overlap_node_benefit">overlap_node_benefit</span><span class="tag better_than_whole_image">better_than_whole_image</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>-30.0</b></div>
+                <div>overlap - tile node err: <b>-38.0</b></div>
+                <div>overlap - tile net err: <b>+0.0</b></div>
+                <div>overlap - whole edge err: <b>-50.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>730</b> / <b>1162</b> / <b>1</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>220</b> / <b>190</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>510.0</b> / <b>972.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>229</b> / <b>210</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>501.0</b> / <b>952.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>267</b> / <b>240</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>463.0</b> / <b>922.0</b> / <b>1.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../datas/qa_and_png/P1_oda_output/QA-D201-16%28%231%E4%B8%BB%E5%8F%98110kV%E4%BE%A7%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 72/68/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_QA-D201-16%28__1%E4%B8%BB%E5%8F%98110kV%E4%BE%A7%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4681, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 60/52/3</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_QA-D201-16%28__1%E4%B8%BB%E5%8F%98110kV%E4%BE%A7%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 0, 9362, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 62/58/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_QA-D201-16%28__1%E4%B8%BB%E5%8F%98110kV%E4%BE%A7%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3311, 4681, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 35/32/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_QA-D201-16%28__1%E4%B8%BB%E5%8F%98110kV%E4%BE%A7%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 3311, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 95/85/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_QA-D201-16%28__1%E4%B8%BB%E5%8F%98110kV%E4%BE%A7%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4915, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 62/68/3</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_QA-D201-16%28__1%E4%B8%BB%E5%8F%98110kV%E4%BE%A7%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 0, 9362, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 70/35/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_QA-D201-16%28__1%E4%B8%BB%E5%8F%98110kV%E4%BE%A7%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3145, 4915, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 40/52/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_QA-D201-16%28__1%E4%B8%BB%E5%8F%98110kV%E4%BE%A7%E5%BC%80%E5%85%B3%E6%9C%BA%E6%9E%84%E7%AE%B1%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%283AP1-FG%29%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 3145, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-6">
+              <div class="panel-header">
+                <div>
+                  <h2>6. _P3_staging_batch1/07(通信回路背面接线图 )#panel_000</h2>
+                  <div class="subtle">P3 · train</div>
+                </div>
+                <div class="tags"><span class="tag overlap_edge_benefit">overlap_edge_benefit</span><span class="tag overlap_node_benefit">overlap_node_benefit</span><span class="tag better_than_whole_image">better_than_whole_image</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>-28.0</b></div>
+                <div>overlap - tile node err: <b>-41.0</b></div>
+                <div>overlap - tile net err: <b>+0.0</b></div>
+                <div>overlap - whole edge err: <b>-46.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>506</b> / <b>795</b> / <b>1</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>56</b> / <b>48</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>450.0</b> / <b>747.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>78</b> / <b>66</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>428.0</b> / <b>729.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>119</b> / <b>94</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>387.0</b> / <b>701.0</b> / <b>1.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../datas/qa_and_png/P3_oda_output/07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%20%29.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 20/10/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE_%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4681, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 32/28/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE_%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 0, 9362, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE_%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3311, 4681, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 26/28/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE_%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 3311, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 24/12/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE_%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4915, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 65/58/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE_%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 0, 9362, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE_%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3145, 4915, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 30/24/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE_%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 3145, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-7">
+              <div class="panel-header">
+                <div>
+                  <h2>7. _P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_002</h2>
+                  <div class="subtle">P1 · train</div>
+                </div>
+                <div class="tags"><span class="tag overlap_edge_benefit">overlap_edge_benefit</span><span class="tag possible_duplicate_nets">possible_duplicate_nets</span><span class="tag better_than_whole_image">better_than_whole_image</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>-28.0</b></div>
+                <div>overlap - tile node err: <b>-1.0</b></div>
+                <div>overlap - tile net err: <b>+1.0</b></div>
+                <div>overlap - whole edge err: <b>-88.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>561</b> / <b>953</b> / <b>1</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>88</b> / <b>72</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>473.0</b> / <b>881.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>144</b> / <b>132</b> / <b>1</b></div>
+        <div>abs err n/e/net: <b>417.0</b> / <b>821.0</b> / <b>0.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>145</b> / <b>160</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>416.0</b> / <b>793.0</b> / <b>1.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../outputs/panels/P1/P1_staging__%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com__panel_002.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 52/46/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com__panel_002__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 2249, 1606]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 42/36/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com__panel_002__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[2249, 0, 4498, 1606]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 50/50/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com__panel_002__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 1606, 2249, 3213]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P1_staging_%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com__panel_002__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[2249, 1606, 4498, 3213]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 55/62/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com__panel_002__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 2361, 1686]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 40/50/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com__panel_002__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[2136, 0, 4498, 1686]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 50/48/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com__panel_002__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 1526, 2361, 3213]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P1_staging_%E4%B8%BB%E5%8F%98%E5%8E%8B%E5%99%A835kV%E4%BE%A7%E6%96%AD%E8%B7%AF%E5%99%A8%E5%9C%A8PWFXH-1111%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1215%29wm666.taobao.com__panel_002__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[2136, 1526, 4498, 3213]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-8">
+              <div class="panel-header">
+                <div>
+                  <h2>8. _P3_staging_batch3/2FWK柜左侧端子排电缆接线图(B066-500-2411)wm666.taobao.com#panel_000</h2>
+                  <div class="subtle">P3 · train</div>
+                </div>
+                <div class="tags"><span class="tag overlap_edge_benefit">overlap_edge_benefit</span><span class="tag overlap_node_benefit">overlap_node_benefit</span><span class="tag possible_duplicate_nets">possible_duplicate_nets</span><span class="tag better_than_whole_image">better_than_whole_image</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>-27.0</b></div>
+                <div>overlap - tile node err: <b>-30.0</b></div>
+                <div>overlap - tile net err: <b>+1.0</b></div>
+                <div>overlap - whole edge err: <b>-32.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>392</b> / <b>657</b> / <b>1</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>85</b> / <b>98</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>307.0</b> / <b>559.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>112</b> / <b>103</b> / <b>1</b></div>
+        <div>abs err n/e/net: <b>280.0</b> / <b>554.0</b> / <b>0.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>142</b> / <b>130</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>250.0</b> / <b>527.0</b> / <b>1.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../datas/qa_and_png/P3_oda_output/2FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2411%29wm666.taobao.com.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 42/38/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch3_2FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2411%29wm666.taobao.com__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4681, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 70/65/3</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch3_2FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2411%29wm666.taobao.com__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 0, 9362, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch3_2FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2411%29wm666.taobao.com__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3311, 4681, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch3_2FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2411%29wm666.taobao.com__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 3311, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 72/68/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch3_2FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2411%29wm666.taobao.com__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4915, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 35/32/3</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch3_2FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2411%29wm666.taobao.com__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 0, 9362, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch3_2FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2411%29wm666.taobao.com__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3145, 4915, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 35/30/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch3_2FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2411%29wm666.taobao.com__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 3145, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-9">
+              <div class="panel-header">
+                <div>
+                  <h2>9. _P2_staging/35kV并联电抗器在监控柜上的端子排(B066-500-1904)wm666.taobao.com#panel_000</h2>
+                  <div class="subtle">P2 · val</div>
+                </div>
+                <div class="tags"><span class="tag overlap_edge_benefit">overlap_edge_benefit</span><span class="tag overlap_node_benefit">overlap_node_benefit</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>-18.0</b></div>
+                <div>overlap - tile node err: <b>-42.0</b></div>
+                <div>overlap - tile net err: <b>+0.0</b></div>
+                <div>overlap - whole edge err: <b>+109.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>315</b> / <b>541</b> / <b>1</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>200</b> / <b>230</b> / <b>1</b></div>
+        <div>abs err n/e/net: <b>115.0</b> / <b>311.0</b> / <b>0.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>102</b> / <b>103</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>213.0</b> / <b>438.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>144</b> / <b>121</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>171.0</b> / <b>420.0</b> / <b>1.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../datas/qa_and_png/P2_oda_output/35kV%E5%B9%B6%E8%81%94%E7%94%B5%E6%8A%97%E5%99%A8%E5%9C%A8%E7%9B%91%E6%8E%A7%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1904%29wm666.taobao.com.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 38/45/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P2_staging_35kV%E5%B9%B6%E8%81%94%E7%94%B5%E6%8A%97%E5%99%A8%E5%9C%A8%E7%9B%91%E6%8E%A7%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1904%29wm666.taobao.com__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4681, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 40/36/3</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P2_staging_35kV%E5%B9%B6%E8%81%94%E7%94%B5%E6%8A%97%E5%99%A8%E5%9C%A8%E7%9B%91%E6%8E%A7%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1904%29wm666.taobao.com__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 0, 9362, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 24/22/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P2_staging_35kV%E5%B9%B6%E8%81%94%E7%94%B5%E6%8A%97%E5%99%A8%E5%9C%A8%E7%9B%91%E6%8E%A7%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1904%29wm666.taobao.com__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3311, 4681, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P2_staging_35kV%E5%B9%B6%E8%81%94%E7%94%B5%E6%8A%97%E5%99%A8%E5%9C%A8%E7%9B%91%E6%8E%A7%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1904%29wm666.taobao.com__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 3311, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 50/32/3</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P2_staging_35kV%E5%B9%B6%E8%81%94%E7%94%B5%E6%8A%97%E5%99%A8%E5%9C%A8%E7%9B%91%E6%8E%A7%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1904%29wm666.taobao.com__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4915, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 40/40/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P2_staging_35kV%E5%B9%B6%E8%81%94%E7%94%B5%E6%8A%97%E5%99%A8%E5%9C%A8%E7%9B%91%E6%8E%A7%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1904%29wm666.taobao.com__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 0, 9362, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 30/25/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P2_staging_35kV%E5%B9%B6%E8%81%94%E7%94%B5%E6%8A%97%E5%99%A8%E5%9C%A8%E7%9B%91%E6%8E%A7%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1904%29wm666.taobao.com__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3145, 4915, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 24/24/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P2_staging_35kV%E5%B9%B6%E8%81%94%E7%94%B5%E6%8A%97%E5%99%A8%E5%9C%A8%E7%9B%91%E6%8E%A7%E6%9F%9C%E4%B8%8A%E7%9A%84%E7%AB%AF%E5%AD%90%E6%8E%92%28B066-500-1904%29wm666.taobao.com__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 3145, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-10">
+              <div class="panel-header">
+                <div>
+                  <h2>10. _P3_staging_batch4/发电机保护屏端子图#panel_003</h2>
+                  <div class="subtle">P3 · train</div>
+                </div>
+                <div class="tags"><span class="tag overlap_edge_benefit">overlap_edge_benefit</span><span class="tag possible_duplicate_nodes">possible_duplicate_nodes</span><span class="tag better_than_whole_image">better_than_whole_image</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>-12.0</b></div>
+                <div>overlap - tile node err: <b>+18.0</b></div>
+                <div>overlap - tile net err: <b>+0.0</b></div>
+                <div>overlap - whole edge err: <b>-47.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>385</b> / <b>619</b> / <b>3</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>120</b> / <b>145</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>265.0</b> / <b>474.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>221</b> / <b>180</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>164.0</b> / <b>439.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>203</b> / <b>192</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>182.0</b> / <b>427.0</b> / <b>1.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../outputs/panels/P3/P3_staging_batch4__%E5%8F%91%E7%94%B5%E6%9C%BA%E4%BF%9D%E6%8A%A4%E5%B1%8F%E7%AB%AF%E5%AD%90%E5%9B%BE__panel_003.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 36/18/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch4_%E5%8F%91%E7%94%B5%E6%9C%BA%E4%BF%9D%E6%8A%A4%E5%B1%8F%E7%AB%AF%E5%AD%90%E5%9B%BE__panel_003__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 442, 1442]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 100/90/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch4_%E5%8F%91%E7%94%B5%E6%9C%BA%E4%BF%9D%E6%8A%A4%E5%B1%8F%E7%AB%AF%E5%AD%90%E5%9B%BE__panel_003__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[442, 0, 884, 1442]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 35/30/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch4_%E5%8F%91%E7%94%B5%E6%9C%BA%E4%BF%9D%E6%8A%A4%E5%B1%8F%E7%AB%AF%E5%AD%90%E5%9B%BE__panel_003__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 1442, 442, 2884]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 50/42/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch4_%E5%8F%91%E7%94%B5%E6%9C%BA%E4%BF%9D%E6%8A%A4%E5%B1%8F%E7%AB%AF%E5%AD%90%E5%9B%BE__panel_003__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[442, 1442, 884, 2884]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 40/35/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch4_%E5%8F%91%E7%94%B5%E6%9C%BA%E4%BF%9D%E6%8A%A4%E5%B1%8F%E7%AB%AF%E5%AD%90%E5%9B%BE__panel_003__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 464, 1514]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 85/78/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch4_%E5%8F%91%E7%94%B5%E6%9C%BA%E4%BF%9D%E6%8A%A4%E5%B1%8F%E7%AB%AF%E5%AD%90%E5%9B%BE__panel_003__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[419, 0, 884, 1514]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 30/27/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch4_%E5%8F%91%E7%94%B5%E6%9C%BA%E4%BF%9D%E6%8A%A4%E5%B1%8F%E7%AB%AF%E5%AD%90%E5%9B%BE__panel_003__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 1369, 464, 2884]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 48/52/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch4_%E5%8F%91%E7%94%B5%E6%9C%BA%E4%BF%9D%E6%8A%A4%E5%B1%8F%E7%AB%AF%E5%AD%90%E5%9B%BE__panel_003__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[419, 1369, 884, 2884]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-11">
+              <div class="panel-header">
+                <div>
+                  <h2>11. _P3_staging_batch1/QA-D601-03(10kV#1(#2)站变柜端子排图)#panel_000</h2>
+                  <div class="subtle">P3 · train</div>
+                </div>
+                <div class="tags"><span class="tag possible_duplicate_nodes">possible_duplicate_nodes</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>-4.0</b></div>
+                <div>overlap - tile node err: <b>+13.0</b></div>
+                <div>overlap - tile net err: <b>+0.0</b></div>
+                <div>overlap - whole edge err: <b>+14.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>204</b> / <b>337</b> / <b>2</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>65</b> / <b>72</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>139.0</b> / <b>265.0</b> / <b>0.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>70</b> / <b>54</b> / <b>1</b></div>
+        <div>abs err n/e/net: <b>134.0</b> / <b>283.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>57</b> / <b>58</b> / <b>1</b></div>
+        <div>abs err n/e/net: <b>147.0</b> / <b>279.0</b> / <b>1.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../datas/qa_and_png/P3_oda_output/QA-D601-03%2810kV%231%28%232%29%E7%AB%99%E5%8F%98%E6%9F%9C%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%29.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 52/38/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_QA-D601-03%2810kV__1%28__2%29%E7%AB%99%E5%8F%98%E6%9F%9C%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4681, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 18/16/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_QA-D601-03%2810kV__1%28__2%29%E7%AB%99%E5%8F%98%E6%9F%9C%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 0, 9362, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_QA-D601-03%2810kV__1%28__2%29%E7%AB%99%E5%8F%98%E6%9F%9C%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3311, 4681, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_QA-D601-03%2810kV__1%28__2%29%E7%AB%99%E5%8F%98%E6%9F%9C%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 3311, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 37/39/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_QA-D601-03%2810kV__1%28__2%29%E7%AB%99%E5%8F%98%E6%9F%9C%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4915, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 20/19/1</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_QA-D601-03%2810kV__1%28__2%29%E7%AB%99%E5%8F%98%E6%9F%9C%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 0, 9362, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_QA-D601-03%2810kV__1%28__2%29%E7%AB%99%E5%8F%98%E6%9F%9C%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3145, 4915, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_QA-D601-03%2810kV__1%28__2%29%E7%AB%99%E5%8F%98%E6%9F%9C%E7%AB%AF%E5%AD%90%E6%8E%92%E5%9B%BE%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 3145, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-12">
+              <div class="panel-header">
+                <div>
+                  <h2>12. _P3_staging_batch1/07(通信回路背面接线图)#panel_000</h2>
+                  <div class="subtle">P3 · train</div>
+                </div>
+                <div class="tags"><span class="tag better_than_whole_image">better_than_whole_image</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>-1.0</b></div>
+                <div>overlap - tile node err: <b>-4.0</b></div>
+                <div>overlap - tile net err: <b>+0.0</b></div>
+                <div>overlap - whole edge err: <b>-22.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>485</b> / <b>762</b> / <b>1</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>72</b> / <b>64</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>413.0</b> / <b>698.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>92</b> / <b>85</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>393.0</b> / <b>677.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>96</b> / <b>86</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>389.0</b> / <b>676.0</b> / <b>1.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../datas/qa_and_png/P3_oda_output/07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 38/42/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4681, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 32/24/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 0, 9362, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3311, 4681, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 22/19/3</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 3311, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 42/36/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4915, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 30/24/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 0, 9362, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3145, 4915, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 24/26/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_07%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 3145, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-13">
+              <div class="panel-header">
+                <div>
+                  <h2>13. _P3_staging_batch3/1FWK柜左侧端子排电缆接线图(B066-500-2409)wm666.taobao.com#panel_000</h2>
+                  <div class="subtle">P3 · train</div>
+                </div>
+                <div class="tags"><span class="tag possible_duplicate_nodes">possible_duplicate_nodes</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>+6.0</b></div>
+                <div>overlap - tile node err: <b>+39.0</b></div>
+                <div>overlap - tile net err: <b>+0.0</b></div>
+                <div>overlap - whole edge err: <b>+16.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>421</b> / <b>701</b> / <b>1</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>160</b> / <b>170</b> / <b>1</b></div>
+        <div>abs err n/e/net: <b>261.0</b> / <b>531.0</b> / <b>0.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>174</b> / <b>160</b> / <b>1</b></div>
+        <div>abs err n/e/net: <b>247.0</b> / <b>541.0</b> / <b>0.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>135</b> / <b>154</b> / <b>1</b></div>
+        <div>abs err n/e/net: <b>286.0</b> / <b>547.0</b> / <b>0.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../datas/qa_and_png/P3_oda_output/1FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2409%29wm666.taobao.com.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 82/76/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch3_1FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2409%29wm666.taobao.com__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4681, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 92/84/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch3_1FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2409%29wm666.taobao.com__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 0, 9362, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch3_1FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2409%29wm666.taobao.com__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3311, 4681, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch3_1FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2409%29wm666.taobao.com__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 3311, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 75/82/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch3_1FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2409%29wm666.taobao.com__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4915, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 60/72/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch3_1FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2409%29wm666.taobao.com__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 0, 9362, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch3_1FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2409%29wm666.taobao.com__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3145, 4915, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch3_1FWK%E6%9F%9C%E5%B7%A6%E4%BE%A7%E7%AB%AF%E5%AD%90%E6%8E%92%E7%94%B5%E7%BC%86%E6%8E%A5%E7%BA%BF%E5%9B%BE%28B066-500-2409%29wm666.taobao.com__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 3145, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+            <section class="panel-card" id="row-14">
+              <div class="panel-header">
+                <div>
+                  <h2>14. _P3_staging_batch1/09(通信回路背面接线图)#panel_000</h2>
+                  <div class="subtle">P3 · train</div>
+                </div>
+                <div class="tags"><span class="tag possible_duplicate_edges">possible_duplicate_edges</span><span class="tag possible_duplicate_nodes">possible_duplicate_nodes</span></div>
+              </div>
+              <div class="delta-strip">
+                <div>overlap - tile edge err: <b>+10.0</b></div>
+                <div>overlap - tile node err: <b>+14.0</b></div>
+                <div>overlap - tile net err: <b>+0.0</b></div>
+                <div>overlap - whole edge err: <b>+10.0</b></div>
+              </div>
+              <div class="metrics">
+                <div class="ref">reference n/e/net: <b>594</b> / <b>940</b> / <b>1</b></div>
+                
+      <div class="metric-block">
+        <div class="metric-title">whole v3@512</div>
+        <div>pred n/e/net: <b>78</b> / <b>62</b> / <b>2</b></div>
+        <div>abs err n/e/net: <b>516.0</b> / <b>878.0</b> / <b>1.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2</div>
+        <div>pred n/e/net: <b>78</b> / <b>62</b> / <b>1</b></div>
+        <div>abs err n/e/net: <b>516.0</b> / <b>878.0</b> / <b>0.0</b></div>
+      </div>
+    
+                
+      <div class="metric-block">
+        <div class="metric-title">tile2x2 overlap10</div>
+        <div>pred n/e/net: <b>64</b> / <b>52</b> / <b>1</b></div>
+        <div>abs err n/e/net: <b>530.0</b> / <b>888.0</b> / <b>0.0</b></div>
+      </div>
+    
+              </div>
+              <div class="visual-grid">
+                <div class="original">
+                  <div class="section-title">Original Panel</div>
+                  <img src="../datas/qa_and_png/P3_oda_output/09%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29.png" loading="lazy" />
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_09%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4681, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_09%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 0, 9362, 3311]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 78/62/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_09%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3311, 4681, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_v1/_P3_staging_batch1_09%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4681, 3311, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+                <div>
+                  <div class="section-title">Tile2x2 Overlap10</div>
+                  <div class="tile-grid">
+            <div class="tile-card">
+              <div class="tile-head">r0c0 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_09%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r0c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 0, 4915, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r0c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_09%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r0c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 0, 9362, 3476]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c0 · n/e/net 64/52/2</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_09%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r1c0.png" loading="lazy" />
+              <div class="tile-bbox">[0, 3145, 4915, 6622]</div>
+            </div>
+            
+
+            <div class="tile-card">
+              <div class="tile-head">r1c1 · n/e/net 0/0/0</div>
+              <img src="../outputs/topology_panel_v1_tiles/tile2x2_overlap10_v1/_P3_staging_batch1_09%28%E9%80%9A%E4%BF%A1%E5%9B%9E%E8%B7%AF%E8%83%8C%E9%9D%A2%E6%8E%A5%E7%BA%BF%E5%9B%BE%29__panel_000__r1c1.png" loading="lazy" />
+              <div class="tile-bbox">[4446, 3145, 9362, 6622]</div>
+            </div>
+            </div>
+                </div>
+              </div>
+              <div class="review-controls">
+                <label>review_label
+                  <select data-field="review_label">
+                    <option value=""></option>
+                    <option value="overlap_benefit">overlap_benefit</option>
+                    <option value="duplicate_counting">duplicate_counting</option>
+                    <option value="boundary_cut_issue">boundary_cut_issue</option>
+                    <option value="needs_3x3">needs_3x3</option>
+                    <option value="needs_adaptive_crop">needs_adaptive_crop</option>
+                    <option value="keep_tile2x2">keep_tile2x2</option>
+                    <option value="prefer_whole_image">prefer_whole_image</option>
+                  </select>
+                </label>
+                <label>note <input data-field="review_note" placeholder="optional note" /></label>
+              </div>
+            </section>
+            
+  </main>
+  <script>
+    const storageKey = 'topology_panel_v1_tile2x2_overlap10_review';
+    const panelIds = ["_P3_staging_batch1/QA-D401-06(10kV开关柜柜顶小母线布置图)#panel_000", "_P3_staging_batch3/#2备用分支在微机保护柜上的端子排(B066-500-0911)wm666.taobao.com#panel_000", "_P1_staging/QA-D301-10(110kV南雄线开关机构箱端子排图(3AP1-FG))#panel_000", "_P1_staging/QA-D302-10(110kV澜河线开关机构箱端子排图(3AP1-FG))#panel_000", "_P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000", "_P3_staging_batch1/07(通信回路背面接线图 )#panel_000", "_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_002", "_P3_staging_batch3/2FWK柜左侧端子排电缆接线图(B066-500-2411)wm666.taobao.com#panel_000", "_P2_staging/35kV并联电抗器在监控柜上的端子排(B066-500-1904)wm666.taobao.com#panel_000", "_P3_staging_batch4/发电机保护屏端子图#panel_003", "_P3_staging_batch1/QA-D601-03(10kV#1(#2)站变柜端子排图)#panel_000", "_P3_staging_batch1/07(通信回路背面接线图)#panel_000", "_P3_staging_batch3/1FWK柜左侧端子排电缆接线图(B066-500-2409)wm666.taobao.com#panel_000", "_P3_staging_batch1/09(通信回路背面接线图)#panel_000"];
+    function loadState() {
+      const state = JSON.parse(localStorage.getItem(storageKey) || '{}');
+      document.querySelectorAll('.panel-card').forEach((card, idx) => {
+        const pid = panelIds[idx];
+        const row = state[pid] || {};
+        card.querySelectorAll('[data-field]').forEach(el => {
+          el.value = row[el.dataset.field] || '';
+          el.addEventListener('input', saveState);
+          el.addEventListener('change', saveState);
+        });
+      });
+    }
+    function saveState() {
+      const state = {};
+      document.querySelectorAll('.panel-card').forEach((card, idx) => {
+        const pid = panelIds[idx];
+        state[pid] = {};
+        card.querySelectorAll('[data-field]').forEach(el => state[pid][el.dataset.field] = el.value);
+      });
+      localStorage.setItem(storageKey, JSON.stringify(state));
+    }
+    function exportCsv() {
+      saveState();
+      const state = JSON.parse(localStorage.getItem(storageKey) || '{}');
+      const rows = [['panel_id','review_label','review_note']];
+      panelIds.forEach(pid => rows.push([pid, state[pid]?.review_label || '', state[pid]?.review_note || '']));
+      const csv = rows.map(r => r.map(v => '"' + String(v).replaceAll('"','""') + '"').join(',')).join('\n');
+      const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'topology_panel_v1_tile2x2_overlap10_review_labels.csv';
+      a.click();
+    }
+    function clearLabels() {
+      if (!confirm('Clear local review labels?')) return;
+      localStorage.removeItem(storageKey);
+      location.reload();
+    }
+    loadState();
+  </script>
+</body>
+</html>
