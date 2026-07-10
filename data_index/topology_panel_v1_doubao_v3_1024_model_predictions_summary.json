@@ -1,0 +1,23 @@
+{
+  "adapter_id": "topology_panel_v1_doubao_adapter_v3_2026-07-09",
+  "provider": "doubao",
+  "model": "doubao-seed-2-0-pro-260215",
+  "prompt_version": "v3",
+  "image_max_side": 1024,
+  "image_max_pixels": 1000000,
+  "dry_run": false,
+  "benchmark": "data_index/topology_panel_v1_benchmark_manifest.jsonl",
+  "output_predictions": "data_index/topology_panel_v1_doubao_v3_1024_model_predictions.jsonl",
+  "prediction_rows": 14,
+  "adapter_mode_counts": {
+    "synthetic_from_counts": 14
+  },
+  "adapter_error_counts": {
+    "none": 14
+  },
+  "rules": [
+    "Model predictions are converted into evaluator-ready topology graph JSONL.",
+    "If the model returns only counts, the adapter creates a synthetic schema-valid graph with stats equal to model counts.",
+    "This adapter is a first-pass bridge; count-only predictions are not full geometric topology reconstructions."
+  ]
+}

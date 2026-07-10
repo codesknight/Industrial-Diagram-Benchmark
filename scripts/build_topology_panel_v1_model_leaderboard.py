@@ -94,6 +94,21 @@ EXPERIMENTS = [
         "notes": "Keeps valid/status gains and fixes net_count overestimation with stricter connected-component rules.",
     },
     {
+        "experiment_id": "doubao_prompt_v3_image_1024",
+        "display_name": "Doubao prompt v3 image 1024",
+        "category": "model",
+        "comparable": "yes",
+        "provider": "doubao",
+        "model": "",
+        "prompt_version": "v3",
+        "input_version": "image_1024px_1M",
+        "prediction_type": "count_only_synthetic_graph",
+        "adapter_summary": INDEX_DIR / "topology_panel_v1_doubao_v3_1024_model_predictions_summary.json",
+        "eval_summary": INDEX_DIR / "topology_panel_v1_doubao_v3_1024_model_predictions_eval_summary.json",
+        "report": DOCS_DIR / "topology_panel_v1_doubao_image_input_v2_report.md",
+        "notes": "Same prompt as v3 with larger whole-image input; did not improve count MAE over 512.",
+    },
+    {
         "experiment_id": "deepseek_smoke",
         "display_name": "DeepSeek smoke",
         "category": "smoke",
@@ -275,7 +290,7 @@ def write_markdown(rows: List[Dict[str, object]]) -> None:
                 f"- 最低 edge_count MAE：`{best_ids(comparable_rows, 'edge_mae', 'min')}` = {fmt(best_edge['edge_mae'])}",
                 f"- 最低 net_count MAE：`{best_ids(comparable_rows, 'net_mae', 'min')}` = {fmt(best_net['net_mae'])}",
                 "",
-                "Doubao prompt v3 相比 v2 保持了 status/valid 改善，同时显著修正 net_count 过估计，并继续小幅降低 node/edge MAE。当前下一步应转向 image input v2 或局部裁剪/分块输入实验。",
+                "Doubao prompt v3 的 512 输入仍是当前最好的 count-level baseline。1024 整图输入没有降低 node/edge/net MAE，说明下一步应转向局部裁剪/分块输入，而不是继续放大整图。",
             ]
         )
     lines.extend(
@@ -288,6 +303,7 @@ def write_markdown(rows: List[Dict[str, object]]) -> None:
             "- Doubao v1 report：`docs/topology_panel_v1_doubao_eval_report.md`",
             "- Doubao prompt v2 report：`docs/topology_panel_v1_doubao_prompt_v2_comparison_report.md`",
             "- Doubao prompt v3 report：`docs/topology_panel_v1_doubao_prompt_v3_comparison_report.md`",
+            "- Doubao image input v2 report：`docs/topology_panel_v1_doubao_image_input_v2_report.md`",
             "- Evaluation protocol：`docs/topology_graph_eval_protocol_v1.md`",
             "",
             "## 更新规则",

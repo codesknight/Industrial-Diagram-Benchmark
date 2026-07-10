@@ -441,3 +441,30 @@
   - `data_index/topology_panel_v1_doubao_v3_model_predictions_eval_details.csv`
   - `data_index/topology_panel_v1_doubao_v3_model_predictions_eval_errors.csv`
   - updated `data_index/topology_panel_v1_model_leaderboard.csv`
+
+## 2026-07-10 Doubao Image Input v2 Whole-Image Resolution Test
+
+- Fixed prompt version at `v3` and compared whole-image input resolution.
+- Baseline setting: `--max-image-side 512 --max-image-pixels 250000`.
+- New setting: `--max-image-side 1024 --max-image-pixels 1000000`.
+- Ran Doubao v3@1024 on all 14 Topology Panel v1 baseline rows.
+- Prediction rows: 14 / 14.
+- Adapter mode counts: `synthetic_from_counts` 14.
+- Adapter error counts: `none` 14.
+- v3@1024 prediction graph valid rate: 1.0.
+- v3@1024 invalid prediction rows: 0.
+- Count error comparison:
+  - node MAE: v3@512 394.642857, v3@1024 399.571429.
+  - edge MAE: v3@512 715.642857, v3@1024 724.285714.
+  - net MAE: v3@512 0.857143, v3@1024 0.928571.
+- Interpretation: larger whole-image input did not improve node/edge/net MAE. The next image-input experiment should use local cropping or tiled inputs rather than simply increasing full-image resolution.
+- Main outputs:
+  - `docs/topology_panel_v1_doubao_image_input_v2_report.md`
+  - `data_index/topology_panel_v1_doubao_v3_1024_model_predictions.jsonl`
+  - `data_index/topology_panel_v1_doubao_v3_1024_model_predictions_summary.json`
+  - `data_index/topology_panel_v1_doubao_v3_1024_model_predictions_report.md`
+  - `data_index/topology_panel_v1_doubao_v3_1024_model_predictions_eval_summary.json`
+  - `data_index/topology_panel_v1_doubao_v3_1024_model_predictions_eval_report.md`
+  - `data_index/topology_panel_v1_doubao_v3_1024_model_predictions_eval_details.csv`
+  - `data_index/topology_panel_v1_doubao_v3_1024_model_predictions_eval_errors.csv`
+  - updated `data_index/topology_panel_v1_model_leaderboard.csv`

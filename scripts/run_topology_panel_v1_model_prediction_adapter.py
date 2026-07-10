@@ -641,9 +641,9 @@ def main() -> None:
     write_summary(rows, args)
     write_report(rows, args)
     print(f"Prediction rows: {len(rows)}")
-    print(f"Wrote: {args.output.relative_to(ROOT).as_posix()}")
-    print(f"Wrote: {args.summary.relative_to(ROOT).as_posix()}")
-    print(f"Wrote: {args.report.relative_to(ROOT).as_posix()}")
+    print(f"Wrote: {rel(args.output)}")
+    print(f"Wrote: {rel(args.summary)}")
+    print(f"Wrote: {rel(args.report)}")
 
 
 if __name__ == "__main__":
