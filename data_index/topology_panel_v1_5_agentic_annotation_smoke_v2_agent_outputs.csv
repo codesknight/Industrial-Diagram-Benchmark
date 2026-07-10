@@ -1,0 +1,78 @@
+﻿panel_id,agent,agent_model,agent_modality,agent_label,agent_confidence,is_single_panel,is_topology_target,has_visible_watermark,geometry_usable,agent_reason,agent_visible_cues,elapsed_sec,error,raw_response
+_P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,0.99,True,True,False,True,"This is a single coherent terminal wiring topology diagram for a 110kV switch mechanism box with no quality defects, suitable as a clean benchmark sample.","Single unified terminal wiring topology with no independent subfigures; Standard drawing title block, no third-party marketplace watermarks; All terminal symbols, connection lines and labels are clearly legible; No obvious graph fragmentation or geometry corruption",21.385,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 0.99,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""This is a single coherent terminal wiring topology diagram for a 110kV switch mechanism box with no quality defects, suitable as a clean benchmark sample."",
+  ""visible_cues"": [""Single unified terminal wiring topology with no independent subfigures"", ""Standard drawing title block, no third-party marketplace watermarks"", ""All terminal symbols, connection lines and labels are clearly legible"", ""No obvious graph fragmentation or geometry corruption""]
+}"
+_P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000,deepseek,deepseek-v4-pro,text_fallback,accept_clean_topology,0.95,True,True,False,True,"Text-only fallback; metadata clearly indicates a single coherent terminal block wiring topology panel, baseline accepted with clean graph (single net, zero isolated edges), no sub-figure or watermark flags.","baseline_accept and accept_v1 label; single_panel with panel_count: 1; dominant_connected_component quality flag; v1_net_count: 1, v1_isolated_edge_ratio: 0.0, largest_net_edge_ratio: 1.0; review comment confirms 'Single coherent terminal block wiring topology panel'; no known_policy_exclude_reason",8.158,"vision_failed_used_text_fallback: Error code: 400 - {'error': {'message': 'Failed to deserialize the JSON body into the target type: messages[1]: unknown variant `image_url`, expected `text` at line 1 column 737971', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}","{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 0.95,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""Text-only fallback; metadata clearly indicates a single coherent terminal block wiring topology panel, baseline accepted with clean graph (single net, zero isolated edges), no sub-figure or watermark flags."",
+  ""visible_cues"": [
+    ""baseline_accept and accept_v1 label"",
+    ""single_panel with panel_count: 1"",
+    ""dominant_connected_component quality flag"",
+    ""v1_net_count: 1, v1_isolated_edge_ratio: 0.0, largest_net_edge_ratio: 1.0"",
+    ""review comment confirms 'Single coherent terminal block wiring topology panel'"",
+    ""no known_policy_exclude_reason""
+  ]
+}"
+_P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000,zhipu,glm-5.2,error,uncertain,0.0,False,False,False,False,agent_error,,26.588,"vision_error: Error code: 400 - {'error': {'code': '1210', 'message': ""messages.content.type 参数非法，取值范围 ['text']""}} | text_fallback_error: Unterminated string starting at: line 8 column 13 (char 190)",
+_P1_staging/QA-D301-10(110kV南雄线开关机构箱端子排图(3AP1-FG))#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"The image contains a single coherent terminal wiring topology diagram for 110kV Nanxiong line switch mechanism box, with no quality defects, suitable as a clean benchmark sample.",Unified terminal row and wiring topology diagram; Standard integrated engineering drawing title block without independent subfigures; No visible watermarks or content corruption; Clear readable terminal labels and connection lines,16.865,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image contains a single coherent terminal wiring topology diagram for 110kV Nanxiong line switch mechanism box, with no quality defects, suitable as a clean benchmark sample."",
+  ""visible_cues"": [""Unified terminal row and wiring topology diagram"", ""Standard integrated engineering drawing title block without independent subfigures"", ""No visible watermarks or content corruption"", ""Clear readable terminal labels and connection lines""]
+}"
+_P1_staging/QA-D301-10(110kV南雄线开关机构箱端子排图(3AP1-FG))#panel_000,deepseek,deepseek-v4-pro,text_fallback,accept_clean_topology,0.95,True,True,False,True,"Text-only fallback: metadata shows baseline_accept, high candidate score (94), clean graph stats (single net, no isolated edges, dominant component), and review label accept_v1, strongly supporting a clean topology diagram.","known_policy_decision: baseline_accept; candidate_score: 94 high_priority; quality_flags: dominant_component; v1_net_count: 1, isolated_edge_ratio: 0.0; review_label: accept_v1; panel name indicates terminal block wiring diagram",7.889,"vision_failed_used_text_fallback: Error code: 400 - {'error': {'message': 'Failed to deserialize the JSON body into the target type: messages[1]: unknown variant `image_url`, expected `text` at line 1 column 708789', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}","{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 0.95,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""Text-only fallback: metadata shows baseline_accept, high candidate score (94), clean graph stats (single net, no isolated edges, dominant component), and review label accept_v1, strongly supporting a clean topology diagram."",
+  ""visible_cues"": [
+    ""known_policy_decision: baseline_accept"",
+    ""candidate_score: 94 high_priority"",
+    ""quality_flags: dominant_component"",
+    ""v1_net_count: 1, isolated_edge_ratio: 0.0"",
+    ""review_label: accept_v1"",
+    ""panel name indicates terminal block wiring diagram""
+  ]
+}"
+_P1_staging/QA-D301-10(110kV南雄线开关机构箱端子排图(3AP1-FG))#panel_000,zhipu,glm-5.2,error,uncertain,0.0,False,False,False,False,agent_error,,22.78,"vision_error: Error code: 400 - {'error': {'code': '1210', 'message': ""messages.content.type 参数非法，取值范围 ['text']""}} | text_fallback_error: Unterminated string starting at: line 12 column 5 (char 687)",
+_P1_staging/QA-D302-10(110kV澜河线开关机构箱端子排图(3AP1-FG))#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,0.99,True,True,False,True,"Single coherent terminal wiring topology diagram with no quality issues, meets clean benchmark requirements","Single 110kV switch mechanism box terminal row wiring topology panel; No visible marketplace/library watermarks, only standard official drawing title block; Wiring connections and terminal labels are fully readable, no geometry corruption; One unified connected topology network present",19.845,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 0.99,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""Single coherent terminal wiring topology diagram with no quality issues, meets clean benchmark requirements"",
+  ""visible_cues"": [""Single 110kV switch mechanism box terminal row wiring topology panel"", ""No visible marketplace/library watermarks, only standard official drawing title block"", ""Wiring connections and terminal labels are fully readable, no geometry corruption"", ""One unified connected topology network present""]
+}"
+_P1_staging/QA-D302-10(110kV澜河线开关机构箱端子排图(3AP1-FG))#panel_000,deepseek,deepseek-v4-pro,text_fallback,accept_clean_topology,0.95,True,True,False,True,"Text-only audit fallback: metadata indicates baseline_accept with clean graph metrics (one net, no isolated edges, dominant component), confirming a single coherent topology diagram suitable as benchmark sample.",baseline_accept policy decision; single net with all edges connected; high candidate score; quality_flags: dominant_component,5.855,"vision_failed_used_text_fallback: Error code: 400 - {'error': {'message': 'Failed to deserialize the JSON body into the target type: messages[1]: unknown variant `image_url`, expected `text` at line 1 column 709078', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}}","{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 0.95,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""Text-only audit fallback: metadata indicates baseline_accept with clean graph metrics (one net, no isolated edges, dominant component), confirming a single coherent topology diagram suitable as benchmark sample."",
+  ""visible_cues"": [""baseline_accept policy decision"", ""single net with all edges connected"", ""high candidate score"", ""quality_flags: dominant_component""]
+}"
+_P1_staging/QA-D302-10(110kV澜河线开关机构箱端子排图(3AP1-FG))#panel_000,zhipu,glm-5.2,error,uncertain,0.0,False,False,False,False,agent_error,,22.275,"vision_error: Error code: 400 - {'error': {'code': '1210', 'message': ""messages.content.type 参数非法，取值范围 ['text']""}} | text_fallback_error: Unterminated string starting at: line 10 column 5 (char 598)",

@@ -1,0 +1,40 @@
+{
+  "input_csv": "data_index/topology_panel_v1_5_candidate_manifest.csv",
+  "dry_run": true,
+  "providers": [
+    "doubao",
+    "deepseek",
+    "zhipu"
+  ],
+  "input_rows": 20,
+  "agent_output_rows": 60,
+  "consensus_rows": 20,
+  "consensus_decision_counts": {
+    "auto_accept": 14,
+    "human_review": 6
+  },
+  "consensus_label_counts": {
+    "accept_clean_topology": 14,
+    "uncertain": 6
+  },
+  "agent_label_counts": {
+    "doubao": {
+      "accept_clean_topology": 14,
+      "uncertain": 6
+    },
+    "deepseek": {
+      "accept_clean_topology": 14,
+      "uncertain": 6
+    },
+    "zhipu": {
+      "accept_clean_topology": 14,
+      "uncertain": 6
+    }
+  },
+  "outputs": {
+    "agent_outputs": "data_index/topology_panel_v1_5_agentic_annotation_agent_outputs.csv",
+    "consensus": "data_index/topology_panel_v1_5_agentic_annotation_consensus.csv",
+    "summary": "data_index/topology_panel_v1_5_agentic_annotation_summary.json",
+    "report": "data_index/topology_panel_v1_5_agentic_annotation_report.md"
+  }
+}

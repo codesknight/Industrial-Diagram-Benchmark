@@ -676,3 +676,47 @@
   - current best baseline metrics.
   - MAE bar chart, per-sample delta heatmap, and data cleaning flow chart.
   - ready-to-speak defense script.
+
+## 2026-07-10 Agentic Annotation Framework v0
+
+- Built a multi-agent annotation framework for Topology Panel v1.5 expansion.
+- Available API keys detected by name only:
+  - Doubao vision API.
+  - DeepSeek API.
+  - Zhipu API.
+- Added candidate generation:
+  - `scripts/build_topology_panel_v1_5_candidate_manifest.py`
+  - `data_index/topology_panel_v1_5_candidate_manifest.csv`
+  - `data_index/topology_panel_v1_5_candidate_summary.json`
+  - `data_index/topology_panel_v1_5_candidate_report.md`
+- Candidate pool:
+  - input reviewed rows: 171.
+  - candidate rows: 154.
+  - anchor_existing_v1: 14.
+  - high_priority: 1.
+  - medium_priority: 12.
+  - low_priority: 2.
+  - negative_control_badcase: 125.
+- Added multi-agent annotation runner:
+  - `scripts/run_agentic_panel_annotation.py`
+  - default agents: Doubao, DeepSeek, Zhipu.
+  - labels: accept_clean_topology, reject_multi_subfigure, reject_visible_watermark, reject_bad_geometry, reject_not_topology, needs_terminal_anchor, needs_graph_repair, uncertain.
+  - consensus decisions: auto_accept, auto_reject, auto_defer_improvement, human_review.
+- Smoke test:
+  - Doubao accepts image input and returned vision judgments.
+  - DeepSeek current endpoint rejects image_url and is used through text-only metadata fallback.
+  - Zhipu current endpoint rejects image_url and still needs endpoint/model compatibility adjustment.
+- Added conflict review HTML:
+  - `scripts/build_agentic_annotation_review_html.py`
+  - `data_index/topology_panel_v1_5_agentic_annotation_review.html`
+- Added framework documentation:
+  - `docs/agentic_annotation_framework.md`
+- Dry-run verification:
+  - input rows: 20.
+  - agent output rows: 60.
+  - consensus rows: 20.
+  - auto_accept: 14.
+  - human_review: 6.
+- Policy:
+  - v1.5 samples must pass agentic consensus or targeted human review.
+  - AI handles repetitive screening; human review is reserved for conflict and uncertain rows.

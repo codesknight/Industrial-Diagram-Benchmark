@@ -1,0 +1,35 @@
+{
+  "input_csv": "data_index/topology_panel_v1_sample_policy_reviewed.csv",
+  "output_csv": "data_index/topology_panel_v1_5_candidate_manifest.csv",
+  "summary_json": "data_index/topology_panel_v1_5_candidate_summary.json",
+  "report_md": "data_index/topology_panel_v1_5_candidate_report.md",
+  "input_rows": 171,
+  "candidate_rows": 154,
+  "min_score": 45,
+  "limit": null,
+  "include_negative_controls": true,
+  "bucket_counts": {
+    "anchor_existing_v1": 14,
+    "high_priority": 1,
+    "medium_priority": 12,
+    "low_priority": 2,
+    "negative_control_badcase": 125
+  },
+  "phase_counts": {
+    "P1": 12,
+    "P2": 63,
+    "P3": 79
+  },
+  "policy_decision_counts": {
+    "baseline_accept": 14,
+    "improvement_target": 14,
+    "unreviewed": 1,
+    "badcase": 125
+  },
+  "rules": [
+    "This is not a final benchmark manifest.",
+    "Rows must pass agentic annotation consensus before entering v1.5.",
+    "Existing v1 baseline rows are kept as anchors for calibration.",
+    "Known badcases are excluded unless --include-negative-controls is used."
+  ]
+}

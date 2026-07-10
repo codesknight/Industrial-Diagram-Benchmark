@@ -1,0 +1,11 @@
+{
+  "consensus_csv": "data_index/topology_panel_v1_5_agentic_annotation_consensus.csv",
+  "agent_outputs_csv": "data_index/topology_panel_v1_5_agentic_annotation_agent_outputs.csv",
+  "output_html": "data_index/topology_panel_v1_5_agentic_annotation_review.html",
+  "selected_rows": 6,
+  "only_review": true,
+  "decision_counts": {
+    "auto_accept": 14,
+    "human_review": 6
+  }
+}
