@@ -79,6 +79,21 @@ EXPERIMENTS = [
         "notes": "Improves valid/status behavior and node/edge counts; overestimates net_count.",
     },
     {
+        "experiment_id": "doubao_prompt_v3",
+        "display_name": "Doubao prompt v3",
+        "category": "model",
+        "comparable": "yes",
+        "provider": "doubao",
+        "model": "",
+        "prompt_version": "v3",
+        "input_version": "image_512px_250k",
+        "prediction_type": "count_only_synthetic_graph",
+        "adapter_summary": INDEX_DIR / "topology_panel_v1_doubao_v3_model_predictions_summary.json",
+        "eval_summary": INDEX_DIR / "topology_panel_v1_doubao_v3_model_predictions_eval_summary.json",
+        "report": DOCS_DIR / "topology_panel_v1_doubao_prompt_v3_comparison_report.md",
+        "notes": "Keeps valid/status gains and fixes net_count overestimation with stricter connected-component rules.",
+    },
+    {
         "experiment_id": "deepseek_smoke",
         "display_name": "DeepSeek smoke",
         "category": "smoke",
@@ -223,6 +238,15 @@ def md_table(rows: List[Dict[str, object]]) -> List[str]:
     return lines
 
 
+def best_ids(rows: List[Dict[str, object]], key: str, prefer: str) -> str:
+    if not rows:
+        return ""
+    values = [float(row[key] or 0) for row in rows]
+    best_value = max(values) if prefer == "max" else min(values)
+    ids = [str(row["experiment_id"]) for row in rows if float(row[key] or 0) == best_value]
+    return ", ".join(ids)
+
+
 def write_markdown(rows: List[Dict[str, object]]) -> None:
     comparable_rows = [row for row in rows if row["comparable"] == "yes"]
     lines = [
@@ -246,12 +270,12 @@ def write_markdown(rows: List[Dict[str, object]]) -> None:
         best_net = min(comparable_rows, key=lambda row: float(row["net_mae"] or 999999))
         lines.extend(
             [
-                f"- 最高 prediction valid rate：`{best_valid['experiment_id']}` = {fmt(best_valid['prediction_valid_rate'])}",
-                f"- 最低 node_count MAE：`{best_node['experiment_id']}` = {fmt(best_node['node_mae'])}",
-                f"- 最低 edge_count MAE：`{best_edge['experiment_id']}` = {fmt(best_edge['edge_mae'])}",
-                f"- 最低 net_count MAE：`{best_net['experiment_id']}` = {fmt(best_net['net_mae'])}",
+                f"- 最高 prediction valid rate：`{best_ids(comparable_rows, 'prediction_valid_rate', 'max')}` = {fmt(best_valid['prediction_valid_rate'])}",
+                f"- 最低 node_count MAE：`{best_ids(comparable_rows, 'node_mae', 'min')}` = {fmt(best_node['node_mae'])}",
+                f"- 最低 edge_count MAE：`{best_ids(comparable_rows, 'edge_mae', 'min')}` = {fmt(best_edge['edge_mae'])}",
+                f"- 最低 net_count MAE：`{best_ids(comparable_rows, 'net_mae', 'min')}` = {fmt(best_net['net_mae'])}",
                 "",
-                "Doubao prompt v2 相比 Doubao v1，显著改善了 status/valid 行为，并降低 node/edge MAE；但 net_count MAE 明显变差。因此下一步 prompt v3 应优先约束 `net_count = 连通分量数量`，避免把端子组、功能区域或线束组误计为多个网络。",
+                "Doubao prompt v3 相比 v2 保持了 status/valid 改善，同时显著修正 net_count 过估计，并继续小幅降低 node/edge MAE。当前下一步应转向 image input v2 或局部裁剪/分块输入实验。",
             ]
         )
     lines.extend(
@@ -263,6 +287,7 @@ def write_markdown(rows: List[Dict[str, object]]) -> None:
             f"- Summary：`{rel(OUTPUT_SUMMARY)}`",
             "- Doubao v1 report：`docs/topology_panel_v1_doubao_eval_report.md`",
             "- Doubao prompt v2 report：`docs/topology_panel_v1_doubao_prompt_v2_comparison_report.md`",
+            "- Doubao prompt v3 report：`docs/topology_panel_v1_doubao_prompt_v3_comparison_report.md`",
             "- Evaluation protocol：`docs/topology_graph_eval_protocol_v1.md`",
             "",
             "## 更新规则",
@@ -284,10 +309,10 @@ def write_summary(rows: List[Dict[str, object]]) -> None:
         "output_md": rel(OUTPUT_MD),
         "experiments": [row["experiment_id"] for row in rows],
         "best_comparable": {
-            "prediction_valid_rate": max(comparable_rows, key=lambda row: float(row["prediction_valid_rate"] or 0))["experiment_id"] if comparable_rows else "",
-            "node_mae": min(comparable_rows, key=lambda row: float(row["node_mae"] or 999999))["experiment_id"] if comparable_rows else "",
-            "edge_mae": min(comparable_rows, key=lambda row: float(row["edge_mae"] or 999999))["experiment_id"] if comparable_rows else "",
-            "net_mae": min(comparable_rows, key=lambda row: float(row["net_mae"] or 999999))["experiment_id"] if comparable_rows else "",
+            "prediction_valid_rate": best_ids(comparable_rows, "prediction_valid_rate", "max") if comparable_rows else "",
+            "node_mae": best_ids(comparable_rows, "node_mae", "min") if comparable_rows else "",
+            "edge_mae": best_ids(comparable_rows, "edge_mae", "min") if comparable_rows else "",
+            "net_mae": best_ids(comparable_rows, "net_mae", "min") if comparable_rows else "",
         },
     }
     OUTPUT_SUMMARY.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

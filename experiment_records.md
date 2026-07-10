@@ -415,3 +415,29 @@
   - `data_index/topology_panel_v1_model_leaderboard.csv`
   - `data_index/topology_panel_v1_model_leaderboard_summary.json`
   - `docs/topology_panel_v1_model_leaderboard.md`
+
+## 2026-07-10 Doubao Prompt v3 Net Count Fix
+
+- Added `--prompt-version v3` to `scripts/run_topology_panel_v1_model_prediction_adapter.py`.
+- Prompt v3 keeps the v2 readable-diagram status policy and adds strict `net_count = connected component count` rules.
+- Ran Doubao prompt v3 on all 14 Topology Panel v1 baseline rows with the same image settings as v2: `--max-image-side 512 --max-image-pixels 250000 --timeout 45 --retries 1`.
+- Prediction rows: 14 / 14.
+- Adapter mode counts: `synthetic_from_counts` 14.
+- Adapter error counts: `none` 14.
+- v3 prediction graph valid rate: 1.0.
+- v3 invalid prediction rows: 0.
+- Count error comparison:
+  - node MAE: v1 500.857143, v2 409.285714, v3 394.642857.
+  - edge MAE: v1 828.357143, v2 737.357143, v3 715.642857.
+  - net MAE: v1 3.571429, v2 16.357143, v3 0.857143.
+- Interpretation: prompt v3 fixes the v2 net_count overestimation while preserving valid/status gains and slightly improving node/edge count estimates.
+- Main outputs:
+  - `docs/topology_panel_v1_doubao_prompt_v3_comparison_report.md`
+  - `data_index/topology_panel_v1_doubao_v3_model_predictions.jsonl`
+  - `data_index/topology_panel_v1_doubao_v3_model_predictions_summary.json`
+  - `data_index/topology_panel_v1_doubao_v3_model_predictions_report.md`
+  - `data_index/topology_panel_v1_doubao_v3_model_predictions_eval_summary.json`
+  - `data_index/topology_panel_v1_doubao_v3_model_predictions_eval_report.md`
+  - `data_index/topology_panel_v1_doubao_v3_model_predictions_eval_details.csv`
+  - `data_index/topology_panel_v1_doubao_v3_model_predictions_eval_errors.csv`
+  - updated `data_index/topology_panel_v1_model_leaderboard.csv`

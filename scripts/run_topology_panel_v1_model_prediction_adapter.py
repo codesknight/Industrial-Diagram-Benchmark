@@ -60,7 +60,42 @@ node_count, edge_count, and net_count must be positive integers.
 """
 
 
+SYSTEM_PROMPT_V3 = """You are a careful industrial diagram topology counting assistant.
+Return only strict JSON. Do not include markdown, prose, comments, or code fences.
+
+Your task is count-level topology prediction from an industrial wiring,
+terminal, relay, or control diagram panel. Estimate node_count, edge_count, and
+net_count from visible topology.
+
+Critical definition:
+- net_count means the number of connected components in the topology graph.
+- net_count does NOT mean the number of function blocks, terminal rows, cable
+  bundles, drawing regions, circuits described by labels, or repeated groups.
+- If wires/terminals/line segments are connected through a terminal, junction,
+  crossing with a connection mark, continuous line, or bus-like conductor, they
+  belong to the same net.
+- A dense terminal diagram often has only 1 to 3 large connected nets even when
+  it contains many terminals, labels, or repeated rows.
+
+Use status "ok" whenever the panel contains a readable industrial connection,
+terminal, wiring, or control diagram and you can make a reasonable estimate.
+Use status "unreadable" only when the image is blank, corrupted, or the linework
+is impossible to inspect. Use status "not_topology_target" only when the image is
+clearly not a diagram. Use status "uncertain" only when the image is a diagram
+but the topology target is genuinely ambiguous.
+
+Do not return zero counts for a readable diagram. If status is "ok", all of
+node_count, edge_count, and net_count must be positive integers.
+
+When unsure about net_count, prefer the smaller connected-component count. Do not
+split one connected drawing into many nets just because it has many labels,
+columns, rows, or local wire groups.
+"""
+
+
 def system_prompt(prompt_version: str) -> str:
+    if prompt_version == "v3":
+        return SYSTEM_PROMPT_V3
     if prompt_version == "v2":
         return SYSTEM_PROMPT_V2
     return SYSTEM_PROMPT_V1
@@ -78,7 +113,17 @@ def user_prompt(record: Dict[str, object], prompt_version: str) -> str:
     summary = reference.get("topology_summary", {})
     if not isinstance(summary, dict):
         summary = {}
-    if prompt_version == "v2":
+    if prompt_version in {"v2", "v3"}:
+        net_rules = ""
+        if prompt_version == "v3":
+            net_rules = """
+Net-count rules for v3:
+- Count connected components, not semantic circuit groups.
+- Do not count terminal rows, repeated blocks, wire bundles, columns, or drawing zones as separate nets.
+- If most visible wires are connected through terminals, shared buses, or continuous lines, net_count should usually be small.
+- For dense terminal/wiring diagrams, prefer net_count in the 1-3 range unless there are clearly disconnected components.
+- If uncertain between many small nets and one large connected net, choose the smaller connected-component estimate.
+"""
         return f"""Predict topology graph count-level structure for this panel image.
 
 panel_id: {record.get("panel_id", "")}
@@ -97,6 +142,7 @@ Important counting rules:
 - If there are many repeated terminal rows or wire runs, count them as topology elements.
 - If the exact number is hard, use the best integer estimate and lower confidence.
 - Keep status "ok" for readable industrial diagrams even if confidence is not high.
+{net_rules}
 
 Return JSON with this exact shape and no extra fields:
 {{
@@ -555,7 +601,7 @@ def write_report(rows: List[Dict[str, object]], args: argparse.Namespace) -> Non
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--provider", choices=["doubao", "deepseek"], default="doubao")
-    parser.add_argument("--prompt-version", choices=["v1", "v2"], default="v1")
+    parser.add_argument("--prompt-version", choices=["v1", "v2", "v3"], default="v1")
     parser.add_argument("--benchmark", type=Path, default=DEFAULT_BENCHMARK)
     parser.add_argument("--output", type=Path, default=None)
     parser.add_argument("--summary", type=Path, default=None)
