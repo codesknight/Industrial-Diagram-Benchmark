@@ -1,0 +1,29 @@
+{
+  "candidate_csv": "data_index/topology_panel_v1_5_candidate_manifest.csv",
+  "agent_outputs": "data_index/topology_panel_v1_5_agentic_annotation_full_agent_outputs.csv",
+  "consensus": "data_index/topology_panel_v1_5_agentic_annotation_full_consensus.csv",
+  "candidate_rows": 154,
+  "final_agent_rows": 154,
+  "final_consensus_rows": 154,
+  "policy_completed_rows": 92,
+  "decision_counts": {
+    "auto_accept": 14,
+    "auto_defer_improvement": 13,
+    "auto_reject": 119,
+    "human_review": 8
+  },
+  "label_counts": {
+    "accept_clean_topology": 14,
+    "needs_graph_repair": 11,
+    "reject_visible_watermark": 2,
+    "needs_terminal_anchor": 2,
+    "reject_not_topology": 20,
+    "reject_bad_geometry": 57,
+    "uncertain": 8,
+    "reject_multi_subfigure": 40
+  },
+  "agent_counts": {
+    "doubao": 62,
+    "policy_rule": 92
+  }
+}

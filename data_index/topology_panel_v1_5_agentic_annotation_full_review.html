@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>Agentic Annotation Review</title>
+  <style>
+    body { margin: 0; font-family: Arial, "Microsoft YaHei", sans-serif; background: #f6f7f9; color: #1f2937; }
+    .toolbar { position: sticky; top: 0; z-index: 2; background: #111827; color: white; padding: 12px 18px; display: flex; gap: 12px; align-items: center; }
+    .toolbar button { padding: 7px 10px; border: 0; border-radius: 4px; cursor: pointer; }
+    main { max-width: 1280px; margin: 18px auto; padding: 0 14px; }
+    .card { background: white; border: 1px solid #d6dbe3; border-radius: 8px; margin-bottom: 16px; overflow: hidden; }
+    header { display: flex; justify-content: space-between; gap: 10px; padding: 10px 12px; border-bottom: 1px solid #e5e7eb; }
+    code { white-space: normal; overflow-wrap: anywhere; }
+    .grid { display: grid; grid-template-columns: minmax(360px, 58%) 1fr; gap: 14px; padding: 12px; }
+    .image-wrap { background: #eef2f7; border: 1px solid #d1d5db; max-height: 760px; overflow: auto; }
+    img { max-width: 100%; display: block; }
+    dl { display: grid; grid-template-columns: 110px 1fr; gap: 6px 10px; margin: 0; }
+    dt { font-weight: 700; color: #4b5563; }
+    dd { margin: 0; overflow-wrap: anywhere; }
+    .pill { padding: 4px 8px; border-radius: 999px; font-size: 12px; background: #e5e7eb; }
+    .human_review { background: #fde68a; }
+    .auto_accept { background: #bbf7d0; }
+    .auto_reject { background: #fecaca; }
+    .auto_defer_improvement { background: #bfdbfe; }
+    .agent { border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px; margin: 8px 0; }
+    .label { color: #0f766e; margin-left: 6px; }
+    .conf { float: right; color: #6b7280; }
+    .error { color: #b91c1c; font-size: 12px; margin-top: 4px; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+    .buttons button { padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 4px; background: #f8fafc; cursor: pointer; }
+    .buttons button.selected { background: #2563eb; color: white; border-color: #2563eb; }
+    textarea { width: 100%; min-height: 52px; box-sizing: border-box; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <b>Agentic Annotation Review</b>
+    <span>8 rows</span>
+    <button onclick="exportCsv()">Export CSV</button>
+  </div>
+  <main>
+    
+<article class="card">
+  <header>
+    <div><b>#1</b> <code>_P2_staging/220kV总降站电气一次设计图纸wm666.taobao.com#panel_000</code></div>
+    <div class="pill human_review">human_review</div>
+  </header>
+  <section class="grid">
+    <div class="image-wrap"><img src="file:///D:/LiuYanhong/Projects/BISHE/Industrial%20Diagram%20Benchmark/datas/qa_and_png/P2_oda_output/220kV%E6%80%BB%E9%99%8D%E7%AB%99%E7%94%B5%E6%B0%94%E4%B8%80%E6%AC%A1%E8%AE%BE%E8%AE%A1%E5%9B%BE%E7%BA%B8wm666.taobao.com.png" loading="lazy" /></div>
+    <div>
+      <dl>
+        <dt>consensus</dt><dd>uncertain</dd>
+        <dt>reason</dt><dd>all agent calls failed</dd>
+        <dt>bucket / score</dt><dd>negative_control_badcase / 46</dd>
+        <dt>known policy</dt><dd>badcase</dd>
+      </dl>
+      <h4>Agent votes</h4>
+      <div class='agent'><b>doubao</b> <span class='label'>uncertain</span> <span class='conf'>0.0</span><div>agent_error</div><small></small><div class='error'>Request timed out.</div></div>
+      <h4>Human label</h4>
+      <div class="buttons">
+        <button data-label="accept_clean_topology">accept</button>
+        <button data-label="reject_multi_subfigure">multi</button>
+        <button data-label="reject_visible_watermark">watermark</button>
+        <button data-label="reject_bad_geometry">bad geometry</button>
+        <button data-label="reject_not_topology">not topology</button>
+        <button data-label="needs_graph_repair">repair</button>
+        <button data-label="uncertain">uncertain</button>
+      </div>
+      <textarea placeholder="review comment"></textarea>
+    </div>
+  </section>
+</article>
+
+<article class="card">
+  <header>
+    <div><b>#2</b> <code>_P3_staging_batch1/10KV高压室开关柜接线图方案比较#panel_000</code></div>
+    <div class="pill human_review">human_review</div>
+  </header>
+  <section class="grid">
+    <div class="image-wrap"><img src="file:///D:/LiuYanhong/Projects/BISHE/Industrial%20Diagram%20Benchmark/datas/qa_and_png/P3_oda_output/10KV%E9%AB%98%E5%8E%8B%E5%AE%A4%E5%BC%80%E5%85%B3%E6%9F%9C%E6%8E%A5%E7%BA%BF%E5%9B%BE%E6%96%B9%E6%A1%88%E6%AF%94%E8%BE%83.png" loading="lazy" /></div>
+    <div>
+      <dl>
+        <dt>consensus</dt><dd>uncertain</dd>
+        <dt>reason</dt><dd>all agent calls failed</dd>
+        <dt>bucket / score</dt><dd>negative_control_badcase / 46</dd>
+        <dt>known policy</dt><dd>badcase</dd>
+      </dl>
+      <h4>Agent votes</h4>
+      <div class='agent'><b>doubao</b> <span class='label'>uncertain</span> <span class='conf'>0.0</span><div>agent_error</div><small></small><div class='error'>Request timed out.</div></div>
+      <h4>Human label</h4>
+      <div class="buttons">
+        <button data-label="accept_clean_topology">accept</button>
+        <button data-label="reject_multi_subfigure">multi</button>
+        <button data-label="reject_visible_watermark">watermark</button>
+        <button data-label="reject_bad_geometry">bad geometry</button>
+        <button data-label="reject_not_topology">not topology</button>
+        <button data-label="needs_graph_repair">repair</button>
+        <button data-label="uncertain">uncertain</button>
+      </div>
+      <textarea placeholder="review comment"></textarea>
+    </div>
+  </section>
+</article>
+
+<article class="card">
+  <header>
+    <div><b>#3</b> <code>_P1_staging/直流系统级差1（主变保护室）wm666.taobao.com#panel_000</code></div>
+    <div class="pill human_review">human_review</div>
+  </header>
+  <section class="grid">
+    <div class="image-wrap"><img src="file:///D:/LiuYanhong/Projects/BISHE/Industrial%20Diagram%20Benchmark/datas/qa_and_png/P1_oda_output/%E7%9B%B4%E6%B5%81%E7%B3%BB%E7%BB%9F%E7%BA%A7%E5%B7%AE1%EF%BC%88%E4%B8%BB%E5%8F%98%E4%BF%9D%E6%8A%A4%E5%AE%A4%EF%BC%89wm666.taobao.com.png" loading="lazy" /></div>
+    <div>
+      <dl>
+        <dt>consensus</dt><dd>uncertain</dd>
+        <dt>reason</dt><dd>all agent calls failed</dd>
+        <dt>bucket / score</dt><dd>negative_control_badcase / 44</dd>
+        <dt>known policy</dt><dd>badcase</dd>
+      </dl>
+      <h4>Agent votes</h4>
+      <div class='agent'><b>doubao</b> <span class='label'>uncertain</span> <span class='conf'>0.0</span><div>agent_error</div><small></small><div class='error'>Request timed out.</div></div>
+      <h4>Human label</h4>
+      <div class="buttons">
+        <button data-label="accept_clean_topology">accept</button>
+        <button data-label="reject_multi_subfigure">multi</button>
+        <button data-label="reject_visible_watermark">watermark</button>
+        <button data-label="reject_bad_geometry">bad geometry</button>
+        <button data-label="reject_not_topology">not topology</button>
+        <button data-label="needs_graph_repair">repair</button>
+        <button data-label="uncertain">uncertain</button>
+      </div>
+      <textarea placeholder="review comment"></textarea>
+    </div>
+  </section>
+</article>
+
+<article class="card">
+  <header>
+    <div><b>#4</b> <code>_P2_staging/变电所#panel_000</code></div>
+    <div class="pill human_review">human_review</div>
+  </header>
+  <section class="grid">
+    <div class="image-wrap"><img src="file:///D:/LiuYanhong/Projects/BISHE/Industrial%20Diagram%20Benchmark/datas/qa_and_png/P2_oda_output/%E5%8F%98%E7%94%B5%E6%89%80.png" loading="lazy" /></div>
+    <div>
+      <dl>
+        <dt>consensus</dt><dd>uncertain</dd>
+        <dt>reason</dt><dd>all agent calls failed</dd>
+        <dt>bucket / score</dt><dd>negative_control_badcase / 40</dd>
+        <dt>known policy</dt><dd>badcase</dd>
+      </dl>
+      <h4>Agent votes</h4>
+      <div class='agent'><b>doubao</b> <span class='label'>uncertain</span> <span class='conf'>0.0</span><div>agent_error</div><small></small><div class='error'>Request timed out.</div></div>
+      <h4>Human label</h4>
+      <div class="buttons">
+        <button data-label="accept_clean_topology">accept</button>
+        <button data-label="reject_multi_subfigure">multi</button>
+        <button data-label="reject_visible_watermark">watermark</button>
+        <button data-label="reject_bad_geometry">bad geometry</button>
+        <button data-label="reject_not_topology">not topology</button>
+        <button data-label="needs_graph_repair">repair</button>
+        <button data-label="uncertain">uncertain</button>
+      </div>
+      <textarea placeholder="review comment"></textarea>
+    </div>
+  </section>
+</article>
+
+<article class="card">
+  <header>
+    <div><b>#5</b> <code>_P3_staging_batch1/01(PRCK-720-B变压器保护柜柜面布置图)#panel_000</code></div>
+    <div class="pill human_review">human_review</div>
+  </header>
+  <section class="grid">
+    <div class="image-wrap"><img src="file:///D:/LiuYanhong/Projects/BISHE/Industrial%20Diagram%20Benchmark/datas/qa_and_png/P3_oda_output/01%28PRCK-720-B%E5%8F%98%E5%8E%8B%E5%99%A8%E4%BF%9D%E6%8A%A4%E6%9F%9C%E6%9F%9C%E9%9D%A2%E5%B8%83%E7%BD%AE%E5%9B%BE%29.png" loading="lazy" /></div>
+    <div>
+      <dl>
+        <dt>consensus</dt><dd>uncertain</dd>
+        <dt>reason</dt><dd>all agent calls failed</dd>
+        <dt>bucket / score</dt><dd>negative_control_badcase / 38</dd>
+        <dt>known policy</dt><dd>badcase</dd>
+      </dl>
+      <h4>Agent votes</h4>
+      <div class='agent'><b>doubao</b> <span class='label'>uncertain</span> <span class='conf'>0.0</span><div>agent_error</div><small></small><div class='error'>Request timed out.</div></div>
+      <h4>Human label</h4>
+      <div class="buttons">
+        <button data-label="accept_clean_topology">accept</button>
+        <button data-label="reject_multi_subfigure">multi</button>
+        <button data-label="reject_visible_watermark">watermark</button>
+        <button data-label="reject_bad_geometry">bad geometry</button>
+        <button data-label="reject_not_topology">not topology</button>
+        <button data-label="needs_graph_repair">repair</button>
+        <button data-label="uncertain">uncertain</button>
+      </div>
+      <textarea placeholder="review comment"></textarea>
+    </div>
+  </section>
+</article>
+
+<article class="card">
+  <header>
+    <div><b>#6</b> <code>_P2_staging/变电站全套建筑图wm666.taobao.com#panel_000</code></div>
+    <div class="pill human_review">human_review</div>
+  </header>
+  <section class="grid">
+    <div class="image-wrap"><img src="file:///D:/LiuYanhong/Projects/BISHE/Industrial%20Diagram%20Benchmark/datas/qa_and_png/P2_oda_output/%E5%8F%98%E7%94%B5%E7%AB%99%E5%85%A8%E5%A5%97%E5%BB%BA%E7%AD%91%E5%9B%BEwm666.taobao.com.png" loading="lazy" /></div>
+    <div>
+      <dl>
+        <dt>consensus</dt><dd>uncertain</dd>
+        <dt>reason</dt><dd>all agent calls failed</dd>
+        <dt>bucket / score</dt><dd>negative_control_badcase / 34</dd>
+        <dt>known policy</dt><dd>badcase</dd>
+      </dl>
+      <h4>Agent votes</h4>
+      <div class='agent'><b>doubao</b> <span class='label'>uncertain</span> <span class='conf'>0.0</span><div>agent_error</div><small></small><div class='error'>Request timed out.</div></div>
+      <h4>Human label</h4>
+      <div class="buttons">
+        <button data-label="accept_clean_topology">accept</button>
+        <button data-label="reject_multi_subfigure">multi</button>
+        <button data-label="reject_visible_watermark">watermark</button>
+        <button data-label="reject_bad_geometry">bad geometry</button>
+        <button data-label="reject_not_topology">not topology</button>
+        <button data-label="needs_graph_repair">repair</button>
+        <button data-label="uncertain">uncertain</button>
+      </div>
+      <textarea placeholder="review comment"></textarea>
+    </div>
+  </section>
+</article>
+
+<article class="card">
+  <header>
+    <div><b>#7</b> <code>_P2_staging/商场10KV变电所接线图wm666.taobao.com#panel_000</code></div>
+    <div class="pill human_review">human_review</div>
+  </header>
+  <section class="grid">
+    <div class="image-wrap"><img src="file:///D:/LiuYanhong/Projects/BISHE/Industrial%20Diagram%20Benchmark/datas/qa_and_png/P2_oda_output/%E5%95%86%E5%9C%BA10KV%E5%8F%98%E7%94%B5%E6%89%80%E6%8E%A5%E7%BA%BF%E5%9B%BEwm666.taobao.com.png" loading="lazy" /></div>
+    <div>
+      <dl>
+        <dt>consensus</dt><dd>uncertain</dd>
+        <dt>reason</dt><dd>all agent calls failed</dd>
+        <dt>bucket / score</dt><dd>negative_control_badcase / 34</dd>
+        <dt>known policy</dt><dd>badcase</dd>
+      </dl>
+      <h4>Agent votes</h4>
+      <div class='agent'><b>doubao</b> <span class='label'>uncertain</span> <span class='conf'>0.0</span><div>agent_error</div><small></small><div class='error'>Request timed out.</div></div>
+      <h4>Human label</h4>
+      <div class="buttons">
+        <button data-label="accept_clean_topology">accept</button>
+        <button data-label="reject_multi_subfigure">multi</button>
+        <button data-label="reject_visible_watermark">watermark</button>
+        <button data-label="reject_bad_geometry">bad geometry</button>
+        <button data-label="reject_not_topology">not topology</button>
+        <button data-label="needs_graph_repair">repair</button>
+        <button data-label="uncertain">uncertain</button>
+      </div>
+      <textarea placeholder="review comment"></textarea>
+    </div>
+  </section>
+</article>
+
+<article class="card">
+  <header>
+    <div><b>#8</b> <code>_P2_staging/变电所修#panel_000</code></div>
+    <div class="pill human_review">human_review</div>
+  </header>
+  <section class="grid">
+    <div class="image-wrap"><img src="file:///D:/LiuYanhong/Projects/BISHE/Industrial%20Diagram%20Benchmark/datas/qa_and_png/P2_oda_output/%E5%8F%98%E7%94%B5%E6%89%80%E4%BF%AE.png" loading="lazy" /></div>
+    <div>
+      <dl>
+        <dt>consensus</dt><dd>uncertain</dd>
+        <dt>reason</dt><dd>all agent calls failed</dd>
+        <dt>bucket / score</dt><dd>negative_control_badcase / 30</dd>
+        <dt>known policy</dt><dd>badcase</dd>
+      </dl>
+      <h4>Agent votes</h4>
+      <div class='agent'><b>doubao</b> <span class='label'>uncertain</span> <span class='conf'>0.0</span><div>agent_error</div><small></small><div class='error'>Request timed out.</div></div>
+      <h4>Human label</h4>
+      <div class="buttons">
+        <button data-label="accept_clean_topology">accept</button>
+        <button data-label="reject_multi_subfigure">multi</button>
+        <button data-label="reject_visible_watermark">watermark</button>
+        <button data-label="reject_bad_geometry">bad geometry</button>
+        <button data-label="reject_not_topology">not topology</button>
+        <button data-label="needs_graph_repair">repair</button>
+        <button data-label="uncertain">uncertain</button>
+      </div>
+      <textarea placeholder="review comment"></textarea>
+    </div>
+  </section>
+</article>
+
+  </main>
+  <script>
+    const labels = new Map();
+    document.querySelectorAll('.card').forEach(card => {
+      const panel = card.querySelector('code').innerText;
+      card.querySelectorAll('button[data-label]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          card.querySelectorAll('button[data-label]').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          labels.set(panel, btn.dataset.label);
+        });
+      });
+    });
+    function csvEscape(value) {
+      const text = String(value ?? '');
+      return '"' + text.replaceAll('"', '""') + '"';
+    }
+    function exportCsv() {
+      const rows = [['panel_id','human_label','human_comment']];
+      document.querySelectorAll('.card').forEach(card => {
+        const panel = card.querySelector('code').innerText;
+        const comment = card.querySelector('textarea').value;
+        rows.push([panel, labels.get(panel) || '', comment]);
+      });
+      const csv = rows.map(row => row.map(csvEscape).join(',')).join('\n');
+      const blob = new Blob([csv], {type: 'text/csv;charset=utf-8'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'topology_panel_v1_5_agentic_human_review_labels.csv';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+  </script>
+</body>
+</html>

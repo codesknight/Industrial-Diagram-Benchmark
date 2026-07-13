@@ -1,0 +1,73 @@
+﻿panel_id,agent,agent_model,agent_modality,agent_label,agent_confidence,is_single_panel,is_topology_target,has_visible_watermark,geometry_usable,agent_reason,agent_visible_cues,elapsed_sec,error,raw_response
+_P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"Single coherent terminal wiring topology diagram with no quality defects, existing semantic anchors, and intact graph structure.","Single panel terminal row wiring diagram with connection leads to external terminal boxes; Standard official drawing title block is integrated content not an independent subfigure; No visible watermarks, corruption, or readability issues",18.25,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""Single coherent terminal wiring topology diagram with no quality defects, existing semantic anchors, and intact graph structure."",
+  ""visible_cues"": [""Single panel terminal row wiring diagram with connection leads to external terminal boxes"", ""Standard official drawing title block is integrated content not an independent subfigure"", ""No visible watermarks, corruption, or readability issues""]
+}"
+_P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000,zhipu,glm-4.6v-flash,error,uncertain,0.0,False,False,False,False,agent_error,,2.245,"Error code: 429 - {'error': {'code': '1305', 'message': '该模型当前访问量过大，请您稍后再试'}}",
+_P1_staging/QA-D301-10(110kV南雄线开关机构箱端子排图(3AP1-FG))#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"The image is a single coherent terminal wiring topology diagram with no quality defects, watermarks, or extraneous content, suitable as a clean benchmark sample.","Single unified 110kV switch mechanism box terminal block wiring diagram; Standard title block is integrated as part of the diagram, no independent subfigures; No visible watermarks or corruption, all terminal and wiring elements are readable; Metadata confirms complete connected topology with no fragmentation or isolated edges",16.032,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a single coherent terminal wiring topology diagram with no quality defects, watermarks, or extraneous content, suitable as a clean benchmark sample."",
+  ""visible_cues"": [
+    ""Single unified 110kV switch mechanism box terminal block wiring diagram"",
+    ""Standard title block is integrated as part of the diagram, no independent subfigures"",
+    ""No visible watermarks or corruption, all terminal and wiring elements are readable"",
+    ""Metadata confirms complete connected topology with no fragmentation or isolated edges""
+  ]
+}"
+_P1_staging/QA-D301-10(110kV南雄线开关机构箱端子排图(3AP1-FG))#panel_000,zhipu,glm-4.6v-flash,error,uncertain,0.0,False,False,False,False,agent_error,,2.387,"Error code: 429 - {'error': {'code': '1305', 'message': '该模型当前访问量过大，请您稍后再试'}}",
+_P1_staging/QA-D302-10(110kV澜河线开关机构箱端子排图(3AP1-FG))#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"Single coherent terminal wiring topology diagram with no quality defects, meets clean benchmark requirements.","Single 110kV switch mechanism box terminal row wiring topology; Standard drawing title block is part of the valid diagram, no independent subfigures; No visible third-party watermarks, all diagram elements are clear and readable",18.41,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""Single coherent terminal wiring topology diagram with no quality defects, meets clean benchmark requirements."",
+  ""visible_cues"": [""Single 110kV switch mechanism box terminal row wiring topology"", ""Standard drawing title block is part of the valid diagram, no independent subfigures"", ""No visible third-party watermarks, all diagram elements are clear and readable""]
+}"
+_P1_staging/QA-D302-10(110kV澜河线开关机构箱端子排图(3AP1-FG))#panel_000,zhipu,glm-4.6v-flash,error,uncertain,0.0,False,False,False,False,agent_error,,2.168,"Error code: 429 - {'error': {'code': '1305', 'message': '该模型当前访问量过大，请您稍后再试'}}",
+_P2_staging/35kV并联电抗器在监控柜上的端子排(B066-500-1904)wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,error,uncertain,0.0,False,False,False,False,agent_error,,61.836,Request timed out.,
+_P2_staging/35kV并联电抗器在监控柜上的端子排(B066-500-1904)wm666.taobao.com#panel_000,zhipu,glm-4.6v-flash,error,uncertain,0.0,False,False,False,False,agent_error,,2.475,"Error code: 429 - {'error': {'code': '1305', 'message': '该模型当前访问量过大，请您稍后再试'}}",
+_P3_staging_batch1/07(通信回路背面接线图 )#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"Single coherent communication circuit back wiring topology diagram, no quality defects, valid existing anchor and graph structure meeting benchmark requirements","Single panel showing CPU terminal connection topology to TXD terminal blocks; No visible third-party watermarks, diagram is fully readable; Complete unified wiring topology with no fragmented subfigures",36.944,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""Single coherent communication circuit back wiring topology diagram, no quality defects, valid existing anchor and graph structure meeting benchmark requirements"",
+  ""visible_cues"": [""Single panel showing CPU terminal connection topology to TXD terminal blocks"", ""No visible third-party watermarks, diagram is fully readable"", ""Complete unified wiring topology with no fragmented subfigures""]
+}"
+_P3_staging_batch1/07(通信回路背面接线图 )#panel_000,zhipu,glm-4.6v-flash,vision,accept_clean_topology,1.0,True,True,False,True,"The image shows a single coherent wiring diagram with two CPU components, terminal connections, and clear topology layout. It's a standard electrical wiring diagram with no subfigures or watermarks, and the graph statistics indicate a single connected net with no fragmentation.",single panel with coherent wiring topology; two CPU components with labeled terminals; terminal block with connection points; clear line connections between components,15.199,,"
+{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image shows a single coherent wiring diagram with two CPU components, terminal connections, and clear topology layout. It's a standard electrical wiring diagram with no subfigures or watermarks, and the graph statistics indicate a single connected net with no fragmentation."",
+  ""visible_cues"": [""single panel with coherent wiring topology"", ""two CPU components with labeled terminals"", ""terminal block with connection points"", ""clear line connections between components""]
+}"
+_P3_staging_batch1/07(通信回路背面接线图)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"The image is a single coherent communication circuit wiring topology diagram with no quality defects, suitable as a clean benchmark sample.","Single complete wiring topology diagram showing connections between RCS-9705A CPU modules and TXD terminal blocks; No visible watermarks, corruption, or separate independent subfigures; All wiring connections, device nodes, and terminal labels are clearly legible; Title block and notes are contextual to the single diagram, not separate content",13.334,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a single coherent communication circuit wiring topology diagram with no quality defects, suitable as a clean benchmark sample."",
+  ""visible_cues"": [""Single complete wiring topology diagram showing connections between RCS-9705A CPU modules and TXD terminal blocks"", ""No visible watermarks, corruption, or separate independent subfigures"", ""All wiring connections, device nodes, and terminal labels are clearly legible"", ""Title block and notes are contextual to the single diagram, not separate content""]
+}"
+_P3_staging_batch1/07(通信回路背面接线图)#panel_000,zhipu,glm-4.6v-flash,error,uncertain,0.0,False,False,False,False,agent_error,,2.514,"Error code: 429 - {'error': {'code': '1305', 'message': '该模型当前访问量过大，请您稍后再试'}}",

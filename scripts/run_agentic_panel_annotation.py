@@ -310,6 +310,7 @@ def call_provider(provider: Provider, client: OpenAI, row: Dict[str, str], image
         model=model,
         temperature=args.temperature,
         max_tokens=args.max_tokens,
+        timeout=args.request_timeout,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {
@@ -340,6 +341,7 @@ def call_provider_text_only(
         model=model,
         temperature=args.temperature,
         max_tokens=args.max_tokens,
+        timeout=args.request_timeout,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": text_only_user_prompt(row, vision_error)},
@@ -388,7 +390,7 @@ def dry_run_result(provider: Provider, row: Dict[str, str]) -> Dict[str, object]
     }
 
 
-def consensus_for_panel(rows: List[Dict[str, object]]) -> Dict[str, object]:
+def consensus_for_panel(rows: List[Dict[str, object]], args: Optional[argparse.Namespace] = None) -> Dict[str, object]:
     valid_rows = [
         row
         for row in rows
@@ -414,11 +416,15 @@ def consensus_for_panel(rows: List[Dict[str, object]]) -> Dict[str, object]:
     avg_conf = sum(confidence_by_label[winner]) / len(confidence_by_label[winner])
     has_hard_reject = any(label in HARD_REJECT_LABELS for label in labels)
 
-    if agreement >= 2 and winner == "accept_clean_topology" and avg_conf >= 0.80 and not has_hard_reject:
+    allow_single = bool(args and args.allow_single_agent_auto_decision and len(valid_rows) == 1)
+    if (
+        (agreement >= 2 and winner == "accept_clean_topology" and avg_conf >= 0.80)
+        or (allow_single and winner == "accept_clean_topology" and avg_conf >= 0.90)
+    ) and not has_hard_reject:
         decision = "auto_accept"
-    elif agreement >= 2 and winner in HARD_REJECT_LABELS and avg_conf >= 0.75:
+    elif (agreement >= 2 or allow_single) and winner in HARD_REJECT_LABELS and avg_conf >= 0.75:
         decision = "auto_reject"
-    elif agreement >= 2 and winner in {"needs_terminal_anchor", "needs_graph_repair"} and avg_conf >= 0.75:
+    elif (agreement >= 2 or allow_single) and winner in {"needs_terminal_anchor", "needs_graph_repair"} and avg_conf >= 0.75:
         decision = "auto_defer_improvement"
     else:
         decision = "human_review"
@@ -440,6 +446,82 @@ def output_paths(prefix: Path) -> Dict[str, Path]:
         "summary": prefix.with_name(prefix.name + "_summary.json"),
         "report": prefix.with_name(prefix.name + "_report.md"),
     }
+
+
+AGENT_FIELDS = [
+    "panel_id",
+    "agent",
+    "agent_model",
+    "agent_modality",
+    "agent_label",
+    "agent_confidence",
+    "is_single_panel",
+    "is_topology_target",
+    "has_visible_watermark",
+    "geometry_usable",
+    "agent_reason",
+    "agent_visible_cues",
+    "elapsed_sec",
+    "error",
+    "raw_response",
+]
+
+CONSENSUS_FIELDS = [
+    "panel_id",
+    "phase",
+    "split",
+    "panel_png_path",
+    "topology_v1_panel_json_path",
+    "v1_5_candidate_score",
+    "v1_5_candidate_bucket",
+    "known_policy_decision",
+    "known_review_label",
+    "consensus_label",
+    "consensus_decision",
+    "consensus_confidence",
+    "agreement_count",
+    "agent_count",
+    "reason",
+]
+
+
+def build_consensus_rows(
+    input_rows: List[Dict[str, str]],
+    grouped: Dict[str, List[Dict[str, object]]],
+    args: Optional[argparse.Namespace] = None,
+) -> List[Dict[str, object]]:
+    input_by_id = {row["panel_id"]: row for row in input_rows}
+    consensus_rows: List[Dict[str, object]] = []
+    for panel_id, panel_agent_rows in grouped.items():
+        source = input_by_id[panel_id]
+        consensus = consensus_for_panel(panel_agent_rows, args)
+        consensus_rows.append(
+            {
+                "panel_id": panel_id,
+                "phase": source.get("phase", ""),
+                "split": source.get("split", ""),
+                "panel_png_path": source.get("panel_png_path", ""),
+                "topology_v1_panel_json_path": source.get("topology_v1_panel_json_path", ""),
+                "v1_5_candidate_score": source.get("v1_5_candidate_score", ""),
+                "v1_5_candidate_bucket": source.get("v1_5_candidate_bucket", ""),
+                "known_policy_decision": source.get("topology_panel_v1_policy_decision", ""),
+                "known_review_label": source.get("topology_panel_v1_review_label", ""),
+                **consensus,
+            }
+        )
+    return consensus_rows
+
+
+def write_incremental_outputs(
+    args: argparse.Namespace,
+    input_rows: List[Dict[str, str]],
+    agent_rows: List[Dict[str, object]],
+    grouped: Dict[str, List[Dict[str, object]]],
+) -> None:
+    paths = output_paths(args.output_prefix)
+    consensus_rows = build_consensus_rows(input_rows, grouped, args)
+    write_csv(paths["agent_outputs"], agent_rows, AGENT_FIELDS)
+    write_csv(paths["consensus"], consensus_rows, CONSENSUS_FIELDS)
 
 
 def run(args: argparse.Namespace) -> tuple[List[Dict[str, object]], List[Dict[str, object]]]:
@@ -538,26 +620,10 @@ def run(args: argparse.Namespace) -> tuple[List[Dict[str, object]], List[Dict[st
         if index % args.progress_every == 0:
             print(f"Annotated {index}/{len(input_rows)}")
 
-    consensus_rows: List[Dict[str, object]] = []
-    input_by_id = {row["panel_id"]: row for row in input_rows}
-    for panel_id, panel_agent_rows in grouped.items():
-        source = input_by_id[panel_id]
-        consensus = consensus_for_panel(panel_agent_rows)
-        consensus_rows.append(
-            {
-                "panel_id": panel_id,
-                "phase": source.get("phase", ""),
-                "split": source.get("split", ""),
-                "panel_png_path": source.get("panel_png_path", ""),
-                "topology_v1_panel_json_path": source.get("topology_v1_panel_json_path", ""),
-                "v1_5_candidate_score": source.get("v1_5_candidate_score", ""),
-                "v1_5_candidate_bucket": source.get("v1_5_candidate_bucket", ""),
-                "known_policy_decision": source.get("topology_panel_v1_policy_decision", ""),
-                "known_review_label": source.get("topology_panel_v1_review_label", ""),
-                **consensus,
-            }
-        )
-    return agent_rows, consensus_rows
+        if args.incremental:
+            write_incremental_outputs(args, input_rows, agent_rows, grouped)
+
+    return agent_rows, build_consensus_rows(input_rows, grouped, args)
 
 
 def write_report(path: Path, summary: Dict[str, object]) -> None:
@@ -604,42 +670,8 @@ def write_report(path: Path, summary: Dict[str, object]) -> None:
 
 def write_outputs(args: argparse.Namespace, agent_rows: List[Dict[str, object]], consensus_rows: List[Dict[str, object]]) -> None:
     paths = output_paths(args.output_prefix)
-    agent_fields = [
-        "panel_id",
-        "agent",
-        "agent_model",
-        "agent_modality",
-        "agent_label",
-        "agent_confidence",
-        "is_single_panel",
-        "is_topology_target",
-        "has_visible_watermark",
-        "geometry_usable",
-        "agent_reason",
-        "agent_visible_cues",
-        "elapsed_sec",
-        "error",
-        "raw_response",
-    ]
-    consensus_fields = [
-        "panel_id",
-        "phase",
-        "split",
-        "panel_png_path",
-        "topology_v1_panel_json_path",
-        "v1_5_candidate_score",
-        "v1_5_candidate_bucket",
-        "known_policy_decision",
-        "known_review_label",
-        "consensus_label",
-        "consensus_decision",
-        "consensus_confidence",
-        "agreement_count",
-        "agent_count",
-        "reason",
-    ]
-    write_csv(paths["agent_outputs"], agent_rows, agent_fields)
-    write_csv(paths["consensus"], consensus_rows, consensus_fields)
+    write_csv(paths["agent_outputs"], agent_rows, AGENT_FIELDS)
+    write_csv(paths["consensus"], consensus_rows, CONSENSUS_FIELDS)
     summary = {
         "input_csv": rel(args.input),
         "dry_run": args.dry_run,
@@ -673,12 +705,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--no-text-fallback", action="store_false", dest="allow_text_fallback")
     parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--max-tokens", type=int, default=700)
+    parser.add_argument("--request-timeout", type=float, default=60.0)
     parser.add_argument("--retries", type=int, default=2)
     parser.add_argument("--retry-sleep", type=float, default=2.0)
     parser.add_argument("--progress-every", type=int, default=10)
     parser.add_argument("--image-cache", type=Path, default=DEFAULT_IMAGE_CACHE)
     parser.add_argument("--max-image-side", type=int, default=3072)
     parser.add_argument("--max-image-pixels", type=int, default=14_000_000)
+    parser.add_argument("--incremental", action="store_true", default=True)
+    parser.add_argument("--no-incremental", action="store_false", dest="incremental")
+    parser.add_argument("--allow-single-agent-auto-decision", action="store_true")
     args = parser.parse_args()
     args.image_cache = args.image_cache.resolve()
     return args

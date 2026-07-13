@@ -720,3 +720,53 @@
 - Policy:
   - v1.5 samples must pass agentic consensus or targeted human review.
   - AI handles repetitive screening; human review is reserved for conflict and uncertain rows.
+
+## 2026-07-10 Topology Panel v1.5 Agentic Annotation Full Run
+
+- Switched and verified Zhipu vision compatibility with `glm-4.6v-flash`.
+- Zhipu smoke test confirmed true image understanding:
+  - `data_index/topology_panel_v1_5_zhipu_glm46v_smoke_agent_outputs.csv`
+  - `data_index/topology_panel_v1_5_zhipu_glm46v_smoke_consensus.csv`
+  - `data_index/topology_panel_v1_5_zhipu_glm46v_smoke_summary.json`
+  - `data_index/topology_panel_v1_5_zhipu_glm46v_smoke_report.md`
+- Full 154-row agentic annotation was completed with Doubao vision plus deterministic policy rules.
+- Reason for policy completion:
+  - Zhipu `glm-4.6v-flash` can see images, but full-batch calls repeatedly hit 429 service-load errors.
+  - DeepSeek remains metadata/text fallback under the current endpoint because image input is not accepted.
+- Full-run summary:
+  - candidate rows: 154.
+  - final agent rows: 154.
+  - final consensus rows: 154.
+  - policy-completed rows: 92.
+  - agent counts: Doubao 62, policy_rule 92.
+- Consensus decisions:
+  - auto_accept: 14.
+  - auto_reject: 119.
+  - auto_defer_improvement: 13.
+  - human_review: 8.
+- Label counts:
+  - accept_clean_topology: 14.
+  - needs_graph_repair: 11.
+  - needs_terminal_anchor: 2.
+  - reject_visible_watermark: 2.
+  - reject_not_topology: 20.
+  - reject_bad_geometry: 57.
+  - reject_multi_subfigure: 40.
+  - uncertain: 8.
+- Full-run outputs:
+  - `data_index/topology_panel_v1_5_agentic_annotation_full_agent_outputs.csv`
+  - `data_index/topology_panel_v1_5_agentic_annotation_full_consensus.csv`
+  - `data_index/topology_panel_v1_5_agentic_annotation_full_summary.json`
+  - `data_index/topology_panel_v1_5_agentic_annotation_full_report.md`
+  - `data_index/topology_panel_v1_5_agentic_annotation_full_review.html`
+  - `data_index/topology_panel_v1_5_agentic_annotation_full_review_summary.json`
+- Partitioned release queues:
+  - `data_index/topology_panel_v1_5_agentic_full_auto_accept_manifest.csv`
+  - `data_index/topology_panel_v1_5_agentic_full_auto_reject_manifest.csv`
+  - `data_index/topology_panel_v1_5_agentic_full_defer_improvement_manifest.csv`
+  - `data_index/topology_panel_v1_5_agentic_full_human_review_manifest.csv`
+  - `data_index/topology_panel_v1_5_agentic_full_consensus_partition_summary.json`
+  - `data_index/topology_panel_v1_5_agentic_full_consensus_partition_report.md`
+- Interpretation:
+  - The current auto-accepted clean set is still 14 rows, matching the v1 anchor baseline.
+  - v1.5 expansion should focus next on the 8 human-review rows and 13 deferred-improvement rows, rather than rerunning full-batch model calls.

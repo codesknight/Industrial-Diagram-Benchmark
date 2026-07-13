@@ -1,0 +1,23 @@
+﻿panel_id,agent,agent_model,agent_modality,agent_label,agent_confidence,is_single_panel,is_topology_target,has_visible_watermark,geometry_usable,agent_reason,agent_visible_cues,elapsed_sec,error,raw_response
+_P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000,zhipu,glm-4.6v-flash,vision,accept_clean_topology,1.0,True,True,False,True,"This is a clear terminal block wiring diagram showing organized terminal connections and wiring topology for a switchgear box, with no obvious fragmentation or quality issues.",terminal rows with numbered connections; wiring connections between terminals; title block with project information; single coherent panel layout,13.538,,"
+{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""This is a clear terminal block wiring diagram showing organized terminal connections and wiring topology for a switchgear box, with no obvious fragmentation or quality issues."",
+  ""visible_cues"": [""terminal rows with numbered connections"", ""wiring connections between terminals"", ""title block with project information"", ""single coherent panel layout""]
+}"
+_P1_staging/QA-D301-10(110kV南雄线开关机构箱端子排图(3AP1-FG))#panel_000,zhipu,glm-4.6v-flash,vision,accept_clean_topology,0.0,True,True,False,True,"The image shows a clear terminal block wiring diagram with organized terminal connections and external connections, presented as a single coherent panel with no visible watermarks or quality issues.",single panel layout with terminal rows; wiring connections between terminals; external connection labels to 110kV terminal boxes; title block with project information,19.38,,"
+{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 0.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image shows a clear terminal block wiring diagram with organized terminal connections and external connections, presented as a single coherent panel with no visible watermarks or quality issues."",
+  ""visible_cues"": [""single panel layout with terminal rows"", ""wiring connections between terminals"", ""external connection labels to 110kV terminal boxes"", ""title block with project information""]
+}"

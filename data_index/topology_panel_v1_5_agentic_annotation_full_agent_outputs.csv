@@ -1,0 +1,684 @@
+﻿panel_id,agent,agent_model,agent_modality,agent_label,agent_confidence,is_single_panel,is_topology_target,has_visible_watermark,geometry_usable,agent_reason,agent_visible_cues,elapsed_sec,error,raw_response
+_P1_staging/QA-D201-16(#1主变110kV侧开关机构箱端子排图(3AP1-FG))#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"Single coherent terminal wiring topology diagram with no quality defects, meets clean benchmark requirements.","Single unified panel with standard engineering title block integrated as part of the diagram; Clear, readable terminal and connection topology for #1 main transformer 110kV side switch mechanism box; No visible watermarks, corruption, or fragmented graph elements",21.164,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""Single coherent terminal wiring topology diagram with no quality defects, meets clean benchmark requirements."",
+  ""visible_cues"": [""Single unified panel with standard engineering title block integrated as part of the diagram"", ""Clear, readable terminal and connection topology for #1 main transformer 110kV side switch mechanism box"", ""No visible watermarks, corruption, or fragmented graph elements""]
+}"
+_P1_staging/QA-D301-10(110kV南雄线开关机构箱端子排图(3AP1-FG))#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"Single coherent terminal wiring topology diagram with no quality defects, suitable as clean benchmark sample","Single 110kV switch mechanism box terminal row wiring topology diagram; No overlay watermarks, standard title block is native drawing metadata; All terminals, connection lines and labels are legible; No independent subfigures present",15.117,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""Single coherent terminal wiring topology diagram with no quality defects, suitable as clean benchmark sample"",
+  ""visible_cues"": [""Single 110kV switch mechanism box terminal row wiring topology diagram"", ""No overlay watermarks, standard title block is native drawing metadata"", ""All terminals, connection lines and labels are legible"", ""No independent subfigures present""]
+}"
+_P1_staging/QA-D302-10(110kV澜河线开关机构箱端子排图(3AP1-FG))#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"The image is a single coherent 110kV line switch mechanism box terminal wiring topology diagram with no quality defects, eligible as a clean benchmark sample.","Single unified terminal wiring topology, no independent subfigures; No visible third-party watermarks; Clear readable terminals and wiring connections; Standard official engineering title block that is not obstructive",15.159,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a single coherent 110kV line switch mechanism box terminal wiring topology diagram with no quality defects, eligible as a clean benchmark sample."",
+  ""visible_cues"": [""Single unified terminal wiring topology, no independent subfigures"", ""No visible third-party watermarks"", ""Clear readable terminals and wiring connections"", ""Standard official engineering title block that is not obstructive""]
+}"
+_P2_staging/35kV并联电抗器在监控柜上的端子排(B066-500-1904)wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,0.98,True,True,False,True,"Single coherent terminal wiring topology diagram with complete valid node/edge anchors, no quality issues present","Single independent 35kV shunt reactor terminal wiring panel without multiple subfigures; No visible watermarks or content corruption; Clear terminal symbols, connection edges and complete topology structure; Title block is part of the same diagram, not independent subfigure",44.895,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 0.98,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""Single coherent terminal wiring topology diagram with complete valid node/edge anchors, no quality issues present"",
+  ""visible_cues"": [""Single independent 35kV shunt reactor terminal wiring panel without multiple subfigures"", ""No visible watermarks or content corruption"", ""Clear terminal symbols, connection edges and complete topology structure"", ""Title block is part of the same diagram, not independent subfigure""]
+}"
+_P3_staging_batch1/07(通信回路背面接线图 )#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"The image contains one complete, legible communication circuit wiring topology diagram with no quality defects, meeting the clean benchmark requirements.","Single coherent wiring topology diagram, no independent subfigures; No visible watermarks, corruption, or illegible content; All terminal symbols, device nodes, and connection edges are clearly present; It is a valid electrical wiring topology target, not a layout/arrangement drawing",14.907,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image contains one complete, legible communication circuit wiring topology diagram with no quality defects, meeting the clean benchmark requirements."",
+  ""visible_cues"": [""Single coherent wiring topology diagram, no independent subfigures"", ""No visible watermarks, corruption, or illegible content"", ""All terminal symbols, device nodes, and connection edges are clearly present"", ""It is a valid electrical wiring topology target, not a layout/arrangement drawing""]
+}"
+_P3_staging_batch1/07(通信回路背面接线图)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"Single coherent communication circuit back wiring topology diagram with no quality issues, suitable as clean benchmark sample.","Single unified wiring topology diagram with CPU modules, wiring connections, and terminal assignment table; No visible watermarks, corruption, or fragmented subfigures; All topology elements are readable and geometry is intact; Consists of one coherent complete wiring diagram without separate independent subfigures",15.44,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""Single coherent communication circuit back wiring topology diagram with no quality issues, suitable as clean benchmark sample."",
+  ""visible_cues"": [
+    ""Single unified wiring topology diagram with CPU modules, wiring connections, and terminal assignment table"",
+    ""No visible watermarks, corruption, or fragmented subfigures"",
+    ""All topology elements are readable and geometry is intact"",
+    ""Consists of one coherent complete wiring diagram without separate independent subfigures""
+  ]
+}"
+_P3_staging_batch1/09(通信回路背面接线图)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"The image is a single coherent communication circuit wiring topology diagram with no quality defects, existing valid semantic anchors, and meets all clean benchmark requirements.",Single complete topology panel without independent subfigures; No visible watermark or source mark; Readable clear wiring topology with terminals and connection lines; Valid existing node/edge anchors confirmed by metadata,14.086,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a single coherent communication circuit wiring topology diagram with no quality defects, existing valid semantic anchors, and meets all clean benchmark requirements."",
+  ""visible_cues"": [""Single complete topology panel without independent subfigures"", ""No visible watermark or source mark"", ""Readable clear wiring topology with terminals and connection lines"", ""Valid existing node/edge anchors confirmed by metadata""]
+}"
+_P3_staging_batch1/QA-D401-06(10kV开关柜柜顶小母线布置图)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"The image is a single coherent 10kV switchgear cabinet top small busbar wiring topology diagram with no quality defects, complete valid nodes and edges, suitable as a clean benchmark sample.","Single unified busbar arrangement wiring topology diagram; No visible watermarks, corruption or unreadable content; Standard engineering drawing title block is part of the diagram not an independent subfigure; All connection edges and terminal symbols are clearly presented",20.03,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a single coherent 10kV switchgear cabinet top small busbar wiring topology diagram with no quality defects, complete valid nodes and edges, suitable as a clean benchmark sample."",
+  ""visible_cues"": [""Single unified busbar arrangement wiring topology diagram"", ""No visible watermarks, corruption or unreadable content"", ""Standard engineering drawing title block is part of the diagram not an independent subfigure"", ""All connection edges and terminal symbols are clearly presented""]
+}"
+_P3_staging_batch1/QA-D601-03(10kV#1(#2)站变柜端子排图)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,0.99,True,True,False,True,"The image is a single coherent 10kV station transformer cabinet terminal row wiring topology diagram with no quality defects, suitable as a clean benchmark sample.","Single complete terminal wiring topology diagram present; Standard engineering title block is part of the same diagram, no independent separate subfigures; No visible watermarks or content corruption; Readable terminals, connection lines, and network labels exist",17.567,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 0.99,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a single coherent 10kV station transformer cabinet terminal row wiring topology diagram with no quality defects, suitable as a clean benchmark sample."",
+  ""visible_cues"": [""Single complete terminal wiring topology diagram present"", ""Standard engineering title block is part of the same diagram, no independent separate subfigures"", ""No visible watermarks or content corruption"", ""Readable terminals, connection lines, and network labels exist""]
+}"
+_P3_staging_batch3/#2备用分支在微机保护柜上的端子排(B066-500-0911)wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"The image contains one coherent terminal wiring topology diagram with no quality defects, independent subfigures, or visible watermarks, suitable as a clean benchmark sample.","Single terminal block wiring topology for #2备用分支 in microcomputer protection cabinet; Standard title block is part of the same diagram, not an independent subfigure; No visible watermarks, corruption or illegible content; Clear terminal symbols and connecting lines are present",22.664,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image contains one coherent terminal wiring topology diagram with no quality defects, independent subfigures, or visible watermarks, suitable as a clean benchmark sample."",
+  ""visible_cues"": [""Single terminal block wiring topology for #2备用分支 in microcomputer protection cabinet"", ""Standard title block is part of the same diagram, not an independent subfigure"", ""No visible watermarks, corruption or illegible content"", ""Clear terminal symbols and connecting lines are present""]
+}"
+_P3_staging_batch3/1FWK柜左侧端子排电缆接线图(B066-500-2409)wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,1.0,True,True,False,True,"The image is a single coherent terminal block cable wiring topology diagram, no quality issues, no visible watermarks, complete and readable, suitable as a clean benchmark sample.",Single complete terminal wiring topology diagram; No visible watermarks or corruption; Clear terminal nodes and wiring connections present; Standard footer title block as part of the standard diagram,19.501,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a single coherent terminal block cable wiring topology diagram, no quality issues, no visible watermarks, complete and readable, suitable as a clean benchmark sample."",
+  ""visible_cues"": [""Single complete terminal wiring topology diagram"", ""No visible watermarks or corruption"", ""Clear terminal nodes and wiring connections present"", ""Standard footer title block as part of the standard diagram""]
+}"
+_P3_staging_batch3/2FWK柜左侧端子排电缆接线图(B066-500-2411)wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,0.99,True,True,False,True,"The image contains one coherent terminal cable wiring topology diagram with no blocking quality issues, meeting clean benchmark requirements.","Single complete terminal wiring topology diagram with integrated standard title block; No visible watermark printed on image content; Clear readable lines, terminal labels and connection markers; Valid wiring topology target, not a layout or arrangement plan",20.502,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 0.99,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image contains one coherent terminal cable wiring topology diagram with no blocking quality issues, meeting clean benchmark requirements."",
+  ""visible_cues"": [""Single complete terminal wiring topology diagram with integrated standard title block"", ""No visible watermark printed on image content"", ""Clear readable lines, terminal labels and connection markers"", ""Valid wiring topology target, not a layout or arrangement plan""]
+}"
+_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_002,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,0.99,True,True,False,True,"The image is a single coherent terminal wiring topology diagram with no quality defects, suitable as a clean benchmark sample.","Single complete terminal block wiring topology for main transformer 35kV side circuit breaker; No visible watermarks, corruption or unreadable content; Standard title block is part of the diagram, no independent subfigures present; All connection lines and terminal symbols are clearly distinguishable",21.432,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 0.99,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a single coherent terminal wiring topology diagram with no quality defects, suitable as a clean benchmark sample."",
+  ""visible_cues"": [
+    ""Single complete terminal block wiring topology for main transformer 35kV side circuit breaker"",
+    ""No visible watermarks, corruption or unreadable content"",
+    ""Standard title block is part of the diagram, no independent subfigures present"",
+    ""All connection lines and terminal symbols are clearly distinguishable""
+  ]
+}"
+_P3_staging_batch4/发电机保护屏端子图#panel_003,doubao,doubao-seed-2-0-pro-260215,vision,accept_clean_topology,0.99,True,True,False,True,"The image is a single complete coherent generator protection panel terminal wiring topology diagram with no quality defects, suitable as a clean benchmark sample.","Single coherent terminal wiring topology diagram with no independent subfigures; No visible watermarks, corruption or unreadable content; Clear terminal symbols, connection lines and destination cabinet labels; Usable geometry with all topology components clearly presented",12.955,,"{
+  ""label"": ""accept_clean_topology"",
+  ""confidence"": 0.99,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a single complete coherent generator protection panel terminal wiring topology diagram with no quality defects, suitable as a clean benchmark sample."",
+  ""visible_cues"": [
+    ""Single coherent terminal wiring topology diagram with no independent subfigures"",
+    ""No visible watermarks, corruption or unreadable content"",
+    ""Clear terminal symbols, connection lines and destination cabinet labels"",
+    ""Usable geometry with all topology components clearly presented""
+  ]
+}"
+_P3_staging_batch1/06(背面通讯接线图)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,needs_graph_repair,0.95,True,True,False,True,The topology graph has confirmed over-connection errors that require repair to be a clean benchmark sample.,Single coherent communication wiring topology diagram; No visible watermark or geometric corruption; Known review label marks the graph as over-connected; High intersection count of 474 indicates connection errors,17.073,,"{
+  ""label"": ""needs_graph_repair"",
+  ""confidence"": 0.95,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The topology graph has confirmed over-connection errors that require repair to be a clean benchmark sample."",
+  ""visible_cues"": [""Single coherent communication wiring topology diagram"", ""No visible watermark or geometric corruption"", ""Known review label marks the graph as over-connected"", ""High intersection count of 474 indicates connection errors""]
+}"
+_P1_staging/某电厂GIS室接地布置图#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_visible_watermark,1.0,True,True,True,True,"Visible design library source watermark with contact and website information is printed on the bottom right of the image, violating no-watermark policy.","Bottom right has explicit '星欣设计图库' (Xingxin Design Library) source mark; Watermark contains website URL www.xingsc.cn, QQ contact numbers, and telephone contact information",23.891,,"{
+  ""label"": ""reject_visible_watermark"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": true,
+  ""geometry_usable"": true,
+  ""reason"": ""Visible design library source watermark with contact and website information is printed on the bottom right of the image, violating no-watermark policy."",
+  ""visible_cues"": [""Bottom right has explicit '星欣设计图库' (Xingxin Design Library) source mark"", ""Watermark contains website URL www.xingsc.cn, QQ contact numbers, and telephone contact information""]
+}"
+_P3_staging_batch1/过电流保护的电磁操作 (gb4728_3_2-20)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,needs_graph_repair,0.9,True,True,False,True,"The topology graph has fragmented disconnected edges that should form a continuous conductor, requiring repair to correct edge continuity errors.",Single panel containing an electrical schematic symbol segment; Horizontal conductor line split into multiple disconnected segments; 100% of edges are isolated with no connected nets larger than 1 edge,73.167,,"{
+  ""label"": ""needs_graph_repair"",
+  ""confidence"": 0.9,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The topology graph has fragmented disconnected edges that should form a continuous conductor, requiring repair to correct edge continuity errors."",
+  ""visible_cues"": [""Single panel containing an electrical schematic symbol segment"", ""Horizontal conductor line split into multiple disconnected segments"", ""100% of edges are isolated with no connected nets larger than 1 edge""]
+}"
+_P3_staging_batch1/500KVA有载调压箱变系统图#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,needs_graph_repair,0.9,True,True,False,True,"The diagram is a valid power system topology, but the existing graph annotation has confirmed over-connection errors that need repair.",Single coherent 500KVA box-type substation system topology diagram; No visible watermarks or geometric damage to the diagram; Existing review notes the graph has over-connection issues,15.779,,"{
+  ""label"": ""needs_graph_repair"",
+  ""confidence"": 0.9,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The diagram is a valid power system topology, but the existing graph annotation has confirmed over-connection errors that need repair."",
+  ""visible_cues"": [""Single coherent 500KVA box-type substation system topology diagram"", ""No visible watermarks or geometric damage to the diagram"", ""Existing review notes the graph has over-connection issues""]
+}"
+_P3_staging_batch3/WGB-113N 馈线保护原理图(手车)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,needs_graph_repair,0.98,True,True,False,True,"The panel is a valid single topology diagram, but the extracted graph has confirmed over-connection errors requiring repair.",Single coherent 10kV feeder protection wiring topology diagram with no visible watermarks or geometry corruption; Explicit known review label identifies the graph as over-connected; High intersection count (22424) and edge count (4581) confirm over-connection issues in the graph,18.455,,"{
+  ""label"": ""needs_graph_repair"",
+  ""confidence"": 0.98,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The panel is a valid single topology diagram, but the extracted graph has confirmed over-connection errors requiring repair."",
+  ""visible_cues"": [
+    ""Single coherent 10kV feeder protection wiring topology diagram with no visible watermarks or geometry corruption"",
+    ""Explicit known review label identifies the graph as over-connected"",
+    ""High intersection count (22424) and edge count (4581) confirm over-connection issues in the graph""
+  ]
+}"
+_P3_staging_batch3/WGB-114N 馈线保护原理图(手车)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,needs_graph_repair,0.95,True,True,False,True,"The topology graph has confirmed severe over-connection errors, requiring repair before it can be used as a clean benchmark sample.","Known review label explicitly states the graph is over-connected; Extremely high intersection count (22386) and edge count (4627) confirm severe over-connection errors; The image is a single coherent 10kV feeder protection wiring topology with no corruption, watermarks or extra subfigures",19.099,,"{
+  ""label"": ""needs_graph_repair"",
+  ""confidence"": 0.95,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The topology graph has confirmed severe over-connection errors, requiring repair before it can be used as a clean benchmark sample."",
+  ""visible_cues"": [
+    ""Known review label explicitly states the graph is over-connected"",
+    ""Extremely high intersection count (22386) and edge count (4627) confirm severe over-connection errors"",
+    ""The image is a single coherent 10kV feeder protection wiring topology with no corruption, watermarks or extra subfigures""
+  ]
+}"
+_P3_staging_batch3/WGB-114N 馈线保护原理图(手车)__286#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,needs_graph_repair,0.95,True,True,False,True,"The diagram is a valid single feeder protection topology panel, but the existing graph has severe over-connection errors requiring repair","Known review label marked as over_connected; Extremely high intersection count (22386) indicating severe over-connection of edges; No visible watermark, single coherent 10kV wiring topology diagram, geometry is readable",15.4,,"{
+  ""label"": ""needs_graph_repair"",
+  ""confidence"": 0.95,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The diagram is a valid single feeder protection topology panel, but the existing graph has severe over-connection errors requiring repair"",
+  ""visible_cues"": [""Known review label marked as over_connected"", ""Extremely high intersection count (22386) indicating severe over-connection of edges"", ""No visible watermark, single coherent 10kV wiring topology diagram, geometry is readable""]
+}"
+_P3_staging_batch4/WGB-123N 高压柜综合保护原理图(手车)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,needs_graph_repair,0.95,True,True,False,True,"The extracted graph for this valid single topology panel has confirmed severe over-connection issues, requiring graph repair before use as a clean benchmark.","Candidate is a single coherent high-voltage cabinet comprehensive protection wiring topology diagram, no visible watermarks, geometry is fully readable; Known review label is marked as over_connected, extremely high intersection count of 22385 confirms severe over-connection errors in current extracted graph; V1 edge count (4576) is disproportionately high relative to node count (2114), consistent with over-connection defects",19.798,,"{
+  ""label"": ""needs_graph_repair"",
+  ""confidence"": 0.95,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The extracted graph for this valid single topology panel has confirmed severe over-connection issues, requiring graph repair before use as a clean benchmark."",
+  ""visible_cues"": [
+    ""Candidate is a single coherent high-voltage cabinet comprehensive protection wiring topology diagram, no visible watermarks, geometry is fully readable"",
+    ""Known review label is marked as over_connected, extremely high intersection count of 22385 confirms severe over-connection errors in current extracted graph"",
+    ""V1 edge count (4576) is disproportionately high relative to node count (2114), consistent with over-connection defects""
+  ]
+}"
+_P3_staging_batch4/WGB-124N 高压柜综合保护原理图(手车)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_visible_watermark,1.0,True,True,True,True,"A visible source library watermark with contact information is present on the image, which violates the watermark policy for benchmark samples.","Top right corner has '星欣设计图库' source mark with QQ numbers, website www.xingsc.cn, email and telephone contact details; The underlying content is a valid high voltage cabinet comprehensive protection schematic topology",40.432,,"{
+  ""label"": ""reject_visible_watermark"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": true,
+  ""geometry_usable"": true,
+  ""reason"": ""A visible source library watermark with contact information is present on the image, which violates the watermark policy for benchmark samples."",
+  ""visible_cues"": [""Top right corner has '星欣设计图库' source mark with QQ numbers, website www.xingsc.cn, email and telephone contact details"", ""The underlying content is a valid high voltage cabinet comprehensive protection schematic topology""]
+}"
+_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,needs_graph_repair,0.9,True,True,False,True,The current topology graph has confirmed over-connection errors that require repair to become a clean benchmark sample.,Known review label marked as over_connected; High intersection count of 291 indicates edge connection issues; Single coherent terminal wiring topology diagram; No visible watermarks or unreadable content,49.768,,"{
+  ""label"": ""needs_graph_repair"",
+  ""confidence"": 0.9,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The current topology graph has confirmed over-connection errors that require repair to become a clean benchmark sample."",
+  ""visible_cues"": [""Known review label marked as over_connected"", ""High intersection count of 291 indicates edge connection issues"", ""Single coherent terminal wiring topology diagram"", ""No visible watermarks or unreadable content""]
+}"
+_P1_staging/某铁路牵引变电所主接线图wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,needs_graph_repair,0.9,True,True,False,True,"The image is a valid substation wiring topology, but the extracted graph has severe fragmentation issues that need repair",Single coherent railway traction substation main wiring diagram; No visible watermark or geometric corruption on the image; Extracted graph has 1.0 isolated edge ratio and low largest net edge ratio indicating severe fragmentation,24.867,,"{
+  ""label"": ""needs_graph_repair"",
+  ""confidence"": 0.9,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a valid substation wiring topology, but the extracted graph has severe fragmentation issues that need repair"",
+  ""visible_cues"": [""Single coherent railway traction substation main wiring diagram"", ""No visible watermark or geometric corruption on the image"", ""Extracted graph has 1.0 isolated edge ratio and low largest net edge ratio indicating severe fragmentation""]
+}"
+_P3_staging_batch2/10kV-中置柜进线电气图纸#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,needs_graph_repair,0.92,True,True,False,True,"The topology diagram has confirmed high graph fragmentation, requiring node/edge error repair before it qualifies as a clean benchmark sample.",Quality flag explicitly notes high fragmentation; Known review label indicates the diagram is still fragmented; High intersection count of 5223 suggests potential graph connectivity errors,16.904,,"{
+  ""label"": ""needs_graph_repair"",
+  ""confidence"": 0.92,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The topology diagram has confirmed high graph fragmentation, requiring node/edge error repair before it qualifies as a clean benchmark sample."",
+  ""visible_cues"": [""Quality flag explicitly notes high fragmentation"", ""Known review label indicates the diagram is still fragmented"", ""High intersection count of 5223 suggests potential graph connectivity errors""]
+}"
+_P3_staging_batch4/发电机保护屏端子图#panel_004,doubao,doubao-seed-2-0-pro-260215,vision,needs_terminal_anchor,0.95,True,True,False,True,"This is a valid single-panel generator terminal wiring topology diagram, but requires semantic terminal/symbol/device anchors to meet clean benchmark standards.",Single coherent generator current/voltage terminal connection diagram; Terminal entries with wiring links to external equipment panels are present; No annotated semantic anchors for terminal nodes and connection edges,13.283,,"{
+  ""label"": ""needs_terminal_anchor"",
+  ""confidence"": 0.95,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""This is a valid single-panel generator terminal wiring topology diagram, but requires semantic terminal/symbol/device anchors to meet clean benchmark standards."",
+  ""visible_cues"": [""Single coherent generator current/voltage terminal connection diagram"", ""Terminal entries with wiring links to external equipment panels are present"", ""No annotated semantic anchors for terminal nodes and connection edges""]
+}"
+_P2_staging/某煤矿变电所电气系统图wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,needs_graph_repair,0.9,True,True,False,True,The electrical topology diagram has confirmed high graph fragmentation requiring repair to be a clean benchmark sample.,Single coherent coal mine substation electrical system topology diagram; Quality flags mark high fragmentation of the detected graph; Known review label explicitly notes the graph remains fragmented,22.811,,"{
+  ""label"": ""needs_graph_repair"",
+  ""confidence"": 0.9,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The electrical topology diagram has confirmed high graph fragmentation requiring repair to be a clean benchmark sample."",
+  ""visible_cues"": [""Single coherent coal mine substation electrical system topology diagram"", ""Quality flags mark high fragmentation of the detected graph"", ""Known review label explicitly notes the graph remains fragmented""]
+}"
+_P1_staging/主变压器35kV侧断路器在PWFXH-1111上的端子排(B066-500-1215)wm666.taobao.com#panel_001,doubao,doubao-seed-2-0-pro-260215,vision,needs_terminal_anchor,0.9,True,True,False,True,"The diagram is a valid terminal wiring topology, but semantic terminal/symbol/device anchors need explicit annotation before it can be used as a clean benchmark sample.","Single coherent terminal wiring diagram for main transformer 35kV side breaker terminal block; Wiring connections between the terminal strip and external control/protection cabinets are fully visible; No visible watermarks, no geometry corruption, no multiple independent subfigures present",23.572,,"{
+  ""label"": ""needs_terminal_anchor"",
+  ""confidence"": 0.9,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The diagram is a valid terminal wiring topology, but semantic terminal/symbol/device anchors need explicit annotation before it can be used as a clean benchmark sample."",
+  ""visible_cues"": [""Single coherent terminal wiring diagram for main transformer 35kV side breaker terminal block"", ""Wiring connections between the terminal strip and external control/protection cabinets are fully visible"", ""No visible watermarks, no geometry corruption, no multiple independent subfigures present""]
+}"
+_P3_staging_batch1/1(监控系统及继电保护图纸目录)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_not_topology,1.0,True,False,False,True,"The panel contains an engineering drawing catalog table, no topology diagram content is present.","Main content is a tabular list of drawing numbers, plan numbers and cabinet information; No wiring, terminal connections or topology graph elements exist; Title explicitly states the content is a monitoring system and relay protection drawing catalog",16.638,,"{
+  ""label"": ""reject_not_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The panel contains an engineering drawing catalog table, no topology diagram content is present."",
+  ""visible_cues"": [""Main content is a tabular list of drawing numbers, plan numbers and cabinet information"", ""No wiring, terminal connections or topology graph elements exist"", ""Title explicitly states the content is a monitoring system and relay protection drawing catalog""]
+}"
+_P3_staging_batch4/电机保护原理图#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,1.0,True,False,False,False,"The image is almost entirely blank, with only a tiny unreadable diagram frame in the corner, so the topology content is completely unusable",Nearly 99% of the image area is blank white space; Only a minuscule unreadable bordered frame is visible in the bottom left corner with no discernible topology content,13.604,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""The image is almost entirely blank, with only a tiny unreadable diagram frame in the corner, so the topology content is completely unusable"",
+  ""visible_cues"": [""Nearly 99% of the image area is blank white space"", ""Only a minuscule unreadable bordered frame is visible in the bottom left corner with no discernible topology content""]
+}"
+_P2_staging/220kV总降站电气一次设计图纸wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,error,uncertain,0.0,False,False,False,False,agent_error,,76.98,Request timed out.,
+_P2_staging/变电所-巳改期目录#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_multi_subfigure,1.0,False,True,False,True,"The image contains multiple independent separate topology sub-diagrams that must be split into individual samples, violating the single coherent panel requirement.","Multiple distinct separated diagram panels are present, each marked with unique number labels from 15 to 23; Each panel holds independent electrical topology content unconnected to the content of other panels",19.962,,"{
+  ""label"": ""reject_multi_subfigure"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": false,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image contains multiple independent separate topology sub-diagrams that must be split into individual samples, violating the single coherent panel requirement."",
+  ""visible_cues"": [""Multiple distinct separated diagram panels are present, each marked with unique number labels from 15 to 23"", ""Each panel holds independent electrical topology content unconnected to the content of other panels""]
+}"
+_P3_staging_batch1/10KV高压室开关柜接线图方案比较#panel_000,doubao,doubao-seed-2-0-pro-260215,error,uncertain,0.0,False,False,False,False,agent_error,,77.739,Request timed out.,
+_P1_staging/直流系统级差1（主变保护室）wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,error,uncertain,0.0,False,False,False,False,agent_error,,77.14,Request timed out.,
+_P2_staging/35KV变电站总平面图#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_not_topology,1.0,True,False,False,True,"The panel is a substation electrical arrangement and office area general layout plan, which does not belong to the wiring/terminal/control topology type required by the benchmark.","Lower right title explicitly marks the content as '电气布置及办公区总平面图 (electrical arrangement and office area general plan)'; Content displays site dimension lines, building placement, equipment arrangement rather than electrical wiring connection topology",16.666,,"{
+  ""label"": ""reject_not_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The panel is a substation electrical arrangement and office area general layout plan, which does not belong to the wiring/terminal/control topology type required by the benchmark."",
+  ""visible_cues"": [""Lower right title explicitly marks the content as '电气布置及办公区总平面图 (electrical arrangement and office area general plan)'"", ""Content displays site dimension lines, building placement, equipment arrangement rather than electrical wiring connection topology""]
+}"
+_P2_staging/直流系统级差3(220kV保护室）wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,0.95,True,True,False,False,"All device node text labels are unreadably small and the layout is extremely dense with excessive line intersections, making the topology graph unusable.",Microscopic unreadable text inside every terminal/device node; Extremely high density of nodes and lines with many intersections; No legible semantic information for individual topology nodes,73.949,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 0.95,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""All device node text labels are unreadably small and the layout is extremely dense with excessive line intersections, making the topology graph unusable."",
+  ""visible_cues"": [""Microscopic unreadable text inside every terminal/device node"", ""Extremely high density of nodes and lines with many intersections"", ""No legible semantic information for individual topology nodes""]
+}"
+_P3_staging_batch1/3.10.9室外保护罩#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_not_topology,0.99,True,False,False,True,"The image is only an outline drawing of an outdoor protection cover, no wiring/terminal/control topology content is present, so it is not a valid topology target.","Only simple geometric outlines of the protection cover are visible, no topology elements like wires, terminals or device symbols exist; Known review annotation marks this sample as a non-topology badcase",15.695,,"{
+  ""label"": ""reject_not_topology"",
+  ""confidence"": 0.99,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is only an outline drawing of an outdoor protection cover, no wiring/terminal/control topology content is present, so it is not a valid topology target."",
+  ""visible_cues"": [""Only simple geometric outlines of the protection cover are visible, no topology elements like wires, terminals or device symbols exist"", ""Known review annotation marks this sample as a non-topology badcase""]
+}"
+_P3_staging_batch1/装在发电机保护屏上的端子图29#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_not_topology,1.0,True,False,False,True,The panel is a terminal connection list/table rather than a coherent wiring/terminal topology diagram meeting benchmark requirements,Tabular arrangement of terminal identifiers and text descriptions of connection destinations; No interconnected node-edge topology graph structure is present,45.865,,"{
+  ""label"": ""reject_not_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The panel is a terminal connection list/table rather than a coherent wiring/terminal topology diagram meeting benchmark requirements"",
+  ""visible_cues"": [""Tabular arrangement of terminal identifiers and text descriptions of connection destinations"", ""No interconnected node-edge topology graph structure is present""]
+}"
+_P2_staging/变电所#panel_000,doubao,doubao-seed-2-0-pro-260215,error,uncertain,0.0,False,False,False,False,agent_error,,77.222,Request timed out.,
+_P2_staging/防爆式移动变电所 (gb4728_11_2.13-1)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,1.0,True,False,False,False,"The panel is corrupted and unreadable, with no identifiable wiring, terminal, or control topology elements present, only partial arbitrary shapes and blank space.",Majority of the panel area is blank; No recognizable topology or wiring diagram components exist; Only a partial black semicircle and faint empty circular outlines are visible,16.628,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""The panel is corrupted and unreadable, with no identifiable wiring, terminal, or control topology elements present, only partial arbitrary shapes and blank space."",
+  ""visible_cues"": [""Majority of the panel area is blank"", ""No recognizable topology or wiring diagram components exist"", ""Only a partial black semicircle and faint empty circular outlines are visible""]
+}"
+_P2_staging/防爆式移动变电所 (gb4728_11_2.13-2)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,1.0,True,False,False,False,"The panel content is corrupted, with only incomplete abstract shapes present, no identifiable topology/wiring/device elements, making it entirely unusable as a topology benchmark sample.","Only a partial solid black semicircular shape and faint outline circles/lines are visible; No recognizable industrial topology, wiring, terminal, or component symbols exist; Content is unreadable as a valid topology diagram",18.663,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""The panel content is corrupted, with only incomplete abstract shapes present, no identifiable topology/wiring/device elements, making it entirely unusable as a topology benchmark sample."",
+  ""visible_cues"": [""Only a partial solid black semicircular shape and faint outline circles/lines are visible"", ""No recognizable industrial topology, wiring, terminal, or component symbols exist"", ""Content is unreadable as a valid topology diagram""]
+}"
+_P3_staging_batch1/01(PRCK-720-B变压器保护柜柜面布置图)#panel_000,doubao,doubao-seed-2-0-pro-260215,error,uncertain,0.0,False,False,False,False,agent_error,,77.096,Request timed out.,
+_P1_staging/主变进线柜原理图#panel_002,doubao,doubao-seed-2-0-pro-260215,vision,reject_not_topology,1.0,True,False,False,True,"The image is a tabular list of alphanumeric values, not a valid wiring/terminal/control topology diagram.","Content is structured entirely as table rows and columns; No topology wiring connections, device symbols, or circuit elements are visible; No graph edges or node connections characteristic of topology diagrams are present",18.675,,"{
+  ""label"": ""reject_not_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a tabular list of alphanumeric values, not a valid wiring/terminal/control topology diagram."",
+  ""visible_cues"": [""Content is structured entirely as table rows and columns"", ""No topology wiring connections, device symbols, or circuit elements are visible"", ""No graph edges or node connections characteristic of topology diagrams are present""]
+}"
+_P1_staging/主变进线柜原理图#panel_003,doubao,doubao-seed-2-0-pro-260215,vision,reject_not_topology,1.0,True,False,False,True,"The image is a tabular terminal assignment list, not a coherent wiring/control topology diagram.","Content is structured as a grid table with terminal identifier rows; No connected topology graph, wiring edges, or device symbols are present; Known review label confirms it is not a topology target",19.437,,"{
+  ""label"": ""reject_not_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a tabular terminal assignment list, not a coherent wiring/control topology diagram."",
+  ""visible_cues"": [""Content is structured as a grid table with terminal identifier rows"", ""No connected topology graph, wiring edges, or device symbols are present"", ""Known review label confirms it is not a topology target""]
+}"
+_P2_staging/变电站全套建筑图wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,error,uncertain,0.0,False,False,False,False,agent_error,,77.046,Request timed out.,
+_P2_staging/商场10KV变电所接线图#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_multi_subfigure,1.0,False,True,False,True,The image contains multiple independent separate subfigures/panels instead of one single coherent topology diagram.,Dozens of distinct framed sub-diagrams are arranged in 4 rows across the sheet; Each subfigure is an independent diagram separated by white space and has its own boundary,50.666,,"{
+  ""label"": ""reject_multi_subfigure"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": false,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image contains multiple independent separate subfigures/panels instead of one single coherent topology diagram."",
+  ""visible_cues"": [""Dozens of distinct framed sub-diagrams are arranged in 4 rows across the sheet"", ""Each subfigure is an independent diagram separated by white space and has its own boundary""]
+}"
+_P2_staging/商场10KV变电所接线图wm666.taobao.com#panel_000,doubao,doubao-seed-2-0-pro-260215,error,uncertain,0.0,False,False,False,False,agent_error,,77.229,Request timed out.,
+_P2_staging/地下变电所 (gb4728_11_2.14-1)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,1.0,True,False,False,False,"The panel is nearly blank with no identifiable coherent topology elements, making the topology graph completely unusable.","Only faint unidentifiable lines and a circle are present, no valid topology components such as devices, terminals, or connected wiring exist; Majority of the panel area is blank with extremely low content density; Isolated edge ratio is 1.0, confirming no valid connected topology structure",14.48,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""The panel is nearly blank with no identifiable coherent topology elements, making the topology graph completely unusable."",
+  ""visible_cues"": [""Only faint unidentifiable lines and a circle are present, no valid topology components such as devices, terminals, or connected wiring exist"", ""Majority of the panel area is blank with extremely low content density"", ""Isolated edge ratio is 1.0, confirming no valid connected topology structure""]
+}"
+_P2_staging/地下变电所 (gb4728_11_2.14-2)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,1.0,True,False,False,False,"The image only contains sparse disconnected line segments with no coherent readable topology structure, suffering from extreme geometry failure and is unusable as a benchmark sample.","Only partial disconnected lines and a circle outline are visible; No identifiable terminals, devices, or connected wiring topology structure exists; All line segments are isolated with no attached semantic components",20.27,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""The image only contains sparse disconnected line segments with no coherent readable topology structure, suffering from extreme geometry failure and is unusable as a benchmark sample."",
+  ""visible_cues"": [""Only partial disconnected lines and a circle outline are visible"", ""No identifiable terminals, devices, or connected wiring topology structure exists"", ""All line segments are isolated with no attached semantic components""]
+}"
+_P2_staging/电站、变电所电气及设备12#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_multi_subfigure,1.0,False,True,False,False,"The image contains multiple independent separate topology sub-diagrams/panels, so it cannot be used as a single clean benchmark sample per policy requirements.",Multiple distinct separated independent diagram panels each with their own content and title blocks are present; No single unified coherent topology diagram spans the entire image area,44.731,,"{
+  ""label"": ""reject_multi_subfigure"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": false,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""The image contains multiple independent separate topology sub-diagrams/panels, so it cannot be used as a single clean benchmark sample per policy requirements."",
+  ""visible_cues"": [""Multiple distinct separated independent diagram panels each with their own content and title blocks are present"", ""No single unified coherent topology diagram spans the entire image area""]
+}"
+_P3_staging_batch1/保护接地 (gb4728_3_4-3)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,0.99,True,False,False,False,"Linework is extremely faint and nearly indistinguishable from the white background, making the diagram unreadable and unusable as a topology sample.",Extremely low contrast faint lines on white background; No clearly identifiable topology features are visible; Near-blank appearance with almost no discernible diagram content,18.642,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 0.99,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""Linework is extremely faint and nearly indistinguishable from the white background, making the diagram unreadable and unusable as a topology sample."",
+  ""visible_cues"": [""Extremely low contrast faint lines on white background"", ""No clearly identifiable topology features are visible"", ""Near-blank appearance with almost no discernible diagram content""]
+}"
+_P3_staging_batch1/保护接地#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,0.99,True,False,False,False,"The diagram has extremely faint, barely legible linework with no usable complete topology graph, fitting the known bad geometry badcase classification.","Extremely light grey lines nearly indistinguishable from the white background; No coherent, identifiable topology structure visible; Listed as negative control badcase with known bad geometry review label in metadata",22.409,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 0.99,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""The diagram has extremely faint, barely legible linework with no usable complete topology graph, fitting the known bad geometry badcase classification."",
+  ""visible_cues"": [""Extremely light grey lines nearly indistinguishable from the white background"", ""No coherent, identifiable topology structure visible"", ""Listed as negative control badcase with known bad geometry review label in metadata""]
+}"
+_P3_staging_batch2/HK12-10温度元件电缆保护及连接图(断开式、汇线槽).#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,1.0,True,False,False,False,"Most content of the panel is title block, explanatory notes and material list, the actual usable topology diagram only occupies a tiny fragmented portion, making it unsuitable as a benchmark sample.",Standard title block with industry standard info at the top; Bilingual explanatory notes occupying upper middle area; Only a small fragmented cable connection diagram as topology content; Installation material list table at the bottom,47.304,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""Most content of the panel is title block, explanatory notes and material list, the actual usable topology diagram only occupies a tiny fragmented portion, making it unsuitable as a benchmark sample."",
+  ""visible_cues"": [
+    ""Standard title block with industry standard info at the top"",
+    ""Bilingual explanatory notes occupying upper middle area"",
+    ""Only a small fragmented cable connection diagram as topology content"",
+    ""Installation material list table at the bottom""
+  ]
+}"
+_P3_staging_batch2/HK12-14调节阀电缆保护及连接图(断开式、汇线槽)(一)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,0.95,True,True,False,False,"The topology graph is severely fragmented, and most of the panel area is occupied by text notes, title blocks and material tables, making the topology content unusable as a clean benchmark sample.","high isolated edge ratio of 0.4; low largest net edge ratio of 0.275 indicating fragmented connectivity; large proportion of panel is text notes, title blocks and installation material list table; limited coherent topology diagram content",77.703,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 0.95,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""The topology graph is severely fragmented, and most of the panel area is occupied by text notes, title blocks and material tables, making the topology content unusable as a clean benchmark sample."",
+  ""visible_cues"": [""high isolated edge ratio of 0.4"", ""low largest net edge ratio of 0.275 indicating fragmented connectivity"", ""large proportion of panel is text notes, title blocks and installation material list table"", ""limited coherent topology diagram content""]
+}"
+_P3_staging_batch2/HK12-23调节阀铠装电缆保护及连接图(汇线槽)  (一)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,1.0,True,True,False,False,"Panel is a known badcase with bad geometry, has severe graph fragmentation issues, and low-contrast faded content that is unfit for benchmark use.",faded low-contrast text and diagram elements; high 0.4 isolated edge ratio indicating fragmented graph; low 0.275 largest net edge ratio showing poor graph integrity; known review label marked as bad geometry,77.07,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""Panel is a known badcase with bad geometry, has severe graph fragmentation issues, and low-contrast faded content that is unfit for benchmark use."",
+  ""visible_cues"": [""faded low-contrast text and diagram elements"", ""high 0.4 isolated edge ratio indicating fragmented graph"", ""low 0.275 largest net edge ratio showing poor graph integrity"", ""known review label marked as bad geometry""]
+}"
+_P3_staging_batch2/HK12-39B二位式阀电缆保护及连接图(防爆密封接头、挠性管、压接式) (一)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,1.0,True,True,False,False,"The main intended diagram area is completely blank, no actual topology/wiring content exists, only title block and material list are present, making the topology graph unusable.","Large central area designated for the diagram is entirely blank; Only title block and installation material list table are visible, no topology or wiring graph content is present",25.017,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": true,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""The main intended diagram area is completely blank, no actual topology/wiring content exists, only title block and material list are present, making the topology graph unusable."",
+  ""visible_cues"": [""Large central area designated for the diagram is entirely blank"", ""Only title block and installation material list table are visible, no topology or wiring graph content is present""]
+}"
+_P3_staging_batch2/HK12-52B二位式阀电缆保护及连接图(浇封式接头、挠性管、压接式)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_bad_geometry,1.0,True,False,False,False,"The main topology diagram area is completely blank, only title blocks and installation material list are present with no usable topology content.","Large central drawing area is entirely blank; No wiring, terminal or connection topology elements exist; Only title block and material list table are visible",75.582,,"{
+  ""label"": ""reject_bad_geometry"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": false,
+  ""reason"": ""The main topology diagram area is completely blank, only title blocks and installation material list are present with no usable topology content."",
+  ""visible_cues"": [""Large central drawing area is entirely blank"", ""No wiring, terminal or connection topology elements exist"", ""Only title block and material list table are visible""]
+}"
+_P3_staging_batch2/HK12-64B二位式阀电缆保护及连接图(防水密封接头、挠性管、压接式) (一)#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_not_topology,1.0,True,False,False,True,"The panel only contains title blocks, empty drawing space and an installation material list, with no actual wiring/topology diagram content","No wiring or topology connection graph present in the large blank drawing area; Bottom section is an installation material list bill of materials table; Only header title metadata blocks exist, no topology graph content",16.261,,"{
+  ""label"": ""reject_not_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The panel only contains title blocks, empty drawing space and an installation material list, with no actual wiring/topology diagram content"",
+  ""visible_cues"": [
+    ""No wiring or topology connection graph present in the large blank drawing area"",
+    ""Bottom section is an installation material list bill of materials table"",
+    ""Only header title metadata blocks exist, no topology graph content""
+  ]
+}"
+_P3_staging_batch3/02-10kV配电装置室平面布置图wm666.taobao.com#panel_003,doubao,doubao-seed-2-0-pro-260215,vision,reject_not_topology,1.0,True,False,False,True,"The image is a 10kV power distribution room equipment arrangement layout plan, which does not belong to the required wiring/terminal/control topology diagram type.","Building dimension measurement annotations are present throughout the diagram; Content marks equipment placement positions in a room space, no electrical connection topology is shown",23.378,,"{
+  ""label"": ""reject_not_topology"",
+  ""confidence"": 1.0,
+  ""is_single_panel"": true,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is a 10kV power distribution room equipment arrangement layout plan, which does not belong to the required wiring/terminal/control topology diagram type."",
+  ""visible_cues"": [
+    ""Building dimension measurement annotations are present throughout the diagram"",
+    ""Content marks equipment placement positions in a room space, no electrical connection topology is shown""
+  ]
+}"
+_P3_staging_batch4/10kV箱式开关站外形图#panel_000,doubao,doubao-seed-2-0-pro-260215,vision,reject_not_topology,0.99,False,False,False,True,"The image is an exterior shape/elevation drawing of a 10kV box-type switch station, belonging to equipment arrangement drawing category, not a wiring/terminal/control topology diagram.","Drawing title explicitly marks it as 10kV box-type switch station exterior drawing (外形图); Content displays 3 independent architectural elevation views of the station building with dimension annotations; Attached notes describe building material and dimension requirements, no electrical connection or topology content is present",50.709,,"{
+  ""label"": ""reject_not_topology"",
+  ""confidence"": 0.99,
+  ""is_single_panel"": false,
+  ""is_topology_target"": false,
+  ""has_visible_watermark"": false,
+  ""geometry_usable"": true,
+  ""reason"": ""The image is an exterior shape/elevation drawing of a 10kV box-type switch station, belonging to equipment arrangement drawing category, not a wiring/terminal/control topology diagram."",
+  ""visible_cues"": [
+    ""Drawing title explicitly marks it as 10kV box-type switch station exterior drawing (外形图)"",
+    ""Content displays 3 independent architectural elevation views of the station building with dimension annotations"",
+    ""Attached notes describe building material and dimension requirements, no electrical connection or topology content is present""
+  ]
+}"
+_P2_staging/变电所修#panel_000,doubao,doubao-seed-2-0-pro-260215,error,uncertain,0.0,False,False,False,False,agent_error,,78.397,Request timed out.,
+_P2_staging/变电所修__479#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P1_staging/热电厂工程电气主接线#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/0武汉某35变电所一次部分施工图wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/10KV变电站电气图wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/10kV变电所电气图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/35KV二次图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/35KV变电站全套电气二次图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/35KV变电站全套电气二次图2#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/35KV变电站全套电气二次图wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/35kV变电站新建工程电气施工图纸（含初步设计说明书）#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/35kV变电站新建工程电气施工图纸（含初步设计说明书）wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/500KV变电站直流系统图纸#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/500KV变电站直流系统图纸wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/B-变电所-办公楼201411.19_t3#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/[E-1~2(总图)、ET-7~13(通用图)、ET2-1~5(通用图A3A4#)、E-31~37(A2#楼)]A2~A4#楼变电所及总平20130319#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/变电所设计图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/某10KV变电站电气完整版图纸wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/某变电所电气设计wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/某机械工厂变电所全套图-t3#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/某机械工厂变电所全套图wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/武汉某35kV变配电所电气二次设计图wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/水泥厂35KV变电站设计全套图纸#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/电站、变电所电气及设备01#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/电站、变电所电气及设备14#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch1/10KV开关站二次图纸#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch1/10KV高压开关柜原理图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch1/10kv变电室二次系统图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch1/6kV二次接线图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch1/某配电工程10kV杆型一缆图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch1/某高层10KV配电图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch1/自行车有限10KV变电室#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch2/10KV配变电房工程典型设计图纸wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-11变送器电缆保护及连接图(断开式、汇线槽)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-12其它类仪表电缆保护及连接图(断开式、汇线槽)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-19温度元件铠装电缆保护及连接图(汇线槽)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-1温度元件电缆保护及连接图(断开式、钢管)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-20变送器铠装电缆保护及连接图(汇线槽)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-2变送器电缆保护及连接图(断开式、钢管).#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-38B调节阀电缆保护及连接图(防爆密封接头、挠性管、压接式)  (二)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-3其它类仪表电缆保护及连接图(断开式、钢管).#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-40B二位式阀电缆保护及连接图(防爆密封接头、挠性管、压接式)(二)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-51B调节阀电缆保护及连接图(浇封式接头、挠性管、压接式) (二)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-5调节阀电缆保护及连接图(断开式、钢管)(一)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-63B调节阀电缆保护及连接图(防水密封接头、挠性管、压接式) (二)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-65B二位式阀电缆保护及连接图(防水密封接头、挠性管、压接式)(二)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/HK12-67保温(护)箱内变送器电缆保护及连接图(断开式、钢管)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch3/商场照明动力总接线图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch3/某化工厂10KV供电系统全套电气图纸wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch1/11(RCS-9661B背面接线图(四))#panel_001,policy_rule,deterministic_policy,metadata_rule,reject_not_topology,0.98,True,False,False,True,known policy badcase: not topology target,not_topology_target,0,,
+_P2_staging/变电所、配电所 (gb4728_11_1.3-1)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/变电所、配电所 (gb4728_11_1.3-2)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/变电所（示出改变电压） (gb4728_11_2.9-1)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/变电所（示出改变电压） (gb4728_11_2.9-2)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/杆上变电站 (gb4728_11_2.11-1)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/杆上变电站 (gb4728_11_2.11-2)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/移动变电所 (gb4728-11_2.12-2)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/移动变电所 (gb4728_11_2.12-1)#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/运行的移动变电站#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch2/开关柜底座及基础图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch4/DXN8B-T接线图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch1/高压异步电机保护二次原理图#panel_003,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/35KV变电所设计(3)#panel_001,policy_rule,deterministic_policy,metadata_rule,reject_not_topology,0.98,True,False,False,True,known policy badcase: not topology target,not_topology_target,0,,
+_P3_staging_batch3/500kV母线侧断路器(13WDL)在监控柜上的端子排(B066-500-1503)wm666.taobao.com#panel_001,policy_rule,deterministic_policy,metadata_rule,reject_not_topology,0.98,True,False,False,True,known policy badcase: not topology target,not_topology_target,0,,
+_P3_staging_batch4/某学校系统图及接线图#panel_001,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch1/高压异步电机保护二次原理图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch1/高压异步电机保护二次原理图#panel_002,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/35KV变电所设计#panel_001,policy_rule,deterministic_policy,metadata_rule,reject_not_topology,0.98,True,False,False,True,known policy badcase: not topology target,not_topology_target,0,,
+_P2_staging/变电所全套图纸wm666.taobao.com#panel_001,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/变电所全套图纸wm666.taobao.com#panel_003,policy_rule,deterministic_policy,metadata_rule,reject_not_topology,0.98,True,False,False,True,known policy badcase: not topology target,not_topology_target,0,,
+_P2_staging/变电所全套图纸wm666.taobao.com#panel_004,policy_rule,deterministic_policy,metadata_rule,reject_not_topology,0.98,True,False,False,True,known policy badcase: not topology target,not_topology_target,0,,
+_P2_staging/变电所全套图纸wm666.taobao.com#panel_005,policy_rule,deterministic_policy,metadata_rule,reject_not_topology,0.98,True,False,False,True,known policy badcase: not topology target,not_topology_target,0,,
+_P2_staging/变电所全套图纸wm666.taobao.com#panel_006,policy_rule,deterministic_policy,metadata_rule,reject_not_topology,0.98,True,False,False,True,known policy badcase: not topology target,not_topology_target,0,,
+_P2_staging/变电所全套图纸wm666.taobao.com#panel_008,policy_rule,deterministic_policy,metadata_rule,reject_not_topology,0.98,True,False,False,True,known policy badcase: not topology target,not_topology_target,0,,
+_P2_staging/某厂房变电所平面#panel_001,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/某厂房变电所平面wm666.taobao.com#panel_001,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/电站、变电所电气及设备04#panel_004,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch1/铁路配电所有载调压保护#panel_003,policy_rule,deterministic_policy,metadata_rule,reject_not_topology,0.98,True,False,False,True,known policy badcase: not topology target,not_topology_target,0,,
+_P3_staging_batch4/10KV配网设计块图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch4/10KV配网设计块图#panel_001,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch4/10KV配网设计块图#panel_002,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch4/10KV配网设计块图#panel_003,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch4/10KV配网设计块图#panel_004,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch4/10KV配网设计块图#panel_005,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P3_staging_batch4/10kv系统单线图#panel_004,policy_rule,deterministic_policy,metadata_rule,reject_not_topology,0.98,True,False,False,True,known policy badcase: not topology target,not_topology_target,0,,
+_P3_staging_batch4/10kv系统单线图#panel_005,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/SGT-变电所设备布置平面图#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/体育场变电所电气平面图wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_bad_geometry,0.98,False,False,False,False,known policy badcase: bad geometry,bad_geometry,0,,
+_P2_staging/某降压变电站设计#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P2_staging/某降压变电站设计wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch3/泉州涂门街中段保护与改建电气设计#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch3/道窖500KVA变配电工程wm666.taobao.com#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
+_P3_staging_batch3/道窖500KVA变配电工程wm666.taobao.com__29#panel_000,policy_rule,deterministic_policy,metadata_rule,reject_multi_subfigure,0.98,False,True,False,True,known policy badcase: multi-subfigure,multi_subfigure_badcase,0,,
